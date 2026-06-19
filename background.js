@@ -25,6 +25,10 @@ async function setState(patch) {
 }
 
 async function startTimer(intervalMin) {
+  if (intervalMin == null) {
+    const current = await getState();
+    intervalMin = current.intervalMin || 20;
+  }
   const startedAt = Date.now();
   await setState({ running: true, startedAt, pausedRemainSec: null, intervalMin });
   await chrome.alarms.clear(ALARM_NAME);
