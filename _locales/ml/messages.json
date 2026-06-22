@@ -1,0 +1,448 @@
+{
+  "extName": {
+    "message": "MicroBreaks — സ്ട്രെച്ച് ടൈമർ"
+  },
+  "extDescription": {
+    "message": "സ്ട്രെച്ച് നിർദ്ദേശങ്ങളോടെ സൗമ്യമായ ബ്രേക്ക് റിമൈൻഡറുകൾ. ഇരുന്ന് ജോലി ചെയ്യുമ്പോൾ ചലിക്കാൻ മറന്നുപോകുന്നവർക്കായി."
+  },
+  "brandName": {
+    "message": "MicroBreaks"
+  },
+  "strictModeOn": {
+    "message": "സ്ട്രിക്റ്റ് മോഡ് ഓൺ"
+  },
+  "strictModeOff": {
+    "message": "സ്ട്രിക്റ്റ് മോഡ് ഓഫ്"
+  },
+  "strictModeTooltip": {
+    "message": "നോട്ടിഫിക്കേഷനു പകരം, അവഗണിക്കാൻ കഴിയാത്ത ഒരു ഫുൾ-സ്ക്രീൻ ബ്രേക്ക് ഓവർലേ കാണിക്കുന്നു."
+  },
+  "untilBreak": {
+    "message": "ബ്രേക്ക് വരെ"
+  },
+  "breakTime": {
+    "message": "സ്ട്രെച്ച് ചെയ്യാനുള്ള സമയം"
+  },
+  "moveNow": {
+    "message": "ചലിക്കൂ!"
+  },
+  "interval20": {
+    "message": "20 മിനിറ്റ്"
+  },
+  "interval30": {
+    "message": "30 മിനിറ്റ്"
+  },
+  "interval45": {
+    "message": "45 മിനിറ്റ്"
+  },
+  "intervalCustom": {
+    "message": "ഇഷ്ടാനുസൃതം"
+  },
+  "customPrompt": {
+    "message": "ബ്രേക്കുകൾക്കിടയിൽ എത്ര മിനിറ്റ്?"
+  },
+  "snooze": {
+    "message": "5 മിനിറ്റ് നീട്ടുക"
+  },
+  "start": {
+    "message": "ആരംഭിക്കുക"
+  },
+  "pause": {
+    "message": "നിർത്തുക"
+  },
+  "resume": {
+    "message": "തുടരുക"
+  },
+  "upNext": {
+    "message": "അടുത്തത്"
+  },
+  "breaksToday": {
+    "message": "ഇന്നത്തെ ബ്രേക്കുകൾ"
+  },
+  "dayStreak": {
+    "message": "ദിന തുടർച്ച"
+  },
+  "minsMoved": {
+    "message": "ചലിച്ച മിനിറ്റുകൾ"
+  },
+  "settingsNotifications": {
+    "message": "അറിയിപ്പുകൾ"
+  },
+  "settingsDisplay": {
+    "message": "ഡിസ്പ്ലേ"
+  },
+  "settingsModel": {
+    "message": "മോഡൽ"
+  },
+  "browserNotification": {
+    "message": "ബ്രൗസർ അറിയിപ്പ്"
+  },
+  "browserNotificationSub": {
+    "message": "ടാബ് പശ്ചാത്തലത്തിലായാലും പ്രവർത്തിക്കും"
+  },
+  "stretchAnimations": {
+    "message": "സ്ട്രെച്ച് ആനിമേഷനുകൾ"
+  },
+  "stretchAnimationsSub": {
+    "message": "ഓരോ ബ്രേക്കിലും ഗൈഡഡ് ആനിമേഷൻ"
+  },
+  "maleModel": {
+    "message": "പുരുഷ മോഡൽ"
+  },
+  "maleModelSub": {
+    "message": "വ്യായാമങ്ങൾക്കായി പുരുഷ രൂപത്തിലേക്ക് മാറുക"
+  },
+  "language": {
+    "message": "ഭാഷ"
+  },
+  "languageSub": {
+    "message": "നിങ്ങളുടെ ഇഷ്ട ഭാഷ തിരഞ്ഞെടുക്കുക"
+  },
+  "languageAuto": {
+    "message": "സ്വയമേവ കണ്ടെത്തുക"
+  },
+  "doneIMoved": {
+    "message": "കഴിഞ്ഞു — ഞാൻ ചലിച്ചു"
+  },
+  "dismissHint": {
+    "message": "അടയ്ക്കാൻ Esc അമർത്തുക അല്ലെങ്കിൽ പുറത്ത് ക്ലിക്ക് ചെയ്യുക"
+  },
+  "welcomeTitle": {
+    "message": "MicroBreaks പ്രവർത്തിക്കുന്നു"
+  },
+  "welcomeMessage": {
+    "message": "ഓരോ $MINUTES$ മിനിറ്റിലും സ്ട്രെച്ച് ചെയ്യാൻ നിങ്ങൾക്ക് സൗമ്യമായ ഒരു ഓർമ്മപ്പെടുത്തൽ ലഭിക്കും. വഴക്കമുള്ളവരായിരിക്കൂ!",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeToMove": {
+    "message": "ചലിക്കാനുള്ള സമയം"
+  },
+  "snoozeBtn": {
+    "message": "5 മിനിറ്റ് നീട്ടുക"
+  },
+  "restartBtn": {
+    "message": "കഴിഞ്ഞു — വീണ്ടും ആരംഭിക്കുക"
+  },
+  "stretchNeckRolls": {
+    "message": "കഴുത്ത് കറക്കൽ"
+  },
+  "stretchNeckRollsDesc": {
+    "message": "നിങ്ങളുടെ തല സാവധാനം മൂന്നു തവണ ഓരോ ദിശയിലും കറക്കുക. ജോ അയവുള്ളതാക്കുക."
+  },
+  "stretchNeckRollsStep1": {
+    "message": "നിവർന്നിരിക്കുക അല്ലെങ്കിൽ നിൽക്കുക, തോളുകൾ അയവുള്ളതാക്കുക"
+  },
+  "stretchNeckRollsStep2": {
+    "message": "സാവധാനം വലത് ചെവി വലത് തോളിലേക്ക് താഴ്ത്തുക"
+  },
+  "stretchNeckRollsStep3": {
+    "message": "തല മുന്നോട്ട് ചലിപ്പിക്കുക, താടി നെഞ്ചിലേക്ക്"
+  },
+  "stretchNeckRollsStep4": {
+    "message": "ഇടത് വശത്തേക്ക് തുടരുക"
+  },
+  "stretchNeckRollsStep5": {
+    "message": "ഓരോ ദിശയിലും 3 പൂർണ്ണ സാവധാന വൃത്തങ്ങൾ പൂർത്തിയാക്കുക"
+  },
+  "stretchOverheadReach": {
+    "message": "മുകളിലേക്കുള്ള നീട്ടൽ"
+  },
+  "stretchOverheadReachDesc": {
+    "message": "വിരലുകൾ ഇടകലർത്തി, ഉള്ളംകൈകൾ മേൽക്കൂരയിലേക്ക് അമർത്തുക. രണ്ട് ദീർഘശ്വാസങ്ങൾ എടുക്കുക."
+  },
+  "stretchOverheadReachStep1": {
+    "message": "ഇടുപ്പിന്റെ വീതിയിൽ കാലുകൾ വച്ച് നിൽക്കുക"
+  },
+  "stretchOverheadReachStep2": {
+    "message": "ശ്വാസം എടുത്ത് രണ്ട് കൈകളും തലയ്ക്ക് മുകളിൽ ഉയർത്തുക"
+  },
+  "stretchOverheadReachStep3": {
+    "message": "വിരലുകൾ ഇടകലർത്തുക, ഉള്ളംകൈ മുകളിലേക്ക്"
+  },
+  "stretchOverheadReachStep4": {
+    "message": "സാവധാനം മുകളിലേക്ക് അമർത്തി 3 ശ്വാസം പിടിക്കുക"
+  },
+  "stretchOverheadReachStep5": {
+    "message": "ശ്വാസം വിട്ട് കൈകൾ സാവധാനം താഴ്ത്തുക"
+  },
+  "stretch2020": {
+    "message": "20-20-20 നിയമം"
+  },
+  "stretch2020Desc": {
+    "message": "6 മീറ്റർ അകലെയുള്ള എന്തെങ്കിലും കണ്ടെത്തുക. 20 സെക്കൻഡ് കണ്ണ് ചിമ്മാതെ നോക്കുക."
+  },
+  "stretch2020Step1": {
+    "message": "സ്ക്രീനിൽ നിന്ന് പൂർണ്ണമായും ദൃഷ്ടി മാറ്റുക"
+  },
+  "stretch2020Step2": {
+    "message": "കുറഞ്ഞത് 6 മീറ്റർ അകലെയുള്ള എന്തെങ്കിലും കണ്ടെത്തുക"
+  },
+  "stretch2020Step3": {
+    "message": "ബലപ്രയോഗമില്ലാതെ സൗമ്യമായി ശ്രദ്ധ കേന്ദ്രീകരിക്കുക"
+  },
+  "stretch2020Step4": {
+    "message": "20 സെക്കൻഡ് മുഴുവൻ ദൃഷ്ടി ഉറപ്പിക്കുക"
+  },
+  "stretch2020Step5": {
+    "message": "സാവധാനം കണ്ണ് ചിമ്മി ജോലിയിലേക്ക് മടങ്ങുക"
+  },
+  "stretchWristCircles": {
+    "message": "കൈത്തണ്ട വൃത്തങ്ങൾ"
+  },
+  "stretchWristCirclesDesc": {
+    "message": "കൈകൾ മുന്നോട്ട് നീട്ടുക. കൈത്തണ്ടകൾ വലിയ വൃത്തങ്ങളിൽ കറക്കുക — ഓരോ ദിശയിലും അഞ്ച് തവണ."
+  },
+  "stretchWristCirclesStep1": {
+    "message": "രണ്ട് കൈകളും മുന്നോട്ട് നീട്ടുക"
+  },
+  "stretchWristCirclesStep2": {
+    "message": "രണ്ട് കൈകളും കൊണ്ട് അയഞ്ഞ മുഷ്ടി ഉണ്ടാക്കുക"
+  },
+  "stretchWristCirclesStep3": {
+    "message": "രണ്ട് കൈത്തണ്ടകളും സാവധാനം പുറത്തേക്ക് കറക്കുക"
+  },
+  "stretchWristCirclesStep4": {
+    "message": "5 വൃത്തങ്ങൾ പൂർത്തിയാക്കി ദിശ മാറ്റുക"
+  },
+  "stretchWristCirclesStep5": {
+    "message": "അവസാനിപ്പിക്കാൻ കൈകൾ സാവധാനം കുലുക്കുക"
+  },
+  "stretchShoulderRolls": {
+    "message": "തോൾ കറക്കൽ"
+  },
+  "stretchShoulderRollsDesc": {
+    "message": "തോളുകൾ സാവധാനം അഞ്ച് തവണ പിന്നോട്ടും, പിന്നെ അഞ്ച് തവണ മുന്നോട്ടും കറക്കുക. ദിവസത്തിന്റെ ഭാരം ഇറക്കിവയ്ക്കുക."
+  },
+  "stretchShoulderRollsStep1": {
+    "message": "കൈകൾ വശങ്ങളിൽ അയഞ്ഞ് തൂങ്ങാൻ അനുവദിക്കുക"
+  },
+  "stretchShoulderRollsStep2": {
+    "message": "രണ്ട് തോളുകളും ചെവികളിലേക്ക് ഉയർത്തുക"
+  },
+  "stretchShoulderRollsStep3": {
+    "message": "അവ സാവധാനം പിന്നോട്ടും താഴോട്ടും കറക്കുക"
+  },
+  "stretchShoulderRollsStep4": {
+    "message": "തോൾപലകകൾ അടുത്തുവരുന്നത് അനുഭവിക്കുക"
+  },
+  "stretchShoulderRollsStep5": {
+    "message": "5 തവണ ആവർത്തിച്ച് മുന്നോട്ട് കറക്കുക"
+  },
+  "stretchSpinalTwist": {
+    "message": "നടുവിന്റെ വളയൽ"
+  },
+  "stretchSpinalTwistDesc": {
+    "message": "നിവർന്നിരിക്കുക, ഒരു കൈ വിപരീത മുട്ടിൽ വയ്ക്കുക, സാവധാനം തിരിയുക."
+  },
+  "stretchSpinalTwistStep1": {
+    "message": "നിവർന്നിരിക്കുക, പാദങ്ങൾ നിലത്ത് പരന്ന്"
+  },
+  "stretchSpinalTwistStep2": {
+    "message": "വലത് കൈ ഇടത് മുട്ടിൽ വയ്ക്കുക"
+  },
+  "stretchSpinalTwistStep3": {
+    "message": "ശ്വാസം എടുത്ത് നടുവ് മുകളിലേക്ക് നീട്ടുക"
+  },
+  "stretchSpinalTwistStep4": {
+    "message": "ശ്വാസം വിട്ട് സാവധാനം ഇടത്തേക്ക് തിരിയുക"
+  },
+  "stretchSpinalTwistStep5": {
+    "message": "3 ശ്വാസം പിടിച്ച് വശം മാറ്റുക"
+  },
+  "stretchForwardFold": {
+    "message": "മുന്നോട്ടുള്ള വളയൽ"
+  },
+  "stretchForwardFoldDesc": {
+    "message": "ഇടുപ്പിൽ നിന്ന് മുന്നോട്ട് വളയുക, കൈകളും തലയും ഭാരത്തോടെ തൂങ്ങാൻ അനുവദിക്കുക."
+  },
+  "stretchForwardFoldStep1": {
+    "message": "ഇടുപ്പിന്റെ വീതിയിൽ കാലുകൾ വച്ച് നിൽക്കുക"
+  },
+  "stretchForwardFoldStep2": {
+    "message": "ശ്വാസം എടുത്ത് നടുവ് മുകളിലേക്ക് നീട്ടുക"
+  },
+  "stretchForwardFoldStep3": {
+    "message": "ശ്വാസം വിട്ട് ഇടുപ്പിൽ നിന്ന് മുന്നോട്ട് വളയുക"
+  },
+  "stretchForwardFoldStep4": {
+    "message": "കൈകളും തലയും ഭാരത്തോടെ തൂങ്ങാൻ അനുവദിക്കുക"
+  },
+  "stretchForwardFoldStep5": {
+    "message": "3 ശ്വാസം പിടിച്ച് സാവധാനം ഉയരുക"
+  },
+  "stretchChestOpener": {
+    "message": "നെഞ്ച് തുറക്കൽ"
+  },
+  "stretchChestOpenerDesc": {
+    "message": "കൈകൾ പുറകിൽ കൂട്ടിപ്പിടിച്ച് തോൾപലകകൾ അടുപ്പിക്കുക."
+  },
+  "stretchChestOpenerStep1": {
+    "message": "നിവർന്ന് നിൽക്കുക അല്ലെങ്കിൽ ഇരിക്കുക"
+  },
+  "stretchChestOpenerStep2": {
+    "message": "കൈകൾ താഴത്തെ പുറകിൽ കൂട്ടിപ്പിടിക്കുക"
+  },
+  "stretchChestOpenerStep3": {
+    "message": "തോൾപലകകൾ അടുപ്പിക്കുക"
+  },
+  "stretchChestOpenerStep4": {
+    "message": "നെഞ്ചും താടിയും ചെറുതായി ഉയർത്തുക"
+  },
+  "stretchChestOpenerStep5": {
+    "message": "3 ദീർഘശ്വാസം പിടിച്ച് വിടുക"
+  },
+  "stretchSideStretch": {
+    "message": "വശത്തേക്കുള്ള സ്ട്രെച്ച്"
+  },
+  "stretchSideStretchDesc": {
+    "message": "ഒരു കൈ തലയ്ക്ക് മുകളിൽ ഉയർത്തി വിപരീത വശത്തേക്ക് സാവധാനം ചാഞ്ഞുകൊടുക്കുക."
+  },
+  "stretchSideStretchStep1": {
+    "message": "ഇടുപ്പിന്റെ വീതിയിൽ കാലുകൾ വച്ച് നിൽക്കുക"
+  },
+  "stretchSideStretchStep2": {
+    "message": "വലത് കൈ തലയ്ക്ക് മുകളിൽ ഉയർത്തുക"
+  },
+  "stretchSideStretchStep3": {
+    "message": "സാവധാനം ഇടത് വശത്തേക്ക് ചാഞ്ഞുകൊടുക്കുക"
+  },
+  "stretchSideStretchStep4": {
+    "message": "വലത് വശത്ത് നീളൽ അനുഭവിക്കുക"
+  },
+  "stretchSideStretchStep5": {
+    "message": "3 ശ്വാസം പിടിച്ച് വശം മാറ്റുക"
+  },
+  "stretchChinTucks": {
+    "message": "താടി പിന്നോട്ട് വലിക്കൽ"
+  },
+  "stretchChinTucksDesc": {
+    "message": "തലയോട്ടിയുടെ അടിഭാഗം നീട്ടാൻ താടി സാവധാനം നേരെ പിന്നോട്ട് വലിക്കുക."
+  },
+  "stretchChinTucksStep1": {
+    "message": "നടു നിവർത്തി ഇരിക്കുക അല്ലെങ്കിൽ നിൽക്കുക"
+  },
+  "stretchChinTucksStep2": {
+    "message": "കണ്ണിന്റെ നിലയിൽ നേരെ മുന്നോട്ട് നോക്കുക"
+  },
+  "stretchChinTucksStep3": {
+    "message": "താടി സാവധാനം നേരെ പിന്നോട്ട് വലിക്കുക"
+  },
+  "stretchChinTucksStep4": {
+    "message": "തലയോട്ടിയുടെ അടിഭാഗത്ത് നീളൽ അനുഭവിക്കുക"
+  },
+  "stretchChinTucksStep5": {
+    "message": "3 സെക്കൻഡ് പിടിച്ച്, വിട്ട്, 5 തവണ ആവർത്തിക്കുക"
+  },
+  "stretchUpperBackSqueeze": {
+    "message": "മേൽ-പുറം ഇറുക്കൽ"
+  },
+  "stretchUpperBackSqueezeDesc": {
+    "message": "കൈമുട്ടുകൾ പിന്നോട്ട് വലിച്ച് തോൾപലകകൾ ശക്തമായി അടുപ്പിക്കുക."
+  },
+  "stretchUpperBackSqueezeStep1": {
+    "message": "നിവർന്നിരിക്കുക, കൈകൾ വശങ്ങളിൽ"
+  },
+  "stretchUpperBackSqueezeStep2": {
+    "message": "കൈമുട്ടുകൾ 90 ഡിഗ്രിയിൽ വളയ്ക്കുക"
+  },
+  "stretchUpperBackSqueezeStep3": {
+    "message": "രണ്ട് കൈമുട്ടുകളും ശരീരത്തിന് പിന്നിലേക്ക് വലിക്കുക"
+  },
+  "stretchUpperBackSqueezeStep4": {
+    "message": "തോൾപലകകൾ ശക്തമായി അടുപ്പിക്കുക"
+  },
+  "stretchUpperBackSqueezeStep5": {
+    "message": "5 സെക്കൻഡ് പിടിച്ച്, വിട്ട്, 5 തവണ ആവർത്തിക്കുക"
+  },
+  "stretchTempleMassage": {
+    "message": "നെറ്റി മസാജ്"
+  },
+  "stretchTempleMassageDesc": {
+    "message": "സമ്മർദ്ദം ഒഴിവാക്കാൻ നെറ്റിയിൽ സൗമ്യമായ വൃത്താകൃതിയിലുള്ള മർദ്ദം പ്രയോഗിക്കുക."
+  },
+  "stretchTempleMassageStep1": {
+    "message": "നിങ്ങളുടെ വിരൽത്തലപ്പുകൾ നെറ്റിയിൽ വയ്ക്കുക"
+  },
+  "stretchTempleMassageStep2": {
+    "message": "ഉള്ളിലേക്ക് സൗമ്യമായ വൃത്താകൃതിയിലുള്ള മർദ്ദം പ്രയോഗിക്കുക"
+  },
+  "stretchTempleMassageStep3": {
+    "message": "ചെറിയ വൃത്തങ്ങളിൽ സാവധാനം ചലിക്കുക"
+  },
+  "stretchTempleMassageStep4": {
+    "message": "ദീർഘമായി ശ്വസിച്ച് ജോയുടെ പിരിമുറുക്കം ഒഴിവാക്കുക"
+  },
+  "stretchTempleMassageStep5": {
+    "message": "പൂർണ്ണമായ 20 സെക്കൻഡ് തുടരുക"
+  },
+  "stretchAnkleCircles": {
+    "message": "ഉപ്പൂറ്റി വൃത്തങ്ങൾ"
+  },
+  "stretchAnkleCirclesDesc": {
+    "message": "രക്തചംക്രമണം മെച്ചപ്പെടുത്താൻ പാദങ്ങൾ ഉയർത്തി ഉപ്പൂറ്റികൾ സാവധാനം കറക്കുക."
+  },
+  "stretchAnkleCirclesStep1": {
+    "message": "പാദങ്ങൾ നിലത്ത് നിന്ന് ഉയർത്തി ഇരിക്കുക"
+  },
+  "stretchAnkleCirclesStep2": {
+    "message": "കാൽവിരലുകൾ സാവധാനം മുന്നോട്ട് ചൂണ്ടിക്കാട്ടുക"
+  },
+  "stretchAnkleCirclesStep3": {
+    "message": "രണ്ട് ഉപ്പൂറ്റികളും സാവധാനം പുറത്തേക്ക് കറക്കുക"
+  },
+  "stretchAnkleCirclesStep4": {
+    "message": "5 വൃത്തങ്ങൾ പൂർത്തിയാക്കി ദിശ മാറ്റുക"
+  },
+  "stretchAnkleCirclesStep5": {
+    "message": "അവസാനിപ്പിക്കാൻ പാദങ്ങൾ വളയ്ക്കുകയും നീട്ടുകയും ചെയ്യുക"
+  },
+  "stretchFingerSpreads": {
+    "message": "വിരൽ വിടർത്തൽ"
+  },
+  "stretchFingerSpreadsDesc": {
+    "message": "ടൈപ്പിംഗ് മൂലമുള്ള പിരിമുറുക്കം കുറയ്ക്കാൻ വിരലുകൾ വിടർത്തി, പിന്നെ മുഷ്ടി ചുരുട്ടുക."
+  },
+  "stretchFingerSpreadsStep1": {
+    "message": "രണ്ട് കൈകളും മുന്നോട്ട് നീട്ടുക"
+  },
+  "stretchFingerSpreadsStep2": {
+    "message": "വിരലുകൾ കഴിയുന്നത്ര വിടർത്തുക"
+  },
+  "stretchFingerSpreadsStep3": {
+    "message": "3 സെക്കൻഡ് വിടർത്തൽ നിലനിർത്തുക"
+  },
+  "stretchFingerSpreadsStep4": {
+    "message": "പിന്നെ വിരലുകൾ അയഞ്ഞ മുഷ്ടിയിലേക്ക് ചുരുട്ടുക"
+  },
+  "stretchFingerSpreadsStep5": {
+    "message": "തുറക്കൽ-അടയ്ക്കൽ ചലനം 5 തവണ ആവർത്തിക്കുക"
+  },
+  "stretchHipStretch": {
+    "message": "ഇടുപ്പ് സ്ട്രെച്ച്"
+  },
+  "stretchHipStretchDesc": {
+    "message": "ഇടുപ്പും ഗ്ലൂട്ടും നീട്ടാൻ ഒരു മുട്ട് നെഞ്ചിലേക്ക് ഉയർത്തുക."
+  },
+  "stretchHipStretchStep1": {
+    "message": "സന്തുലനത്തിനായി നിങ്ങളുടെ ഡെസ്കിന് സമീപം നിൽക്കുക"
+  },
+  "stretchHipStretchStep2": {
+    "message": "വലത് മുട്ട് നെഞ്ചിലേക്ക് ഉയർത്തുക"
+  },
+  "stretchHipStretchStep3": {
+    "message": "രണ്ട് കൈകളും കൊണ്ട് സാവധാനം പിടിക്കുക"
+  },
+  "stretchHipStretchStep4": {
+    "message": "ഇടുപ്പിലും ഗ്ലൂട്ടിലും നീളൽ അനുഭവിക്കുക"
+  },
+  "stretchHipStretchStep5": {
+    "message": "3 ശ്വാസം പിടിച്ച് കാല് മാറ്റുക"
+  },
+  "settingsLanguage": {
+    "message": "ഭാഷ"
+  }
+}
