@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MicroBreaks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <circle cx="7" cy="7" r="6" fill="#7BAE8A" opacity="0.3"/>
+        <circle cx="7" cy="7" r="3.5" fill="#7BAE8A"/>
+      </svg>
+      <span class="brand-name" data-i18n="brandName">MicroBreaks</span>
+    </div>
+    <div class="topbar-right">
+      <div class="tooltip-wrap">
+        <button class="focus-toggle" id="focusBtn" aria-pressed="false">
+          <span class="focus-dot"></span>
+          <span class="focus-lbl" id="focusLbl" data-i18n="strictModeOff">strict mode off</span>
+        </button>
+        <div class="tooltip" data-i18n="strictModeTooltip">Shows a full-screen break overlay you can't miss, instead of a notification.</div>
+      </div>
+      <button class="icon-btn-top" id="settingsBtn" aria-label="Settings">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="timer-zone">
+    <div class="ring-outer" aria-label="Break timer">
+      <svg class="ring-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle class="breath-ring" id="breathRing" cx="80" cy="80" r="72"/>
+        <circle class="track-ring" cx="80" cy="80" r="62"/>
+        <circle class="progress-ring" id="progRing" cx="80" cy="80" r="62"
+          stroke-dasharray="389.6" stroke-dashoffset="0"/>
+      </svg>
+      <div class="ring-inner">
+        <span class="countdown" id="cdDisplay" aria-live="polite">20:00</span>
+        <span class="countdown-lbl" id="cdLbl" data-i18n="untilBreak">until break</span>
+      </div>
+    </div>
+
+    <div class="interval-row" role="group" aria-label="Break interval">
+      <button class="iv-btn active" id="iv20" data-min="20" data-i18n="interval20">20 min</button>
+      <button class="iv-btn" id="iv30" data-min="30" data-i18n="interval30">30 min</button>
+      <button class="iv-btn" id="iv45" data-min="45" data-i18n="interval45">45 min</button>
+      <button class="iv-btn" id="ivcustom" data-min="0" data-i18n="intervalCustom">custom</button>
+    </div>
+
+    <div class="ctrl-row">
+      <button class="btn-snooze" id="snoozeBtn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><line x1="17" y1="20" x2="22" y2="20"/><line x1="19" y1="18" x2="19" y2="22"/></svg>
+        <span data-i18n="snooze">snooze 5 min</span>
+      </button>
+      <button class="btn-go" id="goBtn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" id="goIcon" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
+        <span id="goLbl" data-i18n="start">start</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mainLower">
+    <div class="stretch-area">
+      <div class="stretch-header">
+        <span class="section-eyebrow" data-i18n="upNext">up next</span>
+        <div class="s-nav" role="group" aria-label="Browse stretches">
+          <button class="s-nav-btn" id="prevBtn" aria-label="Previous stretch">&#8249;</button>
+          <button class="s-nav-btn" id="nextBtn" aria-label="Next stretch">&#8250;</button>
+        </div>
+      </div>
+      <div class="stretch-card">
+        <div class="s-icon" id="sIcon" aria-hidden="true"></div>
+        <div class="s-body">
+          <div class="s-name" id="sName"></div>
+          <div class="s-desc" id="sDesc"></div>
+          <div class="s-dur" id="sDur"></div>
+        </div>
+      </div>
+      <div class="pip-row" id="pips" aria-hidden="true"></div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-n" id="stBreaks">0</span>
+        <span class="stat-l" data-i18n="breaksToday">breaks today</span>
+      </div>
+      <div class="stat stat-divider">
+        <span class="stat-n amber" id="stStreak">0</span>
+        <span class="stat-l" data-i18n="dayStreak">day streak</span>
+      </div>
+      <div class="stat stat-divider">
+        <span class="stat-n" id="stMins">0</span>
+        <span class="stat-l" data-i18n="minsMoved">mins moved</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-layer" id="settingsLayer" aria-hidden="true">
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsNotifications">notifications</div>
+
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="browserNotification">Browser notification</div>
+          <div class="stg-sub" data-i18n="browserNotificationSub">Works when tab is in background</div>
+        </div>
+        <button class="tog" id="tNotif" role="switch" aria-checked="true" data-pref="notifEnabled"></button>
+      </div>
+    </div>
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsDisplay">display</div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="stretchAnimations">Stretch animations</div>
+          <div class="stg-sub" data-i18n="stretchAnimationsSub">Guided animation during each break</div>
+        </div>
+        <button class="tog" id="tAnim" role="switch" aria-checked="true" data-pref="animEnabled"></button>
+      </div>
+
+      <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsModel">model</div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="maleModel">Male model</div>
+          <div class="stg-sub" data-i18n="maleModelSub">Switch to a male figure for exercises</div>
+        </div>
+        <button class="tog" id="tMale" role="switch" aria-checked="false" data-pref="maleModel"></button>
+      </div>
+    </div>
+
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsLanguage">language</div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="language">Language</div>
+          <div class="stg-sub" data-i18n="languageSub">Choose your preferred language</div>
+        </div>
+        <select class="lang-select" id="langSelect">
+          <option value="auto" data-i18n="languageAuto">Auto-detect</option>
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="hi">हिन्दी</option>
+          <option value="ml">മലയാളം</option>
+          <option value="ta">தமிழ்</option>
+          <option value="te">తెలుగు</option>
+        </select>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
