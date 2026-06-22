@@ -1,0 +1,448 @@
+{
+  "extName": {
+    "message": "MicroBreaks — स्ट्रेच टाइमर"
+  },
+  "extDescription": {
+    "message": "स्ट्रेच सुझावों के साथ हल्के ब्रेक रिमाइंडर। उन लोगों के लिए जो बैठे-बैठे हिलना-डुलना भूल जाते हैं।"
+  },
+  "brandName": {
+    "message": "MicroBreaks"
+  },
+  "strictModeOn": {
+    "message": "स्ट्रिक्ट मोड चालू"
+  },
+  "strictModeOff": {
+    "message": "स्ट्रिक्ट मोड बंद"
+  },
+  "strictModeTooltip": {
+    "message": "नोटिफिकेशन की जगह एक फुल-स्क्रीन ब्रेक ओवरले दिखाता है, जिसे आप नज़रअंदाज़ नहीं कर सकते।"
+  },
+  "untilBreak": {
+    "message": "ब्रेक तक"
+  },
+  "breakTime": {
+    "message": "स्ट्रेच करने का समय"
+  },
+  "moveNow": {
+    "message": "हिलें!"
+  },
+  "interval20": {
+    "message": "20 मिनट"
+  },
+  "interval30": {
+    "message": "30 मिनट"
+  },
+  "interval45": {
+    "message": "45 मिनट"
+  },
+  "intervalCustom": {
+    "message": "कस्टम"
+  },
+  "customPrompt": {
+    "message": "ब्रेक के बीच कितने मिनट?"
+  },
+  "snooze": {
+    "message": "5 मिनट टालें"
+  },
+  "start": {
+    "message": "शुरू करें"
+  },
+  "pause": {
+    "message": "रोकें"
+  },
+  "resume": {
+    "message": "जारी रखें"
+  },
+  "upNext": {
+    "message": "अगला"
+  },
+  "breaksToday": {
+    "message": "आज ब्रेक"
+  },
+  "dayStreak": {
+    "message": "दिनों की लकीर"
+  },
+  "minsMoved": {
+    "message": "मिनट हिले"
+  },
+  "settingsNotifications": {
+    "message": "सूचनाएं"
+  },
+  "settingsDisplay": {
+    "message": "डिस्प्ले"
+  },
+  "settingsModel": {
+    "message": "मॉडल"
+  },
+  "browserNotification": {
+    "message": "ब्राउज़र सूचना"
+  },
+  "browserNotificationSub": {
+    "message": "टैब बैकग्राउंड में होने पर भी काम करता है"
+  },
+  "stretchAnimations": {
+    "message": "स्ट्रेच एनिमेशन"
+  },
+  "stretchAnimationsSub": {
+    "message": "हर ब्रेक पर गाइडेड एनिमेशन"
+  },
+  "maleModel": {
+    "message": "पुरुष मॉडल"
+  },
+  "maleModelSub": {
+    "message": "व्यायाम के लिए पुरुष आकृति में बदलें"
+  },
+  "language": {
+    "message": "भाषा"
+  },
+  "languageSub": {
+    "message": "अपनी पसंदीदा भाषा चुनें"
+  },
+  "languageAuto": {
+    "message": "स्वतः पहचान"
+  },
+  "doneIMoved": {
+    "message": "हो गया — मैं हिला"
+  },
+  "dismissHint": {
+    "message": "बंद करने के लिए Esc दबाएं या बाहर क्लिक करें"
+  },
+  "welcomeTitle": {
+    "message": "MicroBreaks चल रहा है"
+  },
+  "welcomeMessage": {
+    "message": "आपको हर $MINUTES$ मिनट में स्ट्रेच करने के लिए एक हल्का रिमाइंडर मिलेगा। लचीले बने रहें!",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeToMove": {
+    "message": "हिलने का समय"
+  },
+  "snoozeBtn": {
+    "message": "5 मिनट टालें"
+  },
+  "restartBtn": {
+    "message": "हो गया — फिर शुरू करें"
+  },
+  "stretchNeckRolls": {
+    "message": "गर्दन घुमाना"
+  },
+  "stretchNeckRollsDesc": {
+    "message": "अपने सिर को धीरे-धीरे तीन बार हर दिशा में घुमाएं। जॉ को ढीला छोड़ें।"
+  },
+  "stretchNeckRollsStep1": {
+    "message": "सीधे बैठें या खड़े हों, कंधे ढीले रखें"
+  },
+  "stretchNeckRollsStep2": {
+    "message": "धीरे-धीरे दाहिने कान को दाहिने कंधे की ओर झुकाएं"
+  },
+  "stretchNeckRollsStep3": {
+    "message": "सिर को आगे झुकाएं, ठोड़ी छाती की ओर"
+  },
+  "stretchNeckRollsStep4": {
+    "message": "बाईं ओर जारी रखें"
+  },
+  "stretchNeckRollsStep5": {
+    "message": "हर दिशा में 3 पूरे धीमे चक्र पूरे करें"
+  },
+  "stretchOverheadReach": {
+    "message": "ऊपर की ओर पहुंच"
+  },
+  "stretchOverheadReachDesc": {
+    "message": "उंगलियां आपस में फंसाएं, हथेलियों को छत की ओर दबाएं। दो गहरी सांसें लें।"
+  },
+  "stretchOverheadReachStep1": {
+    "message": "पैरों को कूल्हे की चौड़ाई पर रखकर खड़े हों"
+  },
+  "stretchOverheadReachStep2": {
+    "message": "सांस लें और दोनों हाथ सिर के ऊपर उठाएं"
+  },
+  "stretchOverheadReachStep3": {
+    "message": "उंगलियां फंसाएं, हथेलियां ऊपर की ओर"
+  },
+  "stretchOverheadReachStep4": {
+    "message": "धीरे से ऊपर दबाएं और 3 सांस रोकें"
+  },
+  "stretchOverheadReachStep5": {
+    "message": "सांस छोड़ें और हाथों को धीरे-धीरे नीचे लाएं"
+  },
+  "stretch2020": {
+    "message": "20-20-20 नियम"
+  },
+  "stretch2020Desc": {
+    "message": "लगभग 6 मीटर दूर कोई चीज़ देखें। 20 सेकंड तक बिना पलक झपकाए देखें।"
+  },
+  "stretch2020Step1": {
+    "message": "अपनी स्क्रीन से पूरी तरह नज़र हटाएं"
+  },
+  "stretch2020Step2": {
+    "message": "कम से कम 6 मीटर दूर कोई चीज़ ढूंढें"
+  },
+  "stretch2020Step3": {
+    "message": "बिना ज़ोर दिए उस पर ध्यान केंद्रित करें"
+  },
+  "stretch2020Step4": {
+    "message": "पूरे 20 सेकंड तक नज़र टिकाएं"
+  },
+  "stretch2020Step5": {
+    "message": "धीरे से पलकें झपकाएं और काम पर लौटें"
+  },
+  "stretchWristCircles": {
+    "message": "कलाई के चक्र"
+  },
+  "stretchWristCirclesDesc": {
+    "message": "हाथों को आगे फैलाएं। कलाइयों को बड़े गोल घेरे में घुमाएं — हर दिशा में पांच बार।"
+  },
+  "stretchWristCirclesStep1": {
+    "message": "दोनों हाथ अपने सामने फैलाएं"
+  },
+  "stretchWristCirclesStep2": {
+    "message": "दोनों हाथों से ढीली मुट्ठी बनाएं"
+  },
+  "stretchWristCirclesStep3": {
+    "message": "दोनों कलाइयों को धीरे-धीरे बाहर की ओर घुमाएं"
+  },
+  "stretchWristCirclesStep4": {
+    "message": "5 चक्र पूरे करें फिर दिशा बदलें"
+  },
+  "stretchWristCirclesStep5": {
+    "message": "खत्म करने के लिए हाथों को धीरे से हिलाएं"
+  },
+  "stretchShoulderRolls": {
+    "message": "कंधे घुमाना"
+  },
+  "stretchShoulderRollsDesc": {
+    "message": "कंधों को धीरे-धीरे पांच बार पीछे घुमाएं, फिर पांच बार आगे। दिन की थकान छोड़ें।"
+  },
+  "stretchShoulderRollsStep1": {
+    "message": "हाथों को ढीला अपनी तरफ लटकने दें"
+  },
+  "stretchShoulderRollsStep2": {
+    "message": "दोनों कंधों को कानों की ओर उठाएं"
+  },
+  "stretchShoulderRollsStep3": {
+    "message": "उन्हें धीरे-धीरे पीछे और नीचे घुमाएं"
+  },
+  "stretchShoulderRollsStep4": {
+    "message": "कंधे की हड्डियों को पास आते हुए महसूस करें"
+  },
+  "stretchShoulderRollsStep5": {
+    "message": "5 बार दोहराएं फिर आगे घुमाएं"
+  },
+  "stretchSpinalTwist": {
+    "message": "रीढ़ की मोड़"
+  },
+  "stretchSpinalTwistDesc": {
+    "message": "सीधे बैठें, एक हाथ विपरीत घुटने पर रखें, और धीरे से मुड़ें।"
+  },
+  "stretchSpinalTwistStep1": {
+    "message": "सीधे बैठें, पैर ज़मीन पर सपाट"
+  },
+  "stretchSpinalTwistStep2": {
+    "message": "अपना दाहिना हाथ बाएं घुटने पर रखें"
+  },
+  "stretchSpinalTwistStep3": {
+    "message": "सांस लें और रीढ़ को ऊपर की ओर खींचें"
+  },
+  "stretchSpinalTwistStep4": {
+    "message": "सांस छोड़ें और धीरे से बाईं ओर मुड़ें"
+  },
+  "stretchSpinalTwistStep5": {
+    "message": "3 सांस रोकें फिर दूसरी तरफ बदलें"
+  },
+  "stretchForwardFold": {
+    "message": "आगे झुकना"
+  },
+  "stretchForwardFoldDesc": {
+    "message": "कूल्हों से आगे झुकें और हाथों व सिर को ढीला लटकने दें।"
+  },
+  "stretchForwardFoldStep1": {
+    "message": "पैरों को कूल्हे की चौड़ाई पर रखकर खड़े हों"
+  },
+  "stretchForwardFoldStep2": {
+    "message": "सांस लें और रीढ़ को ऊपर खींचें"
+  },
+  "stretchForwardFoldStep3": {
+    "message": "सांस छोड़ें और कूल्हों से आगे झुकें"
+  },
+  "stretchForwardFoldStep4": {
+    "message": "हाथों और सिर को ढीला लटकने दें"
+  },
+  "stretchForwardFoldStep5": {
+    "message": "3 सांस रोकें फिर धीरे-धीरे उठें"
+  },
+  "stretchChestOpener": {
+    "message": "छाती खोलना"
+  },
+  "stretchChestOpenerDesc": {
+    "message": "हाथों को पीठ के पीछे फंसाएं और कंधे की हड्डियों को पास लाएं।"
+  },
+  "stretchChestOpenerStep1": {
+    "message": "सीधे खड़े हों या बैठें"
+  },
+  "stretchChestOpenerStep2": {
+    "message": "हाथों को पीठ के निचले हिस्से के पीछे फंसाएं"
+  },
+  "stretchChestOpenerStep3": {
+    "message": "कंधे की हड्डियों को पास लाएं"
+  },
+  "stretchChestOpenerStep4": {
+    "message": "छाती और ठोड़ी को थोड़ा ऊपर उठाएं"
+  },
+  "stretchChestOpenerStep5": {
+    "message": "3 गहरी सांस रोकें फिर छोड़ें"
+  },
+  "stretchSideStretch": {
+    "message": "साइड स्ट्रेच"
+  },
+  "stretchSideStretchDesc": {
+    "message": "एक हाथ सिर के ऊपर उठाएं और धीरे से विपरीत दिशा में झुकें।"
+  },
+  "stretchSideStretchStep1": {
+    "message": "पैरों को कूल्हे की चौड़ाई पर रखकर खड़े हों"
+  },
+  "stretchSideStretchStep2": {
+    "message": "दाहिना हाथ सिर के ऊपर उठाएं"
+  },
+  "stretchSideStretchStep3": {
+    "message": "धीरे-धीरे बाईं ओर झुकें"
+  },
+  "stretchSideStretchStep4": {
+    "message": "दाहिनी ओर खिंचाव महसूस करें"
+  },
+  "stretchSideStretchStep5": {
+    "message": "3 सांस रोकें फिर दूसरी तरफ बदलें"
+  },
+  "stretchChinTucks": {
+    "message": "ठोड़ी अंदर खींचना"
+  },
+  "stretchChinTucksDesc": {
+    "message": "खोपड़ी के आधार को खींचने के लिए ठोड़ी को धीरे से सीधे पीछे खींचें।"
+  },
+  "stretchChinTucksStep1": {
+    "message": "सीधी रीढ़ के साथ बैठें या खड़े हों"
+  },
+  "stretchChinTucksStep2": {
+    "message": "आंखों की सीध में सीधे आगे देखें"
+  },
+  "stretchChinTucksStep3": {
+    "message": "ठोड़ी को धीरे से सीधे पीछे खींचें"
+  },
+  "stretchChinTucksStep4": {
+    "message": "खोपड़ी के आधार पर खिंचाव महसूस करें"
+  },
+  "stretchChinTucksStep5": {
+    "message": "3 सेकंड रोकें, छोड़ें, 5 बार दोहराएं"
+  },
+  "stretchUpperBackSqueeze": {
+    "message": "ऊपरी पीठ को दबाना"
+  },
+  "stretchUpperBackSqueezeDesc": {
+    "message": "कोहनियों को पीछे खींचें और कंधे की हड्डियों को कस कर पास लाएं।"
+  },
+  "stretchUpperBackSqueezeStep1": {
+    "message": "सीधे बैठें, हाथ अपनी तरफ"
+  },
+  "stretchUpperBackSqueezeStep2": {
+    "message": "कोहनियों को 90 डिग्री पर मोड़ें"
+  },
+  "stretchUpperBackSqueezeStep3": {
+    "message": "दोनों कोहनियों को शरीर के पीछे खींचें"
+  },
+  "stretchUpperBackSqueezeStep4": {
+    "message": "कंधे की हड्डियों को कस कर पास लाएं"
+  },
+  "stretchUpperBackSqueezeStep5": {
+    "message": "5 सेकंड रोकें, छोड़ें, 5 बार दोहराएं"
+  },
+  "stretchTempleMassage": {
+    "message": "मंदिर मालिश"
+  },
+  "stretchTempleMassageDesc": {
+    "message": "तनाव दूर करने के लिए कनपटी पर धीरे से गोलाकार दबाव डालें।"
+  },
+  "stretchTempleMassageStep1": {
+    "message": "अपनी उंगलियों को कनपटी पर रखें"
+  },
+  "stretchTempleMassageStep2": {
+    "message": "अंदर की ओर धीरे से गोलाकार दबाव डालें"
+  },
+  "stretchTempleMassageStep3": {
+    "message": "धीरे-धीरे छोटे गोलाकार घेरे में घुमाएं"
+  },
+  "stretchTempleMassageStep4": {
+    "message": "गहरी सांस लें और जॉ का तनाव छोड़ें"
+  },
+  "stretchTempleMassageStep5": {
+    "message": "पूरे 20 सेकंड तक जारी रखें"
+  },
+  "stretchAnkleCircles": {
+    "message": "एड़ी के चक्र"
+  },
+  "stretchAnkleCirclesDesc": {
+    "message": "पैरों को उठाएं और रक्त संचार बेहतर करने के लिए एड़ियों को धीरे से घुमाएं।"
+  },
+  "stretchAnkleCirclesStep1": {
+    "message": "पैरों को ज़मीन से उठाकर बैठें"
+  },
+  "stretchAnkleCirclesStep2": {
+    "message": "पैर की उंगलियों को धीरे से आगे की ओर इशारा करें"
+  },
+  "stretchAnkleCirclesStep3": {
+    "message": "दोनों एड़ियों को धीरे-धीरे बाहर की ओर घुमाएं"
+  },
+  "stretchAnkleCirclesStep4": {
+    "message": "5 चक्र पूरे करें फिर दिशा बदलें"
+  },
+  "stretchAnkleCirclesStep5": {
+    "message": "खत्म करने के लिए पैरों को मोड़ें और सीधा करें"
+  },
+  "stretchFingerSpreads": {
+    "message": "उंगलियां फैलाना"
+  },
+  "stretchFingerSpreadsDesc": {
+    "message": "उंगलियों को चौड़ा फैलाएं, फिर मुट्ठी बंद करें — टाइपिंग की थकान दूर करने के लिए।"
+  },
+  "stretchFingerSpreadsStep1": {
+    "message": "दोनों हाथ अपने सामने रखें"
+  },
+  "stretchFingerSpreadsStep2": {
+    "message": "उंगलियों को जितना हो सके फैलाएं"
+  },
+  "stretchFingerSpreadsStep3": {
+    "message": "3 सेकंड तक फैलाव बनाए रखें"
+  },
+  "stretchFingerSpreadsStep4": {
+    "message": "फिर उंगलियों को ढीली मुट्ठी में बंद करें"
+  },
+  "stretchFingerSpreadsStep5": {
+    "message": "खोलने-बंद करने की क्रिया 5 बार दोहराएं"
+  },
+  "stretchHipStretch": {
+    "message": "कूल्हे का स्ट्रेच"
+  },
+  "stretchHipStretchDesc": {
+    "message": "कूल्हे और ग्लूट को स्ट्रेच करने के लिए एक घुटना छाती की ओर उठाएं।"
+  },
+  "stretchHipStretchStep1": {
+    "message": "बैलेंस के लिए अपनी डेस्क के पास खड़े हों"
+  },
+  "stretchHipStretchStep2": {
+    "message": "दाहिना घुटना छाती की ओर उठाएं"
+  },
+  "stretchHipStretchStep3": {
+    "message": "इसे दोनों हाथों से धीरे से पकड़ें"
+  },
+  "stretchHipStretchStep4": {
+    "message": "कूल्हे और ग्लूट में खिंचाव महसूस करें"
+  },
+  "stretchHipStretchStep5": {
+    "message": "3 सांस रोकें फिर पैर बदलें"
+  },
+  "settingsLanguage": {
+    "message": "भाषा"
+  }
+}
