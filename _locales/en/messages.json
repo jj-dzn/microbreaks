@@ -1,0 +1,448 @@
+{
+  "extName": {
+    "message": "MicroBreaks — Stretch Timer"
+  },
+  "extDescription": {
+    "message": "Gentle break reminders with stretch prompts. For desk workers who forget to move."
+  },
+  "brandName": {
+    "message": "MicroBreaks"
+  },
+  "strictModeOn": {
+    "message": "strict mode on"
+  },
+  "strictModeOff": {
+    "message": "strict mode off"
+  },
+  "strictModeTooltip": {
+    "message": "Shows a full-screen break overlay you can't miss, instead of a notification."
+  },
+  "untilBreak": {
+    "message": "until break"
+  },
+  "breakTime": {
+    "message": "time to stretch"
+  },
+  "moveNow": {
+    "message": "move!"
+  },
+  "interval20": {
+    "message": "20 min"
+  },
+  "interval30": {
+    "message": "30 min"
+  },
+  "interval45": {
+    "message": "45 min"
+  },
+  "intervalCustom": {
+    "message": "custom"
+  },
+  "customPrompt": {
+    "message": "Minutes between breaks?"
+  },
+  "snooze": {
+    "message": "snooze 5 min"
+  },
+  "start": {
+    "message": "start"
+  },
+  "pause": {
+    "message": "pause"
+  },
+  "resume": {
+    "message": "resume"
+  },
+  "upNext": {
+    "message": "up next"
+  },
+  "breaksToday": {
+    "message": "breaks today"
+  },
+  "dayStreak": {
+    "message": "day streak"
+  },
+  "minsMoved": {
+    "message": "mins moved"
+  },
+  "settingsNotifications": {
+    "message": "notifications"
+  },
+  "settingsDisplay": {
+    "message": "display"
+  },
+  "settingsModel": {
+    "message": "model"
+  },
+  "browserNotification": {
+    "message": "Browser notification"
+  },
+  "browserNotificationSub": {
+    "message": "Works when tab is in background"
+  },
+  "stretchAnimations": {
+    "message": "Stretch animations"
+  },
+  "stretchAnimationsSub": {
+    "message": "Guided animation during each break"
+  },
+  "maleModel": {
+    "message": "Male model"
+  },
+  "maleModelSub": {
+    "message": "Switch to a male figure for exercises"
+  },
+  "language": {
+    "message": "Language"
+  },
+  "languageSub": {
+    "message": "Choose your preferred language"
+  },
+  "languageAuto": {
+    "message": "Auto-detect"
+  },
+  "doneIMoved": {
+    "message": "Done — I moved"
+  },
+  "dismissHint": {
+    "message": "Press Esc or click outside to dismiss"
+  },
+  "welcomeTitle": {
+    "message": "MicroBreaks is running"
+  },
+  "welcomeMessage": {
+    "message": "You'll get a gentle reminder to stretch every $MINUTES$ minutes. Stay loose!",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeToMove": {
+    "message": "Time to move"
+  },
+  "snoozeBtn": {
+    "message": "Snooze 5 min"
+  },
+  "restartBtn": {
+    "message": "Done — restart"
+  },
+  "stretchNeckRolls": {
+    "message": "Neck rolls"
+  },
+  "stretchNeckRollsDesc": {
+    "message": "Slowly circle your head three times each direction. Let your jaw go soft."
+  },
+  "stretchNeckRollsStep1": {
+    "message": "Sit or stand tall, shoulders relaxed"
+  },
+  "stretchNeckRollsStep2": {
+    "message": "Slowly drop your right ear toward your right shoulder"
+  },
+  "stretchNeckRollsStep3": {
+    "message": "Roll your head forward, chin to chest"
+  },
+  "stretchNeckRollsStep4": {
+    "message": "Continue to the left side"
+  },
+  "stretchNeckRollsStep5": {
+    "message": "Complete 3 full slow circles each direction"
+  },
+  "stretchOverheadReach": {
+    "message": "Overhead reach"
+  },
+  "stretchOverheadReachDesc": {
+    "message": "Interlace fingers, press palms toward the ceiling. Take two deep breaths."
+  },
+  "stretchOverheadReachStep1": {
+    "message": "Stand with feet hip-width apart"
+  },
+  "stretchOverheadReachStep2": {
+    "message": "Inhale and raise both arms overhead"
+  },
+  "stretchOverheadReachStep3": {
+    "message": "Interlace your fingers, palms facing up"
+  },
+  "stretchOverheadReachStep4": {
+    "message": "Press up gently and hold for 3 breaths"
+  },
+  "stretchOverheadReachStep5": {
+    "message": "Exhale and slowly lower your arms"
+  },
+  "stretch2020": {
+    "message": "20-20-20 rule"
+  },
+  "stretch2020Desc": {
+    "message": "Find something 20 feet away. Look at it for 20 seconds without blinking."
+  },
+  "stretch2020Step1": {
+    "message": "Look away from your screen completely"
+  },
+  "stretch2020Step2": {
+    "message": "Find something at least 20 feet away"
+  },
+  "stretch2020Step3": {
+    "message": "Focus softly on it without straining"
+  },
+  "stretch2020Step4": {
+    "message": "Hold your gaze for 20 full seconds"
+  },
+  "stretch2020Step5": {
+    "message": "Blink slowly and return to your work"
+  },
+  "stretchWristCircles": {
+    "message": "Wrist circles"
+  },
+  "stretchWristCirclesDesc": {
+    "message": "Extend arms forward. Rotate wrists in wide circles — five each direction."
+  },
+  "stretchWristCirclesStep1": {
+    "message": "Extend both arms in front of you"
+  },
+  "stretchWristCirclesStep2": {
+    "message": "Make loose fists with both hands"
+  },
+  "stretchWristCirclesStep3": {
+    "message": "Slowly rotate both wrists outward"
+  },
+  "stretchWristCirclesStep4": {
+    "message": "Complete 5 circles then reverse direction"
+  },
+  "stretchWristCirclesStep5": {
+    "message": "Shake out your hands gently to finish"
+  },
+  "stretchShoulderRolls": {
+    "message": "Shoulder rolls"
+  },
+  "stretchShoulderRollsDesc": {
+    "message": "Roll shoulders slowly backward five times, then forward five. Release the day."
+  },
+  "stretchShoulderRollsStep1": {
+    "message": "Let your arms hang loose at your sides"
+  },
+  "stretchShoulderRollsStep2": {
+    "message": "Lift both shoulders up toward your ears"
+  },
+  "stretchShoulderRollsStep3": {
+    "message": "Roll them slowly backward and down"
+  },
+  "stretchShoulderRollsStep4": {
+    "message": "Feel your shoulder blades squeeze together"
+  },
+  "stretchShoulderRollsStep5": {
+    "message": "Repeat 5 times then roll them forward"
+  },
+  "stretchSpinalTwist": {
+    "message": "Spinal twist"
+  },
+  "stretchSpinalTwistDesc": {
+    "message": "Sit tall, place one hand on the opposite knee, and gently twist."
+  },
+  "stretchSpinalTwistStep1": {
+    "message": "Sit tall with feet flat on the floor"
+  },
+  "stretchSpinalTwistStep2": {
+    "message": "Place your right hand on your left knee"
+  },
+  "stretchSpinalTwistStep3": {
+    "message": "Inhale to lengthen your spine upward"
+  },
+  "stretchSpinalTwistStep4": {
+    "message": "Exhale and gently twist to the left"
+  },
+  "stretchSpinalTwistStep5": {
+    "message": "Hold 3 breaths then switch sides"
+  },
+  "stretchForwardFold": {
+    "message": "Forward fold"
+  },
+  "stretchForwardFoldDesc": {
+    "message": "Hinge forward at the hips and let your arms and head hang heavy."
+  },
+  "stretchForwardFoldStep1": {
+    "message": "Stand with feet hip-width apart"
+  },
+  "stretchForwardFoldStep2": {
+    "message": "Inhale and grow tall through your spine"
+  },
+  "stretchForwardFoldStep3": {
+    "message": "Exhale and hinge forward at the hips"
+  },
+  "stretchForwardFoldStep4": {
+    "message": "Let your arms and head hang heavy"
+  },
+  "stretchForwardFoldStep5": {
+    "message": "Hold 3 breaths then slowly rise back up"
+  },
+  "stretchChestOpener": {
+    "message": "Chest opener"
+  },
+  "stretchChestOpenerDesc": {
+    "message": "Clasp your hands behind your back and squeeze your shoulder blades together."
+  },
+  "stretchChestOpenerStep1": {
+    "message": "Stand or sit upright and tall"
+  },
+  "stretchChestOpenerStep2": {
+    "message": "Clasp your hands behind your lower back"
+  },
+  "stretchChestOpenerStep3": {
+    "message": "Squeeze your shoulder blades together"
+  },
+  "stretchChestOpenerStep4": {
+    "message": "Lift your chest and chin slightly upward"
+  },
+  "stretchChestOpenerStep5": {
+    "message": "Hold for 3 deep breaths then release"
+  },
+  "stretchSideStretch": {
+    "message": "Side stretch"
+  },
+  "stretchSideStretchDesc": {
+    "message": "Raise one arm overhead and lean gently to the opposite side."
+  },
+  "stretchSideStretchStep1": {
+    "message": "Stand tall with feet hip-width apart"
+  },
+  "stretchSideStretchStep2": {
+    "message": "Raise your right arm overhead"
+  },
+  "stretchSideStretchStep3": {
+    "message": "Lean slowly to the left side"
+  },
+  "stretchSideStretchStep4": {
+    "message": "Feel the stretch along your right side"
+  },
+  "stretchSideStretchStep5": {
+    "message": "Hold 3 breaths then switch sides"
+  },
+  "stretchChinTucks": {
+    "message": "Chin tucks"
+  },
+  "stretchChinTucksDesc": {
+    "message": "Gently pull your chin straight back to stretch the base of your skull."
+  },
+  "stretchChinTucksStep1": {
+    "message": "Sit or stand with your spine tall"
+  },
+  "stretchChinTucksStep2": {
+    "message": "Look straight ahead at eye level"
+  },
+  "stretchChinTucksStep3": {
+    "message": "Gently pull your chin straight back"
+  },
+  "stretchChinTucksStep4": {
+    "message": "Feel the stretch at the base of your skull"
+  },
+  "stretchChinTucksStep5": {
+    "message": "Hold 3 seconds, release, repeat 5 times"
+  },
+  "stretchUpperBackSqueeze": {
+    "message": "Upper back squeeze"
+  },
+  "stretchUpperBackSqueezeDesc": {
+    "message": "Pull your elbows back and squeeze your shoulder blades together firmly."
+  },
+  "stretchUpperBackSqueezeStep1": {
+    "message": "Sit upright with arms at your sides"
+  },
+  "stretchUpperBackSqueezeStep2": {
+    "message": "Bend elbows to 90 degrees"
+  },
+  "stretchUpperBackSqueezeStep3": {
+    "message": "Pull both elbows back behind your body"
+  },
+  "stretchUpperBackSqueezeStep4": {
+    "message": "Squeeze your shoulder blades firmly together"
+  },
+  "stretchUpperBackSqueezeStep5": {
+    "message": "Hold 5 seconds, release, repeat 5 times"
+  },
+  "stretchTempleMassage": {
+    "message": "Temple massage"
+  },
+  "stretchTempleMassageDesc": {
+    "message": "Apply gentle circular pressure to your temples to release tension."
+  },
+  "stretchTempleMassageStep1": {
+    "message": "Place your fingertips on your temples"
+  },
+  "stretchTempleMassageStep2": {
+    "message": "Apply gentle circular pressure inward"
+  },
+  "stretchTempleMassageStep3": {
+    "message": "Move slowly in small circles"
+  },
+  "stretchTempleMassageStep4": {
+    "message": "Breathe deeply and release jaw tension"
+  },
+  "stretchTempleMassageStep5": {
+    "message": "Continue for the full 20 seconds"
+  },
+  "stretchAnkleCircles": {
+    "message": "Ankle circles"
+  },
+  "stretchAnkleCirclesDesc": {
+    "message": "Lift your feet and rotate your ankles slowly to improve circulation."
+  },
+  "stretchAnkleCirclesStep1": {
+    "message": "Sit with your feet lifted off the floor"
+  },
+  "stretchAnkleCirclesStep2": {
+    "message": "Point your toes forward gently"
+  },
+  "stretchAnkleCirclesStep3": {
+    "message": "Slowly rotate both ankles outward"
+  },
+  "stretchAnkleCirclesStep4": {
+    "message": "Complete 5 circles then reverse direction"
+  },
+  "stretchAnkleCirclesStep5": {
+    "message": "Flex and point your feet to finish"
+  },
+  "stretchFingerSpreads": {
+    "message": "Finger spreads"
+  },
+  "stretchFingerSpreadsDesc": {
+    "message": "Spread your fingers wide, then curl into a fist, to relieve typing strain."
+  },
+  "stretchFingerSpreadsStep1": {
+    "message": "Hold both hands out in front of you"
+  },
+  "stretchFingerSpreadsStep2": {
+    "message": "Spread your fingers as wide as possible"
+  },
+  "stretchFingerSpreadsStep3": {
+    "message": "Hold the spread for 3 seconds"
+  },
+  "stretchFingerSpreadsStep4": {
+    "message": "Then curl fingers into a loose fist"
+  },
+  "stretchFingerSpreadsStep5": {
+    "message": "Repeat the open-close movement 5 times"
+  },
+  "stretchHipStretch": {
+    "message": "Hip stretch"
+  },
+  "stretchHipStretchDesc": {
+    "message": "Lift one knee toward your chest to stretch your hip and glute."
+  },
+  "stretchHipStretchStep1": {
+    "message": "Stand near your desk for balance"
+  },
+  "stretchHipStretchStep2": {
+    "message": "Lift your right knee toward your chest"
+  },
+  "stretchHipStretchStep3": {
+    "message": "Hold it with both hands gently"
+  },
+  "stretchHipStretchStep4": {
+    "message": "Feel the stretch in your hip and glute"
+  },
+  "stretchHipStretchStep5": {
+    "message": "Hold 3 breaths then switch legs"
+  },
+  "settingsLanguage": {
+    "message": "language"
+  }
+}
