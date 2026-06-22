@@ -1,0 +1,448 @@
+{
+  "extName": {
+    "message": "MicroBreaks — ஸ்ட்ரெச் டைமர்"
+  },
+  "extDescription": {
+    "message": "ஸ்ட்ரெச் பரிந்துரைகளுடன் மென்மையான இடைவேளை நினைவூட்டல்கள். உட்கார்ந்து வேலை செய்து நகர மறக்கும் அனைவருக்கும்."
+  },
+  "brandName": {
+    "message": "MicroBreaks"
+  },
+  "strictModeOn": {
+    "message": "ஸ்ட்ரிக்ட் மோட் ஆன்"
+  },
+  "strictModeOff": {
+    "message": "ஸ்ட்ரிக்ட் மோட் ஆஃப்"
+  },
+  "strictModeTooltip": {
+    "message": "அறிவிப்புக்கு பதிலாக, தவிர்க்க முடியாத முழுத் திரை இடைவேளை ஓவர்லேயைக் காட்டுகிறது."
+  },
+  "untilBreak": {
+    "message": "இடைவேளை வரை"
+  },
+  "breakTime": {
+    "message": "ஸ்ட்ரெச் செய்ய வேண்டிய நேரம்"
+  },
+  "moveNow": {
+    "message": "நகருங்கள்!"
+  },
+  "interval20": {
+    "message": "20 நிமி"
+  },
+  "interval30": {
+    "message": "30 நிமி"
+  },
+  "interval45": {
+    "message": "45 நிமி"
+  },
+  "intervalCustom": {
+    "message": "தனிப்பயன்"
+  },
+  "customPrompt": {
+    "message": "இடைவேளைகளுக்கு இடையில் எத்தனை நிமிடங்கள்?"
+  },
+  "snooze": {
+    "message": "5 நிமி தள்ளிவை"
+  },
+  "start": {
+    "message": "தொடங்கு"
+  },
+  "pause": {
+    "message": "இடைநிறுத்து"
+  },
+  "resume": {
+    "message": "தொடர்"
+  },
+  "upNext": {
+    "message": "அடுத்தது"
+  },
+  "breaksToday": {
+    "message": "இன்றைய இடைவேளைகள்"
+  },
+  "dayStreak": {
+    "message": "தொடர் நாட்கள்"
+  },
+  "minsMoved": {
+    "message": "நகர்ந்த நிமிடங்கள்"
+  },
+  "settingsNotifications": {
+    "message": "அறிவிப்புகள்"
+  },
+  "settingsDisplay": {
+    "message": "திரை"
+  },
+  "settingsModel": {
+    "message": "மாடல்"
+  },
+  "browserNotification": {
+    "message": "உலாவி அறிவிப்பு"
+  },
+  "browserNotificationSub": {
+    "message": "தாவல் பின்னணியில் இருந்தாலும் வேலை செய்யும்"
+  },
+  "stretchAnimations": {
+    "message": "ஸ்ட்ரெச் அனிமேஷன்கள்"
+  },
+  "stretchAnimationsSub": {
+    "message": "ஒவ்வொரு இடைவேளையிலும் வழிகாட்டும் அனிமேஷன்"
+  },
+  "maleModel": {
+    "message": "ஆண் மாடல்"
+  },
+  "maleModelSub": {
+    "message": "பயிற்சிகளுக்கு ஆண் உருவத்திற்கு மாறவும்"
+  },
+  "language": {
+    "message": "மொழி"
+  },
+  "languageSub": {
+    "message": "உங்கள் விருப்ப மொழியைத் தேர்ந்தெடுக்கவும்"
+  },
+  "languageAuto": {
+    "message": "தானாக கண்டறி"
+  },
+  "doneIMoved": {
+    "message": "முடிந்தது — நான் நகர்ந்தேன்"
+  },
+  "dismissHint": {
+    "message": "மூட Esc அழுத்தவும் அல்லது வெளியே கிளிக் செய்யவும்"
+  },
+  "welcomeTitle": {
+    "message": "MicroBreaks இயங்குகிறது"
+  },
+  "welcomeMessage": {
+    "message": "ஒவ்வொரு $MINUTES$ நிமிடத்திற்கும் ஸ்ட்ரெச் செய்ய மென்மையான நினைவூட்டல் கிடைக்கும். நெகிழ்வாக இருங்கள்!",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeToMove": {
+    "message": "நகர வேண்டிய நேரம்"
+  },
+  "snoozeBtn": {
+    "message": "5 நிமி தள்ளிவை"
+  },
+  "restartBtn": {
+    "message": "முடிந்தது — மீண்டும் தொடங்கு"
+  },
+  "stretchNeckRolls": {
+    "message": "கழுத்து சுழற்சி"
+  },
+  "stretchNeckRollsDesc": {
+    "message": "உங்கள் தலையை மெதுவாக மூன்று முறை ஒவ்வொரு திசையிலும் சுழற்றவும். தாடையை தளர்த்தவும்."
+  },
+  "stretchNeckRollsStep1": {
+    "message": "நேராக உட்காரவும் அல்லது நிற்கவும், தோள்களை தளர்த்தவும்"
+  },
+  "stretchNeckRollsStep2": {
+    "message": "வலது காதை வலது தோளுக்கு மெதுவாக சாய்க்கவும்"
+  },
+  "stretchNeckRollsStep3": {
+    "message": "தலையை முன்னே சுருட்டவும், மோவாய் மார்புக்கு"
+  },
+  "stretchNeckRollsStep4": {
+    "message": "இடது பக்கம் தொடரவும்"
+  },
+  "stretchNeckRollsStep5": {
+    "message": "ஒவ்வொரு திசையிலும் 3 முழு மெதுவான சுற்றுகளை முடிக்கவும்"
+  },
+  "stretchOverheadReach": {
+    "message": "மேல்நோக்கி நீட்டுதல்"
+  },
+  "stretchOverheadReachDesc": {
+    "message": "விரல்களை பின்னி, உள்ளங்கைகளை மேற்கூரையை நோக்கி அழுத்தவும். இரண்டு ஆழ்ந்த மூச்சு எடுக்கவும்."
+  },
+  "stretchOverheadReachStep1": {
+    "message": "இடுப்பு அளவில் கால்களை வைத்து நிற்கவும்"
+  },
+  "stretchOverheadReachStep2": {
+    "message": "மூச்சு இழுத்து இரு கைகளையும் தலைக்கு மேல் தூக்கவும்"
+  },
+  "stretchOverheadReachStep3": {
+    "message": "விரல்களை பின்னவும், உள்ளங்கைகள் மேல்நோக்கி"
+  },
+  "stretchOverheadReachStep4": {
+    "message": "மெதுவாக மேலே அழுத்தி 3 மூச்சு பிடிக்கவும்"
+  },
+  "stretchOverheadReachStep5": {
+    "message": "மூச்சு வெளியேற்றி கைகளை மெதுவாக கீழே கொண்டுவரவும்"
+  },
+  "stretch2020": {
+    "message": "20-20-20 விதி"
+  },
+  "stretch2020Desc": {
+    "message": "6 மீட்டர் தொலைவில் ஏதேனும் ஒன்றைக் கண்டறியவும். 20 விநாடிகள் கண் இமைக்காமல் பார்க்கவும்."
+  },
+  "stretch2020Step1": {
+    "message": "உங்கள் திரையிலிருந்து முற்றிலும் பார்வையை விலக்கவும்"
+  },
+  "stretch2020Step2": {
+    "message": "குறைந்தது 6 மீட்டர் தொலைவில் ஏதேனும் ஒன்றைக் கண்டறியவும்"
+  },
+  "stretch2020Step3": {
+    "message": "கண்களை வலியுறுத்தாமல் மென்மையாக கவனம் செலுத்தவும்"
+  },
+  "stretch2020Step4": {
+    "message": "20 விநாடிகள் முழுவதும் பார்வையை நிலைநிறுத்தவும்"
+  },
+  "stretch2020Step5": {
+    "message": "மெதுவாக கண் இமைத்து வேலைக்குத் திரும்பவும்"
+  },
+  "stretchWristCircles": {
+    "message": "மணிக்கட்டு சுழற்சி"
+  },
+  "stretchWristCirclesDesc": {
+    "message": "கைகளை முன்னே நீட்டவும். மணிக்கட்டுகளை பெரிய வட்டங்களில் சுழற்றவும் — ஒவ்வொரு திசையிலும் ஐந்து முறை."
+  },
+  "stretchWristCirclesStep1": {
+    "message": "இரு கைகளையும் உங்கள் முன்னே நீட்டவும்"
+  },
+  "stretchWristCirclesStep2": {
+    "message": "இரு கைகளாலும் தளர்வான முஷ்டிகளை உருவாக்கவும்"
+  },
+  "stretchWristCirclesStep3": {
+    "message": "இரு மணிக்கட்டுகளையும் மெதுவாக வெளியே சுழற்றவும்"
+  },
+  "stretchWristCirclesStep4": {
+    "message": "5 சுற்றுகளை முடித்து திசையை மாற்றவும்"
+  },
+  "stretchWristCirclesStep5": {
+    "message": "முடிக்க கைகளை மெதுவாக உலுக்கவும்"
+  },
+  "stretchShoulderRolls": {
+    "message": "தோள் சுழற்சி"
+  },
+  "stretchShoulderRollsDesc": {
+    "message": "தோள்களை மெதுவாக ஐந்து முறை பின்னோக்கி, பின் ஐந்து முறை முன்னோக்கி சுழற்றவும். நாளின் சுமையை விடுங்கள்."
+  },
+  "stretchShoulderRollsStep1": {
+    "message": "கைகளை பக்கங்களில் தளர்வாக தொங்க விடவும்"
+  },
+  "stretchShoulderRollsStep2": {
+    "message": "இரு தோள்களையும் காதுகளை நோக்கி தூக்கவும்"
+  },
+  "stretchShoulderRollsStep3": {
+    "message": "அவற்றை மெதுவாக பின்னோக்கியும் கீழ்நோக்கியும் சுழற்றவும்"
+  },
+  "stretchShoulderRollsStep4": {
+    "message": "தோள்பட்டைகள் நெருங்குவதை உணரவும்"
+  },
+  "stretchShoulderRollsStep5": {
+    "message": "5 முறை மீண்டும் செய்து முன்னோக்கி சுழற்றவும்"
+  },
+  "stretchSpinalTwist": {
+    "message": "முதுகெலும்பு திருப்பம்"
+  },
+  "stretchSpinalTwistDesc": {
+    "message": "நேராக உட்கார்ந்து, ஒரு கையை எதிர் முழங்காலில் வைத்து, மெதுவாக திரும்பவும்."
+  },
+  "stretchSpinalTwistStep1": {
+    "message": "நேராக உட்காரவும், கால்கள் தரையில் தட்டையாக"
+  },
+  "stretchSpinalTwistStep2": {
+    "message": "வலது கையை இடது முழங்காலில் வைக்கவும்"
+  },
+  "stretchSpinalTwistStep3": {
+    "message": "மூச்சு இழுத்து முதுகெலும்பை மேலே நீட்டவும்"
+  },
+  "stretchSpinalTwistStep4": {
+    "message": "மூச்சு வெளியேற்றி மெதுவாக இடதுபுறம் திரும்பவும்"
+  },
+  "stretchSpinalTwistStep5": {
+    "message": "3 மூச்சு பிடித்து பக்கம் மாற்றவும்"
+  },
+  "stretchForwardFold": {
+    "message": "முன்னோக்கி வளைதல்"
+  },
+  "stretchForwardFoldDesc": {
+    "message": "இடுப்பிலிருந்து முன்னோக்கி வளைந்து கைகளையும் தலையையும் கனமாக தொங்க விடவும்."
+  },
+  "stretchForwardFoldStep1": {
+    "message": "இடுப்பு அளவில் கால்களை வைத்து நிற்கவும்"
+  },
+  "stretchForwardFoldStep2": {
+    "message": "மூச்சு இழுத்து முதுகெலும்பை மேலே நீட்டவும்"
+  },
+  "stretchForwardFoldStep3": {
+    "message": "மூச்சு வெளியேற்றி இடுப்பிலிருந்து முன்னோக்கி வளையவும்"
+  },
+  "stretchForwardFoldStep4": {
+    "message": "கைகளையும் தலையையும் கனமாக தொங்க விடவும்"
+  },
+  "stretchForwardFoldStep5": {
+    "message": "3 மூச்சு பிடித்து மெதுவாக எழவும்"
+  },
+  "stretchChestOpener": {
+    "message": "மார்பு திறப்பு"
+  },
+  "stretchChestOpenerDesc": {
+    "message": "கைகளை முதுகுக்குப் பின்னால் பின்னி தோள்பட்டைகளை நெருக்கவும்."
+  },
+  "stretchChestOpenerStep1": {
+    "message": "நேராக நின்று அல்லது உட்கார்ந்து"
+  },
+  "stretchChestOpenerStep2": {
+    "message": "கைகளை கீழ் முதுகுக்குப் பின்னால் பின்னவும்"
+  },
+  "stretchChestOpenerStep3": {
+    "message": "தோள்பட்டைகளை நெருக்கவும்"
+  },
+  "stretchChestOpenerStep4": {
+    "message": "மார்பையும் மோவாயையும் சிறிது தூக்கவும்"
+  },
+  "stretchChestOpenerStep5": {
+    "message": "3 ஆழ்ந்த மூச்சு பிடித்து விடவும்"
+  },
+  "stretchSideStretch": {
+    "message": "பக்க ஸ்ட்ரெச்"
+  },
+  "stretchSideStretchDesc": {
+    "message": "ஒரு கையை தலைக்கு மேல் தூக்கி எதிர் பக்கம் மெதுவாக சாயவும்."
+  },
+  "stretchSideStretchStep1": {
+    "message": "இடுப்பு அளவில் கால்களை வைத்து நிற்கவும்"
+  },
+  "stretchSideStretchStep2": {
+    "message": "வலது கையை தலைக்கு மேல் தூக்கவும்"
+  },
+  "stretchSideStretchStep3": {
+    "message": "மெதுவாக இடதுபுறம் சாயவும்"
+  },
+  "stretchSideStretchStep4": {
+    "message": "வலது பக்கம் நீட்சியை உணரவும்"
+  },
+  "stretchSideStretchStep5": {
+    "message": "3 மூச்சு பிடித்து பக்கம் மாற்றவும்"
+  },
+  "stretchChinTucks": {
+    "message": "மோவாய் இழுத்தல்"
+  },
+  "stretchChinTucksDesc": {
+    "message": "தலையோட்டின் அடிப்பகுதியை நீட்ட மோவாயை மெதுவாக நேராக பின்னோக்கி இழுக்கவும்."
+  },
+  "stretchChinTucksStep1": {
+    "message": "முதுகெலும்பு நேராக உட்காரவும் அல்லது நிற்கவும்"
+  },
+  "stretchChinTucksStep2": {
+    "message": "கண் மட்டத்தில் நேராக முன்னே பார்க்கவும்"
+  },
+  "stretchChinTucksStep3": {
+    "message": "மோவாயை மெதுவாக நேராக பின்னோக்கி இழுக்கவும்"
+  },
+  "stretchChinTucksStep4": {
+    "message": "தலையோட்டின் அடிப்பகுதியில் நீட்சியை உணரவும்"
+  },
+  "stretchChinTucksStep5": {
+    "message": "3 விநாடிகள் பிடித்து, விடுங்கள், 5 முறை மீண்டும் செய்யவும்"
+  },
+  "stretchUpperBackSqueeze": {
+    "message": "மேல் முதுகு இறுக்கம்"
+  },
+  "stretchUpperBackSqueezeDesc": {
+    "message": "முழங்கைகளை பின்னோக்கி இழுத்து தோள்பட்டைகளை உறுதியாக நெருக்கவும்."
+  },
+  "stretchUpperBackSqueezeStep1": {
+    "message": "நேராக உட்காரவும், கைகள் பக்கங்களில்"
+  },
+  "stretchUpperBackSqueezeStep2": {
+    "message": "முழங்கைகளை 90 டிகிரியில் வளைக்கவும்"
+  },
+  "stretchUpperBackSqueezeStep3": {
+    "message": "இரு முழங்கைகளையும் உடலுக்குப் பின்னால் இழுக்கவும்"
+  },
+  "stretchUpperBackSqueezeStep4": {
+    "message": "தோள்பட்டைகளை உறுதியாக நெருக்கவும்"
+  },
+  "stretchUpperBackSqueezeStep5": {
+    "message": "5 விநாடிகள் பிடித்து, விடுங்கள், 5 முறை மீண்டும் செய்யவும்"
+  },
+  "stretchTempleMassage": {
+    "message": "நெற்றி பக்க மசாஜ்"
+  },
+  "stretchTempleMassageDesc": {
+    "message": "பதற்றத்தைத் தளர்த்த நெற்றி பக்கங்களில் மெதுவான வட்ட அழுத்தம் கொடுக்கவும்."
+  },
+  "stretchTempleMassageStep1": {
+    "message": "உங்கள் விரல் நுனிகளை நெற்றி பக்கங்களில் வைக்கவும்"
+  },
+  "stretchTempleMassageStep2": {
+    "message": "உள்நோக்கி மெதுவான வட்ட அழுத்தம் கொடுக்கவும்"
+  },
+  "stretchTempleMassageStep3": {
+    "message": "சிறிய வட்டங்களில் மெதுவாக நகரவும்"
+  },
+  "stretchTempleMassageStep4": {
+    "message": "ஆழமாக சுவாசித்து தாடை பதற்றத்தை விடவும்"
+  },
+  "stretchTempleMassageStep5": {
+    "message": "முழு 20 விநாடிகளும் தொடரவும்"
+  },
+  "stretchAnkleCircles": {
+    "message": "கணுக்கால் சுழற்சி"
+  },
+  "stretchAnkleCirclesDesc": {
+    "message": "இரத்த ஓட்டத்தை மேம்படுத்த கால்களை தூக்கி கணுக்கால்களை மெதுவாக சுழற்றவும்."
+  },
+  "stretchAnkleCirclesStep1": {
+    "message": "கால்களை தரையிலிருந்து தூக்கி உட்காரவும்"
+  },
+  "stretchAnkleCirclesStep2": {
+    "message": "கால் விரல்களை மெதுவாக முன்னோக்கி நேராக்கவும்"
+  },
+  "stretchAnkleCirclesStep3": {
+    "message": "இரு கணுக்கால்களையும் மெதுவாக வெளியே சுழற்றவும்"
+  },
+  "stretchAnkleCirclesStep4": {
+    "message": "5 சுற்றுகளை முடித்து திசையை மாற்றவும்"
+  },
+  "stretchAnkleCirclesStep5": {
+    "message": "முடிக்க கால்களை வளைத்து நேராக்கவும்"
+  },
+  "stretchFingerSpreads": {
+    "message": "விரல் விரிப்பு"
+  },
+  "stretchFingerSpreadsDesc": {
+    "message": "தட்டச்சு பதற்றத்தை குறைக்க விரல்களை அகலமாக விரித்து, பின் முஷ்டியாக மடிக்கவும்."
+  },
+  "stretchFingerSpreadsStep1": {
+    "message": "இரு கைகளையும் உங்கள் முன்னே நீட்டவும்"
+  },
+  "stretchFingerSpreadsStep2": {
+    "message": "விரல்களை முடிந்தவரை அகலமாக விரிக்கவும்"
+  },
+  "stretchFingerSpreadsStep3": {
+    "message": "3 விநாடிகள் விரிப்பை தக்கவைக்கவும்"
+  },
+  "stretchFingerSpreadsStep4": {
+    "message": "பின் விரல்களை தளர்வான முஷ்டியாக மடிக்கவும்"
+  },
+  "stretchFingerSpreadsStep5": {
+    "message": "திறத்தல்-மூடுதல் இயக்கத்தை 5 முறை மீண்டும் செய்யவும்"
+  },
+  "stretchHipStretch": {
+    "message": "இடுப்பு ஸ்ட்ரெச்"
+  },
+  "stretchHipStretchDesc": {
+    "message": "இடுப்பு மற்றும் குறுக்குத் தசையை நீட்ட ஒரு முழங்காலை மார்புக்கு தூக்கவும்."
+  },
+  "stretchHipStretchStep1": {
+    "message": "சமநிலைக்காக உங்கள் மேசையை அருகே நிற்கவும்"
+  },
+  "stretchHipStretchStep2": {
+    "message": "வலது முழங்காலை மார்புக்கு தூக்கவும்"
+  },
+  "stretchHipStretchStep3": {
+    "message": "இரு கைகளாலும் மெதுவாக பிடிக்கவும்"
+  },
+  "stretchHipStretchStep4": {
+    "message": "இடுப்பு மற்றும் குறுக்குத் தசையில் நீட்சியை உணரவும்"
+  },
+  "stretchHipStretchStep5": {
+    "message": "3 மூச்சு பிடித்து கால் மாற்றவும்"
+  },
+  "settingsLanguage": {
+    "message": "மொழி"
+  }
+}
