@@ -1,0 +1,448 @@
+{
+  "extName": {
+    "message": "MicroBreaks — స్ట్రెచ్ టైమర్"
+  },
+  "extDescription": {
+    "message": "స్ట్రెచ్ సూచనలతో సున్నితమైన బ్రేక్ రిమైండర్లు. కూర్చుని పని చేస్తూ కదలడం మర్చిపోయే వారి కోసం."
+  },
+  "brandName": {
+    "message": "MicroBreaks"
+  },
+  "strictModeOn": {
+    "message": "స్ట్రిక్ట్ మోడ్ ఆన్"
+  },
+  "strictModeOff": {
+    "message": "స్ట్రిక్ట్ మోడ్ ఆఫ్"
+  },
+  "strictModeTooltip": {
+    "message": "నోటిఫికేషన్‌కు బదులుగా, మిస్ చేయలేని ఫుల్-స్క్రీన్ బ్రేక్ ఓవర్‌లేను చూపుతుంది."
+  },
+  "untilBreak": {
+    "message": "బ్రేక్ వరకు"
+  },
+  "breakTime": {
+    "message": "స్ట్రెచ్ చేయాల్సిన సమయం"
+  },
+  "moveNow": {
+    "message": "కదలండి!"
+  },
+  "interval20": {
+    "message": "20 నిమి"
+  },
+  "interval30": {
+    "message": "30 నిమి"
+  },
+  "interval45": {
+    "message": "45 నిమి"
+  },
+  "intervalCustom": {
+    "message": "అనుకూలం"
+  },
+  "customPrompt": {
+    "message": "బ్రేక్‌ల మధ్య ఎన్ని నిమిషాలు?"
+  },
+  "snooze": {
+    "message": "5 నిమి వాయిదా"
+  },
+  "start": {
+    "message": "ప్రారంభించు"
+  },
+  "pause": {
+    "message": "ఆపు"
+  },
+  "resume": {
+    "message": "కొనసాగించు"
+  },
+  "upNext": {
+    "message": "తరువాత"
+  },
+  "breaksToday": {
+    "message": "ఈరోజు బ్రేక్‌లు"
+  },
+  "dayStreak": {
+    "message": "రోజుల వరుస"
+  },
+  "minsMoved": {
+    "message": "కదిలిన నిమిషాలు"
+  },
+  "settingsNotifications": {
+    "message": "నోటిఫికేషన్లు"
+  },
+  "settingsDisplay": {
+    "message": "డిస్‌ప్లే"
+  },
+  "settingsModel": {
+    "message": "మోడల్"
+  },
+  "browserNotification": {
+    "message": "బ్రౌజర్ నోటిఫికేషన్"
+  },
+  "browserNotificationSub": {
+    "message": "ట్యాబ్ బ్యాక్‌గ్రౌండ్‌లో ఉన్నా పనిచేస్తుంది"
+  },
+  "stretchAnimations": {
+    "message": "స్ట్రెచ్ యానిమేషన్లు"
+  },
+  "stretchAnimationsSub": {
+    "message": "ప్రతి బ్రేక్‌లో గైడెడ్ యానిమేషన్"
+  },
+  "maleModel": {
+    "message": "పురుష మోడల్"
+  },
+  "maleModelSub": {
+    "message": "వ్యాయామాల కోసం పురుష ఆకృతికి మారండి"
+  },
+  "language": {
+    "message": "భాష"
+  },
+  "languageSub": {
+    "message": "మీకు నచ్చిన భాషను ఎంచుకోండి"
+  },
+  "languageAuto": {
+    "message": "స్వయంచాలకంగా గుర్తించు"
+  },
+  "doneIMoved": {
+    "message": "పూర్తయింది — నేను కదిలాను"
+  },
+  "dismissHint": {
+    "message": "మూసివేయడానికి Esc నొక్కండి లేదా బయట క్లిక్ చేయండి"
+  },
+  "welcomeTitle": {
+    "message": "MicroBreaks నడుస్తోంది"
+  },
+  "welcomeMessage": {
+    "message": "ప్రతి $MINUTES$ నిమిషాలకు స్ట్రెచ్ చేయడానికి మీకు సున్నితమైన రిమైండర్ వస్తుంది. వంగేలా ఉండండి!",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeToMove": {
+    "message": "కదలాల్సిన సమయం"
+  },
+  "snoozeBtn": {
+    "message": "5 నిమి వాయిదా"
+  },
+  "restartBtn": {
+    "message": "పూర్తయింది — మళ్లీ ప్రారంభించు"
+  },
+  "stretchNeckRolls": {
+    "message": "మెడ తిప్పడం"
+  },
+  "stretchNeckRollsDesc": {
+    "message": "మీ తలను నెమ్మదిగా మూడు సార్లు ప్రతి దిశలో తిప్పండి. దవడను సడలించండి."
+  },
+  "stretchNeckRollsStep1": {
+    "message": "నిటారుగా కూర్చోండి లేదా నిలబడండి, భుజాలు సడలించండి"
+  },
+  "stretchNeckRollsStep2": {
+    "message": "నెమ్మదిగా కుడి చెవిని కుడి భుజం వైపు వంచండి"
+  },
+  "stretchNeckRollsStep3": {
+    "message": "తలను ముందుకు తిప్పండి, గడ్డం రొమ్ముకు"
+  },
+  "stretchNeckRollsStep4": {
+    "message": "ఎడమ వైపుకు కొనసాగించండి"
+  },
+  "stretchNeckRollsStep5": {
+    "message": "ప్రతి దిశలో 3 పూర్తి నెమ్మది వలయాలు పూర్తి చేయండి"
+  },
+  "stretchOverheadReach": {
+    "message": "పైకి చేరడం"
+  },
+  "stretchOverheadReachDesc": {
+    "message": "వేళ్లు పెనవేసి, అరచేతులను పైకప్పు వైపు నొక్కండి. రెండు లోతైన శ్వాసలు తీసుకోండి."
+  },
+  "stretchOverheadReachStep1": {
+    "message": "తుంటి వెడల్పులో పాదాలతో నిలబడండి"
+  },
+  "stretchOverheadReachStep2": {
+    "message": "శ్వాస తీసుకుని రెండు చేతులను తల పైకి ఎత్తండి"
+  },
+  "stretchOverheadReachStep3": {
+    "message": "వేళ్లను పెనవేయండి, అరచేతులు పైకి"
+  },
+  "stretchOverheadReachStep4": {
+    "message": "నెమ్మదిగా పైకి నొక్కి 3 శ్వాసలు పట్టుకోండి"
+  },
+  "stretchOverheadReachStep5": {
+    "message": "శ్వాస వదిలి చేతులను నెమ్మదిగా దించండి"
+  },
+  "stretch2020": {
+    "message": "20-20-20 నియమం"
+  },
+  "stretch2020Desc": {
+    "message": "సుమారు 6 మీటర్ల దూరంలో ఏదైనా కనుగొనండి. 20 సెకన్లు రెప్ప వేయకుండా చూడండి."
+  },
+  "stretch2020Step1": {
+    "message": "మీ స్క్రీన్ నుండి పూర్తిగా దృష్టి మరల్చండి"
+  },
+  "stretch2020Step2": {
+    "message": "కనీసం 6 మీటర్ల దూరంలో ఏదైనా కనుగొనండి"
+  },
+  "stretch2020Step3": {
+    "message": "కళ్లకు ఒత్తిడి లేకుండా మృదువుగా దృష్టి పెట్టండి"
+  },
+  "stretch2020Step4": {
+    "message": "పూర్తి 20 సెకన్ల పాటు దృష్టి నిలపండి"
+  },
+  "stretch2020Step5": {
+    "message": "నెమ్మదిగా రెప్ప వేసి పనికి తిరిగి వెళ్లండి"
+  },
+  "stretchWristCircles": {
+    "message": "మణికట్టు వలయాలు"
+  },
+  "stretchWristCirclesDesc": {
+    "message": "చేతులను ముందుకు చాపండి. మణికట్లను పెద్ద వలయాలలో తిప్పండి — ప్రతి దిశలో ఐదు సార్లు."
+  },
+  "stretchWristCirclesStep1": {
+    "message": "రెండు చేతులను మీ ముందు చాపండి"
+  },
+  "stretchWristCirclesStep2": {
+    "message": "రెండు చేతులతో వదులైన పిడికిళ్లు చేయండి"
+  },
+  "stretchWristCirclesStep3": {
+    "message": "రెండు మణికట్లను నెమ్మదిగా బయటకు తిప్పండి"
+  },
+  "stretchWristCirclesStep4": {
+    "message": "5 వలయాలు పూర్తి చేసి దిశ మార్చండి"
+  },
+  "stretchWristCirclesStep5": {
+    "message": "ముగించడానికి చేతులను సున్నితంగా ఊపండి"
+  },
+  "stretchShoulderRolls": {
+    "message": "భుజాల తిప్పడం"
+  },
+  "stretchShoulderRollsDesc": {
+    "message": "భుజాలను నెమ్మదిగా ఐదు సార్లు వెనుకకు, తరువాత ఐదు సార్లు ముందుకు తిప్పండి. రోజు భారాన్ని వదిలేయండి."
+  },
+  "stretchShoulderRollsStep1": {
+    "message": "చేతులను పక్కలకు వదులుగా వేళ్లాడనివ్వండి"
+  },
+  "stretchShoulderRollsStep2": {
+    "message": "రెండు భుజాలను చెవుల వైపు ఎత్తండి"
+  },
+  "stretchShoulderRollsStep3": {
+    "message": "వాటిని నెమ్మదిగా వెనుకకు, దిగువకు తిప్పండి"
+  },
+  "stretchShoulderRollsStep4": {
+    "message": "భుజం ఎముకలు దగ్గరవ్వడం అనుభవించండి"
+  },
+  "stretchShoulderRollsStep5": {
+    "message": "5 సార్లు పునరావృతం చేసి ముందుకు తిప్పండి"
+  },
+  "stretchSpinalTwist": {
+    "message": "వెన్నెముక మెలి"
+  },
+  "stretchSpinalTwistDesc": {
+    "message": "నిటారుగా కూర్చోండి, ఒక చేతిని వ్యతిరేక మోకాలిపై పెట్టి, నెమ్మదిగా తిప్పండి."
+  },
+  "stretchSpinalTwistStep1": {
+    "message": "నిటారుగా కూర్చోండి, పాదాలు నేలపై చదునుగా"
+  },
+  "stretchSpinalTwistStep2": {
+    "message": "మీ కుడి చేతిని ఎడమ మోకాలిపై పెట్టండి"
+  },
+  "stretchSpinalTwistStep3": {
+    "message": "శ్వాస తీసుకుని వెన్నెముకను పైకి సాగదీయండి"
+  },
+  "stretchSpinalTwistStep4": {
+    "message": "శ్వాస వదిలి నెమ్మదిగా ఎడమవైపు తిప్పండి"
+  },
+  "stretchSpinalTwistStep5": {
+    "message": "3 శ్వాసలు పట్టుకుని వైపు మార్చండి"
+  },
+  "stretchForwardFold": {
+    "message": "ముందుకు వంగడం"
+  },
+  "stretchForwardFoldDesc": {
+    "message": "తుంటి నుండి ముందుకు వంగి చేతులు మరియు తలను బరువుగా వేళ్లాడనివ్వండి."
+  },
+  "stretchForwardFoldStep1": {
+    "message": "తుంటి వెడల్పులో పాదాలతో నిలబడండి"
+  },
+  "stretchForwardFoldStep2": {
+    "message": "శ్వాస తీసుకుని వెన్నెముకను పైకి సాగదీయండి"
+  },
+  "stretchForwardFoldStep3": {
+    "message": "శ్వాస వదిలి తుంటి నుండి ముందుకు వంగండి"
+  },
+  "stretchForwardFoldStep4": {
+    "message": "చేతులు మరియు తలను బరువుగా వేళ్లాడనివ్వండి"
+  },
+  "stretchForwardFoldStep5": {
+    "message": "3 శ్వాసలు పట్టుకుని నెమ్మదిగా లేచండి"
+  },
+  "stretchChestOpener": {
+    "message": "ఛాతీ తెరవడం"
+  },
+  "stretchChestOpenerDesc": {
+    "message": "చేతులను వెనుక పెనవేసి భుజం ఎముకలను దగ్గరగా తీసుకురండి."
+  },
+  "stretchChestOpenerStep1": {
+    "message": "నిటారుగా నిలబడండి లేదా కూర్చోండి"
+  },
+  "stretchChestOpenerStep2": {
+    "message": "చేతులను దిగువ వెన్నెముక వెనుక పెనవేయండి"
+  },
+  "stretchChestOpenerStep3": {
+    "message": "భుజం ఎముకలను దగ్గరగా తీసుకురండి"
+  },
+  "stretchChestOpenerStep4": {
+    "message": "ఛాతీ మరియు గడ్డాన్ని కొద్దిగా పైకి ఎత్తండి"
+  },
+  "stretchChestOpenerStep5": {
+    "message": "3 లోతైన శ్వాసలు పట్టుకుని వదిలేయండి"
+  },
+  "stretchSideStretch": {
+    "message": "పక్క స్ట్రెచ్"
+  },
+  "stretchSideStretchDesc": {
+    "message": "ఒక చేతిని తల పైకి ఎత్తి వ్యతిరేక పక్కకు నెమ్మదిగా వంగండి."
+  },
+  "stretchSideStretchStep1": {
+    "message": "తుంటి వెడల్పులో పాదాలతో నిలబడండి"
+  },
+  "stretchSideStretchStep2": {
+    "message": "కుడి చేతిని తల పైకి ఎత్తండి"
+  },
+  "stretchSideStretchStep3": {
+    "message": "నెమ్మదిగా ఎడమవైపు వంగండి"
+  },
+  "stretchSideStretchStep4": {
+    "message": "కుడి పక్క సాగడం అనుభవించండి"
+  },
+  "stretchSideStretchStep5": {
+    "message": "3 శ్వాసలు పట్టుకుని వైపు మార్చండి"
+  },
+  "stretchChinTucks": {
+    "message": "గడ్డం లాగడం"
+  },
+  "stretchChinTucksDesc": {
+    "message": "పుర్రె అడుగుభాగాన్ని సాగదీయడానికి గడ్డాన్ని నెమ్మదిగా నేరుగా వెనుకకు లాగండి."
+  },
+  "stretchChinTucksStep1": {
+    "message": "వెన్నెముక నిటారుగా కూర్చోండి లేదా నిలబడండి"
+  },
+  "stretchChinTucksStep2": {
+    "message": "కంటి స్థాయిలో నేరుగా ముందుకు చూడండి"
+  },
+  "stretchChinTucksStep3": {
+    "message": "గడ్డాన్ని నెమ్మదిగా నేరుగా వెనుకకు లాగండి"
+  },
+  "stretchChinTucksStep4": {
+    "message": "పుర్రె అడుగుభాగంలో సాగడం అనుభవించండి"
+  },
+  "stretchChinTucksStep5": {
+    "message": "3 సెకన్లు పట్టుకుని, వదిలేయండి, 5 సార్లు పునరావృతం చేయండి"
+  },
+  "stretchUpperBackSqueeze": {
+    "message": "ఎగువ వీపు నొక్కడం"
+  },
+  "stretchUpperBackSqueezeDesc": {
+    "message": "మోచేతులను వెనుకకు లాగి భుజం ఎముకలను గట్టిగా దగ్గరగా తీసుకురండి."
+  },
+  "stretchUpperBackSqueezeStep1": {
+    "message": "నిటారుగా కూర్చోండి, చేతులు పక్కలకు"
+  },
+  "stretchUpperBackSqueezeStep2": {
+    "message": "మోచేతులను 90 డిగ్రీలకు వంచండి"
+  },
+  "stretchUpperBackSqueezeStep3": {
+    "message": "రెండు మోచేతులను శరీరం వెనుకకు లాగండి"
+  },
+  "stretchUpperBackSqueezeStep4": {
+    "message": "భుజం ఎముకలను గట్టిగా దగ్గరగా తీసుకురండి"
+  },
+  "stretchUpperBackSqueezeStep5": {
+    "message": "5 సెకన్లు పట్టుకుని, వదిలేయండి, 5 సార్లు పునరావృతం చేయండి"
+  },
+  "stretchTempleMassage": {
+    "message": "నుదురు మసాజ్"
+  },
+  "stretchTempleMassageDesc": {
+    "message": "ఒత్తిడిని విడుదల చేయడానికి కణతలపై మృదువైన వలయాకార పీడనం ఇవ్వండి."
+  },
+  "stretchTempleMassageStep1": {
+    "message": "మీ వేళ్ల కొనలను కణతలపై పెట్టండి"
+  },
+  "stretchTempleMassageStep2": {
+    "message": "లోపలికి మృదువైన వలయాకార పీడనం ఇవ్వండి"
+  },
+  "stretchTempleMassageStep3": {
+    "message": "చిన్న వలయాలలో నెమ్మదిగా కదలండి"
+  },
+  "stretchTempleMassageStep4": {
+    "message": "లోతుగా శ్వాసించి దవడ ఒత్తిడిని వదిలేయండి"
+  },
+  "stretchTempleMassageStep5": {
+    "message": "పూర్తి 20 సెకన్లు కొనసాగించండి"
+  },
+  "stretchAnkleCircles": {
+    "message": "చీలమండ వలయాలు"
+  },
+  "stretchAnkleCirclesDesc": {
+    "message": "రక్త ప్రసరణను మెరుగుపరచడానికి పాదాలను ఎత్తి చీలమండలను నెమ్మదిగా తిప్పండి."
+  },
+  "stretchAnkleCirclesStep1": {
+    "message": "పాదాలను నేల నుండి ఎత్తి కూర్చోండి"
+  },
+  "stretchAnkleCirclesStep2": {
+    "message": "కాలి వేళ్లను నెమ్మదిగా ముందుకు చూపించండి"
+  },
+  "stretchAnkleCirclesStep3": {
+    "message": "రెండు చీలమండలను నెమ్మదిగా బయటకు తిప్పండి"
+  },
+  "stretchAnkleCirclesStep4": {
+    "message": "5 వలయాలు పూర్తి చేసి దిశ మార్చండి"
+  },
+  "stretchAnkleCirclesStep5": {
+    "message": "ముగించడానికి పాదాలను వంచి, చాపండి"
+  },
+  "stretchFingerSpreads": {
+    "message": "వేళ్లు చాపడం"
+  },
+  "stretchFingerSpreadsDesc": {
+    "message": "టైపింగ్ ఒత్తిడిని తగ్గించడానికి వేళ్లను వెడల్పుగా చాపి, తరువాత పిడికిలి చుట్టండి."
+  },
+  "stretchFingerSpreadsStep1": {
+    "message": "రెండు చేతులను మీ ముందు పెట్టండి"
+  },
+  "stretchFingerSpreadsStep2": {
+    "message": "వేళ్లను వీలైనంత వెడల్పుగా చాపండి"
+  },
+  "stretchFingerSpreadsStep3": {
+    "message": "3 సెకన్లు చాపును కొనసాగించండి"
+  },
+  "stretchFingerSpreadsStep4": {
+    "message": "తరువాత వేళ్లను వదులైన పిడికిలిగా చుట్టండి"
+  },
+  "stretchFingerSpreadsStep5": {
+    "message": "తెరవడం-మూసివేయడం కదలికను 5 సార్లు పునరావృతం చేయండి"
+  },
+  "stretchHipStretch": {
+    "message": "తుంటి స్ట్రెచ్"
+  },
+  "stretchHipStretchDesc": {
+    "message": "తుంటి మరియు గ్లూట్‌ను సాగదీయడానికి ఒక మోకాలిని రొమ్ము వైపు ఎత్తండి."
+  },
+  "stretchHipStretchStep1": {
+    "message": "సమతుల్యత కోసం మీ డెస్క్ దగ్గర నిలబడండి"
+  },
+  "stretchHipStretchStep2": {
+    "message": "కుడి మోకాలిని రొమ్ము వైపు ఎత్తండి"
+  },
+  "stretchHipStretchStep3": {
+    "message": "రెండు చేతులతో నెమ్మదిగా పట్టుకోండి"
+  },
+  "stretchHipStretchStep4": {
+    "message": "తుంటి మరియు గ్లూట్‌లో సాగడం అనుభవించండి"
+  },
+  "stretchHipStretchStep5": {
+    "message": "3 శ్వాసలు పట్టుకుని కాలు మార్చండి"
+  },
+  "settingsLanguage": {
+    "message": "భాష"
+  }
+}
