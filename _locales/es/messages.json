@@ -1,0 +1,448 @@
+{
+  "extName": {
+    "message": "MicroBreaks — Temporizador de Estiramientos"
+  },
+  "extDescription": {
+    "message": "Recordatorios suaves para hacer pausas con sugerencias de estiramiento. Para quienes trabajan sentados y se olvidan de moverse."
+  },
+  "brandName": {
+    "message": "MicroBreaks"
+  },
+  "strictModeOn": {
+    "message": "modo estricto activado"
+  },
+  "strictModeOff": {
+    "message": "modo estricto desactivado"
+  },
+  "strictModeTooltip": {
+    "message": "Muestra una superposición de pausa a pantalla completa que no puedes ignorar, en lugar de una notificación."
+  },
+  "untilBreak": {
+    "message": "hasta la pausa"
+  },
+  "breakTime": {
+    "message": "hora de estirarse"
+  },
+  "moveNow": {
+    "message": "¡muévete!"
+  },
+  "interval20": {
+    "message": "20 min"
+  },
+  "interval30": {
+    "message": "30 min"
+  },
+  "interval45": {
+    "message": "45 min"
+  },
+  "intervalCustom": {
+    "message": "personalizado"
+  },
+  "customPrompt": {
+    "message": "¿Minutos entre pausas?"
+  },
+  "snooze": {
+    "message": "posponer 5 min"
+  },
+  "start": {
+    "message": "iniciar"
+  },
+  "pause": {
+    "message": "pausar"
+  },
+  "resume": {
+    "message": "reanudar"
+  },
+  "upNext": {
+    "message": "a continuación"
+  },
+  "breaksToday": {
+    "message": "pausas hoy"
+  },
+  "dayStreak": {
+    "message": "racha de días"
+  },
+  "minsMoved": {
+    "message": "min en movimiento"
+  },
+  "settingsNotifications": {
+    "message": "notificaciones"
+  },
+  "settingsDisplay": {
+    "message": "pantalla"
+  },
+  "settingsModel": {
+    "message": "modelo"
+  },
+  "browserNotification": {
+    "message": "Notificación del navegador"
+  },
+  "browserNotificationSub": {
+    "message": "Funciona cuando la pestaña está en segundo plano"
+  },
+  "stretchAnimations": {
+    "message": "Animaciones de estiramiento"
+  },
+  "stretchAnimationsSub": {
+    "message": "Animación guiada en cada pausa"
+  },
+  "maleModel": {
+    "message": "Modelo masculino"
+  },
+  "maleModelSub": {
+    "message": "Cambiar a una figura masculina para los ejercicios"
+  },
+  "language": {
+    "message": "Idioma"
+  },
+  "languageSub": {
+    "message": "Elige tu idioma preferido"
+  },
+  "languageAuto": {
+    "message": "Detección automática"
+  },
+  "doneIMoved": {
+    "message": "Listo — me moví"
+  },
+  "dismissHint": {
+    "message": "Pulsa Esc o haz clic fuera para cerrar"
+  },
+  "welcomeTitle": {
+    "message": "MicroBreaks está en marcha"
+  },
+  "welcomeMessage": {
+    "message": "Recibirás un recordatorio para estirarte cada $MINUTES$ minutos. ¡Mantente flexible!",
+    "placeholders": {
+      "minutes": {
+        "content": "$1"
+      }
+    }
+  },
+  "timeToMove": {
+    "message": "Hora de moverse"
+  },
+  "snoozeBtn": {
+    "message": "Posponer 5 min"
+  },
+  "restartBtn": {
+    "message": "Listo — reiniciar"
+  },
+  "stretchNeckRolls": {
+    "message": "Giros de cuello"
+  },
+  "stretchNeckRollsDesc": {
+    "message": "Gira la cabeza lentamente tres veces en cada dirección. Relaja la mandíbula."
+  },
+  "stretchNeckRollsStep1": {
+    "message": "Siéntate o ponte de pie con la espalda recta, hombros relajados"
+  },
+  "stretchNeckRollsStep2": {
+    "message": "Deja caer suavemente la oreja derecha hacia el hombro derecho"
+  },
+  "stretchNeckRollsStep3": {
+    "message": "Lleva la cabeza hacia adelante, mentón al pecho"
+  },
+  "stretchNeckRollsStep4": {
+    "message": "Continúa hacia el lado izquierdo"
+  },
+  "stretchNeckRollsStep5": {
+    "message": "Completa 3 círculos lentos en cada dirección"
+  },
+  "stretchOverheadReach": {
+    "message": "Estiramiento hacia arriba"
+  },
+  "stretchOverheadReachDesc": {
+    "message": "Entrelaza los dedos y empuja las palmas hacia el techo. Respira profundo dos veces."
+  },
+  "stretchOverheadReachStep1": {
+    "message": "Ponte de pie con los pies separados a la altura de las caderas"
+  },
+  "stretchOverheadReachStep2": {
+    "message": "Inhala y levanta ambos brazos por encima de la cabeza"
+  },
+  "stretchOverheadReachStep3": {
+    "message": "Entrelaza los dedos con las palmas hacia arriba"
+  },
+  "stretchOverheadReachStep4": {
+    "message": "Empuja suavemente hacia arriba y sostén 3 respiraciones"
+  },
+  "stretchOverheadReachStep5": {
+    "message": "Exhala y baja los brazos lentamente"
+  },
+  "stretch2020": {
+    "message": "Regla 20-20-20"
+  },
+  "stretch2020Desc": {
+    "message": "Busca algo a 6 metros de distancia. Míralo durante 20 segundos sin parpadear."
+  },
+  "stretch2020Step1": {
+    "message": "Aparta la vista de la pantalla por completo"
+  },
+  "stretch2020Step2": {
+    "message": "Encuentra algo a al menos 6 metros de distancia"
+  },
+  "stretch2020Step3": {
+    "message": "Enfócalo suavemente sin forzar la vista"
+  },
+  "stretch2020Step4": {
+    "message": "Mantén la mirada fija durante 20 segundos completos"
+  },
+  "stretch2020Step5": {
+    "message": "Parpadea lentamente y vuelve a tu trabajo"
+  },
+  "stretchWristCircles": {
+    "message": "Círculos de muñeca"
+  },
+  "stretchWristCirclesDesc": {
+    "message": "Extiende los brazos hacia adelante. Gira las muñecas en círculos amplios, cinco en cada dirección."
+  },
+  "stretchWristCirclesStep1": {
+    "message": "Extiende ambos brazos frente a ti"
+  },
+  "stretchWristCirclesStep2": {
+    "message": "Cierra los puños suavemente con ambas manos"
+  },
+  "stretchWristCirclesStep3": {
+    "message": "Gira lentamente ambas muñecas hacia afuera"
+  },
+  "stretchWristCirclesStep4": {
+    "message": "Completa 5 círculos y luego invierte la dirección"
+  },
+  "stretchWristCirclesStep5": {
+    "message": "Sacude suavemente las manos para terminar"
+  },
+  "stretchShoulderRolls": {
+    "message": "Giros de hombros"
+  },
+  "stretchShoulderRollsDesc": {
+    "message": "Gira los hombros lentamente hacia atrás cinco veces, luego hacia adelante cinco veces. Libera el día."
+  },
+  "stretchShoulderRollsStep1": {
+    "message": "Deja los brazos sueltos a los costados"
+  },
+  "stretchShoulderRollsStep2": {
+    "message": "Levanta ambos hombros hacia las orejas"
+  },
+  "stretchShoulderRollsStep3": {
+    "message": "Gíralos lentamente hacia atrás y hacia abajo"
+  },
+  "stretchShoulderRollsStep4": {
+    "message": "Siente cómo se juntan los omóplatos"
+  },
+  "stretchShoulderRollsStep5": {
+    "message": "Repite 5 veces y luego gira hacia adelante"
+  },
+  "stretchSpinalTwist": {
+    "message": "Torsión de columna"
+  },
+  "stretchSpinalTwistDesc": {
+    "message": "Siéntate erguido, coloca una mano en la rodilla opuesta y gira suavemente."
+  },
+  "stretchSpinalTwistStep1": {
+    "message": "Siéntate erguido con los pies planos en el suelo"
+  },
+  "stretchSpinalTwistStep2": {
+    "message": "Coloca tu mano derecha en tu rodilla izquierda"
+  },
+  "stretchSpinalTwistStep3": {
+    "message": "Inhala y alarga la columna hacia arriba"
+  },
+  "stretchSpinalTwistStep4": {
+    "message": "Exhala y gira suavemente hacia la izquierda"
+  },
+  "stretchSpinalTwistStep5": {
+    "message": "Sostén 3 respiraciones y cambia de lado"
+  },
+  "stretchForwardFold": {
+    "message": "Flexión hacia adelante"
+  },
+  "stretchForwardFoldDesc": {
+    "message": "Inclínate hacia adelante desde las caderas y deja que brazos y cabeza cuelguen pesados."
+  },
+  "stretchForwardFoldStep1": {
+    "message": "Ponte de pie con los pies separados a la altura de las caderas"
+  },
+  "stretchForwardFoldStep2": {
+    "message": "Inhala y alarga la columna hacia arriba"
+  },
+  "stretchForwardFoldStep3": {
+    "message": "Exhala e inclínate hacia adelante desde las caderas"
+  },
+  "stretchForwardFoldStep4": {
+    "message": "Deja que brazos y cabeza cuelguen pesados"
+  },
+  "stretchForwardFoldStep5": {
+    "message": "Sostén 3 respiraciones y luego incorpórate lentamente"
+  },
+  "stretchChestOpener": {
+    "message": "Apertura de pecho"
+  },
+  "stretchChestOpenerDesc": {
+    "message": "Entrelaza las manos detrás de la espalda y junta los omóplatos."
+  },
+  "stretchChestOpenerStep1": {
+    "message": "Ponte de pie o sentado, erguido"
+  },
+  "stretchChestOpenerStep2": {
+    "message": "Entrelaza las manos detrás de la parte baja de la espalda"
+  },
+  "stretchChestOpenerStep3": {
+    "message": "Junta los omóplatos"
+  },
+  "stretchChestOpenerStep4": {
+    "message": "Levanta el pecho y el mentón ligeramente"
+  },
+  "stretchChestOpenerStep5": {
+    "message": "Sostén 3 respiraciones profundas y suelta"
+  },
+  "stretchSideStretch": {
+    "message": "Estiramiento lateral"
+  },
+  "stretchSideStretchDesc": {
+    "message": "Levanta un brazo por encima de la cabeza e inclínate suavemente hacia el lado opuesto."
+  },
+  "stretchSideStretchStep1": {
+    "message": "Ponte de pie con los pies separados a la altura de las caderas"
+  },
+  "stretchSideStretchStep2": {
+    "message": "Levanta el brazo derecho por encima de la cabeza"
+  },
+  "stretchSideStretchStep3": {
+    "message": "Inclínate lentamente hacia el lado izquierdo"
+  },
+  "stretchSideStretchStep4": {
+    "message": "Siente el estiramiento en tu lado derecho"
+  },
+  "stretchSideStretchStep5": {
+    "message": "Sostén 3 respiraciones y cambia de lado"
+  },
+  "stretchChinTucks": {
+    "message": "Retracción de mentón"
+  },
+  "stretchChinTucksDesc": {
+    "message": "Lleva el mentón suavemente hacia atrás para estirar la base del cráneo."
+  },
+  "stretchChinTucksStep1": {
+    "message": "Siéntate o ponte de pie con la columna recta"
+  },
+  "stretchChinTucksStep2": {
+    "message": "Mira hacia adelante a la altura de los ojos"
+  },
+  "stretchChinTucksStep3": {
+    "message": "Lleva el mentón suavemente hacia atrás"
+  },
+  "stretchChinTucksStep4": {
+    "message": "Siente el estiramiento en la base del cráneo"
+  },
+  "stretchChinTucksStep5": {
+    "message": "Sostén 3 segundos, suelta, repite 5 veces"
+  },
+  "stretchUpperBackSqueeze": {
+    "message": "Compresión de espalda alta"
+  },
+  "stretchUpperBackSqueezeDesc": {
+    "message": "Lleva los codos hacia atrás y junta firmemente los omóplatos."
+  },
+  "stretchUpperBackSqueezeStep1": {
+    "message": "Siéntate erguido con los brazos a los costados"
+  },
+  "stretchUpperBackSqueezeStep2": {
+    "message": "Dobla los codos a 90 grados"
+  },
+  "stretchUpperBackSqueezeStep3": {
+    "message": "Lleva ambos codos hacia atrás detrás del cuerpo"
+  },
+  "stretchUpperBackSqueezeStep4": {
+    "message": "Junta firmemente los omóplatos"
+  },
+  "stretchUpperBackSqueezeStep5": {
+    "message": "Sostén 5 segundos, suelta, repite 5 veces"
+  },
+  "stretchTempleMassage": {
+    "message": "Masaje en las sienes"
+  },
+  "stretchTempleMassageDesc": {
+    "message": "Aplica presión circular suave en las sienes para liberar la tensión."
+  },
+  "stretchTempleMassageStep1": {
+    "message": "Coloca las yemas de los dedos en las sienes"
+  },
+  "stretchTempleMassageStep2": {
+    "message": "Aplica presión circular suave hacia adentro"
+  },
+  "stretchTempleMassageStep3": {
+    "message": "Muévete lentamente en círculos pequeños"
+  },
+  "stretchTempleMassageStep4": {
+    "message": "Respira profundo y libera la tensión de la mandíbula"
+  },
+  "stretchTempleMassageStep5": {
+    "message": "Continúa durante los 20 segundos completos"
+  },
+  "stretchAnkleCircles": {
+    "message": "Círculos de tobillo"
+  },
+  "stretchAnkleCirclesDesc": {
+    "message": "Levanta los pies y gira los tobillos lentamente para mejorar la circulación."
+  },
+  "stretchAnkleCirclesStep1": {
+    "message": "Siéntate con los pies levantados del suelo"
+  },
+  "stretchAnkleCirclesStep2": {
+    "message": "Apunta los dedos de los pies suavemente hacia adelante"
+  },
+  "stretchAnkleCirclesStep3": {
+    "message": "Gira lentamente ambos tobillos hacia afuera"
+  },
+  "stretchAnkleCirclesStep4": {
+    "message": "Completa 5 círculos y luego invierte la dirección"
+  },
+  "stretchAnkleCirclesStep5": {
+    "message": "Flexiona y extiende los pies para terminar"
+  },
+  "stretchFingerSpreads": {
+    "message": "Estiramiento de dedos"
+  },
+  "stretchFingerSpreadsDesc": {
+    "message": "Abre los dedos bien amplio, luego cierra el puño, para aliviar la tensión de escribir."
+  },
+  "stretchFingerSpreadsStep1": {
+    "message": "Extiende ambas manos frente a ti"
+  },
+  "stretchFingerSpreadsStep2": {
+    "message": "Abre los dedos lo más amplio posible"
+  },
+  "stretchFingerSpreadsStep3": {
+    "message": "Mantén la apertura durante 3 segundos"
+  },
+  "stretchFingerSpreadsStep4": {
+    "message": "Luego cierra los dedos en un puño suave"
+  },
+  "stretchFingerSpreadsStep5": {
+    "message": "Repite el movimiento de abrir y cerrar 5 veces"
+  },
+  "stretchHipStretch": {
+    "message": "Estiramiento de cadera"
+  },
+  "stretchHipStretchDesc": {
+    "message": "Levanta una rodilla hacia el pecho para estirar la cadera y el glúteo."
+  },
+  "stretchHipStretchStep1": {
+    "message": "Ponte de pie cerca de tu escritorio para apoyarte"
+  },
+  "stretchHipStretchStep2": {
+    "message": "Levanta la rodilla derecha hacia el pecho"
+  },
+  "stretchHipStretchStep3": {
+    "message": "Sosténla suavemente con ambas manos"
+  },
+  "stretchHipStretchStep4": {
+    "message": "Siente el estiramiento en la cadera y el glúteo"
+  },
+  "stretchHipStretchStep5": {
+    "message": "Sostén 3 respiraciones y cambia de pierna"
+  },
+  "settingsLanguage": {
+    "message": "idioma"
+  }
+}
