@@ -449,7 +449,18 @@
     "message": "Arbeitstag beendet"
   },
   "summaryBody": {
-    "message": "Du hast heute $BREAKS$ Pausen gemacht und $MINUTES$ Minuten bewegt. $STREAK$ Tage in Folge."
+    "message": "Du hast heute $BREAKS$ Pausen gemacht und $MINUTES$ Minuten bewegt. $STREAK$ Tage in Folge.",
+    "placeholders": {
+      "breaks": {
+        "content": "$1"
+      },
+      "minutes": {
+        "content": "$2"
+      },
+      "streak": {
+        "content": "$3"
+      }
+    }
   },
   "settingsWorkHours": {
     "message": "Arbeitszeiten"
