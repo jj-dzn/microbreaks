@@ -444,5 +444,104 @@
   },
   "settingsLanguage": {
     "message": "idioma"
+  },
+  "summaryTitle": {
+    "message": "Jornada terminada"
+  },
+  "summaryBody": {
+    "message": "Hoy hiciste $BREAKS$ pausas y te moviste durante $MINUTES$ minutos. Racha de $STREAK$ días."
+  },
+  "settingsWorkHours": {
+    "message": "horario laboral"
+  },
+  "workHoursEnabled": {
+    "message": "Horario laboral"
+  },
+  "workHoursEnabledSub": {
+    "message": "Solo ejecutar el temporizador en este horario"
+  },
+  "workStart": {
+    "message": "Inicio"
+  },
+  "workEnd": {
+    "message": "Fin"
+  },
+  "settingsWeekends": {
+    "message": "fines de semana"
+  },
+  "pauseOnDay": {
+    "message": "Pausar este día"
+  },
+  "dailySummary": {
+    "message": "Resumen diario"
+  },
+  "dailySummarySub": {
+    "message": "Notificarme cuando termine la jornada"
+  },
+  "settingsSound": {
+    "message": "sonido"
+  },
+  "soundChime": {
+    "message": "Sonido antes de la pausa"
+  },
+  "soundChimeSub": {
+    "message": "Reproduce un sonido suave antes de cada pausa"
+  },
+  "soundLeadTime": {
+    "message": "Tiempo de aviso"
+  },
+  "soundLeadTimeSub": {
+    "message": "Cuántos segundos antes de la pausa"
+  },
+  "dayMon": {
+    "message": "Lun"
+  },
+  "dayTue": {
+    "message": "Mar"
+  },
+  "dayWed": {
+    "message": "Mié"
+  },
+  "dayThu": {
+    "message": "Jue"
+  },
+  "dayFri": {
+    "message": "Vie"
+  },
+  "daySat": {
+    "message": "Sáb"
+  },
+  "daySun": {
+    "message": "Dom"
+  },
+  "settingsTheme": {
+    "message": "tema de color"
+  },
+  "themeLabel": {
+    "message": "Tema"
+  },
+  "themeLabelSub": {
+    "message": "Elige la paleta de colores de la superposición"
+  },
+  "settingsChimeSound": {
+    "message": "sonido del aviso"
+  },
+  "chimeSoundLabel": {
+    "message": "Sonido"
+  },
+  "chimeSoundLabelSub": {
+    "message": "Elige el tono que se reproduce antes de cada pausa"
+  },
+  "soundMarimba": {
+    "message": "Marimba"
+  },
+  "soundBell": {
+    "message": "Campana suave"
+  },
+  "soundKalimba": {
+    "message": "Kalimba"
+  },
+  "soundWindchime": {
+    "message": "Campanas de viento"
   }
 }
