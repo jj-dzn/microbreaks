@@ -444,5 +444,104 @@
   },
   "settingsLanguage": {
     "message": "language"
+  },
+  "summaryTitle": {
+    "message": "Workday done"
+  },
+  "summaryBody": {
+    "message": "You took $BREAKS$ breaks and moved for $MINUTES$ minutes today. $STREAK$-day streak."
+  },
+  "settingsWorkHours": {
+    "message": "work hours"
+  },
+  "workHoursEnabled": {
+    "message": "Work hours"
+  },
+  "workHoursEnabledSub": {
+    "message": "Only run the timer during set hours"
+  },
+  "workStart": {
+    "message": "Start"
+  },
+  "workEnd": {
+    "message": "End"
+  },
+  "settingsWeekends": {
+    "message": "weekends"
+  },
+  "pauseOnDay": {
+    "message": "Pause on this day"
+  },
+  "dailySummary": {
+    "message": "Daily summary"
+  },
+  "dailySummarySub": {
+    "message": "Notify me when the workday ends"
+  },
+  "settingsSound": {
+    "message": "sound"
+  },
+  "soundChime": {
+    "message": "Chime before break"
+  },
+  "soundChimeSub": {
+    "message": "Plays a gentle sound before each break"
+  },
+  "soundLeadTime": {
+    "message": "Lead time"
+  },
+  "soundLeadTimeSub": {
+    "message": "How many seconds before the break"
+  },
+  "dayMon": {
+    "message": "Mon"
+  },
+  "dayTue": {
+    "message": "Tue"
+  },
+  "dayWed": {
+    "message": "Wed"
+  },
+  "dayThu": {
+    "message": "Thu"
+  },
+  "dayFri": {
+    "message": "Fri"
+  },
+  "daySat": {
+    "message": "Sat"
+  },
+  "daySun": {
+    "message": "Sun"
+  },
+  "settingsTheme": {
+    "message": "color theme"
+  },
+  "themeLabel": {
+    "message": "Theme"
+  },
+  "themeLabelSub": {
+    "message": "Choose the overlay color palette"
+  },
+  "settingsChimeSound": {
+    "message": "chime sound"
+  },
+  "chimeSoundLabel": {
+    "message": "Sound"
+  },
+  "chimeSoundLabelSub": {
+    "message": "Pick the tone played before each break"
+  },
+  "soundMarimba": {
+    "message": "Marimba"
+  },
+  "soundBell": {
+    "message": "Soft bell"
+  },
+  "soundKalimba": {
+    "message": "Kalimba"
+  },
+  "soundWindchime": {
+    "message": "Wind chime"
   }
 }
