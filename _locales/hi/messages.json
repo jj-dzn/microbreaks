@@ -444,5 +444,104 @@
   },
   "settingsLanguage": {
     "message": "भाषा"
+  },
+  "summaryTitle": {
+    "message": "कार्यदिवस समाप्त"
+  },
+  "summaryBody": {
+    "message": "आज आपने $BREAKS$ ब्रेक लिए और $MINUTES$ मिनट हिले। $STREAK$ दिनों की लकीर।"
+  },
+  "settingsWorkHours": {
+    "message": "कार्य के घंटे"
+  },
+  "workHoursEnabled": {
+    "message": "कार्य के घंटे"
+  },
+  "workHoursEnabledSub": {
+    "message": "केवल इन घंटों में टाइमर चलाएं"
+  },
+  "workStart": {
+    "message": "शुरुआत"
+  },
+  "workEnd": {
+    "message": "समाप्ति"
+  },
+  "settingsWeekends": {
+    "message": "सप्ताहांत"
+  },
+  "pauseOnDay": {
+    "message": "इस दिन रोकें"
+  },
+  "dailySummary": {
+    "message": "दैनिक सारांश"
+  },
+  "dailySummarySub": {
+    "message": "कार्यदिवस समाप्त होने पर मुझे सूचित करें"
+  },
+  "settingsSound": {
+    "message": "ध्वनि"
+  },
+  "soundChime": {
+    "message": "ब्रेक से पहले की ध्वनि"
+  },
+  "soundChimeSub": {
+    "message": "हर ब्रेक से पहले एक सौम्य ध्वनि बजाता है"
+  },
+  "soundLeadTime": {
+    "message": "पूर्व समय"
+  },
+  "soundLeadTimeSub": {
+    "message": "ब्रेक से कितने सेकंड पहले"
+  },
+  "dayMon": {
+    "message": "सोम"
+  },
+  "dayTue": {
+    "message": "मंगल"
+  },
+  "dayWed": {
+    "message": "बुध"
+  },
+  "dayThu": {
+    "message": "गुरु"
+  },
+  "dayFri": {
+    "message": "शुक्र"
+  },
+  "daySat": {
+    "message": "शनि"
+  },
+  "daySun": {
+    "message": "रवि"
+  },
+  "settingsTheme": {
+    "message": "रंग थीम"
+  },
+  "themeLabel": {
+    "message": "थीम"
+  },
+  "themeLabelSub": {
+    "message": "ओवरले का रंग पैलेट चुनें"
+  },
+  "settingsChimeSound": {
+    "message": "ध्वनि टोन"
+  },
+  "chimeSoundLabel": {
+    "message": "ध्वनि"
+  },
+  "chimeSoundLabelSub": {
+    "message": "हर ब्रेक से पहले बजने वाला टोन चुनें"
+  },
+  "soundMarimba": {
+    "message": "मारिम्बा"
+  },
+  "soundBell": {
+    "message": "सौम्य घंटी"
+  },
+  "soundKalimba": {
+    "message": "कलिम्बा"
+  },
+  "soundWindchime": {
+    "message": "विंड चाइम"
   }
 }
