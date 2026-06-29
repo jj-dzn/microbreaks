@@ -449,7 +449,18 @@
     "message": "Workday done"
   },
   "summaryBody": {
-    "message": "You took $BREAKS$ breaks and moved for $MINUTES$ minutes today. $STREAK$-day streak."
+    "message": "You took $BREAKS$ breaks and moved for $MINUTES$ minutes today. $STREAK$-day streak.",
+    "placeholders": {
+      "breaks": {
+        "content": "$1"
+      },
+      "minutes": {
+        "content": "$2"
+      },
+      "streak": {
+        "content": "$3"
+      }
+    }
   },
   "settingsWorkHours": {
     "message": "work hours"
