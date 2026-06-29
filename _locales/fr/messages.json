@@ -449,7 +449,18 @@
     "message": "Journée terminée"
   },
   "summaryBody": {
-    "message": "Vous avez pris $BREAKS$ pauses et bougé pendant $MINUTES$ minutes aujourd'hui. $STREAK$ jours de suite."
+    "message": "Vous avez pris $BREAKS$ pauses et bougé pendant $MINUTES$ minutes aujourd'hui. $STREAK$ jours de suite.",
+    "placeholders": {
+      "breaks": {
+        "content": "$1"
+      },
+      "minutes": {
+        "content": "$2"
+      },
+      "streak": {
+        "content": "$3"
+      }
+    }
   },
   "settingsWorkHours": {
     "message": "heures de travail"
