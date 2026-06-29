@@ -444,5 +444,104 @@
   },
   "settingsLanguage": {
     "message": "ഭാഷ"
+  },
+  "summaryTitle": {
+    "message": "ജോലി ദിനം പൂർത്തിയായി"
+  },
+  "summaryBody": {
+    "message": "ഇന്ന് നിങ്ങൾ $BREAKS$ ബ്രേക്കുകൾ എടുത്തു, $MINUTES$ മിനിറ്റ് ചലിച്ചു. $STREAK$ ദിന തുടർച്ച."
+  },
+  "settingsWorkHours": {
+    "message": "ജോലി സമയം"
+  },
+  "workHoursEnabled": {
+    "message": "ജോലി സമയം"
+  },
+  "workHoursEnabledSub": {
+    "message": "ഈ സമയത്ത് മാത്രം ടൈമർ പ്രവർത്തിപ്പിക്കുക"
+  },
+  "workStart": {
+    "message": "തുടക്കം"
+  },
+  "workEnd": {
+    "message": "അവസാനം"
+  },
+  "settingsWeekends": {
+    "message": "വാരാന്ത്യങ്ങൾ"
+  },
+  "pauseOnDay": {
+    "message": "ഈ ദിവസം നിർത്തുക"
+  },
+  "dailySummary": {
+    "message": "ദിവസേന സംഗ്രഹം"
+  },
+  "dailySummarySub": {
+    "message": "ജോലി ദിനം അവസാനിക്കുമ്പോൾ അറിയിക്കുക"
+  },
+  "settingsSound": {
+    "message": "ശബ്ദം"
+  },
+  "soundChime": {
+    "message": "ബ്രേക്കിന് മുമ്പുള്ള ശബ്ദം"
+  },
+  "soundChimeSub": {
+    "message": "ഓരോ ബ്രേക്കിനും മുമ്പ് ഒരു സൗമ്യ ശബ്ദം പ്ലേ ചെയ്യുന്നു"
+  },
+  "soundLeadTime": {
+    "message": "മുൻ സമയം"
+  },
+  "soundLeadTimeSub": {
+    "message": "ബ്രേക്കിന് എത്ര സെക്കൻഡ് മുമ്പ്"
+  },
+  "dayMon": {
+    "message": "തിങ്കൾ"
+  },
+  "dayTue": {
+    "message": "ചൊവ്വ"
+  },
+  "dayWed": {
+    "message": "ബുധൻ"
+  },
+  "dayThu": {
+    "message": "വ്യാഴം"
+  },
+  "dayFri": {
+    "message": "വെള്ളി"
+  },
+  "daySat": {
+    "message": "ശനി"
+  },
+  "daySun": {
+    "message": "ഞായർ"
+  },
+  "settingsTheme": {
+    "message": "കളർ തീം"
+  },
+  "themeLabel": {
+    "message": "തീം"
+  },
+  "themeLabelSub": {
+    "message": "ഓവർലേയുടെ കളർ പാലറ്റ് തിരഞ്ഞെടുക്കുക"
+  },
+  "settingsChimeSound": {
+    "message": "ശബ്ദ ടോൺ"
+  },
+  "chimeSoundLabel": {
+    "message": "ശബ്ദം"
+  },
+  "chimeSoundLabelSub": {
+    "message": "ഓരോ ബ്രേക്കിനും മുമ്പ് വായിക്കുന്ന ടോൺ തിരഞ്ഞെടുക്കുക"
+  },
+  "soundMarimba": {
+    "message": "മരിംബ"
+  },
+  "soundBell": {
+    "message": "സൗമ്യ ബെൽ"
+  },
+  "soundKalimba": {
+    "message": "കലിംബ"
+  },
+  "soundWindchime": {
+    "message": "വിൻഡ് ചൈം"
   }
 }
