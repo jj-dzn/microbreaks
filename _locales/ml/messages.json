@@ -449,7 +449,18 @@
     "message": "ജോലി ദിനം പൂർത്തിയായി"
   },
   "summaryBody": {
-    "message": "ഇന്ന് നിങ്ങൾ $BREAKS$ ബ്രേക്കുകൾ എടുത്തു, $MINUTES$ മിനിറ്റ് ചലിച്ചു. $STREAK$ ദിന തുടർച്ച."
+    "message": "ഇന്ന് നിങ്ങൾ $BREAKS$ ബ്രേക്കുകൾ എടുത്തു, $MINUTES$ മിനിറ്റ് ചലിച്ചു. $STREAK$ ദിന തുടർച്ച.",
+    "placeholders": {
+      "breaks": {
+        "content": "$1"
+      },
+      "minutes": {
+        "content": "$2"
+      },
+      "streak": {
+        "content": "$3"
+      }
+    }
   },
   "settingsWorkHours": {
     "message": "ജോലി സമയം"
