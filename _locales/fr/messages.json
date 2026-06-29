@@ -444,5 +444,104 @@
   },
   "settingsLanguage": {
     "message": "langue"
+  },
+  "summaryTitle": {
+    "message": "Journée terminée"
+  },
+  "summaryBody": {
+    "message": "Vous avez pris $BREAKS$ pauses et bougé pendant $MINUTES$ minutes aujourd'hui. $STREAK$ jours de suite."
+  },
+  "settingsWorkHours": {
+    "message": "heures de travail"
+  },
+  "workHoursEnabled": {
+    "message": "Heures de travail"
+  },
+  "workHoursEnabledSub": {
+    "message": "N'exécuter le minuteur que pendant ces heures"
+  },
+  "workStart": {
+    "message": "Début"
+  },
+  "workEnd": {
+    "message": "Fin"
+  },
+  "settingsWeekends": {
+    "message": "week-ends"
+  },
+  "pauseOnDay": {
+    "message": "Pause ce jour-là"
+  },
+  "dailySummary": {
+    "message": "Résumé quotidien"
+  },
+  "dailySummarySub": {
+    "message": "Me notifier en fin de journée de travail"
+  },
+  "settingsSound": {
+    "message": "son"
+  },
+  "soundChime": {
+    "message": "Son avant la pause"
+  },
+  "soundChimeSub": {
+    "message": "Joue un son doux avant chaque pause"
+  },
+  "soundLeadTime": {
+    "message": "Délai d'anticipation"
+  },
+  "soundLeadTimeSub": {
+    "message": "Combien de secondes avant la pause"
+  },
+  "dayMon": {
+    "message": "Lun"
+  },
+  "dayTue": {
+    "message": "Mar"
+  },
+  "dayWed": {
+    "message": "Mer"
+  },
+  "dayThu": {
+    "message": "Jeu"
+  },
+  "dayFri": {
+    "message": "Ven"
+  },
+  "daySat": {
+    "message": "Sam"
+  },
+  "daySun": {
+    "message": "Dim"
+  },
+  "settingsTheme": {
+    "message": "thème de couleur"
+  },
+  "themeLabel": {
+    "message": "Thème"
+  },
+  "themeLabelSub": {
+    "message": "Choisissez la palette de couleurs de la superposition"
+  },
+  "settingsChimeSound": {
+    "message": "son d'alerte"
+  },
+  "chimeSoundLabel": {
+    "message": "Son"
+  },
+  "chimeSoundLabelSub": {
+    "message": "Choisissez le son joué avant chaque pause"
+  },
+  "soundMarimba": {
+    "message": "Marimba"
+  },
+  "soundBell": {
+    "message": "Cloche douce"
+  },
+  "soundKalimba": {
+    "message": "Kalimba"
+  },
+  "soundWindchime": {
+    "message": "Carillon"
   }
 }
