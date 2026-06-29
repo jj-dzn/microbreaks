@@ -444,5 +444,104 @@
   },
   "settingsLanguage": {
     "message": "భాష"
+  },
+  "summaryTitle": {
+    "message": "పని దినం పూర్తయింది"
+  },
+  "summaryBody": {
+    "message": "ఈరోజు మీరు $BREAKS$ బ్రేక్‌లు తీసుకున్నారు, $MINUTES$ నిమిషాలు కదిలారు. $STREAK$ రోజుల వరుస."
+  },
+  "settingsWorkHours": {
+    "message": "పని వేళలు"
+  },
+  "workHoursEnabled": {
+    "message": "పని వేళలు"
+  },
+  "workHoursEnabledSub": {
+    "message": "ఈ వేళల్లో మాత్రమే టైమర్‌ను నడపండి"
+  },
+  "workStart": {
+    "message": "ప్రారంభం"
+  },
+  "workEnd": {
+    "message": "ముగింపు"
+  },
+  "settingsWeekends": {
+    "message": "వారాంతాలు"
+  },
+  "pauseOnDay": {
+    "message": "ఈ రోజున ఆపు"
+  },
+  "dailySummary": {
+    "message": "రోజువారీ సారాంశం"
+  },
+  "dailySummarySub": {
+    "message": "పని దినం ముగిసినప్పుడు నాకు తెలియజేయండి"
+  },
+  "settingsSound": {
+    "message": "శబ్దం"
+  },
+  "soundChime": {
+    "message": "బ్రేక్‌కు ముందు శబ్దం"
+  },
+  "soundChimeSub": {
+    "message": "ప్రతి బ్రేక్‌కు ముందు సున్నితమైన శబ్దం వినిపిస్తుంది"
+  },
+  "soundLeadTime": {
+    "message": "ముందు సమయం"
+  },
+  "soundLeadTimeSub": {
+    "message": "బ్రేక్‌కు ఎన్ని సెకన్ల ముందు"
+  },
+  "dayMon": {
+    "message": "సోమ"
+  },
+  "dayTue": {
+    "message": "మంగళ"
+  },
+  "dayWed": {
+    "message": "బుధ"
+  },
+  "dayThu": {
+    "message": "గురు"
+  },
+  "dayFri": {
+    "message": "శుక్ర"
+  },
+  "daySat": {
+    "message": "శని"
+  },
+  "daySun": {
+    "message": "ఆది"
+  },
+  "settingsTheme": {
+    "message": "రంగు థీమ్"
+  },
+  "themeLabel": {
+    "message": "థీమ్"
+  },
+  "themeLabelSub": {
+    "message": "ఓవర్‌లే రంగు పాలెట్‌ను ఎంచుకోండి"
+  },
+  "settingsChimeSound": {
+    "message": "శబ్ద టోన్"
+  },
+  "chimeSoundLabel": {
+    "message": "శబ్దం"
+  },
+  "chimeSoundLabelSub": {
+    "message": "ప్రతి బ్రేక్‌కు ముందు వినిపించే టోన్‌ను ఎంచుకోండి"
+  },
+  "soundMarimba": {
+    "message": "మరింబా"
+  },
+  "soundBell": {
+    "message": "సున్నితమైన గంట"
+  },
+  "soundKalimba": {
+    "message": "కలింబా"
+  },
+  "soundWindchime": {
+    "message": "విండ్ చైమ్"
   }
 }
