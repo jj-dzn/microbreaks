@@ -449,7 +449,18 @@
     "message": "పని దినం పూర్తయింది"
   },
   "summaryBody": {
-    "message": "ఈరోజు మీరు $BREAKS$ బ్రేక్‌లు తీసుకున్నారు, $MINUTES$ నిమిషాలు కదిలారు. $STREAK$ రోజుల వరుస."
+    "message": "ఈరోజు మీరు $BREAKS$ బ్రేక్‌లు తీసుకున్నారు, $MINUTES$ నిమిషాలు కదిలారు. $STREAK$ రోజుల వరుస.",
+    "placeholders": {
+      "breaks": {
+        "content": "$1"
+      },
+      "minutes": {
+        "content": "$2"
+      },
+      "streak": {
+        "content": "$3"
+      }
+    }
   },
   "settingsWorkHours": {
     "message": "పని వేళలు"
