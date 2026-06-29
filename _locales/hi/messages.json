@@ -449,7 +449,18 @@
     "message": "कार्यदिवस समाप्त"
   },
   "summaryBody": {
-    "message": "आज आपने $BREAKS$ ब्रेक लिए और $MINUTES$ मिनट हिले। $STREAK$ दिनों की लकीर।"
+    "message": "आज आपने $BREAKS$ ब्रेक लिए और $MINUTES$ मिनट हिले। $STREAK$ दिनों की लकीर।",
+    "placeholders": {
+      "breaks": {
+        "content": "$1"
+      },
+      "minutes": {
+        "content": "$2"
+      },
+      "streak": {
+        "content": "$3"
+      }
+    }
   },
   "settingsWorkHours": {
     "message": "कार्य के घंटे"
