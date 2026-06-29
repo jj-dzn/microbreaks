@@ -449,7 +449,18 @@
     "message": "Jornada terminada"
   },
   "summaryBody": {
-    "message": "Hoy hiciste $BREAKS$ pausas y te moviste durante $MINUTES$ minutos. Racha de $STREAK$ días."
+    "message": "Hoy hiciste $BREAKS$ pausas y te moviste durante $MINUTES$ minutos. Racha de $STREAK$ días.",
+    "placeholders": {
+      "breaks": {
+        "content": "$1"
+      },
+      "minutes": {
+        "content": "$2"
+      },
+      "streak": {
+        "content": "$3"
+      }
+    }
   },
   "settingsWorkHours": {
     "message": "horario laboral"
