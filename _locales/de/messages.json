@@ -444,5 +444,104 @@
   },
   "settingsLanguage": {
     "message": "sprache"
+  },
+  "summaryTitle": {
+    "message": "Arbeitstag beendet"
+  },
+  "summaryBody": {
+    "message": "Du hast heute $BREAKS$ Pausen gemacht und $MINUTES$ Minuten bewegt. $STREAK$ Tage in Folge."
+  },
+  "settingsWorkHours": {
+    "message": "Arbeitszeiten"
+  },
+  "workHoursEnabled": {
+    "message": "Arbeitszeiten"
+  },
+  "workHoursEnabledSub": {
+    "message": "Timer nur innerhalb dieser Zeiten laufen lassen"
+  },
+  "workStart": {
+    "message": "Start"
+  },
+  "workEnd": {
+    "message": "Ende"
+  },
+  "settingsWeekends": {
+    "message": "Wochenenden"
+  },
+  "pauseOnDay": {
+    "message": "An diesem Tag pausieren"
+  },
+  "dailySummary": {
+    "message": "Tägliche Zusammenfassung"
+  },
+  "dailySummarySub": {
+    "message": "Benachrichtigen, wenn der Arbeitstag endet"
+  },
+  "settingsSound": {
+    "message": "Ton"
+  },
+  "soundChime": {
+    "message": "Klang vor der Pause"
+  },
+  "soundChimeSub": {
+    "message": "Spielt einen sanften Ton vor jeder Pause"
+  },
+  "soundLeadTime": {
+    "message": "Vorlaufzeit"
+  },
+  "soundLeadTimeSub": {
+    "message": "Wie viele Sekunden vor der Pause"
+  },
+  "dayMon": {
+    "message": "Mo"
+  },
+  "dayTue": {
+    "message": "Di"
+  },
+  "dayWed": {
+    "message": "Mi"
+  },
+  "dayThu": {
+    "message": "Do"
+  },
+  "dayFri": {
+    "message": "Fr"
+  },
+  "daySat": {
+    "message": "Sa"
+  },
+  "daySun": {
+    "message": "So"
+  },
+  "settingsTheme": {
+    "message": "Farbthema"
+  },
+  "themeLabel": {
+    "message": "Thema"
+  },
+  "themeLabelSub": {
+    "message": "Wähle die Farbpalette der Überlagerung"
+  },
+  "settingsChimeSound": {
+    "message": "Klangton"
+  },
+  "chimeSoundLabel": {
+    "message": "Ton"
+  },
+  "chimeSoundLabelSub": {
+    "message": "Wähle den Ton vor jeder Pause"
+  },
+  "soundMarimba": {
+    "message": "Marimba"
+  },
+  "soundBell": {
+    "message": "Sanfte Glocke"
+  },
+  "soundKalimba": {
+    "message": "Kalimba"
+  },
+  "soundWindchime": {
+    "message": "Windspiel"
   }
 }
