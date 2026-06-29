@@ -444,5 +444,104 @@
   },
   "settingsLanguage": {
     "message": "மொழி"
+  },
+  "summaryTitle": {
+    "message": "வேலை நாள் முடிந்தது"
+  },
+  "summaryBody": {
+    "message": "இன்று நீங்கள் $BREAKS$ இடைவேளைகள் எடுத்தீர்கள், $MINUTES$ நிமிடங்கள் நகர்ந்தீர்கள். $STREAK$ நாள் தொடர்ச்சி."
+  },
+  "settingsWorkHours": {
+    "message": "வேலை நேரம்"
+  },
+  "workHoursEnabled": {
+    "message": "வேலை நேரம்"
+  },
+  "workHoursEnabledSub": {
+    "message": "இந்த நேரத்தில் மட்டும் டைமரை இயக்கவும்"
+  },
+  "workStart": {
+    "message": "தொடக்கம்"
+  },
+  "workEnd": {
+    "message": "முடிவு"
+  },
+  "settingsWeekends": {
+    "message": "வார இறுதிகள்"
+  },
+  "pauseOnDay": {
+    "message": "இந்த நாளில் நிறுத்து"
+  },
+  "dailySummary": {
+    "message": "தினசரி சுருக்கம்"
+  },
+  "dailySummarySub": {
+    "message": "வேலை நாள் முடியும்போது எனக்கு அறிவிக்கவும்"
+  },
+  "settingsSound": {
+    "message": "ஒலி"
+  },
+  "soundChime": {
+    "message": "இடைவேளைக்கு முன் ஒலி"
+  },
+  "soundChimeSub": {
+    "message": "ஒவ்வொரு இடைவேளைக்கும் முன் மென்மையான ஒலியை இயக்குகிறது"
+  },
+  "soundLeadTime": {
+    "message": "முன் நேரம்"
+  },
+  "soundLeadTimeSub": {
+    "message": "இடைவேளைக்கு எத்தனை வினாடிகள் முன்பு"
+  },
+  "dayMon": {
+    "message": "திங்கள்"
+  },
+  "dayTue": {
+    "message": "செவ்வாய்"
+  },
+  "dayWed": {
+    "message": "புதன்"
+  },
+  "dayThu": {
+    "message": "வியாழன்"
+  },
+  "dayFri": {
+    "message": "வெள்ளி"
+  },
+  "daySat": {
+    "message": "சனி"
+  },
+  "daySun": {
+    "message": "ஞாயிறு"
+  },
+  "settingsTheme": {
+    "message": "வண்ண தீம்"
+  },
+  "themeLabel": {
+    "message": "தீம்"
+  },
+  "themeLabelSub": {
+    "message": "ஓவர்லேயின் வண்ணத் தட்டை தேர்ந்தெடுக்கவும்"
+  },
+  "settingsChimeSound": {
+    "message": "ஒலி தொனி"
+  },
+  "chimeSoundLabel": {
+    "message": "ஒலி"
+  },
+  "chimeSoundLabelSub": {
+    "message": "ஒவ்வொரு இடைவேளைக்கும் முன் இயங்கும் தொனியைத் தேர்ந்தெடுக்கவும்"
+  },
+  "soundMarimba": {
+    "message": "மரிம்பா"
+  },
+  "soundBell": {
+    "message": "மென்மையான மணி"
+  },
+  "soundKalimba": {
+    "message": "கலிம்பா"
+  },
+  "soundWindchime": {
+    "message": "காற்று மணி"
   }
 }
