@@ -449,7 +449,18 @@
     "message": "வேலை நாள் முடிந்தது"
   },
   "summaryBody": {
-    "message": "இன்று நீங்கள் $BREAKS$ இடைவேளைகள் எடுத்தீர்கள், $MINUTES$ நிமிடங்கள் நகர்ந்தீர்கள். $STREAK$ நாள் தொடர்ச்சி."
+    "message": "இன்று நீங்கள் $BREAKS$ இடைவேளைகள் எடுத்தீர்கள், $MINUTES$ நிமிடங்கள் நகர்ந்தீர்கள். $STREAK$ நாள் தொடர்ச்சி.",
+    "placeholders": {
+      "breaks": {
+        "content": "$1"
+      },
+      "minutes": {
+        "content": "$2"
+      },
+      "streak": {
+        "content": "$3"
+      }
+    }
   },
   "settingsWorkHours": {
     "message": "வேலை நேரம்"
