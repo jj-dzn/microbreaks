@@ -51,14 +51,15 @@
   <p class="updated">Last updated: June 2026</p>
 
   <div class="highlight">
-    <strong>Short version:</strong> MicroBreaks stores nothing on any server. All data lives on your device, in your browser, and never leaves it.
+    <strong>Short version:</strong> MicroBreaks has no servers of its own and collects no personal data. Settings sync between your own devices using Chrome's built-in sync feature — the same mechanism Chrome uses for bookmarks and passwords — and nothing is ever sent to us or any third party.
   </div>
 
   <h2>What data we collect</h2>
-  <p>MicroBreaks stores the following data locally on your device using Chrome's built-in <code>chrome.storage.local</code> API:</p>
+  <p>MicroBreaks stores the following data using Chrome's built-in <code>chrome.storage</code> APIs. Most settings sync automatically across your signed-in Chrome browsers via <code>chrome.storage.sync</code>; session-only timer state stays local to each device via <code>chrome.storage.local</code>:</p>
   <ul>
     <li>Your preferred break interval (e.g. 20 minutes)</li>
-    <li>Your settings (notifications, model preference, strict mode, language)</li>
+    <li>Your settings (notifications, sound, theme, model preference, strict mode, language)</li>
+    <li>Your work hours and weekend pause schedule, if configured</li>
     <li>Your daily break count, minutes moved, and streak</li>
     <li>The timer state (running, paused, remaining time)</li>
   </ul>
@@ -80,6 +81,7 @@
     <li><strong>storage</strong> — to save your settings and streak locally on your device</li>
     <li><strong>tabs</strong> — to detect your active tab when showing the strict mode overlay</li>
     <li><strong>scripting</strong> — to inject the break overlay onto your active tab in strict mode</li>
+    <li><strong>offscreen</strong> — to play the gentle chime sound before a break, since Chrome does not allow background scripts to play audio directly</li>
     <li><strong>host permissions (all URLs)</strong> — required by Chrome to allow the strict mode overlay to appear on any webpage you are visiting</li>
   </ul>
   <p>None of these permissions are used to collect, transmit, or share any data.</p>

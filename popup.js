@@ -177,13 +177,45 @@ function applyState(st) {
   renderStretch(st.stretchIndex ?? 0);
   viewStretchIndex = st.stretchIndex ?? 0;
 
-  const prefs = ['tNotif','tAnim','tMale'];
-  const prefKeys = { tNotif:'notifEnabled', tAnim:'animEnabled', tMale:'maleModel' };
+  const prefs = ['tNotif','tAnim','tMale','tSound','tWorkHours','tDailySummary'];
+  const prefKeys = {
+    tNotif:'notifEnabled', tAnim:'animEnabled', tMale:'maleModel',
+    tSound:'soundEnabled', tWorkHours:'workHoursEnabled', tDailySummary:'dailySummaryEnabled',
+  };
   prefs.forEach(id => {
     const on = !!st[prefKeys[id]];
     const btn = $(id);
     btn.classList.toggle('on', on);
     btn.setAttribute('aria-checked', String(on));
+  });
+
+  $('soundLeadSelect').value = String(st.soundLeadSec ?? 10);
+  $('soundLeadRow').classList.toggle('show', !!st.soundEnabled);
+
+  $('workStartInput').value = st.workStart || '09:00';
+  $('workEndInput').value = st.workEnd || '17:00';
+  const whOn = !!st.workHoursEnabled;
+  $('workHoursRow').classList.toggle('show', whOn);
+  $('workHoursRow2').classList.toggle('show', whOn);
+  $('dailySummaryRow').classList.toggle('show', whOn);
+
+  const weekendDays = st.weekendDays || [];
+  document.querySelectorAll('.day-btn').forEach(btn => {
+    const day = parseInt(btn.dataset.day);
+    btn.classList.toggle('paused', weekendDays.includes(day));
+  });
+
+  const activeTheme = st.theme || 'sage';
+  document.querySelectorAll('.theme-swatch').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.theme === activeTheme);
+  });
+  document.body.classList.remove('theme-dusk', 'theme-ocean');
+  if (activeTheme === 'dusk') document.body.classList.add('theme-dusk');
+  if (activeTheme === 'ocean') document.body.classList.add('theme-ocean');
+
+  const activeSound = st.chimeSound || 'marimba';
+  document.querySelectorAll('.sound-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.sound === activeSound);
   });
 }
 
@@ -205,6 +237,10 @@ async function init() {
     st = await send({ type: 'START', intervalMin: st.intervalMin });
   }
   applyState(st);
+
+  if (st.badgeCount > 0) {
+    await send({ type: 'CLEAR_BADGE' });
+  }
 }
 
 $('langSelect').addEventListener('change', async (e) => {
@@ -272,6 +308,61 @@ document.querySelectorAll('.tog').forEach(btn => {
     const newVal = !state[key];
     const st = await send({ type: 'SET_PREF', key, value: newVal });
     applyState(st);
+  });
+});
+
+$('soundLeadSelect').addEventListener('change', async (e) => {
+  const st = await send({ type: 'SET_PREF', key: 'soundLeadSec', value: parseInt(e.target.value) });
+  applyState(st);
+});
+
+async function pushWorkHours() {
+  const enabled = state.workHoursEnabled;
+  const start = $('workStartInput').value || '09:00';
+  const end = $('workEndInput').value || '17:00';
+  const st = await send({ type: 'SET_WORK_HOURS', enabled, start, end });
+  applyState(st);
+}
+
+$('workStartInput').addEventListener('change', pushWorkHours);
+$('workEndInput').addEventListener('change', pushWorkHours);
+
+document.querySelectorAll('.day-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const day = parseInt(btn.dataset.day);
+    const current = new Set(state.weekendDays || []);
+    if (current.has(day)) current.delete(day);
+    else current.add(day);
+    const st = await send({ type: 'SET_WEEKEND_DAYS', days: Array.from(current) });
+    applyState(st);
+  });
+});
+
+document.querySelectorAll('.theme-swatch').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const theme = btn.dataset.theme;
+    const st = await send({ type: 'SET_PREF', key: 'theme', value: theme });
+    applyState(st);
+  });
+});
+
+const SOUND_FILES = {
+  marimba: 'sounds/chime-marimba.mp3',
+  bell: 'sounds/chime-bell.mp3',
+  kalimba: 'sounds/chime-kalimba.mp3',
+  windchime: 'sounds/chime-windchime.mp3',
+};
+
+document.querySelectorAll('.sound-chip').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const sound = btn.dataset.sound;
+    const st = await send({ type: 'SET_PREF', key: 'chimeSound', value: sound });
+    applyState(st);
+    try {
+      const audio = new Audio(chrome.runtime.getURL(SOUND_FILES[sound] || SOUND_FILES.marimba));
+      audio.volume = 0.6;
+      audio.play().catch(() => {});
+    } catch (e) {}
   });
 });
 

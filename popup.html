@@ -105,7 +105,6 @@
   <div class="settings-layer" id="settingsLayer" aria-hidden="true">
     <div class="stg-group">
       <div class="stg-head" data-i18n="settingsNotifications">notifications</div>
-
       <div class="stg-row">
         <div class="stg-txt">
           <div class="stg-lbl" data-i18n="browserNotification">Browser notification</div>
@@ -114,6 +113,31 @@
         <button class="tog" id="tNotif" role="switch" aria-checked="true" data-pref="notifEnabled"></button>
       </div>
     </div>
+
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsSound">sound</div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="soundChime">Chime before break</div>
+          <div class="stg-sub" data-i18n="soundChimeSub">Plays a gentle sound before each break</div>
+        </div>
+        <button class="tog" id="tSound" role="switch" aria-checked="true" data-pref="soundEnabled"></button>
+      </div>
+      <div class="stg-row" id="soundLeadRow">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="soundLeadTime">Lead time</div>
+          <div class="stg-sub" data-i18n="soundLeadTimeSub">How many seconds before the break</div>
+        </div>
+        <select class="lang-select" id="soundLeadSelect">
+          <option value="0">0s</option>
+          <option value="5">5s</option>
+          <option value="10">10s</option>
+          <option value="15">15s</option>
+          <option value="30">30s</option>
+        </select>
+      </div>
+    </div>
+
     <div class="stg-group">
       <div class="stg-head" data-i18n="settingsDisplay">display</div>
       <div class="stg-row">
@@ -123,8 +147,9 @@
         </div>
         <button class="tog" id="tAnim" role="switch" aria-checked="true" data-pref="animEnabled"></button>
       </div>
+    </div>
 
-      <div class="stg-group">
+    <div class="stg-group">
       <div class="stg-head" data-i18n="settingsModel">model</div>
       <div class="stg-row">
         <div class="stg-txt">
@@ -132,6 +157,37 @@
           <div class="stg-sub" data-i18n="maleModelSub">Switch to a male figure for exercises</div>
         </div>
         <button class="tog" id="tMale" role="switch" aria-checked="false" data-pref="maleModel"></button>
+      </div>
+    </div>
+
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsTheme">color theme</div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="themeLabel">Theme</div>
+          <div class="stg-sub" data-i18n="themeLabelSub">Choose the overlay color palette</div>
+        </div>
+        <div class="theme-row" id="themeRow">
+          <button class="theme-swatch" data-theme="sage" style="background:linear-gradient(135deg, #1D3D38 50%, #5DB8A0 50%);" aria-label="Sage theme"></button>
+          <button class="theme-swatch" data-theme="dusk" style="background:linear-gradient(135deg, #2E1F3D 50%, #B594D6 50%);" aria-label="Dusk theme"></button>
+          <button class="theme-swatch" data-theme="ocean" style="background:linear-gradient(135deg, #0F2D3D 50%, #4FB3D9 50%);" aria-label="Ocean theme"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsChimeSound">chime sound</div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="chimeSoundLabel">Sound</div>
+          <div class="stg-sub" data-i18n="chimeSoundLabelSub">Pick the tone played before each break</div>
+        </div>
+      </div>
+      <div class="sound-row" id="soundRow">
+        <button class="sound-chip" data-sound="marimba" data-i18n="soundMarimba">Marimba</button>
+        <button class="sound-chip" data-sound="bell" data-i18n="soundBell">Soft bell</button>
+        <button class="sound-chip" data-sound="kalimba" data-i18n="soundKalimba">Kalimba</button>
+        <button class="sound-chip" data-sound="windchime" data-i18n="soundWindchime">Wind chime</button>
       </div>
     </div>
 
@@ -155,6 +211,49 @@
         </select>
       </div>
     </div>
+
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsWorkHours">work hours</div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="workHoursEnabled">Work hours</div>
+          <div class="stg-sub" data-i18n="workHoursEnabledSub">Only run the timer during set hours</div>
+        </div>
+        <button class="tog" id="tWorkHours" role="switch" aria-checked="false" data-pref="workHoursEnabled"></button>
+      </div>
+      <div class="stg-row" id="workHoursRow">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="workStart">Start</div>
+        </div>
+        <input type="time" class="time-input" id="workStartInput" value="09:00">
+      </div>
+      <div class="stg-row" id="workHoursRow2">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="workEnd">End</div>
+        </div>
+        <input type="time" class="time-input" id="workEndInput" value="17:00">
+      </div>
+      <div class="stg-row" id="dailySummaryRow">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="dailySummary">Daily summary</div>
+          <div class="stg-sub" data-i18n="dailySummarySub">Notify me when the workday ends</div>
+        </div>
+        <button class="tog" id="tDailySummary" role="switch" aria-checked="true" data-pref="dailySummaryEnabled"></button>
+      </div>
+    </div>
+
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsWeekends">weekends</div>
+      <div class="weekday-row" id="weekdayRow">
+        <button class="day-btn" data-day="1" data-i18n="dayMon">Mon</button>
+        <button class="day-btn" data-day="2" data-i18n="dayTue">Tue</button>
+        <button class="day-btn" data-day="3" data-i18n="dayWed">Wed</button>
+        <button class="day-btn" data-day="4" data-i18n="dayThu">Thu</button>
+        <button class="day-btn" data-day="5" data-i18n="dayFri">Fri</button>
+        <button class="day-btn" data-day="6" data-i18n="daySat">Sat</button>
+        <button class="day-btn" data-day="0" data-i18n="daySun">Sun</button>
+      </div>
+      <div class="stg-sub" style="margin-top:6px;" data-i18n="pauseOnDay">Pause on this day</div>
     </div>
   </div>
 
