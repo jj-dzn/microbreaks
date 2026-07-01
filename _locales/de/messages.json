@@ -554,5 +554,137 @@
   },
   "soundWindchime": {
     "message": "Windspiel"
+  },
+  "openFullSettings": {
+    "message": "Vollständige Einstellungsseite öffnen"
+  },
+  "optionsTitle": {
+    "message": "MicroBreaks-Einstellungen"
+  },
+  "navTimer": {
+    "message": "Timer"
+  },
+  "navNotifications": {
+    "message": "Benachrichtigungen"
+  },
+  "navAppearance": {
+    "message": "Erscheinungsbild"
+  },
+  "navWorkHours": {
+    "message": "Arbeitszeiten"
+  },
+  "navWeekends": {
+    "message": "Wochenenden"
+  },
+  "navLanguage": {
+    "message": "Sprache"
+  },
+  "navAbout": {
+    "message": "Über"
+  },
+  "timerSectionSub": {
+    "message": "Steuere, wie oft du erinnert wirst, dich zu bewegen."
+  },
+  "intervalLabel": {
+    "message": "Pausenintervall"
+  },
+  "strictModeOptLabel": {
+    "message": "Strenger Modus"
+  },
+  "strictModeOptSub": {
+    "message": "Vollbild-Überlagerung statt einer Benachrichtigung"
+  },
+  "snoozeDurationLabel": {
+    "message": "Aufschub-Dauer"
+  },
+  "snoozeDurationSub": {
+    "message": "Wie lange der Aufschub-Button eine Pause verzögert"
+  },
+  "notifSectionSub": {
+    "message": "Wähle, wie MicroBreaks deine Aufmerksamkeit erhält."
+  },
+  "appearanceSectionSub": {
+    "message": "Wähle das Erscheinungsbild von MicroBreaks."
+  },
+  "workHoursSectionSub": {
+    "message": "Den Timer nur während deiner tatsächlichen Arbeitszeit laufen lassen."
+  },
+  "weekendsSectionSub": {
+    "message": "Wähle, welche Tage automatisch pausiert werden."
+  },
+  "languageSectionSub": {
+    "message": "Wähle deine bevorzugte Sprache für MicroBreaks."
+  },
+  "aboutSectionSub": {
+    "message": "Ein sanfter Pausen-Timer für Büroarbeit."
+  },
+  "aboutVersion": {
+    "message": "Version"
+  },
+  "aboutPrivacy": {
+    "message": "Datenschutzrichtlinie"
+  },
+  "aboutWebsite": {
+    "message": "Webseite"
+  },
+  "themeSage": {
+    "message": "Salbei"
+  },
+  "themeDusk": {
+    "message": "Dämmerlila"
+  },
+  "themeOcean": {
+    "message": "Ozeanblau"
+  },
+  "dayMonFull": {
+    "message": "Montag"
+  },
+  "dayTueFull": {
+    "message": "Dienstag"
+  },
+  "dayWedFull": {
+    "message": "Mittwoch"
+  },
+  "dayThuFull": {
+    "message": "Donnerstag"
+  },
+  "dayFriFull": {
+    "message": "Freitag"
+  },
+  "daySatFull": {
+    "message": "Samstag"
+  },
+  "daySunFull": {
+    "message": "Sonntag"
+  },
+  "allStretches": {
+    "message": "alle Dehnübungen"
+  },
+  "darkMode": {
+    "message": "Dunkelmodus"
+  },
+  "darkModeSub": {
+    "message": "Systemdarstellungseinstellung überschreiben"
+  },
+  "darkModeSystem": {
+    "message": "System"
+  },
+  "darkModeLight": {
+    "message": "Hell"
+  },
+  "darkModeDark": {
+    "message": "Dunkel"
+  },
+  "nudgeTitle": {
+    "message": "10 Pausen geschafft!"
+  },
+  "nudgeBody": {
+    "message": "Gefällt dir MicroBreaks? Eine kurze Bewertung hilft anderen, es zu finden."
+  },
+  "nudgeReview": {
+    "message": "Bewertung abgeben ↗"
+  },
+  "nudgeDismiss": {
+    "message": "Vielleicht später"
   }
 }
