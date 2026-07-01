@@ -554,5 +554,137 @@
   },
   "soundWindchime": {
     "message": "Carillon"
+  },
+  "openFullSettings": {
+    "message": "Ouvrir la page complète des paramètres"
+  },
+  "optionsTitle": {
+    "message": "Paramètres MicroBreaks"
+  },
+  "navTimer": {
+    "message": "Minuteur"
+  },
+  "navNotifications": {
+    "message": "Notifications"
+  },
+  "navAppearance": {
+    "message": "Apparence"
+  },
+  "navWorkHours": {
+    "message": "Heures de travail"
+  },
+  "navWeekends": {
+    "message": "Week-ends"
+  },
+  "navLanguage": {
+    "message": "Langue"
+  },
+  "navAbout": {
+    "message": "À propos"
+  },
+  "timerSectionSub": {
+    "message": "Contrôlez la fréquence des rappels pour bouger."
+  },
+  "intervalLabel": {
+    "message": "Intervalle de pause"
+  },
+  "strictModeOptLabel": {
+    "message": "Mode strict"
+  },
+  "strictModeOptSub": {
+    "message": "Superposition plein écran au lieu d'une notification"
+  },
+  "snoozeDurationLabel": {
+    "message": "Durée de report"
+  },
+  "snoozeDurationSub": {
+    "message": "Combien de temps le bouton report retarde une pause"
+  },
+  "notifSectionSub": {
+    "message": "Choisissez comment MicroBreaks attire votre attention."
+  },
+  "appearanceSectionSub": {
+    "message": "Choisissez l'apparence de MicroBreaks."
+  },
+  "workHoursSectionSub": {
+    "message": "N'exécutez le minuteur que pendant vos heures de travail réelles."
+  },
+  "weekendsSectionSub": {
+    "message": "Choisissez les jours à mettre en pause automatiquement."
+  },
+  "languageSectionSub": {
+    "message": "Choisissez votre langue préférée pour MicroBreaks."
+  },
+  "aboutSectionSub": {
+    "message": "Un minuteur de pause doux pour le travail de bureau."
+  },
+  "aboutVersion": {
+    "message": "Version"
+  },
+  "aboutPrivacy": {
+    "message": "Politique de confidentialité"
+  },
+  "aboutWebsite": {
+    "message": "Site web"
+  },
+  "themeSage": {
+    "message": "Sauge"
+  },
+  "themeDusk": {
+    "message": "Violet crépuscule"
+  },
+  "themeOcean": {
+    "message": "Bleu océan"
+  },
+  "dayMonFull": {
+    "message": "Lundi"
+  },
+  "dayTueFull": {
+    "message": "Mardi"
+  },
+  "dayWedFull": {
+    "message": "Mercredi"
+  },
+  "dayThuFull": {
+    "message": "Jeudi"
+  },
+  "dayFriFull": {
+    "message": "Vendredi"
+  },
+  "daySatFull": {
+    "message": "Samedi"
+  },
+  "daySunFull": {
+    "message": "Dimanche"
+  },
+  "allStretches": {
+    "message": "tous les étirements"
+  },
+  "darkMode": {
+    "message": "Mode sombre"
+  },
+  "darkModeSub": {
+    "message": "Remplacer la préférence d'apparence du système"
+  },
+  "darkModeSystem": {
+    "message": "Système"
+  },
+  "darkModeLight": {
+    "message": "Clair"
+  },
+  "darkModeDark": {
+    "message": "Sombre"
+  },
+  "nudgeTitle": {
+    "message": "10 pauses accomplies !"
+  },
+  "nudgeBody": {
+    "message": "Vous aimez MicroBreaks ? Un avis rapide aide d'autres à le trouver."
+  },
+  "nudgeReview": {
+    "message": "Laisser un avis ↗"
+  },
+  "nudgeDismiss": {
+    "message": "Peut-être plus tard"
   }
 }
