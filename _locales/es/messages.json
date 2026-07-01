@@ -554,5 +554,137 @@
   },
   "soundWindchime": {
     "message": "Campanas de viento"
+  },
+  "openFullSettings": {
+    "message": "Abrir la página completa de ajustes"
+  },
+  "optionsTitle": {
+    "message": "Ajustes de MicroBreaks"
+  },
+  "navTimer": {
+    "message": "Temporizador"
+  },
+  "navNotifications": {
+    "message": "Notificaciones"
+  },
+  "navAppearance": {
+    "message": "Apariencia"
+  },
+  "navWorkHours": {
+    "message": "Horario laboral"
+  },
+  "navWeekends": {
+    "message": "Fines de semana"
+  },
+  "navLanguage": {
+    "message": "Idioma"
+  },
+  "navAbout": {
+    "message": "Acerca de"
+  },
+  "timerSectionSub": {
+    "message": "Controla con qué frecuencia se te recuerda moverte."
+  },
+  "intervalLabel": {
+    "message": "Intervalo de pausa"
+  },
+  "strictModeOptLabel": {
+    "message": "Modo estricto"
+  },
+  "strictModeOptSub": {
+    "message": "Superposición a pantalla completa en lugar de una notificación"
+  },
+  "snoozeDurationLabel": {
+    "message": "Duración de posponer"
+  },
+  "snoozeDurationSub": {
+    "message": "Cuánto retrasa la pausa el botón de posponer"
+  },
+  "notifSectionSub": {
+    "message": "Elige cómo MicroBreaks llama tu atención."
+  },
+  "appearanceSectionSub": {
+    "message": "Elige el aspecto de MicroBreaks."
+  },
+  "workHoursSectionSub": {
+    "message": "Ejecuta el temporizador solo mientras realmente trabajas."
+  },
+  "weekendsSectionSub": {
+    "message": "Elige qué días pausar automáticamente."
+  },
+  "languageSectionSub": {
+    "message": "Elige tu idioma preferido para MicroBreaks."
+  },
+  "aboutSectionSub": {
+    "message": "Un temporizador de pausas suave para quienes trabajan sentados."
+  },
+  "aboutVersion": {
+    "message": "Versión"
+  },
+  "aboutPrivacy": {
+    "message": "Política de privacidad"
+  },
+  "aboutWebsite": {
+    "message": "Sitio web"
+  },
+  "themeSage": {
+    "message": "Salvia"
+  },
+  "themeDusk": {
+    "message": "Púrpura crepuscular"
+  },
+  "themeOcean": {
+    "message": "Azul océano"
+  },
+  "dayMonFull": {
+    "message": "Lunes"
+  },
+  "dayTueFull": {
+    "message": "Martes"
+  },
+  "dayWedFull": {
+    "message": "Miércoles"
+  },
+  "dayThuFull": {
+    "message": "Jueves"
+  },
+  "dayFriFull": {
+    "message": "Viernes"
+  },
+  "daySatFull": {
+    "message": "Sábado"
+  },
+  "daySunFull": {
+    "message": "Domingo"
+  },
+  "allStretches": {
+    "message": "todos los estiramientos"
+  },
+  "darkMode": {
+    "message": "Modo oscuro"
+  },
+  "darkModeSub": {
+    "message": "Anular la preferencia de apariencia del sistema"
+  },
+  "darkModeSystem": {
+    "message": "Sistema"
+  },
+  "darkModeLight": {
+    "message": "Claro"
+  },
+  "darkModeDark": {
+    "message": "Oscuro"
+  },
+  "nudgeTitle": {
+    "message": "¡10 pausas completadas!"
+  },
+  "nudgeBody": {
+    "message": "¿Te gusta MicroBreaks? Una reseña rápida ayuda a otros a encontrarlo."
+  },
+  "nudgeReview": {
+    "message": "Dejar una reseña ↗"
+  },
+  "nudgeDismiss": {
+    "message": "Quizás más tarde"
   }
 }
