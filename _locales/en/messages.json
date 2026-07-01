@@ -554,5 +554,137 @@
   },
   "soundWindchime": {
     "message": "Wind chime"
+  },
+  "openFullSettings": {
+    "message": "Open full settings page"
+  },
+  "optionsTitle": {
+    "message": "MicroBreaks settings"
+  },
+  "navTimer": {
+    "message": "Timer"
+  },
+  "navNotifications": {
+    "message": "Notifications"
+  },
+  "navAppearance": {
+    "message": "Appearance"
+  },
+  "navWorkHours": {
+    "message": "Work hours"
+  },
+  "navWeekends": {
+    "message": "Weekends"
+  },
+  "navLanguage": {
+    "message": "Language"
+  },
+  "navAbout": {
+    "message": "About"
+  },
+  "timerSectionSub": {
+    "message": "Control how often you're reminded to move."
+  },
+  "intervalLabel": {
+    "message": "Break interval"
+  },
+  "strictModeOptLabel": {
+    "message": "Strict mode"
+  },
+  "strictModeOptSub": {
+    "message": "Full-screen overlay instead of a notification"
+  },
+  "snoozeDurationLabel": {
+    "message": "Snooze duration"
+  },
+  "snoozeDurationSub": {
+    "message": "How long the snooze button delays a break"
+  },
+  "notifSectionSub": {
+    "message": "Choose how MicroBreaks gets your attention."
+  },
+  "appearanceSectionSub": {
+    "message": "Pick the look and feel of MicroBreaks."
+  },
+  "workHoursSectionSub": {
+    "message": "Only run the timer while you're actually working."
+  },
+  "weekendsSectionSub": {
+    "message": "Choose which days to automatically pause."
+  },
+  "languageSectionSub": {
+    "message": "Choose your preferred language for MicroBreaks."
+  },
+  "aboutSectionSub": {
+    "message": "A gentle stretch timer for desk workers."
+  },
+  "aboutVersion": {
+    "message": "Version"
+  },
+  "aboutPrivacy": {
+    "message": "Privacy policy"
+  },
+  "aboutWebsite": {
+    "message": "Website"
+  },
+  "themeSage": {
+    "message": "Sage"
+  },
+  "themeDusk": {
+    "message": "Dusk purple"
+  },
+  "themeOcean": {
+    "message": "Ocean blue"
+  },
+  "dayMonFull": {
+    "message": "Monday"
+  },
+  "dayTueFull": {
+    "message": "Tuesday"
+  },
+  "dayWedFull": {
+    "message": "Wednesday"
+  },
+  "dayThuFull": {
+    "message": "Thursday"
+  },
+  "dayFriFull": {
+    "message": "Friday"
+  },
+  "daySatFull": {
+    "message": "Saturday"
+  },
+  "daySunFull": {
+    "message": "Sunday"
+  },
+  "allStretches": {
+    "message": "all stretches"
+  },
+  "darkMode": {
+    "message": "Dark mode"
+  },
+  "darkModeSub": {
+    "message": "Override system appearance preference"
+  },
+  "darkModeSystem": {
+    "message": "System"
+  },
+  "darkModeLight": {
+    "message": "Light"
+  },
+  "darkModeDark": {
+    "message": "Dark"
+  },
+  "nudgeTitle": {
+    "message": "10 breaks done!"
+  },
+  "nudgeBody": {
+    "message": "Loving MicroBreaks? A quick review helps others find it."
+  },
+  "nudgeReview": {
+    "message": "Leave a review ↗"
+  },
+  "nudgeDismiss": {
+    "message": "Maybe later"
   }
 }
