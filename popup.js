@@ -213,6 +213,12 @@ function applyState(st) {
   if (activeTheme === 'dusk') document.body.classList.add('theme-dusk');
   if (activeTheme === 'ocean') document.body.classList.add('theme-ocean');
 
+  const darkPref = st.darkMode || 'system';
+  document.body.classList.remove('dark', 'force-light');
+  if (darkPref === 'dark') document.body.classList.add('dark');
+  if (darkPref === 'light') document.body.classList.add('force-light');
+  $('darkModeSelect').value = darkPref;
+
   const activeSound = st.chimeSound || 'marimba';
   document.querySelectorAll('.sound-chip').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.sound === activeSound);
@@ -240,6 +246,10 @@ async function init() {
 
   if (st.badgeCount > 0) {
     await send({ type: 'CLEAR_BADGE' });
+  }
+
+  if ((st.totalBreaksAllTime || 0) >= 10 && !st.ratingNudgeDone) {
+    showNudge();
   }
 }
 
@@ -309,6 +319,11 @@ document.querySelectorAll('.tog').forEach(btn => {
     const st = await send({ type: 'SET_PREF', key, value: newVal });
     applyState(st);
   });
+});
+
+$('darkModeSelect').addEventListener('change', async (e) => {
+  const st = await send({ type: 'SET_PREF', key: 'darkMode', value: e.target.value });
+  applyState(st);
 });
 
 $('soundLeadSelect').addEventListener('change', async (e) => {
@@ -392,8 +407,70 @@ chrome.runtime.onMessage.addListener((msg) => {
       $('progRing').classList.remove('break-mode');
       const st = await send({ type: 'GET_STATE' });
       applyState(st);
+      if ((msg.totalBreaks || 0) >= 10 && !st.ratingNudgeDone) {
+        showNudge();
+      }
     }, 4000);
   }
 });
+
+function showNudge() {
+  $('stretchAreaMain').style.display = 'none';
+  $('stretchGridPanel').classList.remove('open');
+  $('nudgePanel').classList.add('open');
+  $('nudgePanel').setAttribute('aria-hidden', 'false');
+}
+
+function hideNudge() {
+  $('nudgePanel').classList.remove('open');
+  $('nudgePanel').setAttribute('aria-hidden', 'true');
+  $('stretchAreaMain').style.display = '';
+}
+
+$('nudgeDismissBtn').addEventListener('click', async () => {
+  hideNudge();
+  await send({ type: 'SET_PREF', key: 'ratingNudgeDone', value: true });
+});
+
+$('nudgeReviewBtn').addEventListener('click', async () => {
+  await send({ type: 'SET_PREF', key: 'ratingNudgeDone', value: true });
+  setTimeout(hideNudge, 800);
+});
+
+$('openOptionsBtn').addEventListener('click', () => {
+  chrome.runtime.openOptionsPage();
+});
+
+function renderStretchGrid() {
+  const grid = $('stretchGrid');
+  grid.innerHTML = '';
+  const currentIdx = (state.stretchIndex ?? 0) % STRETCHES.length;
+  STRETCHES.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'grid-stretch-card' + (i === currentIdx ? ' next-up' : '');
+    card.innerHTML = `
+      ${i === currentIdx ? `<div class="grid-next-badge">${t('upNext')}</div>` : ''}
+      <div class="grid-stretch-icon">${s.emoji}</div>
+      <div class="grid-stretch-name">${s.name}</div>
+      <div class="grid-stretch-dur">${s.dur}</div>
+    `;
+    card.addEventListener('click', () => {
+      viewStretchIndex = i;
+      renderStretch(i);
+      toggleStretchGrid(false);
+    });
+    grid.appendChild(card);
+  });
+}
+
+function toggleStretchGrid(open) {
+  $('stretchGridPanel').classList.toggle('open', open);
+  $('stretchGridPanel').setAttribute('aria-hidden', String(!open));
+  $('stretchAreaMain').style.display = open ? 'none' : '';
+  if (open) renderStretchGrid();
+}
+
+$('browseAllBtn').addEventListener('click', () => toggleStretchGrid(true));
+$('closeGridBtn').addEventListener('click', () => toggleStretchGrid(false));
 
 init();

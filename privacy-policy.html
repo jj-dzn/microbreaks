@@ -58,8 +58,8 @@
   <p>MicroBreaks stores the following data using Chrome's built-in <code>chrome.storage</code> APIs. Most settings sync automatically across your signed-in Chrome browsers via <code>chrome.storage.sync</code>; session-only timer state stays local to each device via <code>chrome.storage.local</code>:</p>
   <ul>
     <li>Your preferred break interval (e.g. 20 minutes)</li>
-    <li>Your settings (notifications, sound, theme, model preference, strict mode, language)</li>
-    <li>Your work hours and weekend pause schedule, if configured</li>
+    <li>Your settings (notifications, sound, theme, color palette, dark mode, model preference, strict mode, language)</li>
+    <li>Your work hours, weekend pause schedule, and daily summary preference, if configured</li>
     <li>Your daily break count, minutes moved, and streak</li>
     <li>The timer state (running, paused, remaining time)</li>
   </ul>
@@ -82,6 +82,7 @@
     <li><strong>tabs</strong> — to detect your active tab when showing the strict mode overlay</li>
     <li><strong>scripting</strong> — to inject the break overlay onto your active tab in strict mode</li>
     <li><strong>offscreen</strong> — to play the gentle chime sound before a break, since Chrome does not allow background scripts to play audio directly</li>
+    <li><strong>windows</strong> — to detect when you return focus to Chrome after being in another application, so a pending strict-mode break overlay can be shown on your return instead of being silently missed</li>
     <li><strong>host permissions (all URLs)</strong> — required by Chrome to allow the strict mode overlay to appear on any webpage you are visiting</li>
   </ul>
   <p>None of these permissions are used to collect, transmit, or share any data.</p>

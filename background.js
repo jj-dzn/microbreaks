@@ -55,6 +55,8 @@ const SYNC_DEFAULTS = {
   maleModel: false,
   theme: "sage",
   chimeSound: "marimba",
+  darkMode: "system",
+  ratingNudgeDone: false,
   language: "auto",
   streakDays: 0,
   lastBreakDate: null,
@@ -77,6 +79,7 @@ const LOCAL_DEFAULTS = {
   stretchIndex: 0,
   summaryShownDate: null,
   badgeCount: 0,
+  pendingBreak: null,  // { stretchIndex } set when overlay couldn't show; cleared on acknowledgement
 };
 
 async function getState() {
@@ -378,7 +381,13 @@ async function fireBreak() {
           tab.url.startsWith("https://chrome.google.com/webstore") ||
           tab.url.startsWith("https://chromewebstore.google.com");
 
-        if (!restricted) {
+        // Check if the Chrome window is actually focused by the user right now.
+        // If no window is focused (user is in another app), store a pending break
+        // and show the overlay when they come back instead of firing a notification.
+        const win = await new Promise(r => chrome.windows.getLastFocused({ populate: false }, w => r(w)));
+        const chromeIsFocused = win && win.focused && !restricted;
+
+        if (chromeIsFocused) {
           try {
             await chrome.scripting.executeScript({
               target: { tabId: tab.id },
@@ -386,26 +395,86 @@ async function fireBreak() {
             });
             const resolvedLang = (state.language === 'auto' || !state.language) ? detectBgLang() : state.language;
             await chrome.tabs.sendMessage(tab.id, { type: "SHOW_BREAK_OVERLAY", stretchIndex, male: state.maleModel, lang: resolvedLang, theme: state.theme });
+            // Overlay shown — clear any previous pending break
+            await setState({ pendingBreak: null });
           } catch (e) {
             console.log("[MicroBreaks] Overlay injection failed on:", tab && tab.url, "—", e && e.message);
-            await fireNotification(notifText, stretchIndex);
+            // Injection failed on this tab (e.g. CSP) — store pending so user sees it on next navigable tab
+            await setState({ pendingBreak: { stretchIndex } });
+            if (state.notifEnabled) await fireNotification(notifText, stretchIndex);
           }
         } else {
-          await fireNotification(notifText, stretchIndex);
+          // User is not in Chrome — store pending break, show notification too
+          console.log("[MicroBreaks] Chrome not focused — storing pending break for when user returns");
+          await setState({ pendingBreak: { stretchIndex } });
+          if (state.notifEnabled) await fireNotification(notifText, stretchIndex);
         }
       } catch (outerErr) {
-        // Absolute last resort — chrome.tabs.query itself misbehaved, or something
-        // upstream threw outside the inner try/catch. Never let a break fire silently.
         console.log("[MicroBreaks] Unexpected error in focus-mode flow —", outerErr && outerErr.message);
-        await fireNotification(notifText, stretchIndex);
+        await setState({ pendingBreak: { stretchIndex } });
+        if (state.notifEnabled) await fireNotification(notifText, stretchIndex);
       }
     });
   } else if (state.notifEnabled) {
     await fireNotification(notifText, stretchIndex);
   }
 
-  chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex }).catch(() => {});
+  chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex, totalBreaks: totalBreaksAllTime }).catch(() => {});
 }
+
+// ===== PENDING BREAK ON FOCUS RETURN =====
+
+async function tryShowPendingOverlay(tab) {
+  const state = await getState();
+  if (!state.focusMode || !state.pendingBreak) return;
+
+  const { stretchIndex } = state.pendingBreak;
+  const restricted = !tab || !tab.id || !tab.url ||
+    tab.url.startsWith("chrome://") ||
+    tab.url.startsWith("chrome-extension://") ||
+    tab.url.startsWith("edge://") ||
+    tab.url.startsWith("about:") ||
+    tab.url.startsWith("https://chrome.google.com/webstore") ||
+    tab.url.startsWith("https://chromewebstore.google.com");
+
+  if (restricted) return;
+
+  try {
+    await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["content.js"] });
+    const resolvedLang = (state.language === 'auto' || !state.language) ? detectBgLang() : state.language;
+    await chrome.tabs.sendMessage(tab.id, { type: "SHOW_BREAK_OVERLAY", stretchIndex, male: state.maleModel, lang: resolvedLang, theme: state.theme });
+    await setState({ pendingBreak: null });
+    console.log("[MicroBreaks] Showed pending overlay on focus return");
+  } catch (e) {
+    console.log("[MicroBreaks] Could not show pending overlay on focus return:", e && e.message);
+  }
+}
+
+// When Chrome regains focus, check if there's a pending break to show.
+chrome.windows.onFocusChanged.addListener(async (windowId) => {
+  if (windowId === chrome.windows.WINDOW_ID_NONE) return; // Chrome lost focus
+  const state = await getState();
+  if (!state.focusMode || !state.pendingBreak) return;
+
+  // Small delay to let the tab finish rendering before injecting
+  setTimeout(async () => {
+    getActiveVisibleTab(async (tab) => {
+      if (tab) await tryShowPendingOverlay(tab);
+    });
+  }, 600);
+});
+
+// Also check on tab activation — if user switches tabs while a break is pending
+chrome.tabs.onActivated.addListener(async ({ tabId }) => {
+  const state = await getState();
+  if (!state.focusMode || !state.pendingBreak) return;
+
+  setTimeout(async () => {
+    chrome.tabs.get(tabId, async (tab) => {
+      if (tab && !chrome.runtime.lastError) await tryShowPendingOverlay(tab);
+    });
+  }, 400);
+});
 
 // ===== DAILY SUMMARY =====
 
@@ -470,11 +539,11 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   (async () => {
     switch (msg.type) {
       case "GET_STATE":      sendResponse(await getState()); break;
-      case "START":          await startTimer(msg.intervalMin); sendResponse(await getState()); break;
+      case "START":          await setState({ pendingBreak: null }); await startTimer(msg.intervalMin); sendResponse(await getState()); break;
       case "PAUSE":          await pauseTimer(); sendResponse(await getState()); break;
       case "RESUME":         await resumeTimer(); sendResponse(await getState()); break;
       case "STOP":           await stopTimer(); sendResponse(await getState()); break;
-      case "SNOOZE":         await snoozeTimer(); sendResponse(await getState()); break;
+      case "SNOOZE":         await setState({ pendingBreak: null }); await snoozeTimer(); sendResponse(await getState()); break;
       case "SET_INTERVAL":   await setState({ intervalMin: msg.intervalMin }); sendResponse(await getState()); break;
       case "SET_FOCUS":      await setState({ focusMode: msg.value }); sendResponse(await getState()); break;
 

@@ -67,10 +67,13 @@
   </div>
 
   <div id="mainLower">
-    <div class="stretch-area">
+    <div class="stretch-area" id="stretchAreaMain">
       <div class="stretch-header">
         <span class="section-eyebrow" data-i18n="upNext">up next</span>
         <div class="s-nav" role="group" aria-label="Browse stretches">
+          <button class="s-nav-btn" id="browseAllBtn" aria-label="Browse all stretches" title="Browse all">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
           <button class="s-nav-btn" id="prevBtn" aria-label="Previous stretch">&#8249;</button>
           <button class="s-nav-btn" id="nextBtn" aria-label="Next stretch">&#8250;</button>
         </div>
@@ -84,6 +87,24 @@
         </div>
       </div>
       <div class="pip-row" id="pips" aria-hidden="true"></div>
+    </div>
+
+    <div class="stretch-grid-panel" id="stretchGridPanel" aria-hidden="true">
+      <div class="grid-panel-header">
+        <span class="section-eyebrow" data-i18n="allStretches">all stretches</span>
+        <button class="s-nav-btn" id="closeGridBtn" aria-label="Close">&times;</button>
+      </div>
+      <div class="stretch-grid" id="stretchGrid"></div>
+    </div>
+
+    <div class="nudge-panel" id="nudgePanel" aria-hidden="true">
+      <div class="nudge-emoji">🎉</div>
+      <div class="nudge-title" data-i18n="nudgeTitle">10 breaks done!</div>
+      <div class="nudge-body" data-i18n="nudgeBody">Loving MicroBreaks? A quick review helps others find it.</div>
+      <div class="nudge-actions">
+        <a class="nudge-btn-primary" id="nudgeReviewBtn" href="https://chromewebstore.google.com/detail/microbreaks-%E2%80%94-stretch-tim/lkepdmphkgeplknkfoolimhjamkfkgie/reviews" target="_blank" rel="noopener" data-i18n="nudgeReview">Leave a review ↗</a>
+        <button class="nudge-btn-dismiss" id="nudgeDismissBtn" data-i18n="nudgeDismiss">Maybe later</button>
+      </div>
     </div>
 
     <div class="stats-bar">
@@ -146,6 +167,17 @@
           <div class="stg-sub" data-i18n="stretchAnimationsSub">Guided animation during each break</div>
         </div>
         <button class="tog" id="tAnim" role="switch" aria-checked="true" data-pref="animEnabled"></button>
+      </div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="darkMode">Dark mode</div>
+          <div class="stg-sub" data-i18n="darkModeSub">Override system appearance preference</div>
+        </div>
+        <select class="lang-select" id="darkModeSelect">
+          <option value="system" data-i18n="darkModeSystem">System</option>
+          <option value="light" data-i18n="darkModeLight">Light</option>
+          <option value="dark" data-i18n="darkModeDark">Dark</option>
+        </select>
       </div>
     </div>
 
@@ -255,6 +287,8 @@
       </div>
       <div class="stg-sub" style="margin-top:6px;" data-i18n="pauseOnDay">Pause on this day</div>
     </div>
+
+    <button class="options-link" id="openOptionsBtn" data-i18n="openFullSettings">Open full settings page</button>
   </div>
 
   <script src="popup.js"></script>

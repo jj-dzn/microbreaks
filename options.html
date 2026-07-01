@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MicroBreaks Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="brand">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <circle cx="10" cy="10" r="8" fill="#5DB8A0" opacity="0.3"/>
+        <circle cx="10" cy="10" r="4.5" fill="#5DB8A0"/>
+      </svg>
+      <span data-i18n="optionsTitle">MicroBreaks settings</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Settings sections">
+      <button class="nav-item active" data-section="timer">
+        <i class="nav-icon" data-icon="timer"></i>
+        <span data-i18n="navTimer">Timer</span>
+      </button>
+      <button class="nav-item" data-section="notifications">
+        <i class="nav-icon" data-icon="bell"></i>
+        <span data-i18n="navNotifications">Notifications</span>
+      </button>
+      <button class="nav-item" data-section="appearance">
+        <i class="nav-icon" data-icon="palette"></i>
+        <span data-i18n="navAppearance">Appearance</span>
+      </button>
+      <button class="nav-item" data-section="workhours">
+        <i class="nav-icon" data-icon="clock"></i>
+        <span data-i18n="navWorkHours">Work hours</span>
+      </button>
+      <button class="nav-item" data-section="weekends">
+        <i class="nav-icon" data-icon="calendar"></i>
+        <span data-i18n="navWeekends">Weekends</span>
+      </button>
+      <button class="nav-item" data-section="language">
+        <i class="nav-icon" data-icon="globe"></i>
+        <span data-i18n="navLanguage">Language</span>
+      </button>
+      <button class="nav-item" data-section="about">
+        <i class="nav-icon" data-icon="info"></i>
+        <span data-i18n="navAbout">About</span>
+      </button>
+    </nav>
+
+    <main class="content">
+
+      <section class="panel active" id="section-timer">
+        <h1 data-i18n="navTimer">Timer</h1>
+        <p class="section-sub" data-i18n="timerSectionSub">Control how often you're reminded to move.</p>
+
+        <div class="field-group">
+          <div class="field-label" data-i18n="intervalLabel">Break interval</div>
+          <div class="chip-row" id="intervalRow">
+            <button class="chip" data-min="20" data-i18n="interval20">20 min</button>
+            <button class="chip" data-min="30" data-i18n="interval30">30 min</button>
+            <button class="chip" data-min="45" data-i18n="interval45">45 min</button>
+            <button class="chip" data-min="0" data-i18n="intervalCustom">Custom</button>
+          </div>
+        </div>
+
+        <div class="row-divider">
+          <div class="row-text">
+            <div class="row-title" data-i18n="strictModeOptLabel">Strict mode</div>
+            <div class="row-sub" data-i18n="strictModeOptSub">Full-screen overlay instead of a notification</div>
+          </div>
+          <button class="toggle" id="optStrictMode" role="switch" aria-checked="false"></button>
+        </div>
+
+        <div class="row-divider">
+          <div class="row-text">
+            <div class="row-title" data-i18n="snoozeDurationLabel">Snooze duration</div>
+            <div class="row-sub" data-i18n="snoozeDurationSub">How long the snooze button delays a break</div>
+          </div>
+          <select class="select-input" id="optSnoozeMin">
+            <option value="5">5 min</option>
+            <option value="10">10 min</option>
+            <option value="15">15 min</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel" id="section-notifications">
+        <h1 data-i18n="navNotifications">Notifications</h1>
+        <p class="section-sub" data-i18n="notifSectionSub">Choose how MicroBreaks gets your attention.</p>
+
+        <div class="row-divider">
+          <div class="row-text">
+            <div class="row-title" data-i18n="browserNotification">Browser notification</div>
+            <div class="row-sub" data-i18n="browserNotificationSub">Works when tab is in background</div>
+          </div>
+          <button class="toggle" id="optNotif" role="switch" aria-checked="true"></button>
+        </div>
+
+        <div class="row-divider">
+          <div class="row-text">
+            <div class="row-title" data-i18n="soundChime">Chime before break</div>
+            <div class="row-sub" data-i18n="soundChimeSub">Plays a gentle sound before each break</div>
+          </div>
+          <button class="toggle" id="optSound" role="switch" aria-checked="true"></button>
+        </div>
+
+        <div class="field-group" id="optSoundLeadGroup">
+          <div class="field-label" data-i18n="soundLeadTime">Lead time</div>
+          <select class="select-input" id="optSoundLead">
+            <option value="0">0s</option>
+            <option value="5">5s</option>
+            <option value="10">10s</option>
+            <option value="15">15s</option>
+            <option value="30">30s</option>
+          </select>
+        </div>
+
+        <div class="field-group" id="optChimeSoundGroup">
+          <div class="field-label" data-i18n="chimeSoundLabel">Sound</div>
+          <div class="chip-row" id="soundChipRow">
+            <button class="chip" data-sound="marimba" data-i18n="soundMarimba">Marimba</button>
+            <button class="chip" data-sound="bell" data-i18n="soundBell">Soft bell</button>
+            <button class="chip" data-sound="kalimba" data-i18n="soundKalimba">Kalimba</button>
+            <button class="chip" data-sound="windchime" data-i18n="soundWindchime">Wind chime</button>
+          </div>
+        </div>
+
+        <div class="row-divider" id="optSummaryRow">
+          <div class="row-text">
+            <div class="row-title" data-i18n="dailySummary">Daily summary</div>
+            <div class="row-sub" data-i18n="dailySummarySub">Notify me when the workday ends</div>
+          </div>
+          <button class="toggle" id="optDailySummary" role="switch" aria-checked="true"></button>
+        </div>
+      </section>
+
+      <section class="panel" id="section-appearance">
+        <h1 data-i18n="navAppearance">Appearance</h1>
+        <p class="section-sub" data-i18n="appearanceSectionSub">Pick the look and feel of MicroBreaks.</p>
+
+        <div class="field-group">
+          <div class="field-label" data-i18n="themeLabel">Theme</div>
+          <div class="theme-grid" id="themeGrid">
+            <button class="theme-card" data-theme="sage">
+              <div class="theme-swatch-lg" style="background:linear-gradient(135deg, #1D3D38 50%, #5DB8A0 50%);"></div>
+              <span data-i18n="themeSage">Sage</span>
+            </button>
+            <button class="theme-card" data-theme="dusk">
+              <div class="theme-swatch-lg" style="background:linear-gradient(135deg, #2E1F3D 50%, #B594D6 50%);"></div>
+              <span data-i18n="themeDusk">Dusk purple</span>
+            </button>
+            <button class="theme-card" data-theme="ocean">
+              <div class="theme-swatch-lg" style="background:linear-gradient(135deg, #0F2D3D 50%, #4FB3D9 50%);"></div>
+              <span data-i18n="themeOcean">Ocean blue</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="row-divider">
+          <div class="row-text">
+            <div class="row-title" data-i18n="darkMode">Dark mode</div>
+            <div class="row-sub" data-i18n="darkModeSub">Override system appearance preference</div>
+          </div>
+          <select class="select-input" id="optDarkMode">
+            <option value="system" data-i18n="darkModeSystem">System</option>
+            <option value="light" data-i18n="darkModeLight">Light</option>
+            <option value="dark" data-i18n="darkModeDark">Dark</option>
+          </select>
+        </div>
+
+        <div class="row-divider">
+          <div class="row-text">
+            <div class="row-title" data-i18n="maleModel">Male model</div>
+            <div class="row-sub" data-i18n="maleModelSub">Switch to a male figure for exercises</div>
+          </div>
+          <button class="toggle" id="optMaleModel" role="switch" aria-checked="false"></button>
+        </div>
+
+        <div class="row-divider">
+          <div class="row-text">
+            <div class="row-title" data-i18n="stretchAnimations">Stretch animations</div>
+            <div class="row-sub" data-i18n="stretchAnimationsSub">Guided animation during each break</div>
+          </div>
+          <button class="toggle" id="optAnim" role="switch" aria-checked="true"></button>
+        </div>
+      </section>
+
+      <section class="panel" id="section-workhours">
+        <h1 data-i18n="navWorkHours">Work hours</h1>
+        <p class="section-sub" data-i18n="workHoursSectionSub">Only run the timer while you're actually working.</p>
+
+        <div class="row-divider">
+          <div class="row-text">
+            <div class="row-title" data-i18n="workHoursEnabled">Work hours</div>
+            <div class="row-sub" data-i18n="workHoursEnabledSub">Only run the timer during set hours</div>
+          </div>
+          <button class="toggle" id="optWorkHours" role="switch" aria-checked="false"></button>
+        </div>
+
+        <div class="field-group two-col" id="workHoursTimes">
+          <div>
+            <div class="field-label" data-i18n="workStart">Start</div>
+            <input type="time" class="select-input" id="optWorkStart" value="09:00">
+          </div>
+          <div>
+            <div class="field-label" data-i18n="workEnd">End</div>
+            <input type="time" class="select-input" id="optWorkEnd" value="17:00">
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="section-weekends">
+        <h1 data-i18n="navWeekends">Weekends</h1>
+        <p class="section-sub" data-i18n="weekendsSectionSub">Choose which days to automatically pause.</p>
+
+        <div class="field-group">
+          <div class="weekday-grid" id="weekdayGrid">
+            <button class="day-card" data-day="1" data-i18n="dayMonFull">Monday</button>
+            <button class="day-card" data-day="2" data-i18n="dayTueFull">Tuesday</button>
+            <button class="day-card" data-day="3" data-i18n="dayWedFull">Wednesday</button>
+            <button class="day-card" data-day="4" data-i18n="dayThuFull">Thursday</button>
+            <button class="day-card" data-day="5" data-i18n="dayFriFull">Friday</button>
+            <button class="day-card" data-day="6" data-i18n="daySatFull">Saturday</button>
+            <button class="day-card" data-day="0" data-i18n="daySunFull">Sunday</button>
+          </div>
+          <p class="hint-text" data-i18n="pauseOnDay">Pause on this day</p>
+        </div>
+      </section>
+
+      <section class="panel" id="section-language">
+        <h1 data-i18n="navLanguage">Language</h1>
+        <p class="section-sub" data-i18n="languageSectionSub">Choose your preferred language for MicroBreaks.</p>
+
+        <div class="field-group">
+          <div class="field-label" data-i18n="language">Language</div>
+          <select class="select-input wide" id="optLangSelect">
+            <option value="auto" data-i18n="languageAuto">Auto-detect</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ml">മലയാളം</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel" id="section-about">
+        <h1 data-i18n="navAbout">About</h1>
+        <p class="section-sub" data-i18n="aboutSectionSub">A gentle stretch timer for desk workers.</p>
+
+        <div class="about-card">
+          <div class="about-row"><span data-i18n="aboutVersion">Version</span><span id="aboutVersionVal">1.4.0</span></div>
+          <div class="about-row"><span data-i18n="aboutPrivacy">Privacy policy</span><a href="https://jj-dzn.github.io/microbreaks/privacy-policy.html" target="_blank" rel="noopener">jj-dzn.github.io/microbreaks</a></div>
+          <div class="about-row"><span data-i18n="aboutWebsite">Website</span><a href="https://jj-dzn.github.io/microbreaks/" target="_blank" rel="noopener">jj-dzn.github.io/microbreaks</a></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

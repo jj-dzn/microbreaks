@@ -352,13 +352,18 @@ function showOverlayContent(svgEl, idx, male, themeName, S) {
   })(performance.now());
 }
 
+function emojiForIndex(idx) {
+  const EMOJIS = ["🔄","☝️","👁","🤲","🙆","🌀","🙇","🦋","↔️","😌","💪","👆","🦶","🖐","🧘"];
+  return EMOJIS[idx % EMOJIS.length];
+}
+
 async function showOverlay(stretchIndex, male, lang, themeName) {
   await loadMbMessages(lang || 'en');
   removeOverlay();
   const T = getTheme(themeName);
   const S = getStretches();
-  const idx = stretchIndex % S.length;
-  const s = S[idx];
+  let idx = stretchIndex % S.length;
+  let browsing = false;
 
   const overlay = document.createElement('div');
   overlay.id = 'microbreaks-overlay';
@@ -375,39 +380,38 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
   Object.assign(card.style, {
     textAlign:'center', maxWidth:'420px', width:'100%',
     padding:'0 24px 32px', cursor:'default',
-    display:'flex', flexDirection:'column', alignItems:'center',
+    display:'flex', flexDirection:'column', alignItems:'center', position:'relative',
   });
+
+  const browseBtn = document.createElement('button');
+  browseBtn.innerHTML = '&#9638;&#9638;';
+  browseBtn.setAttribute('aria-label', 'Browse all stretches');
+  browseBtn.title = mbT('allStretches') || 'Browse all';
+  Object.assign(browseBtn.style, {
+    position:'absolute', top:'0', right:'0',
+    background:'none', border:`0.5px solid ${hexToRgba(T.cream,0.25)}`, borderRadius:'8px',
+    width:'30px', height:'30px', cursor:'pointer', color:hexToRgba(T.cream,0.6),
+    fontSize:'11px', display:'flex', alignItems:'center', justifyContent:'center',
+  });
+  card.appendChild(browseBtn);
 
   const figSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   figSvg.setAttribute('viewBox', '0 0 100 170');
-  figSvg.setAttribute('width', '170');
-  figSvg.setAttribute('height', '289');
+  figSvg.setAttribute('width', '150');
+  figSvg.setAttribute('height', '255');
   card.appendChild(figSvg);
 
   const nameEl = document.createElement('div');
-  nameEl.textContent = s.name;
-  Object.assign(nameEl.style, {fontSize:'22px', fontWeight:'500', color:T.cream, margin:'16px 0 6px', letterSpacing:'-0.3px'});
+  Object.assign(nameEl.style, {fontSize:'20px', fontWeight:'500', color:T.cream, margin:'12px 0 6px', letterSpacing:'-0.3px'});
   card.appendChild(nameEl);
 
   const durEl = document.createElement('div');
-  durEl.textContent = s.dur;
-  Object.assign(durEl.style, {fontSize:'11px', fontWeight:'500', color:T.teal, background:hexToRgba(T.teal,0.12), border:`0.5px solid ${hexToRgba(T.teal,0.3)}`, borderRadius:'20px', padding:'3px 12px', marginBottom:'16px', display:'inline-block'});
+  Object.assign(durEl.style, {fontSize:'11px', fontWeight:'500', color:T.teal, background:hexToRgba(T.teal,0.12), border:`0.5px solid ${hexToRgba(T.teal,0.3)}`, borderRadius:'20px', padding:'3px 12px', marginBottom:'14px', display:'inline-block'});
   card.appendChild(durEl);
 
-  const stepsEl = document.createElement('ol');
-  Object.assign(stepsEl.style, {listStyle:'none', textAlign:'left', width:'100%', display:'flex', flexDirection:'column', gap:'6px', marginBottom:'24px'});
-  s.steps.forEach((step, i) => {
-    const li = document.createElement('li');
-    Object.assign(li.style, {display:'flex', gap:'10px', fontSize:'13px', color:hexToRgba(T.cream,0.85), lineHeight:'1.55'});
-    const num = document.createElement('span');
-    num.textContent = i + 1;
-    Object.assign(num.style, {color:T.teal, fontWeight:'500', flexShrink:'0', width:'16px'});
-    const text = document.createElement('span');
-    text.textContent = step;
-    li.append(num, text);
-    stepsEl.appendChild(li);
-  });
-  card.appendChild(stepsEl);
+  const bodyWrap = document.createElement('div');
+  Object.assign(bodyWrap.style, {width:'100%', marginBottom:'20px'});
+  card.appendChild(bodyWrap);
 
   const doneBtn = document.createElement('button');
   doneBtn.textContent = mbT('doneIMoved');
@@ -424,7 +428,64 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
   overlay.appendChild(card);
   document.body.appendChild(overlay);
 
-  showOverlayContent(figSvg, idx, male, themeName, S);
+  function renderStepsView() {
+    const s = S[idx];
+    nameEl.textContent = s.name;
+    durEl.textContent = s.dur;
+    bodyWrap.innerHTML = '';
+    const stepsEl = document.createElement('ol');
+    Object.assign(stepsEl.style, {listStyle:'none', textAlign:'left', display:'flex', flexDirection:'column', gap:'6px'});
+    s.steps.forEach((step, i) => {
+      const li = document.createElement('li');
+      Object.assign(li.style, {display:'flex', gap:'10px', fontSize:'13px', color:hexToRgba(T.cream,0.85), lineHeight:'1.55'});
+      const num = document.createElement('span');
+      num.textContent = i + 1;
+      Object.assign(num.style, {color:T.teal, fontWeight:'500', flexShrink:'0', width:'16px'});
+      const text = document.createElement('span');
+      text.textContent = step;
+      li.append(num, text);
+      stepsEl.appendChild(li);
+    });
+    bodyWrap.appendChild(stepsEl);
+    showOverlayContent(figSvg, idx, male, themeName, S);
+  }
+
+  function renderBrowseView() {
+    bodyWrap.innerHTML = '';
+    if (overlayAnimId) cancelAnimationFrame(overlayAnimId);
+    nameEl.textContent = mbT('allStretches') || 'All stretches';
+    durEl.textContent = '';
+    const grid = document.createElement('div');
+    Object.assign(grid.style, {display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:'8px', maxHeight:'180px', overflowY:'auto'});
+    S.forEach((s, i) => {
+      const cell = document.createElement('div');
+      const isCurrent = i === idx;
+      Object.assign(cell.style, {
+        background: isCurrent ? hexToRgba(T.amber, 0.18) : hexToRgba(T.teal, 0.08),
+        border: `1px solid ${isCurrent ? hexToRgba(T.amber,0.5) : hexToRgba(T.teal,0.2)}`,
+        borderRadius:'8px', padding:'8px 2px', textAlign:'center', cursor:'pointer', fontSize:'16px',
+      });
+      cell.innerHTML = `<div>${emojiForIndex(i)}</div>`;
+      cell.title = s.name;
+      cell.addEventListener('click', (e) => {
+        e.stopPropagation();
+        idx = i;
+        browsing = false;
+        renderStepsView();
+      });
+      grid.appendChild(cell);
+    });
+    bodyWrap.appendChild(grid);
+  }
+
+  browseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    browsing = !browsing;
+    if (browsing) renderBrowseView();
+    else renderStepsView();
+  });
+
+  renderStepsView();
 
   function finish() {
     chrome.runtime.sendMessage({type:'START'});
