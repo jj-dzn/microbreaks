@@ -554,5 +554,137 @@
   },
   "soundWindchime": {
     "message": "വിൻഡ് ചൈം"
+  },
+  "openFullSettings": {
+    "message": "പൂർണ്ണ ക്രമീകരണ പേജ് തുറക്കുക"
+  },
+  "optionsTitle": {
+    "message": "MicroBreaks ക്രമീകരണങ്ങൾ"
+  },
+  "navTimer": {
+    "message": "ടൈമർ"
+  },
+  "navNotifications": {
+    "message": "അറിയിപ്പുകൾ"
+  },
+  "navAppearance": {
+    "message": "രൂപഭാവം"
+  },
+  "navWorkHours": {
+    "message": "ജോലി സമയം"
+  },
+  "navWeekends": {
+    "message": "വാരാന്ത്യങ്ങൾ"
+  },
+  "navLanguage": {
+    "message": "ഭാഷ"
+  },
+  "navAbout": {
+    "message": "വിവരം"
+  },
+  "timerSectionSub": {
+    "message": "നിങ്ങളെ എത്ര തവണ ചലിക്കാൻ ഓർമ്മിപ്പിക്കണമെന്ന് നിയന്ത്രിക്കുക."
+  },
+  "intervalLabel": {
+    "message": "ബ്രേക്ക് ഇടവേള"
+  },
+  "strictModeOptLabel": {
+    "message": "സ്ട്രിക്റ്റ് മോഡ്"
+  },
+  "strictModeOptSub": {
+    "message": "അറിയിപ്പിന് പകരം ഫുൾ-സ്ക്രീൻ ഓവർലേ"
+  },
+  "snoozeDurationLabel": {
+    "message": "സ്നൂസ് കാലയളവ്"
+  },
+  "snoozeDurationSub": {
+    "message": "സ്നൂസ് ബട്ടൺ ബ്രേക്ക് എത്ര നീട്ടിവയ്ക്കുന്നു"
+  },
+  "notifSectionSub": {
+    "message": "MicroBreaks നിങ്ങളുടെ ശ്രദ്ധ എങ്ങനെ നേടണമെന്ന് തിരഞ്ഞെടുക്കുക."
+  },
+  "appearanceSectionSub": {
+    "message": "MicroBreaks ന്റെ രൂപം തിരഞ്ഞെടുക്കുക."
+  },
+  "workHoursSectionSub": {
+    "message": "നിങ്ങൾ യഥാർത്ഥത്തിൽ ജോലി ചെയ്യുമ്പോൾ മാത്രം ടൈമർ പ്രവർത്തിപ്പിക്കുക."
+  },
+  "weekendsSectionSub": {
+    "message": "ഏതൊക്കെ ദിവസങ്ങൾ സ്വയമേവ നിർത്തണമെന്ന് തിരഞ്ഞെടുക്കുക."
+  },
+  "languageSectionSub": {
+    "message": "MicroBreaks നായി നിങ്ങളുടെ ഇഷ്ട ഭാഷ തിരഞ്ഞെടുക്കുക."
+  },
+  "aboutSectionSub": {
+    "message": "ഡെസ്ക് ജോലിക്കാർക്കായി ഒരു സൗമ്യ ബ്രേക്ക് ടൈമർ."
+  },
+  "aboutVersion": {
+    "message": "പതിപ്പ്"
+  },
+  "aboutPrivacy": {
+    "message": "സ്വകാര്യതാ നയം"
+  },
+  "aboutWebsite": {
+    "message": "വെബ്സൈറ്റ്"
+  },
+  "themeSage": {
+    "message": "സേജ്"
+  },
+  "themeDusk": {
+    "message": "ഡസ്ക് പർപ്പിൾ"
+  },
+  "themeOcean": {
+    "message": "ഓഷൻ ബ്ലൂ"
+  },
+  "dayMonFull": {
+    "message": "തിങ്കൾ"
+  },
+  "dayTueFull": {
+    "message": "ചൊവ്വ"
+  },
+  "dayWedFull": {
+    "message": "ബുധൻ"
+  },
+  "dayThuFull": {
+    "message": "വ്യാഴം"
+  },
+  "dayFriFull": {
+    "message": "വെള്ളി"
+  },
+  "daySatFull": {
+    "message": "ശനി"
+  },
+  "daySunFull": {
+    "message": "ഞായർ"
+  },
+  "allStretches": {
+    "message": "എല്ലാ സ്ട്രെച്ചുകളും"
+  },
+  "darkMode": {
+    "message": "ഡാർക്ക് മോഡ്"
+  },
+  "darkModeSub": {
+    "message": "സിസ്റ്റം ദൃശ്യ മുൻഗണന മറികടക്കുക"
+  },
+  "darkModeSystem": {
+    "message": "സിസ്റ്റം"
+  },
+  "darkModeLight": {
+    "message": "ലൈറ്റ്"
+  },
+  "darkModeDark": {
+    "message": "ഡാർക്ക്"
+  },
+  "nudgeTitle": {
+    "message": "10 ബ്രേക്കുകൾ പൂർത്തിയായി!"
+  },
+  "nudgeBody": {
+    "message": "MicroBreaks ഇഷ്ടമാണോ? ഒരു ദ്രുത അവലോകനം മറ്റുള്ളവരെ ഇത് കണ്ടെത്താൻ സഹായിക്കുന്നു."
+  },
+  "nudgeReview": {
+    "message": "ഒരു അവലോകനം ഇടുക ↗"
+  },
+  "nudgeDismiss": {
+    "message": "ഒരുപക്ഷേ പിന്നീട്"
   }
 }
