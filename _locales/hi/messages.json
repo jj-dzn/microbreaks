@@ -554,5 +554,137 @@
   },
   "soundWindchime": {
     "message": "विंड चाइम"
+  },
+  "openFullSettings": {
+    "message": "पूरा सेटिंग्स पेज खोलें"
+  },
+  "optionsTitle": {
+    "message": "MicroBreaks सेटिंग्स"
+  },
+  "navTimer": {
+    "message": "टाइमर"
+  },
+  "navNotifications": {
+    "message": "सूचनाएं"
+  },
+  "navAppearance": {
+    "message": "दिखावट"
+  },
+  "navWorkHours": {
+    "message": "कार्य के घंटे"
+  },
+  "navWeekends": {
+    "message": "सप्ताहांत"
+  },
+  "navLanguage": {
+    "message": "भाषा"
+  },
+  "navAbout": {
+    "message": "बारे में"
+  },
+  "timerSectionSub": {
+    "message": "नियंत्रित करें कि आपको कितनी बार हिलने की याद दिलाई जाए।"
+  },
+  "intervalLabel": {
+    "message": "ब्रेक अंतराल"
+  },
+  "strictModeOptLabel": {
+    "message": "स्ट्रिक्ट मोड"
+  },
+  "strictModeOptSub": {
+    "message": "सूचना के बजाय फुल-स्क्रीन ओवरले"
+  },
+  "snoozeDurationLabel": {
+    "message": "स्नूज़ अवधि"
+  },
+  "snoozeDurationSub": {
+    "message": "स्नूज़ बटन ब्रेक को कितना टालता है"
+  },
+  "notifSectionSub": {
+    "message": "चुनें कि MicroBreaks आपका ध्यान कैसे आकर्षित करे।"
+  },
+  "appearanceSectionSub": {
+    "message": "MicroBreaks का रूप-रंग चुनें।"
+  },
+  "workHoursSectionSub": {
+    "message": "केवल अपने वास्तविक काम के समय में टाइमर चलाएं।"
+  },
+  "weekendsSectionSub": {
+    "message": "चुनें कि किन दिनों को स्वचालित रूप से रोका जाए।"
+  },
+  "languageSectionSub": {
+    "message": "MicroBreaks के लिए अपनी पसंदीदा भाषा चुनें।"
+  },
+  "aboutSectionSub": {
+    "message": "डेस्क पर काम करने वालों के लिए एक सौम्य ब्रेक टाइमर।"
+  },
+  "aboutVersion": {
+    "message": "संस्करण"
+  },
+  "aboutPrivacy": {
+    "message": "प्राइवेसी पॉलिसी"
+  },
+  "aboutWebsite": {
+    "message": "वेबसाइट"
+  },
+  "themeSage": {
+    "message": "सेज"
+  },
+  "themeDusk": {
+    "message": "डस्क पर्पल"
+  },
+  "themeOcean": {
+    "message": "ओशन ब्लू"
+  },
+  "dayMonFull": {
+    "message": "सोमवार"
+  },
+  "dayTueFull": {
+    "message": "मंगलवार"
+  },
+  "dayWedFull": {
+    "message": "बुधवार"
+  },
+  "dayThuFull": {
+    "message": "गुरुवार"
+  },
+  "dayFriFull": {
+    "message": "शुक्रवार"
+  },
+  "daySatFull": {
+    "message": "शनिवार"
+  },
+  "daySunFull": {
+    "message": "रविवार"
+  },
+  "allStretches": {
+    "message": "सभी स्ट्रेच"
+  },
+  "darkMode": {
+    "message": "डार्क मोड"
+  },
+  "darkModeSub": {
+    "message": "सिस्टम की दिखावट प्राथमिकता बदलें"
+  },
+  "darkModeSystem": {
+    "message": "सिस्टम"
+  },
+  "darkModeLight": {
+    "message": "हल्का"
+  },
+  "darkModeDark": {
+    "message": "गहरा"
+  },
+  "nudgeTitle": {
+    "message": "10 ब्रेक पूरे हो गए!"
+  },
+  "nudgeBody": {
+    "message": "MicroBreaks पसंद आया? एक त्वरित समीक्षा दूसरों को इसे खोजने में मदद करती है।"
+  },
+  "nudgeReview": {
+    "message": "समीक्षा दें ↗"
+  },
+  "nudgeDismiss": {
+    "message": "शायद बाद में"
   }
 }
