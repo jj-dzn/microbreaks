@@ -554,5 +554,137 @@
   },
   "soundWindchime": {
     "message": "విండ్ చైమ్"
+  },
+  "openFullSettings": {
+    "message": "పూర్తి సెట్టింగ్‌ల పేజీని తెరవండి"
+  },
+  "optionsTitle": {
+    "message": "MicroBreaks సెట్టింగ్‌లు"
+  },
+  "navTimer": {
+    "message": "టైమర్"
+  },
+  "navNotifications": {
+    "message": "నోటిఫికేషన్‌లు"
+  },
+  "navAppearance": {
+    "message": "కనిపించే తీరు"
+  },
+  "navWorkHours": {
+    "message": "పని వేళలు"
+  },
+  "navWeekends": {
+    "message": "వారాంతాలు"
+  },
+  "navLanguage": {
+    "message": "భాష"
+  },
+  "navAbout": {
+    "message": "గురించి"
+  },
+  "timerSectionSub": {
+    "message": "మీకు ఎంత తరచుగా కదలమని గుర్తు చేయాలో నియంత్రించండి."
+  },
+  "intervalLabel": {
+    "message": "బ్రేక్ విరామం"
+  },
+  "strictModeOptLabel": {
+    "message": "స్ట్రిక్ట్ మోడ్"
+  },
+  "strictModeOptSub": {
+    "message": "నోటిఫికేషన్‌కు బదులుగా ఫుల్-స్క్రీన్ ఓవర్‌లే"
+  },
+  "snoozeDurationLabel": {
+    "message": "స్నూజ్ వ్యవధి"
+  },
+  "snoozeDurationSub": {
+    "message": "స్నూజ్ బటన్ బ్రేక్‌ను ఎంత ఆలస్యం చేస్తుంది"
+  },
+  "notifSectionSub": {
+    "message": "MicroBreaks మీ దృష్టిని ఎలా పొందాలో ఎంచుకోండి."
+  },
+  "appearanceSectionSub": {
+    "message": "MicroBreaks యొక్క కనిపించే తీరును ఎంచుకోండి."
+  },
+  "workHoursSectionSub": {
+    "message": "మీరు నిజంగా పని చేసేటప్పుడు మాత్రమే టైమర్‌ను నడపండి."
+  },
+  "weekendsSectionSub": {
+    "message": "ఏ రోజులను స్వయంచాలకంగా ఆపాలో ఎంచుకోండి."
+  },
+  "languageSectionSub": {
+    "message": "MicroBreaks కోసం మీకు నచ్చిన భాషను ఎంచుకోండి."
+  },
+  "aboutSectionSub": {
+    "message": "డెస్క్ వద్ద పనిచేసేవారి కోసం సున్నితమైన బ్రేక్ టైమర్."
+  },
+  "aboutVersion": {
+    "message": "వెర్షన్"
+  },
+  "aboutPrivacy": {
+    "message": "ప్రైవసీ పాలసీ"
+  },
+  "aboutWebsite": {
+    "message": "వెబ్‌సైట్"
+  },
+  "themeSage": {
+    "message": "సేజ్"
+  },
+  "themeDusk": {
+    "message": "డస్క్ పర్పుల్"
+  },
+  "themeOcean": {
+    "message": "ఓషన్ బ్లూ"
+  },
+  "dayMonFull": {
+    "message": "సోమవారం"
+  },
+  "dayTueFull": {
+    "message": "మంగళవారం"
+  },
+  "dayWedFull": {
+    "message": "బుధవారం"
+  },
+  "dayThuFull": {
+    "message": "గురువారం"
+  },
+  "dayFriFull": {
+    "message": "శుక్రవారం"
+  },
+  "daySatFull": {
+    "message": "శనివారం"
+  },
+  "daySunFull": {
+    "message": "ఆదివారం"
+  },
+  "allStretches": {
+    "message": "అన్ని స్ట్రెచ్‌లు"
+  },
+  "darkMode": {
+    "message": "డార్క్ మోడ్"
+  },
+  "darkModeSub": {
+    "message": "సిస్టమ్ రూపాన్ని ప్రాధాన్యతను అభిభవించు"
+  },
+  "darkModeSystem": {
+    "message": "సిస్టమ్"
+  },
+  "darkModeLight": {
+    "message": "లైట్"
+  },
+  "darkModeDark": {
+    "message": "డార్క్"
+  },
+  "nudgeTitle": {
+    "message": "10 బ్రేక్‌లు పూర్తయ్యాయి!"
+  },
+  "nudgeBody": {
+    "message": "MicroBreaks నచ్చిందా? ఒక శీఘ్ర సమీక్ష ఇతరులు దాన్ని కనుగొనడంలో సహాయపడుతుంది."
+  },
+  "nudgeReview": {
+    "message": "సమీక్ష ఇవ్వండి ↗"
+  },
+  "nudgeDismiss": {
+    "message": "బహుశా తర్వాత"
   }
 }
