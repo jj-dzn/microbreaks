@@ -251,17 +251,22 @@ async function ensureOffscreen() {
         justification: 'Play a short chime before a scheduled stretch break.',
       });
     } catch (e) {
-      // A stale/orphaned offscreen document can cause "already exists" or
-      // "Page failed to load" errors. Close it and retry once.
       console.log('[MicroBreaks] First offscreen create attempt failed:', e.message, '— retrying');
       try {
         await chrome.offscreen.closeDocument();
       } catch (_) { /* nothing to close */ }
-      await chrome.offscreen.createDocument({
-        url: 'offscreen.html',
-        reasons: ['AUDIO_PLAYBACK'],
-        justification: 'Play a short chime before a scheduled stretch break.',
-      });
+      try {
+        await chrome.offscreen.createDocument({
+          url: 'offscreen.html',
+          reasons: ['AUDIO_PLAYBACK'],
+          justification: 'Play a short chime before a scheduled stretch break.',
+        });
+      } catch (e2) {
+        console.log('[MicroBreaks] Offscreen retry also failed:', e2.message);
+        // Reset so future calls can try again
+        creatingOffscreen = null;
+        throw e2;
+      }
     }
   })();
 
@@ -416,6 +421,11 @@ async function fireBreak() {
   }
 
   chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex, totalBreaks: totalBreaksAllTime }).catch(() => {});
+
+  // Auto-restart the timer after the break so the next one is always scheduled,
+  // regardless of whether the user interacts with the popup or notification.
+  // A short delay gives the overlay/notification a moment to appear first.
+  setTimeout(() => startTimer(state.intervalMin), 1500);
 }
 
 // ===== PENDING BREAK ON FOCUS RETURN =====
@@ -570,28 +580,28 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
             await startTimer(newState.intervalMin);
           }
         }
-        sendResponse(await getState());
+        sendResponse(newState);
         break;
       }
 
       case "SET_WORK_HOURS": {
         await setState({ workHoursEnabled: msg.enabled, workStart: msg.start, workEnd: msg.end });
-        const newState = await getState();
-        scheduleSummaryAlarm(newState);
-        if (newState.running || newState.pausedRemainSec != null) {
-          await startTimer(newState.intervalMin);
+        const whState = await getState();
+        scheduleSummaryAlarm(whState);
+        if (whState.running || whState.pausedRemainSec != null) {
+          await startTimer(whState.intervalMin);
         }
-        sendResponse(await getState());
+        sendResponse(whState);
         break;
       }
 
       case "SET_WEEKEND_DAYS": {
         await setState({ weekendDays: msg.days });
-        const newState = await getState();
-        if (newState.running || newState.pausedRemainSec != null) {
-          await startTimer(newState.intervalMin);
+        const wdState = await getState();
+        if (wdState.running || wdState.pausedRemainSec != null) {
+          await startTimer(wdState.intervalMin);
         }
-        sendResponse(await getState());
+        sendResponse(wdState);
         break;
       }
 
