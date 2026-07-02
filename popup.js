@@ -156,6 +156,7 @@ function renderBreathRing(running, isBreak) {
 }
 
 function applyState(st) {
+  if (!st) return; // guard against null response from sleeping service worker
   state = st;
   const rem = computeRemSec(st);
   localRemSec = rem;
@@ -226,7 +227,20 @@ function applyState(st) {
 }
 
 function send(msg) {
-  return new Promise(resolve => chrome.runtime.sendMessage(msg, resolve));
+  return new Promise(resolve => {
+    try {
+      chrome.runtime.sendMessage(msg, (response) => {
+        if (chrome.runtime.lastError) {
+          console.log('[MicroBreaks] sendMessage error:', chrome.runtime.lastError.message);
+          resolve(null);
+          return;
+        }
+        resolve(response || null);
+      });
+    } catch (e) {
+      resolve(null);
+    }
+  });
 }
 
 async function init() {

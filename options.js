@@ -38,7 +38,19 @@ function applyI18n() {
 }
 
 function send(msg) {
-  return new Promise(resolve => chrome.runtime.sendMessage(msg, resolve));
+  return new Promise(resolve => {
+    try {
+      chrome.runtime.sendMessage(msg, (response) => {
+        if (chrome.runtime.lastError) {
+          resolve(null);
+          return;
+        }
+        resolve(response || null);
+      });
+    } catch (e) {
+      resolve(null);
+    }
+  });
 }
 
 // ===== SIDEBAR NAVIGATION =====
@@ -55,7 +67,7 @@ document.querySelectorAll('.nav-item').forEach(btn => {
 // ===== RENDER STATE =====
 
 function renderAll() {
-  // Interval chips
+  if (!state || !Object.keys(state).length) return; // guard against null/empty state
   const knownIntervals = [20, 30, 45];
   document.querySelectorAll('#intervalRow .chip').forEach(chip => {
     const min = parseInt(chip.dataset.min);

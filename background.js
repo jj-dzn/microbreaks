@@ -127,14 +127,6 @@ function isWeekendPaused(state, now = new Date()) {
   return (state.weekendDays || []).includes(day);
 }
 
-function minutesUntilWorkStart(state, now = new Date()) {
-  const { h, m } = parseHM(state.workStart);
-  const start = new Date(now);
-  start.setHours(h, m, 0, 0);
-  if (start <= now) start.setDate(start.getDate() + 1);
-  return Math.max(1, Math.round((start - now) / 60000));
-}
-
 // ===== TIMER CORE =====
 
 async function startTimer(intervalMin) {
@@ -204,21 +196,25 @@ async function stopTimer() {
 async function snoozeTimer() {
   const state = await getState();
   const SNOOZE_MIN = 5;
-  await chrome.alarms.clear(ALARM_NAME);
-  await chrome.alarms.clear(CHIME_ALARM_NAME);
 
   let newRemainSec;
   if (state.running) {
+    // Only clear alarms once we've confirmed we're in a valid state
+    await chrome.alarms.clear(ALARM_NAME);
+    await chrome.alarms.clear(CHIME_ALARM_NAME);
     const elapsedSec = Math.floor((Date.now() - state.startedAt) / 1000);
     const totalSec = state.intervalMin * 60;
     newRemainSec = Math.max(0, totalSec - elapsedSec) + SNOOZE_MIN * 60;
     chrome.alarms.create(ALARM_NAME, { delayInMinutes: newRemainSec / 60 });
     await setState({ startedAt: Date.now(), pausedRemainSec: null });
   } else if (state.pausedRemainSec != null) {
+    await chrome.alarms.clear(ALARM_NAME);
+    await chrome.alarms.clear(CHIME_ALARM_NAME);
     newRemainSec = state.pausedRemainSec + SNOOZE_MIN * 60;
     await setState({ pausedRemainSec: newRemainSec });
     return;
   } else {
+    // Neither running nor paused — nothing to snooze, don't touch alarms
     return;
   }
 
@@ -439,14 +435,20 @@ async function tryShowPendingOverlay(tab) {
 
   if (restricted) return;
 
+  // Clear pendingBreak BEFORE injection to prevent the race condition where
+  // both onFocusChanged and onActivated fire simultaneously and both attempt
+  // to show the overlay on the same tab.
+  await setState({ pendingBreak: null });
+
   try {
     await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["content.js"] });
     const resolvedLang = (state.language === 'auto' || !state.language) ? detectBgLang() : state.language;
     await chrome.tabs.sendMessage(tab.id, { type: "SHOW_BREAK_OVERLAY", stretchIndex, male: state.maleModel, lang: resolvedLang, theme: state.theme });
-    await setState({ pendingBreak: null });
     console.log("[MicroBreaks] Showed pending overlay on focus return");
   } catch (e) {
     console.log("[MicroBreaks] Could not show pending overlay on focus return:", e && e.message);
+    // Re-store the pending break so it can try again on next tab activation
+    await setState({ pendingBreak: { stretchIndex } });
   }
 }
 
@@ -519,10 +521,19 @@ async function fireDailySummary() {
 
 // ===== ALARM ROUTER =====
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === ALARM_NAME) fireBreak();
   if (alarm.name === CHIME_ALARM_NAME) playChime();
   if (alarm.name === SUMMARY_ALARM_NAME) fireDailySummary();
+  if (alarm.name === 'microbreak-gate-check') {
+    const state = await getState();
+    const shouldRun = !isWeekendPaused(state) && isWithinWorkHours(state);
+    if (shouldRun && !state.running && state.pausedRemainSec != null) {
+      await startTimer(state.intervalMin);
+    } else if (!shouldRun && state.running) {
+      await pauseTimer();
+    }
+  }
 });
 
 chrome.notifications.onButtonClicked.addListener((notifId, btnIndex) => {
@@ -625,14 +636,9 @@ chrome.runtime.onStartup.addListener(async () => {
 
 // Periodically re-check work-hours / weekend gating even without user interaction,
 // in case the browser was left open across a work-hours boundary.
-chrome.alarms.create('microbreak-gate-check', { periodInMinutes: 5 });
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name !== 'microbreak-gate-check') return;
-  const state = await getState();
-  const shouldRun = !isWeekendPaused(state) && isWithinWorkHours(state);
-  if (shouldRun && !state.running && state.pausedRemainSec != null) {
-    await startTimer(state.intervalMin);
-  } else if (!shouldRun && state.running) {
-    await pauseTimer();
+// Guard with getAll() so we don't reset the countdown on every service worker wake.
+chrome.alarms.getAll(alarms => {
+  if (!alarms.find(a => a.name === 'microbreak-gate-check')) {
+    chrome.alarms.create('microbreak-gate-check', { periodInMinutes: 5 });
   }
 });

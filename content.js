@@ -279,6 +279,7 @@ function getStretches() {
 // ===== OVERLAY =====
 
 function removeOverlay() {
+  if (overlayAnimId) { cancelAnimationFrame(overlayAnimId); overlayAnimId = null; }
   const el = document.getElementById('microbreaks-overlay');
   if (el) el.remove();
   document.removeEventListener('keydown', onEscape);
