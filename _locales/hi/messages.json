@@ -686,5 +686,38 @@
   },
   "nudgeDismiss": {
     "message": "शायद बाद में"
+  },
+  "historyTitle": {
+    "message": "आज के ब्रेक"
+  },
+  "historyEmpty": {
+    "message": "आज अभी तक कोई ब्रेक नहीं"
+  },
+  "navStretches": {
+    "message": "स्ट्रेच"
+  },
+  "stretchesSectionSub": {
+    "message": "चुनें कि कौन से स्ट्रेच दिखाई दें और क्रम बदलने के लिए खींचें।"
+  },
+  "stretchesDragHint": {
+    "message": "क्रम बदलने के लिए खींचें · सक्षम या अक्षम करें"
+  },
+  "replayOnboarding": {
+    "message": "सेटअप गाइड"
+  },
+  "replayOnboardingBtn": {
+    "message": "दोबारा चलाएं →"
+  },
+  "onboardingTitle": {
+    "message": "MicroBreaks में आपका स्वागत है"
+  },
+  "keyboardShortcuts": {
+    "message": "कीबोर्ड शॉर्टकट"
+  },
+  "shortcutTrigger": {
+    "message": "अभी ब्रेक शुरू करें"
+  },
+  "shortcutSnooze": {
+    "message": "वर्तमान ब्रेक स्नूज़ करें"
   }
 }
