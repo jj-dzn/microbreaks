@@ -686,5 +686,38 @@
   },
   "nudgeDismiss": {
     "message": "బహుశా తర్వాత"
+  },
+  "historyTitle": {
+    "message": "నేటి బ్రేక్‌లు"
+  },
+  "historyEmpty": {
+    "message": "ఈరోజు ఇంకా బ్రేక్‌లు లేవు"
+  },
+  "navStretches": {
+    "message": "స్ట్రెచ్‌లు"
+  },
+  "stretchesSectionSub": {
+    "message": "ఏ స్ట్రెచ్‌లు కనిపించాలో ఎంచుకోండి మరియు క్రమాన్ని మార్చడానికి లాగండి."
+  },
+  "stretchesDragHint": {
+    "message": "క్రమాన్ని మార్చడానికి లాగండి · ప్రారంభించు లేదా నిలిపివేయు"
+  },
+  "replayOnboarding": {
+    "message": "సెటప్ గైడ్"
+  },
+  "replayOnboardingBtn": {
+    "message": "మళ్లీ →"
+  },
+  "onboardingTitle": {
+    "message": "MicroBreaks కి స్వాగతం"
+  },
+  "keyboardShortcuts": {
+    "message": "కీబోర్డ్ షార్ట్‌కట్‌లు"
+  },
+  "shortcutTrigger": {
+    "message": "ఇప్పుడు బ్రేక్ ప్రారంభించు"
+  },
+  "shortcutSnooze": {
+    "message": "ప్రస్తుత బ్రేక్‌ను వాయిదా వేయి"
   }
 }
