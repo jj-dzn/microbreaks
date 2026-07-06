@@ -14,10 +14,17 @@ async function loadBgMessages(lang) {
     bgLang = lang;
   } catch (e) {
     if (lang !== 'en') {
-      const url = chrome.runtime.getURL(`_locales/en/messages.json`);
-      const res = await fetch(url);
-      bgMessages = await res.json();
-      bgLang = 'en';
+      try {
+        const url = chrome.runtime.getURL(`_locales/en/messages.json`);
+        const res = await fetch(url);
+        bgMessages = await res.json();
+        bgLang = 'en';
+      } catch (e2) {
+        console.log('[MicroBreaks] Failed to load any messages:', e2.message);
+        bgMessages = null;
+      }
+    } else {
+      bgMessages = null;
     }
   }
   return bgMessages;
@@ -35,6 +42,7 @@ async function bgT(key, sub) {
     const lang = (state.language === 'auto' || !state.language) ? detectBgLang() : state.language;
     await loadBgMessages(lang);
   }
+  if (!bgMessages) return key; // both fetches failed — return raw key
   const m = bgMessages[key];
   if (!m) return key;
   let text = m.message;
@@ -639,8 +647,6 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   })();
   return true;
 });
-
-// ===== LIFECYCLE =====
 
 // ===== KEYBOARD SHORTCUTS =====
 

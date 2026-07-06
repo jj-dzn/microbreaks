@@ -266,6 +266,13 @@ function send(msg) {
 async function init() {
   let st = await send({ type: 'GET_STATE' });
 
+  // Guard against null response when service worker is still waking up
+  if (!st) {
+    await new Promise(r => setTimeout(r, 400));
+    st = await send({ type: 'GET_STATE' });
+  }
+  if (!st) return; // give up gracefully — popup will show defaults
+
   const langPref = st.language || 'auto';
   const langToLoad = langPref === 'auto' ? detectBrowserLang() : langPref;
   await loadMessages(langToLoad);
