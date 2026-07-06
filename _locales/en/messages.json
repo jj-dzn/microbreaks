@@ -686,5 +686,38 @@
   },
   "nudgeDismiss": {
     "message": "Maybe later"
+  },
+  "historyTitle": {
+    "message": "today's breaks"
+  },
+  "historyEmpty": {
+    "message": "No breaks yet today"
+  },
+  "navStretches": {
+    "message": "Stretches"
+  },
+  "stretchesSectionSub": {
+    "message": "Choose which stretches appear in your breaks and drag to reorder."
+  },
+  "stretchesDragHint": {
+    "message": "Drag to reorder · Toggle to enable or disable"
+  },
+  "replayOnboarding": {
+    "message": "Setup guide"
+  },
+  "replayOnboardingBtn": {
+    "message": "Replay →"
+  },
+  "onboardingTitle": {
+    "message": "Welcome to MicroBreaks"
+  },
+  "keyboardShortcuts": {
+    "message": "Keyboard shortcuts"
+  },
+  "shortcutTrigger": {
+    "message": "Trigger a break now"
+  },
+  "shortcutSnooze": {
+    "message": "Snooze current break"
   }
 }
