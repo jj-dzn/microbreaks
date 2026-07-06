@@ -686,5 +686,38 @@
   },
   "nudgeDismiss": {
     "message": "Vielleicht später"
+  },
+  "historyTitle": {
+    "message": "Pausen heute"
+  },
+  "historyEmpty": {
+    "message": "Heute noch keine Pausen"
+  },
+  "navStretches": {
+    "message": "Dehnübungen"
+  },
+  "stretchesSectionSub": {
+    "message": "Wähle Dehnübungen und ziehe sie zum Neuanordnen."
+  },
+  "stretchesDragHint": {
+    "message": "Ziehen zum Neuanordnen · Ein-/Ausschalten"
+  },
+  "replayOnboarding": {
+    "message": "Einrichtungsanleitung"
+  },
+  "replayOnboardingBtn": {
+    "message": "Wiederholen →"
+  },
+  "onboardingTitle": {
+    "message": "Willkommen bei MicroBreaks"
+  },
+  "keyboardShortcuts": {
+    "message": "Tastenkürzel"
+  },
+  "shortcutTrigger": {
+    "message": "Pause jetzt auslösen"
+  },
+  "shortcutSnooze": {
+    "message": "Aktuelle Pause verschieben"
   }
 }
