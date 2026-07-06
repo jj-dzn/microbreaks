@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extName__",
-  "version": "1.5.4",
+  "version": "1.6.1",
   "description": "__MSG_extDescription__",
   "permissions": [
     "alarms",
@@ -46,5 +46,21 @@
       ]
     }
   ],
-  "options_page": "options.html"
+  "options_page": "options.html",
+  "commands": {
+    "trigger-break": {
+      "suggested_key": {
+        "default": "Alt+Shift+B",
+        "mac": "Alt+Shift+B"
+      },
+      "description": "Trigger a break now"
+    },
+    "snooze-break": {
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "mac": "Alt+Shift+S"
+      },
+      "description": "Snooze the current break"
+    }
+  }
 }

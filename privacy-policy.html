@@ -59,8 +59,9 @@
   <ul>
     <li>Your preferred break interval (e.g. 20 minutes)</li>
     <li>Your settings (notifications, sound, theme, color palette, dark mode, model preference, strict mode, language)</li>
+    <li>Your custom stretch order and which stretches are enabled, if you've changed them</li>
     <li>Your work hours, weekend pause schedule, and daily summary preference, if configured</li>
-    <li>Your daily break count, minutes moved, and streak</li>
+    <li>Your daily break count, minutes moved, streak, and today's break log (time and stretch for each break, cleared at midnight)</li>
     <li>The timer state (running, paused, remaining time)</li>
   </ul>
 
@@ -83,6 +84,7 @@
     <li><strong>scripting</strong> — to inject the break overlay onto your active tab in strict mode</li>
     <li><strong>offscreen</strong> — to play the gentle chime sound before a break, since Chrome does not allow background scripts to play audio directly</li>
     <li><strong>windows</strong> — to detect when you return focus to Chrome after being in another application, so a pending strict-mode break overlay can be shown on your return instead of being silently missed</li>
+    <li><strong>commands</strong> — to register keyboard shortcuts (Alt+Shift+B and Alt+Shift+S) that let you trigger or snooze a break without opening the extension popup</li>
     <li><strong>host permissions (all URLs)</strong> — required by Chrome to allow the strict mode overlay to appear on any webpage you are visiting</li>
   </ul>
   <p>None of these permissions are used to collect, transmit, or share any data.</p>

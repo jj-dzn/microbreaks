@@ -120,6 +120,17 @@
         <span class="stat-n" id="stMins">0</span>
         <span class="stat-l" data-i18n="minsMoved">mins moved</span>
       </div>
+      <button class="history-toggle" id="historyToggle" aria-label="Show break history">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </button>
+    </div>
+
+    <div class="history-panel" id="historyPanel" aria-hidden="true">
+      <div class="history-header">
+        <span class="section-eyebrow" data-i18n="historyTitle">today's breaks</span>
+        <button class="s-nav-btn" id="historyClose">&times;</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
     </div>
   </div>
 

@@ -594,3 +594,42 @@ body {
   transition: color 0.15s;
 }
 .nudge-btn-dismiss:hover { color: var(--text-main); }
+
+.history-toggle {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-soft); padding: 4px; margin-left: auto;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; transition: color 0.15s;
+}
+.history-toggle:hover { color: var(--sage); }
+
+.history-panel {
+  display: none;
+  padding: 10px 14px 12px;
+  border-top: 0.5px solid var(--border);
+}
+.history-panel.open { display: block; }
+.history-header {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 8px;
+}
+.history-list {
+  display: flex; flex-direction: column; gap: 5px;
+  max-height: 140px; overflow-y: auto;
+}
+.history-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11px; color: var(--text-mid);
+  padding: 5px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.history-item:last-child { border-bottom: none; }
+.history-time {
+  font-size: 10px; color: var(--text-soft);
+  flex-shrink: 0; width: 38px;
+}
+.history-stretch { flex: 1; }
+.history-empty {
+  font-size: 11px; color: var(--text-soft);
+  text-align: center; padding: 12px 0;
+}

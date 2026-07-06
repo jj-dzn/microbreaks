@@ -57,6 +57,7 @@ const SYNC_DEFAULTS = {
   chimeSound: "marimba",
   darkMode: "system",
   ratingNudgeDone: false,
+  onboardingDone: false,
   language: "auto",
   streakDays: 0,
   lastBreakDate: null,
@@ -66,8 +67,10 @@ const SYNC_DEFAULTS = {
   workHoursEnabled: false,
   workStart: "09:00",
   workEnd: "17:00",
-  weekendDays: [0, 6],          // 0=Sun ... 6=Sat ; default both off
+  weekendDays: [0, 6],
   dailySummaryEnabled: true,
+  stretchOrder: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], // indices into STRETCH_KEYS
+  stretchEnabled: [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true],
 };
 
 const LOCAL_DEFAULTS = {
@@ -79,7 +82,9 @@ const LOCAL_DEFAULTS = {
   stretchIndex: 0,
   summaryShownDate: null,
   badgeCount: 0,
-  pendingBreak: null,  // { stretchIndex } set when overlay couldn't show; cleared on acknowledgement
+  pendingBreak: null,
+  breakLog: [], // [{time: ISO string, stretchIndex: number}] — today only, cleared at midnight
+  breakLogDate: null, // date string to detect midnight rollover
 };
 
 async function getState() {
@@ -354,11 +359,28 @@ async function fireBreak() {
   breaksToday += 1;
   minsMoved += 1;
   totalBreaksAllTime = (totalBreaksAllTime || 0) + 1;
-  stretchIndex = (stretchIndex + 1) % 15;
+
+  // Pick next stretch from the custom order, skipping disabled ones
+  const order = state.stretchOrder || [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+  const enabled = state.stretchEnabled || order.map(() => true);
+  const activeOrder = order.filter((_, i) => enabled[i] !== false);
+  if (activeOrder.length === 0) {
+    // All stretches disabled — fall back to full list
+    stretchIndex = (stretchIndex + 1) % 15;
+  } else {
+    const currentPos = activeOrder.indexOf(stretchIndex);
+    const nextPos = (currentPos + 1) % activeOrder.length;
+    stretchIndex = activeOrder[nextPos];
+  }
+
+  // Log this break (today only — clear on date rollover, cap at 100 entries)
+  let breakLog = state.breakLogDate === today ? (state.breakLog || []) : [];
+  breakLog = [...breakLog, { time: new Date().toISOString(), stretchIndex }].slice(-100);
 
   await setState({
     breaksToday, minsMoved, streakDays, lastBreakDate: today, totalBreaksAllTime,
     stretchIndex, running: false, startedAt: null, pausedRemainSec: null,
+    breakLog, breakLogDate: today,
   });
 
   const stretchKeys = [
@@ -565,7 +587,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       case "RESUME":         await resumeTimer(); sendResponse(await getState()); break;
       case "STOP":           await stopTimer(); sendResponse(await getState()); break;
       case "SNOOZE":         await setState({ pendingBreak: null }); await snoozeTimer(); sendResponse(await getState()); break;
-      case "SET_INTERVAL":   await setState({ intervalMin: msg.intervalMin }); sendResponse(await getState()); break;
+      case "SET_INTERVAL":   await setState({ intervalMin: msg.intervalMin }); await startTimer(msg.intervalMin); sendResponse(await getState()); break;
       case "SET_FOCUS":      await setState({ focusMode: msg.value }); sendResponse(await getState()); break;
 
       case "SET_PREF": {
@@ -620,20 +642,26 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 
 // ===== LIFECYCLE =====
 
+// ===== KEYBOARD SHORTCUTS =====
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command === 'trigger-break') {
+    await fireBreak();
+  }
+  if (command === 'snooze-break') {
+    await snoozeTimer();
+  }
+});
+
+// ===== LIFECYCLE =====
+
 chrome.runtime.onInstalled.addListener(async (details) => {
   const state = await getState();
   if (!state.running) await startTimer(state.intervalMin);
   scheduleSummaryAlarm(state);
   if (details.reason === 'install') {
-    const title = await bgT('welcomeTitle');
-    const message = await bgT('welcomeMessage', String(state.intervalMin));
-    chrome.notifications.create('microbreaks-welcome', {
-      type: 'basic',
-      iconUrl: 'icons/icon128.png',
-      title,
-      message,
-      requireInteraction: false,
-    });
+    // Open the onboarding page on first install
+    chrome.tabs.create({ url: chrome.runtime.getURL('onboarding.html') });
   }
 });
 

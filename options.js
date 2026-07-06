@@ -61,6 +61,7 @@ document.querySelectorAll('.nav-item').forEach(btn => {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
     $('section-' + btn.dataset.section).classList.add('active');
+    if (btn.dataset.section === 'stretches') renderStretchList();
   });
 });
 
@@ -243,6 +244,87 @@ $('optLangSelect').addEventListener('change', async (e) => {
   await loadMessages(langToLoad);
   applyI18n();
   renderAll();
+});
+
+// ===== STRETCH LIST =====
+
+const STRETCH_EMOJIS = ["🔄","☝️","👁","🤲","🙆","🌀","🙇","🦋","↔️","😌","💪","👆","🦶","🖐","🧘"];
+const STRETCH_DURATIONS = ["30 sec","30 sec","20 sec","20 sec","30 sec","30 sec","30 sec","30 sec","30 sec","20 sec","30 sec","20 sec","20 sec","20 sec","30 sec"];
+const STRETCH_KEYS_OPT = ["stretchNeckRolls","stretchOverheadReach","stretch2020","stretchWristCircles","stretchShoulderRolls","stretchSpinalTwist","stretchForwardFold","stretchChestOpener","stretchSideStretch","stretchChinTucks","stretchUpperBackSqueeze","stretchTempleMassage","stretchAnkleCircles","stretchFingerSpreads","stretchHipStretch"];
+
+let dragSrcIdx = null;
+
+function renderStretchList() {
+  const wrap = $('stretchListWrap');
+  if (!wrap) return;
+  const order = state.stretchOrder || [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+  const enabled = state.stretchEnabled || order.map(() => true);
+  wrap.innerHTML = '';
+
+  order.forEach((stretchIdx, pos) => {
+    const isEnabled = enabled[pos] !== false;
+    const name = t(STRETCH_KEYS_OPT[stretchIdx]) || STRETCH_KEYS_OPT[stretchIdx];
+    const item = document.createElement('div');
+    item.className = 'stretch-list-item' + (isEnabled ? '' : ' disabled-stretch');
+    item.draggable = true;
+    item.dataset.pos = pos;
+    item.innerHTML = `
+      <span class="stretch-drag-handle">⠿</span>
+      <span class="stretch-list-emoji">${STRETCH_EMOJIS[stretchIdx]}</span>
+      <span class="stretch-list-name">${name}</span>
+      <span class="stretch-list-dur">${STRETCH_DURATIONS[stretchIdx]}</span>
+      <button class="toggle ${isEnabled ? 'on' : ''}" role="switch" aria-checked="${isEnabled}" data-pos="${pos}"></button>
+    `;
+
+    // Toggle enable/disable
+    item.querySelector('.toggle').addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const newEnabled = [...(state.stretchEnabled || order.map(() => true))];
+      newEnabled[pos] = !newEnabled[pos];
+      state = await send({ type: 'SET_PREF', key: 'stretchEnabled', value: newEnabled });
+      renderStretchList();
+    });
+
+    // Drag reorder
+    item.addEventListener('dragstart', (e) => {
+      dragSrcIdx = pos;
+      item.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    item.addEventListener('dragend', () => {
+      item.classList.remove('dragging');
+      wrap.querySelectorAll('.stretch-list-item').forEach(i => i.classList.remove('drag-over'));
+    });
+    item.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      wrap.querySelectorAll('.stretch-list-item').forEach(i => i.classList.remove('drag-over'));
+      item.classList.add('drag-over');
+    });
+    item.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      if (dragSrcIdx === null || dragSrcIdx === pos) return;
+      const newOrder = [...(state.stretchOrder || [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])];
+      const newEnabled = [...(state.stretchEnabled || newOrder.map(() => true))];
+      const [movedO] = newOrder.splice(dragSrcIdx, 1);
+      const [movedE] = newEnabled.splice(dragSrcIdx, 1);
+      newOrder.splice(pos, 0, movedO);
+      newEnabled.splice(pos, 0, movedE);
+      // Send both in one message to avoid split-state if second write fails
+      await send({ type: 'SET_PREF', key: 'stretchOrder', value: newOrder });
+      state = await send({ type: 'SET_PREF', key: 'stretchEnabled', value: newEnabled });
+      dragSrcIdx = null;
+      renderStretchList();
+    });
+
+    wrap.appendChild(item);
+  });
+}
+
+// ===== ONBOARDING REPLAY =====
+
+$('replayOnboardingBtn').addEventListener('click', () => {
+  chrome.tabs.create({ url: chrome.runtime.getURL('onboarding.html') });
 });
 
 // ===== INIT =====

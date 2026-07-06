@@ -107,6 +107,25 @@ function renderStats(st) {
   $('stMins').textContent = st.minsMoved ?? 0;
 }
 
+function renderHistory(st) {
+  const list = $('historyList');
+  const log = st.breakLogDate === new Date().toDateString() ? (st.breakLog || []) : [];
+  if (log.length === 0) {
+    list.innerHTML = `<div class="history-empty">${t('historyEmpty')}</div>`;
+    return;
+  }
+  list.innerHTML = [...log].reverse().map(entry => {
+    const d = new Date(entry.time);
+    const hh = d.getHours().toString().padStart(2,'0');
+    const mm = d.getMinutes().toString().padStart(2,'0');
+    const name = STRETCHES[entry.stretchIndex % STRETCHES.length]?.name || '';
+    return `<div class="history-item">
+      <span class="history-time">${hh}:${mm}</span>
+      <span class="history-stretch">${name}</span>
+    </div>`;
+  }).join('');
+}
+
 function renderRing(remSec, totalSec) {
   const pct = Math.min(1, remSec / totalSec);
   $('progRing').style.strokeDashoffset = (CIRC * (1 - pct)).toFixed(1);
@@ -174,6 +193,7 @@ function applyState(st) {
   renderGoBtn(st.running, st.pausedRemainSec != null && !st.running);
   renderFocus(st.focusMode);
   renderStats(st);
+  renderHistory(st);
   renderBreathRing(st.running, false);
   renderStretch(st.stretchIndex ?? 0);
   viewStretchIndex = st.stretchIndex ?? 0;
@@ -324,6 +344,11 @@ $('settingsBtn').addEventListener('click', () => {
   const open = layer.classList.toggle('open');
   layer.setAttribute('aria-hidden', String(!open));
   lower.style.display = open ? 'none' : '';
+  // Close history panel when settings opens
+  if (open) {
+    $('historyPanel').classList.remove('open');
+    $('historyPanel').setAttribute('aria-hidden', 'true');
+  }
 });
 
 document.querySelectorAll('.tog').forEach(btn => {
@@ -449,6 +474,24 @@ $('nudgeDismissBtn').addEventListener('click', async () => {
 $('nudgeReviewBtn').addEventListener('click', async () => {
   await send({ type: 'SET_PREF', key: 'ratingNudgeDone', value: true });
   setTimeout(hideNudge, 800);
+});
+
+$('historyToggle').addEventListener('click', () => {
+  const panel = $('historyPanel');
+  const open = panel.classList.toggle('open');
+  panel.setAttribute('aria-hidden', String(!open));
+  // Close settings if open
+  if (open) {
+    $('settingsLayer').classList.remove('open');
+    $('settingsLayer').setAttribute('aria-hidden', 'true');
+    $('mainLower').style.display = '';
+  }
+  if (open) renderHistory(state);
+});
+
+$('historyClose').addEventListener('click', () => {
+  $('historyPanel').classList.remove('open');
+  $('historyPanel').setAttribute('aria-hidden', 'true');
 });
 
 $('openOptionsBtn').addEventListener('click', () => {

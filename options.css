@@ -321,3 +321,43 @@ body {
 .about-row span:first-child { color: var(--text-soft); }
 .about-row a { color: var(--sage); text-decoration: none; }
 .about-row a:hover { text-decoration: underline; }
+
+.stretch-list-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+.stretch-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  cursor: grab;
+  transition: all 0.15s;
+  user-select: none;
+}
+.stretch-list-item:active { cursor: grabbing; }
+.stretch-list-item.dragging {
+  opacity: 0.5;
+  border-style: dashed;
+}
+.stretch-list-item.drag-over {
+  border-color: var(--sage);
+  background: rgba(93,184,160,0.06);
+}
+.stretch-list-item.disabled-stretch { opacity: 0.45; }
+.stretch-drag-handle {
+  color: var(--text-soft);
+  font-size: 16px;
+  flex-shrink: 0;
+  cursor: grab;
+  line-height: 1;
+}
+.stretch-list-emoji { font-size: 18px; flex-shrink: 0; }
+.stretch-list-name { flex: 1; font-size: 13px; font-weight: 500; color: var(--text-main); }
+.stretch-list-dur { font-size: 11px; color: var(--text-soft); flex-shrink: 0; }

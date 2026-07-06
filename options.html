@@ -34,6 +34,10 @@
         <i class="nav-icon" data-icon="palette"></i>
         <span data-i18n="navAppearance">Appearance</span>
       </button>
+      <button class="nav-item" data-section="stretches">
+        <i class="nav-icon" data-icon="stretches"></i>
+        <span data-i18n="navStretches">Stretches</span>
+      </button>
       <button class="nav-item" data-section="workhours">
         <i class="nav-icon" data-icon="clock"></i>
         <span data-i18n="navWorkHours">Work hours</span>
@@ -190,6 +194,13 @@
         </div>
       </section>
 
+      <section class="panel" id="section-stretches">
+        <h1 data-i18n="navStretches">Stretches</h1>
+        <p class="section-sub" data-i18n="stretchesSectionSub">Choose which stretches appear in your breaks and drag to reorder them.</p>
+        <div class="stretch-list-wrap" id="stretchListWrap"></div>
+        <p class="hint-text" style="margin-top:10px;" data-i18n="stretchesDragHint">Drag to reorder · Toggle to enable or disable</p>
+      </section>
+
       <section class="panel" id="section-workhours">
         <h1 data-i18n="navWorkHours">Work hours</h1>
         <p class="section-sub" data-i18n="workHoursSectionSub">Only run the timer while you're actually working.</p>
@@ -257,9 +268,13 @@
         <p class="section-sub" data-i18n="aboutSectionSub">A gentle stretch timer for desk workers.</p>
 
         <div class="about-card">
-          <div class="about-row"><span data-i18n="aboutVersion">Version</span><span id="aboutVersionVal">1.4.0</span></div>
+          <div class="about-row"><span data-i18n="aboutVersion">Version</span><span id="aboutVersionVal">1.6.0</span></div>
           <div class="about-row"><span data-i18n="aboutPrivacy">Privacy policy</span><a href="https://jj-dzn.github.io/microbreaks/privacy-policy.html" target="_blank" rel="noopener">jj-dzn.github.io/microbreaks</a></div>
           <div class="about-row"><span data-i18n="aboutWebsite">Website</span><a href="https://jj-dzn.github.io/microbreaks/" target="_blank" rel="noopener">jj-dzn.github.io/microbreaks</a></div>
+          <div class="about-row">
+            <span data-i18n="replayOnboarding">Setup guide</span>
+            <button class="chip" id="replayOnboardingBtn" data-i18n="replayOnboardingBtn">Replay →</button>
+          </div>
         </div>
       </section>
 

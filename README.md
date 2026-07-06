@@ -16,8 +16,12 @@ No accounts, no servers, no tracking. Everything stays on your device.
 - 🧘 **15 guided stretches** — neck rolls, shoulder rolls, spinal twists, wrist circles, and more, each with step-by-step instructions and an animated figure
 - 🎯 **Strict mode** — full-screen break overlay that waits for you even if you were away from Chrome when it fired
 - 🗂️ **Browse all stretches** — view all 15 in a grid from the popup or inside the overlay, and jump to any one instantly
+- 🔀 **Custom stretch list** — reorder stretches by dragging, and toggle any off so they never appear in your rotation
 - ⚙️ **Full options page** — dedicated settings page with sidebar navigation for all preferences
-- 💤 **Snooze** — push a break back, no guilt
+- 🎓 **Onboarding flow** — a guided 4-step setup on first install; replayable anytime from the About section
+- 🕑 **Break history** — a clock icon in the stats bar shows every break you took today with the time and stretch name
+- ⌨️ **Keyboard shortcuts** — `Alt+Shift+B` triggers a break, `Alt+Shift+S` snoozes, both customisable in Chrome
+- 💤 **Snooze** — push a break back 5 minutes, no guilt
 - 🔥 **Streak tracking** — daily breaks taken, minutes moved, and current streak
 - 🔔 **Gentle chime** — 4 sounds to choose from (marimba, soft bell, kalimba, wind chime), with a live preview when selecting
 - 🕐 **Work hours** — timer only runs during your set working hours
@@ -52,6 +56,7 @@ Plain JavaScript, HTML, and CSS — no build step, no frameworks, no dependencie
 - `chrome.notifications` — break reminders and daily summary
 - `chrome.offscreen` — plays the chime sound from the service worker (MV3 restriction)
 - `chrome.scripting` + `host_permissions` — on-demand strict mode overlay injection on any active tab
+- `chrome.commands` — keyboard shortcuts for triggering and snoozing breaks without opening the popup
 - `chrome.windows` — detects when the user returns to Chrome to show a pending break overlay
 - `_locales/` — Chrome's native i18n system for 8-language support
 
@@ -63,6 +68,7 @@ microbreaks/
 ├── background.js               Service worker — timer, alarms, break logic, pending break
 ├── popup.html / .css / .js     Extension popup UI
 ├── options.html / .css / .js   Full settings page (sidebar navigation)
+├── onboarding.html              First-install setup flow (4 steps)
 ├── content.js                  Injected on-demand — renders the strict mode overlay
 ├── offscreen.html / .js        Audio playback document (MV3 service workers can't play sound directly)
 ├── icons/                      Toolbar and store icons
