@@ -686,5 +686,38 @@
   },
   "nudgeDismiss": {
     "message": "Quizás más tarde"
+  },
+  "historyTitle": {
+    "message": "pausas de hoy"
+  },
+  "historyEmpty": {
+    "message": "Aún no hay pausas hoy"
+  },
+  "navStretches": {
+    "message": "Estiramientos"
+  },
+  "stretchesSectionSub": {
+    "message": "Elige qué estiramientos aparecen en tus pausas y arrástralos para reordenar."
+  },
+  "stretchesDragHint": {
+    "message": "Arrastra para reordenar · Activa o desactiva"
+  },
+  "replayOnboarding": {
+    "message": "Guía de configuración"
+  },
+  "replayOnboardingBtn": {
+    "message": "Reproducir →"
+  },
+  "onboardingTitle": {
+    "message": "Bienvenido a MicroBreaks"
+  },
+  "keyboardShortcuts": {
+    "message": "Atajos de teclado"
+  },
+  "shortcutTrigger": {
+    "message": "Activar un descanso ahora"
+  },
+  "shortcutSnooze": {
+    "message": "Posponer el descanso actual"
   }
 }
