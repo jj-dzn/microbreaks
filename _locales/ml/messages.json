@@ -686,5 +686,38 @@
   },
   "nudgeDismiss": {
     "message": "ഒരുപക്ഷേ പിന്നീട്"
+  },
+  "historyTitle": {
+    "message": "ഇന്നത്തെ ബ്രേക്കുകൾ"
+  },
+  "historyEmpty": {
+    "message": "ഇന്ന് ഇതുവരെ ബ്രേക്കുകൾ ഇല്ല"
+  },
+  "navStretches": {
+    "message": "സ്ട്രെച്ചുകൾ"
+  },
+  "stretchesSectionSub": {
+    "message": "ഏതൊക്കെ സ്ട്രെച്ചുകൾ കാണിക്കണമെന്ന് തിരഞ്ഞെടുക്കുക, ക്രമം മാറ്റാൻ വലിക്കുക."
+  },
+  "stretchesDragHint": {
+    "message": "ക്രമം മാറ്റാൻ വലിക്കുക · പ്രവർത്തനക്ഷമമാക്കുക അല്ലെങ്കിൽ നിർജ്ജീവമാക്കുക"
+  },
+  "replayOnboarding": {
+    "message": "സജ്ജീകരണ ഗൈഡ്"
+  },
+  "replayOnboardingBtn": {
+    "message": "വീണ്ടും →"
+  },
+  "onboardingTitle": {
+    "message": "MicroBreaks-ലേക്ക് സ്വാഗതം"
+  },
+  "keyboardShortcuts": {
+    "message": "കീബോർഡ് ഷോർട്ട്‌കട്ടുകൾ"
+  },
+  "shortcutTrigger": {
+    "message": "ഇപ്പോൾ ഒരു ബ്രേക്ക് ആരംഭിക്കുക"
+  },
+  "shortcutSnooze": {
+    "message": "നിലവിലെ ബ്രേക്ക് സ്നൂസ് ചെയ്യുക"
   }
 }
