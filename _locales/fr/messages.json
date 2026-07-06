@@ -686,5 +686,38 @@
   },
   "nudgeDismiss": {
     "message": "Peut-être plus tard"
+  },
+  "historyTitle": {
+    "message": "pauses d'aujourd'hui"
+  },
+  "historyEmpty": {
+    "message": "Aucune pause aujourd'hui"
+  },
+  "navStretches": {
+    "message": "Étirements"
+  },
+  "stretchesSectionSub": {
+    "message": "Choisissez quels étirements apparaissent et faites glisser pour réorganiser."
+  },
+  "stretchesDragHint": {
+    "message": "Glisser pour réorganiser · Activer ou désactiver"
+  },
+  "replayOnboarding": {
+    "message": "Guide de configuration"
+  },
+  "replayOnboardingBtn": {
+    "message": "Rejouer →"
+  },
+  "onboardingTitle": {
+    "message": "Bienvenue sur MicroBreaks"
+  },
+  "keyboardShortcuts": {
+    "message": "Raccourcis clavier"
+  },
+  "shortcutTrigger": {
+    "message": "Déclencher une pause maintenant"
+  },
+  "shortcutSnooze": {
+    "message": "Reporter la pause actuelle"
   }
 }
