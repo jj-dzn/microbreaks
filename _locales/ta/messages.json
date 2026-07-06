@@ -686,5 +686,38 @@
   },
   "nudgeDismiss": {
     "message": "ஒருவேளை பின்னர்"
+  },
+  "historyTitle": {
+    "message": "இன்றைய இடைவேளைகள்"
+  },
+  "historyEmpty": {
+    "message": "இன்று இதுவரை இடைவேளைகள் இல்லை"
+  },
+  "navStretches": {
+    "message": "ஸ்ட்ரெச்கள்"
+  },
+  "stretchesSectionSub": {
+    "message": "எந்த ஸ்ட்ரெச்கள் தோன்ற வேண்டும் என்பதை தேர்ந்தெடுத்து வரிசைமாற்ற இழுக்கவும்."
+  },
+  "stretchesDragHint": {
+    "message": "வரிசைமாற்ற இழுக்கவும் · இயக்கு அல்லது முடக்கு"
+  },
+  "replayOnboarding": {
+    "message": "அமைப்பு வழிகாட்டி"
+  },
+  "replayOnboardingBtn": {
+    "message": "மீண்டும் →"
+  },
+  "onboardingTitle": {
+    "message": "MicroBreaks-க்கு வரவேற்கிறோம்"
+  },
+  "keyboardShortcuts": {
+    "message": "கீபோர்டு குறுக்குவழிகள்"
+  },
+  "shortcutTrigger": {
+    "message": "இப்போது ஒரு இடைவேளை தொடங்கு"
+  },
+  "shortcutSnooze": {
+    "message": "தற்போதைய இடைவேளையை ஒத்திடு"
   }
 }
