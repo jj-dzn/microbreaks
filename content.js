@@ -430,6 +430,8 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
   document.body.appendChild(overlay);
 
   function renderStepsView() {
+    // Cancel any running animation before starting a new one
+    if (overlayAnimId) { cancelAnimationFrame(overlayAnimId); overlayAnimId = null; }
     const s = S[idx];
     nameEl.textContent = s.name;
     durEl.textContent = s.dur;
@@ -466,7 +468,8 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
         border: `1px solid ${isCurrent ? hexToRgba(T.amber,0.5) : hexToRgba(T.teal,0.2)}`,
         borderRadius:'8px', padding:'8px 2px', textAlign:'center', cursor:'pointer', fontSize:'16px',
       });
-      cell.innerHTML = `<div>${emojiForIndex(i)}</div>`;
+      // Use the stretch's own canonical emoji via its index in S, not position i
+      cell.innerHTML = `<div>${s.emoji || emojiForIndex(i)}</div>`;
       cell.title = s.name;
       cell.addEventListener('click', (e) => {
         e.stopPropagation();

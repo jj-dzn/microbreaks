@@ -4,24 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome to MicroBreaks</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --forest: #1D3D38; --sage: #5DB8A0; --sage-mid: #AAD9CF;
-      --amber: #E8A84C; --cream: #F7F9F8; --cream-dark: #E6EFEC;
+      --amber: #E8A84C; --amber-dark: #B07A22;
+      --cream: #F7F9F8; --cream-dark: #E6EFEC;
       --text: #1D3D38; --text-mid: #3D6B62; --text-soft: #6A9E94;
       --border: rgba(29,61,56,0.12);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+    }
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: -apple-system, 'Inter', sans-serif;
       background: var(--forest);
-      min-height: 100vh;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: 24px;
+      padding: 40px 24px 60px;
+      min-height: 100%;
+      overflow-y: auto;
     }
     .card {
       background: var(--cream);
@@ -37,100 +40,127 @@
       text-align: center;
     }
     .logo-ring {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: rgba(93,184,160,0.2);
-      border: 2px solid rgba(93,184,160,0.4);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(93,184,160,0.2); border: 2px solid rgba(93,184,160,0.4);
       display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 14px;
+      margin: 0 auto 12px;
     }
-    .logo-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--sage); }
-    .card-header h1 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 26px; color: var(--cream); margin-bottom: 6px;
-    }
-    .card-header p { font-size: 13px; color: var(--sage-mid); line-height: 1.55; }
-    .steps-bar {
-      display: flex;
-      padding: 20px 36px 0;
-      gap: 8px;
-    }
-    .step-pip {
-      flex: 1; height: 3px; border-radius: 2px;
-      background: var(--cream-dark);
-      transition: background 0.3s;
-    }
-    .step-pip.done { background: var(--sage); }
-    .step-pip.active { background: var(--amber); }
-    .card-body { padding: 24px 36px 28px; }
+    .logo-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--sage); }
+    .card-header h1 { font-size: 24px; color: var(--cream); margin-bottom: 5px; font-weight: 600; }
+    .card-header p { font-size: 13px; color: var(--sage-mid); }
+    .pips { display: flex; gap: 8px; padding: 18px 36px 0; }
+    .pip { flex: 1; height: 3px; border-radius: 2px; background: var(--cream-dark); transition: background 0.3s; }
+    .pip.done { background: var(--sage); }
+    .pip.active { background: var(--amber); }
+    .card-body { padding: 24px 36px 0; }
     .step { display: none; }
     .step.active { display: block; }
-    .step-title {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 20px; color: var(--text); margin-bottom: 6px;
-    }
-    .step-sub { font-size: 13px; color: var(--text-soft); margin-bottom: 20px; line-height: 1.55; }
-    .interval-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 8px;
-    }
+    .step-title { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    .step-sub { font-size: 12px; color: var(--text-soft); margin-bottom: 18px; line-height: 1.55; }
+    .iv-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 6px; }
     .iv-opt {
-      padding: 12px 4px; border-radius: 10px; border: 1.5px solid var(--border);
-      background: white; font-family: inherit; font-size: 12px; font-weight: 500;
-      color: var(--text-mid); cursor: pointer; text-align: center; transition: all 0.15s;
+      padding: 12px 4px; border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: white; font-size: 12px; font-weight: 500;
+      color: var(--text-mid); cursor: pointer; text-align: center;
     }
-    .iv-opt:hover { border-color: var(--sage); background: rgba(93,184,160,0.06); }
-    .iv-opt.sel {
-      border-color: var(--amber); background: rgba(232,168,76,0.12); color: var(--text);
-    }
-    .iv-opt .iv-min { font-size: 16px; font-weight: 600; display: block; color: var(--text); margin-bottom: 2px; }
+    .iv-opt:hover { border-color: var(--sage); }
+    .iv-opt.sel { border-color: var(--amber); background: rgba(232,168,76,0.12); color: var(--text); }
+    .iv-big { font-size: 16px; font-weight: 700; display: block; color: var(--text); margin-bottom: 2px; }
     .mode-opts { display: flex; flex-direction: column; gap: 10px; }
     .mode-opt {
       display: flex; align-items: center; gap: 14px;
-      padding: 14px 16px; border-radius: 12px; border: 1.5px solid var(--border);
-      background: white; cursor: pointer; transition: all 0.15s;
+      padding: 14px 16px; border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: white; cursor: pointer;
     }
     .mode-opt:hover { border-color: var(--sage); }
     .mode-opt.sel { border-color: var(--amber); background: rgba(232,168,76,0.08); }
     .mode-icon { font-size: 22px; flex-shrink: 0; }
     .mode-title { font-size: 13px; font-weight: 600; color: var(--text); }
-    .mode-desc { font-size: 11px; color: var(--text-soft); margin-top: 1px; }
-    .theme-grid { display: flex; gap: 10px; margin-bottom: 8px; }
+    .mode-desc { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
+    .theme-grid { display: flex; gap: 10px; }
     .theme-opt {
-      flex: 1; padding: 14px 8px; border-radius: 12px; border: 1.5px solid var(--border);
-      background: white; cursor: pointer; text-align: center; transition: all 0.15s;
-      font-family: inherit;
+      flex: 1; padding: 14px 8px; border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: white; cursor: pointer; text-align: center;
     }
     .theme-opt:hover { border-color: var(--sage); }
     .theme-opt.sel { border-color: var(--amber); background: rgba(232,168,76,0.08); }
-    .theme-swatch {
-      width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 8px;
-    }
+    .theme-swatch { width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 8px; }
     .theme-name { font-size: 11px; font-weight: 500; color: var(--text-mid); }
-    .card-footer {
-      padding: 0 36px 28px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .btn-skip { background: none; border: none; font-family: inherit; font-size: 12px; color: var(--text-soft); cursor: pointer; padding: 4px; }
-    .btn-skip:hover { color: var(--text-mid); }
-    .btn-next {
-      background: var(--sage); color: var(--forest); border: none;
-      border-radius: 10px; padding: 11px 28px; font-family: inherit;
-      font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.15s;
-    }
-    .btn-next:hover { opacity: 0.88; }
-    .btn-next.done-btn { background: var(--amber); }
     .shortcut-box {
       background: var(--forest); border-radius: 10px; padding: 14px 16px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
-    .shortcut-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; }
-    .shortcut-row:not(:last-child) { border-bottom: 0.5px solid rgba(93,184,160,0.15); padding-bottom: 10px; margin-bottom: 5px; }
+    .shortcut-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 0;
+    }
+    .shortcut-row + .shortcut-row { border-top: 0.5px solid rgba(93,184,160,0.15); margin-top: 6px; padding-top: 12px; }
     .shortcut-label { font-size: 12px; color: var(--sage-mid); }
     .shortcut-key {
-      font-size: 11px; font-weight: 600; color: var(--forest);
-      background: var(--sage-mid); padding: 3px 8px; border-radius: 5px;
-      letter-spacing: 0.02em;
+      font-size: 11px; font-weight: 600;
+      background: var(--sage-mid); color: var(--forest);
+      padding: 3px 8px; border-radius: 5px;
     }
+    .card-footer {
+      padding: 20px 36px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .btn-skip {
+      background: none; border: none; font-size: 12px;
+      color: var(--text-soft); cursor: pointer; padding: 4px;
+    }
+    .btn-next {
+      background: var(--sage); color: var(--forest);
+      border: none; border-radius: 10px;
+      padding: 11px 28px; font-size: 13px; font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-next.done-btn { background: var(--amber); color: var(--forest); }
+    .hint-text { font-size: 11px; color: var(--text-soft); margin-top: 10px; }
+    .wh-toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 0.5px solid var(--border);
+      margin-bottom: 14px;
+    }
+    .wh-label { font-size: 13px; font-weight: 500; color: var(--text); }
+    .wh-tog {
+      width: 38px; height: 22px; border-radius: 11px;
+      background: var(--cream-dark); border: 0.5px solid var(--border);
+      position: relative; cursor: pointer; flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .wh-tog.on { background: var(--sage); border-color: var(--sage); }
+    .wh-tog-knob {
+      position: absolute; top: 3px; left: 3px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: white; transition: transform 0.2s; display: block;
+    }
+    .wh-tog.on .wh-tog-knob { transform: translateX(16px); }
+    .wh-times { display: none; flex-direction: column; gap: 10px; }
+    .wh-times.show { display: flex; }
+    .wh-time-row { display: flex; align-items: center; justify-content: space-between; }
+    .wh-time-lbl { font-size: 12px; color: var(--text-mid); }
+    .wh-time-input {
+      font-size: 12px; padding: 6px 10px;
+      border-radius: 8px; border: 0.5px solid var(--border);
+      background: white; color: var(--text); cursor: pointer;
+    }
+    .wh-days { display: flex; gap: 5px; flex-wrap: wrap; }
+    .wh-day {
+      flex: 1; min-width: 36px; padding: 7px 4px;
+      border-radius: 7px; border: 0.5px solid var(--border);
+      background: white; font-size: 11px; font-weight: 500;
+      color: var(--text-mid); cursor: pointer;
+    }
+    .wh-day.paused {
+      background: rgba(232,168,76,0.12);
+      border-color: rgba(232,168,76,0.45);
+      color: var(--amber-dark);
+    }
+    .wh-days-hint { font-size: 10px; color: var(--text-soft); margin-top: 4px; }
   </style>
 </head>
 <body>
@@ -142,28 +172,27 @@
     <p>Let's get you set up in under a minute.</p>
   </div>
 
-  <div class="steps-bar">
-    <div class="step-pip active" id="pip0"></div>
-    <div class="step-pip" id="pip1"></div>
-    <div class="step-pip" id="pip2"></div>
-    <div class="step-pip" id="pip3"></div>
+  <div class="pips">
+    <div class="pip active" id="pip0"></div>
+    <div class="pip" id="pip1"></div>
+    <div class="pip" id="pip2"></div>
+    <div class="pip" id="pip3"></div>
+    <div class="pip" id="pip4"></div>
   </div>
 
   <div class="card-body">
 
-    <!-- Step 1: Interval -->
     <div class="step active" id="step0">
       <div class="step-title">How often should we remind you?</div>
-      <div class="step-sub">You can always change this later. Most people start with 30 minutes.</div>
-      <div class="interval-grid">
-        <button class="iv-opt" data-min="20"><span class="iv-min">20</span>min</button>
-        <button class="iv-opt sel" data-min="30"><span class="iv-min">30</span>min</button>
-        <button class="iv-opt" data-min="45"><span class="iv-min">45</span>min</button>
-        <button class="iv-opt" data-min="60"><span class="iv-min">60</span>min</button>
+      <div class="step-sub">You can change this later. Most people start with 30 minutes.</div>
+      <div class="iv-grid">
+        <button class="iv-opt" data-min="20"><span class="iv-big">20</span>min</button>
+        <button class="iv-opt sel" data-min="30"><span class="iv-big">30</span>min</button>
+        <button class="iv-opt" data-min="45"><span class="iv-big">45</span>min</button>
+        <button class="iv-opt" data-min="60"><span class="iv-big">60</span>min</button>
       </div>
     </div>
 
-    <!-- Step 2: Mode -->
     <div class="step" id="step1">
       <div class="step-title">How would you like to be reminded?</div>
       <div class="step-sub">Strict mode covers your screen so you actually stop. Notification is gentler.</div>
@@ -185,7 +214,6 @@
       </div>
     </div>
 
-    <!-- Step 3: Theme -->
     <div class="step" id="step2">
       <div class="step-title">Pick a color theme</div>
       <div class="step-sub">Sets the look of both the popup and the break overlay.</div>
@@ -205,21 +233,51 @@
       </div>
     </div>
 
-    <!-- Step 4: Keyboard shortcuts -->
     <div class="step" id="step3">
+      <div class="step-title">Set your working hours?</div>
+      <div class="step-sub">MicroBreaks will only run during these hours. You can skip this and set it later.</div>
+      <div class="wh-toggle-row">
+        <span class="wh-label">Enable work hours</span>
+        <button class="wh-tog" id="whToggle" role="switch" aria-checked="false">
+          <span class="wh-tog-knob"></span>
+        </button>
+      </div>
+      <div class="wh-times" id="whTimes">
+        <div class="wh-time-row">
+          <label class="wh-time-lbl" for="whStart">Start</label>
+          <input type="time" class="wh-time-input" id="whStart" value="09:00">
+        </div>
+        <div class="wh-time-row">
+          <label class="wh-time-lbl" for="whEnd">End</label>
+          <input type="time" class="wh-time-input" id="whEnd" value="17:00">
+        </div>
+        <div class="wh-days" id="whDays">
+          <button class="wh-day" data-day="1">Mon</button>
+          <button class="wh-day" data-day="2">Tue</button>
+          <button class="wh-day" data-day="3">Wed</button>
+          <button class="wh-day" data-day="4">Thu</button>
+          <button class="wh-day" data-day="5">Fri</button>
+          <button class="wh-day paused" data-day="6">Sat</button>
+          <button class="wh-day paused" data-day="0">Sun</button>
+        </div>
+        <div class="wh-days-hint">Highlighted days are paused</div>
+      </div>
+    </div>
+
+    <div class="step" id="step4">
       <div class="step-title">Keyboard shortcuts</div>
       <div class="step-sub">Trigger or snooze a break without opening the extension.</div>
       <div class="shortcut-box">
         <div class="shortcut-row">
           <span class="shortcut-label">Trigger a break now</span>
-          <span class="shortcut-key" id="triggerKey">Alt+Shift+B</span>
+          <span class="shortcut-key">Alt+Shift+B</span>
         </div>
         <div class="shortcut-row">
           <span class="shortcut-label">Snooze current break</span>
-          <span class="shortcut-key" id="snoozeKey">Alt+Shift+S</span>
+          <span class="shortcut-key">Alt+Shift+S</span>
         </div>
       </div>
-      <div class="step-sub" style="font-size:11px;">You can customise these anytime at <strong>chrome://extensions/shortcuts</strong></div>
+      <div class="hint-text">Customise these at <strong>chrome://extensions/shortcuts</strong></div>
     </div>
 
   </div>
@@ -230,92 +288,7 @@
   </div>
 </div>
 
-<script>
-const $ = id => document.getElementById(id);
-let step = 0;
-const TOTAL = 4;
-let selectedMin = 30;
-let selectedMode = 'notification';
-let selectedTheme = 'sage';
-
-function send(msg) {
-  return new Promise(resolve => chrome.runtime.sendMessage(msg, r => resolve(r || null)));
-}
-
-// Detect platform for shortcut display
-const isMac = navigator.platform.toUpperCase().includes('MAC');
-if (isMac) {
-  $('triggerKey').textContent = '⌥⇧B';
-  $('snoozeKey').textContent = '⌥⇧S';
-}
-
-// Interval selection
-document.querySelectorAll('.iv-opt').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.iv-opt').forEach(b => b.classList.remove('sel'));
-    btn.classList.add('sel');
-    selectedMin = parseInt(btn.dataset.min);
-  });
-});
-
-// Mode selection
-document.querySelectorAll('.mode-opt').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.mode-opt').forEach(b => b.classList.remove('sel'));
-    btn.classList.add('sel');
-    selectedMode = btn.dataset.mode;
-  });
-});
-
-// Theme selection
-document.querySelectorAll('.theme-opt').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.theme-opt').forEach(b => b.classList.remove('sel'));
-    btn.classList.add('sel');
-    selectedTheme = btn.dataset.theme;
-  });
-});
-
-function updatePips() {
-  for (let i = 0; i < TOTAL; i++) {
-    const pip = $('pip' + i);
-    pip.className = 'step-pip ' + (i < step ? 'done' : i === step ? 'active' : '');
-  }
-  const isLast = step === TOTAL - 1;
-  $('nextBtn').textContent = isLast ? 'Get started 🌿' : 'Next →';
-  $('nextBtn').className = 'btn-next' + (isLast ? ' done-btn' : '');
-}
-
-async function goNext() {
-  if (step < TOTAL - 1) {
-    $('step' + step).classList.remove('active');
-    step++;
-    $('step' + step).classList.add('active');
-    updatePips();
-  } else {
-    await finish();
-  }
-}
-
-async function finish() {
-  await send({ type: 'SET_INTERVAL', intervalMin: selectedMin });
-  await send({ type: 'SET_FOCUS', value: selectedMode === 'strict' });
-  await send({ type: 'SET_PREF', key: 'theme', value: selectedTheme });
-  await send({ type: 'SET_PREF', key: 'onboardingDone', value: true });
-  // chrome.tabs.remove is more reliable than window.close() for tab pages
-  chrome.tabs.getCurrent(tab => {
-    if (tab) chrome.tabs.remove(tab.id);
-  });
-}
-
-$('nextBtn').addEventListener('click', goNext);
-$('skipBtn').addEventListener('click', async () => {
-  await send({ type: 'SET_PREF', key: 'onboardingDone', value: true });
-  chrome.tabs.getCurrent(tab => {
-    if (tab) chrome.tabs.remove(tab.id);
-  });
-});
-</script>
+<script src="onboarding.js"></script>
 
 </body>
 </html>

@@ -452,10 +452,16 @@ async function fireBreak() {
 
   chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex, totalBreaks: totalBreaksAllTime }).catch(() => {});
 
-  // Auto-restart the timer after the break so the next one is always scheduled,
-  // regardless of whether the user interacts with the popup or notification.
-  // A short delay gives the overlay/notification a moment to appear first.
-  setTimeout(() => startTimer(state.intervalMin), 1500);
+  // Auto-restart the timer after the break so the next one is always scheduled.
+  // But if we stored a pendingBreak (user was away), skip the restart — the overlay
+  // dismissal will trigger START which restarts correctly after acknowledgement.
+  // We check pendingBreak AFTER the focus-mode block has had time to set it.
+  setTimeout(async () => {
+    const freshState = await getState();
+    if (!freshState.pendingBreak) {
+      startTimer(freshState.intervalMin);
+    }
+  }, 1500);
 }
 
 // ===== PENDING BREAK ON FOCUS RETURN =====
@@ -594,7 +600,17 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       case "PAUSE":          await pauseTimer(); sendResponse(await getState()); break;
       case "RESUME":         await resumeTimer(); sendResponse(await getState()); break;
       case "STOP":           await stopTimer(); sendResponse(await getState()); break;
-      case "SNOOZE":         await setState({ pendingBreak: null }); await snoozeTimer(); sendResponse(await getState()); break;
+      case "SNOOZE": {
+        // Only clear pendingBreak if the overlay was already shown (user snoozing from it).
+        // If pendingBreak is set and overlay hasn't shown yet, leave it so it shows on return.
+        const snoozeState = await getState();
+        if (!snoozeState.pendingBreak) {
+          await setState({ pendingBreak: null });
+        }
+        await snoozeTimer();
+        sendResponse(await getState());
+        break;
+      }
       case "SET_INTERVAL":   await setState({ intervalMin: msg.intervalMin }); await startTimer(msg.intervalMin); sendResponse(await getState()); break;
       case "SET_FOCUS":      await setState({ focusMode: msg.value }); sendResponse(await getState()); break;
 

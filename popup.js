@@ -296,7 +296,8 @@ async function init() {
 
 $('langSelect').addEventListener('change', async (e) => {
   const langPref = e.target.value;
-  await send({ type: 'SET_PREF', key: 'language', value: langPref });
+  const st = await send({ type: 'SET_PREF', key: 'language', value: langPref });
+  if (st) state = st; // keep local state in sync
   const langToLoad = langPref === 'auto' ? detectBrowserLang() : langPref;
   await loadMessages(langToLoad);
   applyI18n();
@@ -335,13 +336,9 @@ document.querySelectorAll('.iv-btn').forEach(btn => {
       if (isNaN(v) || v < 1) return;
       min = v;
     }
+    // SET_INTERVAL internally calls startTimer — no need to also send START
     const st = await send({ type: 'SET_INTERVAL', intervalMin: min });
-    if (state.running) {
-      const st2 = await send({ type: 'START', intervalMin: min });
-      applyState(st2);
-    } else {
-      applyState(st);
-    }
+    applyState(st);
   });
 });
 
@@ -461,8 +458,10 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 
 function showNudge() {
+  // Close both the stretch area and the grid panel before showing the nudge
   $('stretchAreaMain').style.display = 'none';
   $('stretchGridPanel').classList.remove('open');
+  $('stretchGridPanel').setAttribute('aria-hidden', 'true');
   $('nudgePanel').classList.add('open');
   $('nudgePanel').setAttribute('aria-hidden', 'false');
 }
@@ -470,7 +469,10 @@ function showNudge() {
 function hideNudge() {
   $('nudgePanel').classList.remove('open');
   $('nudgePanel').setAttribute('aria-hidden', 'true');
+  // Only restore stretchAreaMain — the grid stays closed
   $('stretchAreaMain').style.display = '';
+  $('stretchGridPanel').classList.remove('open');
+  $('stretchGridPanel').setAttribute('aria-hidden', 'true');
 }
 
 $('nudgeDismissBtn').addEventListener('click', async () => {
@@ -508,19 +510,24 @@ $('openOptionsBtn').addEventListener('click', () => {
 function renderStretchGrid() {
   const grid = $('stretchGrid');
   grid.innerHTML = '';
-  const currentIdx = (state.stretchIndex ?? 0) % STRETCHES.length;
-  STRETCHES.forEach((s, i) => {
+  const order = state.stretchOrder || STRETCHES.map((_, i) => i);
+  const enabled = state.stretchEnabled || order.map(() => true);
+  // Only show stretches that are enabled, in the user's custom order
+  const activeOrder = order.filter((_, i) => enabled[i] !== false);
+  const currentIdx = state.stretchIndex ?? 0;
+  (activeOrder.length > 0 ? activeOrder : order).forEach((stretchId) => {
+    const s = STRETCHES[stretchId];
     const card = document.createElement('div');
-    card.className = 'grid-stretch-card' + (i === currentIdx ? ' next-up' : '');
+    card.className = 'grid-stretch-card' + (stretchId === currentIdx ? ' next-up' : '');
     card.innerHTML = `
-      ${i === currentIdx ? `<div class="grid-next-badge">${t('upNext')}</div>` : ''}
+      ${stretchId === currentIdx ? `<div class="grid-next-badge">${t('upNext')}</div>` : ''}
       <div class="grid-stretch-icon">${s.emoji}</div>
       <div class="grid-stretch-name">${s.name}</div>
       <div class="grid-stretch-dur">${s.dur}</div>
     `;
     card.addEventListener('click', () => {
-      viewStretchIndex = i;
-      renderStretch(i);
+      viewStretchIndex = stretchId;
+      renderStretch(stretchId);
       toggleStretchGrid(false);
     });
     grid.appendChild(card);

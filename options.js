@@ -276,10 +276,13 @@ function renderStretchList() {
       <button class="toggle ${isEnabled ? 'on' : ''}" role="switch" aria-checked="${isEnabled}" data-pos="${pos}"></button>
     `;
 
-    // Toggle enable/disable
+    // Toggle enable/disable — always fetch fresh state to avoid stale array mismatch
     item.querySelector('.toggle').addEventListener('click', async (e) => {
       e.stopPropagation();
-      const newEnabled = [...(state.stretchEnabled || order.map(() => true))];
+      const fresh = await send({ type: 'GET_STATE' });
+      if (!fresh) return;
+      const freshOrder = fresh.stretchOrder || [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+      const newEnabled = [...(fresh.stretchEnabled || freshOrder.map(() => true))];
       newEnabled[pos] = !newEnabled[pos];
       state = await send({ type: 'SET_PREF', key: 'stretchEnabled', value: newEnabled });
       renderStretchList();
@@ -331,6 +334,13 @@ $('replayOnboardingBtn').addEventListener('click', () => {
 
 async function init() {
   state = await send({ type: 'GET_STATE' });
+
+  // Guard against null response when service worker is still waking up
+  if (!state) {
+    await new Promise(r => setTimeout(r, 400));
+    state = await send({ type: 'GET_STATE' });
+  }
+  if (!state) return; // give up gracefully
 
   const langPref = state.language || 'auto';
   const langToLoad = langPref === 'auto' ? detectBrowserLang() : langPref;
