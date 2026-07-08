@@ -719,5 +719,11 @@
   },
   "shortcutSnooze": {
     "message": "നിലവിലെ ബ്രേക്ക് സ്നൂസ് ചെയ്യുക"
+  },
+  "femaleModel": {
+    "message": "വനിതാ മോഡൽ"
+  },
+  "femaleModelSub": {
+    "message": "ഒരു വനിതാ ഫിഗറിലേക്ക് മാറുക"
   }
 }
