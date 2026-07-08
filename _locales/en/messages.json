@@ -719,5 +719,11 @@
   },
   "shortcutSnooze": {
     "message": "Snooze current break"
+  },
+  "femaleModel": {
+    "message": "Female model"
+  },
+  "femaleModelSub": {
+    "message": "Switch to a female figure for exercises"
   }
 }
