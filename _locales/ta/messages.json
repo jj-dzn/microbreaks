@@ -719,5 +719,11 @@
   },
   "shortcutSnooze": {
     "message": "தற்போதைய இடைவேளையை ஒத்திடு"
+  },
+  "femaleModel": {
+    "message": "பெண் மாடல்"
+  },
+  "femaleModelSub": {
+    "message": "பெண் உருவத்திற்கு மாறவும்"
   }
 }
