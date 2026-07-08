@@ -94,7 +94,20 @@ function updatePips() {
   var isLast = step === TOTAL - 1;
   el('nextBtn').textContent = isLast ? 'Get started 🌿' : 'Next →';
   el('nextBtn').className = isLast ? 'btn-next done-btn' : 'btn-next';
+  // Show back button on all steps except the first
+  el('backBtn').style.display = step > 0 ? '' : 'none';
 }
+
+el('backBtn').onclick = function() {
+  if (step <= 0) return;
+  el('step' + step).classList.remove('active');
+  step--;
+  el('step' + step).classList.add('active');
+  updatePips();
+  // Reset finishing state so Next works again if user went back from last step
+  finishing = false;
+  el('nextBtn').disabled = false;
+};
 
 var finishing = false;
 
@@ -130,7 +143,6 @@ function finish() {
   }).then(function() {
     return send({ type: 'SET_PREF', key: 'theme', value: selectedTheme });
   }).then(function() {
-    // Bug 3 fix: only send work hours if user actually enabled them
     if (workHoursEnabled) {
       return send({ type: 'SET_WORK_HOURS', enabled: true, start: workStart, end: workEnd });
     }
@@ -143,5 +155,9 @@ function finish() {
     chrome.tabs.getCurrent(function(tab) {
       if (tab) chrome.tabs.remove(tab.id);
     });
+  }).catch(function() {
+    // If anything failed, re-enable the button so user can try again
+    finishing = false;
+    el('nextBtn').disabled = false;
   });
 }

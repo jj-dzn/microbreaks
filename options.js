@@ -16,9 +16,16 @@ async function loadMessages(lang) {
     messages = await res.json();
   } catch (e) {
     if (lang !== 'en') {
-      const url2 = chrome.runtime.getURL(`_locales/en/messages.json`);
-      const res2 = await fetch(url2);
-      messages = await res2.json();
+      try {
+        const url2 = chrome.runtime.getURL(`_locales/en/messages.json`);
+        const res2 = await fetch(url2);
+        messages = await res2.json();
+      } catch (e2) {
+        console.log('[MicroBreaks] Failed to load any locale messages');
+        messages = {};
+      }
+    } else {
+      messages = {};
     }
   }
 }
@@ -69,6 +76,7 @@ document.querySelectorAll('.nav-item').forEach(btn => {
 
 function renderAll() {
   if (!state || !Object.keys(state).length) return; // guard against null/empty state
+  if (!messages || !Object.keys(messages).length) return; // guard against messages not yet loaded
   const knownIntervals = [20, 30, 45];
   document.querySelectorAll('#intervalRow .chip').forEach(chip => {
     const min = parseInt(chip.dataset.min);
@@ -77,6 +85,7 @@ function renderAll() {
 
   $('optStrictMode').classList.toggle('on', !!state.focusMode);
   $('optStrictMode').setAttribute('aria-checked', String(!!state.focusMode));
+
 
   $('optSnoozeMin').value = '5';
 
@@ -101,8 +110,9 @@ function renderAll() {
     card.classList.toggle('active', card.dataset.theme === (state.theme || 'sage'));
   });
 
-  $('optMaleModel').classList.toggle('on', !!state.maleModel);
-  $('optMaleModel').setAttribute('aria-checked', String(!!state.maleModel));
+  // Toggle is "Female model" — ON means female (maleModel=false), OFF means male (maleModel=true)
+  $('optMaleModel').classList.toggle('on', !state.maleModel);
+  $('optMaleModel').setAttribute('aria-checked', String(!state.maleModel));
 
   $('optAnim').classList.toggle('on', !!state.animEnabled);
   $('optAnim').setAttribute('aria-checked', String(!!state.animEnabled));
@@ -147,6 +157,7 @@ $('optStrictMode').addEventListener('click', async () => {
   state = await send({ type: 'SET_FOCUS', value: !state.focusMode });
   renderAll();
 });
+
 
 $('optNotif').addEventListener('click', async () => {
   state = await send({ type: 'SET_PREF', key: 'notifEnabled', value: !state.notifEnabled });

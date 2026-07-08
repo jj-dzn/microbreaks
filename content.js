@@ -18,85 +18,103 @@ const THEMES = {
   dusk:  { bg:'#2E1F3D', teal:'#B594D6', tealD:'#7a589c', amber:'#E89AC9', cream:'#F7F4FA', top:'#9B6FC4', topD:'#684485', leg:'#5C3D7A', legD:'#321f47', outline:'#1a1024' },
   ocean: { bg:'#0F2D3D', teal:'#4FB3D9', tealD:'#2d7c98', amber:'#7FE0C4', cream:'#F0F8FA', top:'#3A9BC4', topD:'#216685', leg:'#1D5470', legD:'#0d2e3d', outline:'#06181f' },
 };
-const SKIN_F='#F5DEB8', SKIN_D_F='#E0B882', HAIR_F='#F0D060', HAIR_D_F='#D4A820', LIP='#E8829A', EYE_F='#4BA8D4';
-const SKIN_M='#DBAB7A', SKIN_D_M='#C08550', HAIR_M='#1A0F0A', HAIR_D_M='#0D0806', EYE_M='#4A7040';
+// ===== FIGURE SKIN / HAIR PALETTE =====
+const SKIN_F='#F5DEB8', SKIN_D_F='#E0B882';
+const HAIR_F='#2B3A5C'; // dark navy bob for female
+const LIP_F='#D07068'; const BLUSH_F='rgba(220,100,80,0.22)'; const EYE_F='#2B3A5C';
+const SKIN_M='#DBAB7A', SKIN_D_M='#C08550';
+const HAIR_M='#1A0F0A';
+const LIP_M='#B07060'; const BLUSH_M='rgba(180,80,60,0.18)'; const EYE_M='#1A0F0A';
+
+// Formal suit palette — shared by both male and female
+const SUIT    = '#2C3E50'; // dark charcoal jacket
+const SUIT_D  = '#1A252F'; // jacket shadow
+const SUIT_L  = '#34495E'; // jacket highlight
+const SHIRT   = '#FAFAFA'; // white shirt
+const TIE_F   = '#C04830'; // female — burgundy tie
+const TIE_M   = '#1A6B8A'; // male — navy tie
+const TROUSER = '#1A252F'; // dark trousers
+const TROUSER_D='#111820'; // trouser shadow
+const SHOE_C  = '#0A0A0A'; // black dress shoes
 
 function getTheme(name) { return THEMES[name] || THEMES.sage; }
 
-// ===== TIME OF DAY RING TINT =====
-// Subtle warmth shift on the accent color depending on local hour — cooler in
-// morning, warmer in the evening. Purely decorative, no functional change.
 function timeOfDayAccent(amber) {
   const hour = new Date().getHours();
-  if (hour >= 5 && hour < 11) return amber; // morning — unchanged
-  if (hour >= 17 || hour < 5) {
-    // evening/night — shift warmer
-    return shiftWarm(amber, 0.15);
-  }
-  return amber; // midday — unchanged
+  if (hour >= 17 || hour < 5) return shiftWarm(amber, 0.15);
+  return amber;
 }
 function shiftWarm(hex, amt) {
-  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-  const nr = Math.min(255, r + 30*amt), ng = Math.max(0, g - 10*amt), nb = Math.max(0, b - 20*amt);
-  return `rgb(${Math.round(nr)},${Math.round(ng)},${Math.round(nb)})`;
-}
-
-// ===== FIGURE RENDERING (front-facing) =====
-
-function limb(svg, x1, y1, x2, y2, w1, w2, fill, outline) {
-  const dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy)||1;
-  const nx=-dy/len, ny=dx/len;
-  const path = `M${x1+nx*w1},${y1+ny*w1} L${x2+nx*w2},${y2+ny*w2} L${x2-nx*w2},${y2-ny*w2} L${x1-nx*w1},${y1-ny*w1} Z`;
-  svg.appendChild(h('path', {d:path, fill, stroke:outline, 'stroke-width':1.4, 'stroke-linejoin':'round'}));
-  svg.appendChild(h('line', {x1:x1+nx*w1*0.3, y1:y1+ny*w1*0.3, x2:x2+nx*w2*0.3, y2:y2+ny*w2*0.3, stroke:'rgba(255,255,255,0.38)', 'stroke-width':w1*0.4, 'stroke-linecap':'round'}));
-}
-function jnt(svg, cx, cy, r, fill, outline) {
-  svg.appendChild(h('circle', {cx, cy, r, fill, stroke:outline, 'stroke-width':1.2}));
-  svg.appendChild(h('ellipse', {cx:cx-r*0.2, cy:cy-r*0.25, rx:r*0.35, ry:r*0.25, fill:'rgba(255,255,255,0.3)'}));
+  const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
+  return `rgb(${Math.round(Math.min(255,r+30*amt))},${Math.round(Math.max(0,g-10*amt))},${Math.round(Math.max(0,b-20*amt))})`;
 }
 
 function drawFace(svg, fx, fy, tilt, nod, O, male) {
-  fx = fx + tilt*8; fy = fy + nod*5;
-  const SKIN = male ? SKIN_M : SKIN_F, SKIN_D = male ? SKIN_D_M : SKIN_D_F;
-  const HAIR = male ? HAIR_M : HAIR_F, HAIR_D = male ? HAIR_D_M : HAIR_D_F;
+  fx = fx + tilt * 8; fy = fy + nod * 5;
+  const SKIN = male ? SKIN_M : SKIN_F;
+  const SKIN_D = male ? SKIN_D_M : SKIN_D_F;
+  const HAIR = male ? HAIR_M : HAIR_F;
+  const LIP = male ? LIP_M : LIP_F;
+  const BLUSH = male ? BLUSH_M : BLUSH_F;
   const EYE = male ? EYE_M : EYE_F;
 
-  svg.appendChild(h('ellipse', {cx:fx, cy:fy, rx:13, ry:14.5, fill:SKIN, stroke:O, 'stroke-width':1.3}));
-  svg.appendChild(h('path', {d:`M${fx-10.5},${fy+5.5} Q${fx-7},${fy+18} ${fx},${fy+18} Q${fx+7},${fy+18} ${fx+10.5},${fy+5.5}`, fill:SKIN, stroke:O, 'stroke-width':1.3}));
-  svg.appendChild(h('ellipse', {cx:fx-13, cy:fy+2, rx:3, ry:4.7, fill:SKIN_D, stroke:O, 'stroke-width':1}));
-  svg.appendChild(h('ellipse', {cx:fx+13, cy:fy+2, rx:3, ry:4.7, fill:SKIN_D, stroke:O, 'stroke-width':1}));
+  // === LAYER 1: (back hair now drawn by drawFigure before body) ===
 
+  // === LAYER 2: Head ===
+  svg.appendChild(h('ellipse', {cx:fx, cy:fy, rx:20, ry:22, fill:SKIN}));
+  // Jaw rounded extension
+  svg.appendChild(h('path', {
+    d:`M${fx-14},${fy+14} Q${fx-10},${fy+26} ${fx},${fy+28} Q${fx+10},${fy+26} ${fx+14},${fy+14}`,
+    fill:SKIN
+  }));
+
+  // === LAYER 3: Hair front/crown (on top of head) ===
   if (male) {
-    svg.appendChild(h('path', {d:`M${fx-13},${fy-3} C${fx-14},${fy-14} ${fx-8},${fy-21} ${fx},${fy-19} C${fx+8},${fy-21} ${fx+14},${fy-14} ${fx+13},${fy-3} C${fx+10},${fy-9} ${fx},${fy-11} ${fx-10},${fy-9} Z`, fill:HAIR, stroke:O, 'stroke-width':1.3}));
-    svg.appendChild(h('path', {d:`M${fx-13},${fy-3} Q${fx-13},${fy+4} ${fx-11},${fy+6}`, fill:'none', stroke:HAIR, 'stroke-width':3, 'stroke-linecap':'round', opacity:0.6}));
-    svg.appendChild(h('path', {d:`M${fx+13},${fy-3} Q${fx+13},${fy+4} ${fx+11},${fy+6}`, fill:'none', stroke:HAIR, 'stroke-width':3, 'stroke-linecap':'round', opacity:0.6}));
+    // Short structured dark hair cap
+    svg.appendChild(h('path', {
+      d:`M${fx-20},${fy-6} C${fx-22},${fy-20} ${fx-12},${fy-32} ${fx},${fy-30} C${fx+12},${fy-32} ${fx+22},${fy-20} ${fx+20},${fy-6} C${fx+16},${fy-16} ${fx},${fy-20} ${fx-16},${fy-16} Z`,
+      fill:HAIR
+    }));
+    // Subtle sideburns — small strips at temples only
+    svg.appendChild(h('path', {d:`M${fx-20},${fy-6} Q${fx-22},${fy+2} ${fx-20},${fy+6}`, fill:'none', stroke:HAIR, 'stroke-width':5, 'stroke-linecap':'round'}));
+    svg.appendChild(h('path', {d:`M${fx+20},${fy-6} Q${fx+22},${fy+2} ${fx+20},${fy+6}`, fill:'none', stroke:HAIR, 'stroke-width':5, 'stroke-linecap':'round'}));
   } else {
-    svg.appendChild(h('path', {d:`M${fx-13},${fy-2} C${fx-15.5},${fy-15.5} ${fx-8},${fy-24} ${fx},${fy-22} C${fx+8},${fy-24} ${fx+15.5},${fy-15.5} ${fx+13},${fy-2} C${fx+10},${fy-10} ${fx},${fy-12.5} ${fx-10},${fy-10} Z`, fill:HAIR_D, stroke:O, 'stroke-width':1.3}));
-    svg.appendChild(h('path', {d:`M${fx-12.5},${fy-3} C${fx-13.5},${fy-14.5} ${fx-6},${fy-23} ${fx},${fy-22} C${fx+6},${fy-23} ${fx+13.5},${fy-14.5} ${fx+12.5},${fy-3} C${fx+7},${fy-9} ${fx},${fy-10} ${fx-7},${fy-9} Z`, fill:HAIR}));
-    svg.appendChild(h('path', {d:`M${fx-12},${fy-3} C${fx-16},${fy+5} ${fx-17},${fy+16} ${fx-15},${fy+27}`, fill:'none', stroke:HAIR_D, 'stroke-width':4, 'stroke-linecap':'round'}));
-    svg.appendChild(h('path', {d:`M${fx+12},${fy-3} C${fx+16},${fy+5} ${fx+17},${fy+16} ${fx+15},${fy+27}`, fill:'none', stroke:HAIR_D, 'stroke-width':4, 'stroke-linecap':'round'}));
-    for (let i = 0; i < 6; i++) {
-      svg.appendChild(h('ellipse', {cx:fx-13.5-i*0.3, cy:fy+i*4.2, rx:2.3, ry:1.5, fill:i%2===0?HAIR:HAIR_D, opacity:0.95}));
-      svg.appendChild(h('ellipse', {cx:fx+13.5+i*0.3, cy:fy+i*4.2, rx:2.3, ry:1.5, fill:i%2===0?HAIR:HAIR_D, opacity:0.95}));
-    }
+    // Female crown — sits on top, connects side bobs
+    svg.appendChild(h('path', {
+      d:`M${fx-20},${fy-10} C${fx-22},${fy-24} ${fx-12},${fy-34} ${fx},${fy-32} C${fx+12},${fy-34} ${fx+22},${fy-24} ${fx+20},${fy-10} C${fx+16},${fy-20} ${fx},${fy-24} ${fx-16},${fy-20} Z`,
+      fill:HAIR
+    }));
+    // Hair shine
+    svg.appendChild(h('path', {d:`M${fx-6},${fy-32} Q${fx+4},${fy-36} ${fx+12},${fy-30}`, fill:'none', stroke:'rgba(120,150,220,0.35)', 'stroke-width':2.5, 'stroke-linecap':'round'}));
   }
 
-  svg.appendChild(h('path', {d:`M${fx-10},${fy-6} Q${fx-6},${fy-9.5} ${fx-1.5},${fy-7}`, fill:'none', stroke:HAIR_D, 'stroke-width':1.4, 'stroke-linecap':'round'}));
-  svg.appendChild(h('path', {d:`M${fx+1.5},${fy-7} Q${fx+6},${fy-9.5} ${fx+10},${fy-6}`, fill:'none', stroke:HAIR_D, 'stroke-width':1.4, 'stroke-linecap':'round'}));
-  svg.appendChild(h('ellipse', {cx:fx-6, cy:fy, rx:4.4, ry:3.4, fill:'#FAFAFA', stroke:O, 'stroke-width':0.8}));
-  svg.appendChild(h('ellipse', {cx:fx+6, cy:fy, rx:4.4, ry:3.4, fill:'#FAFAFA', stroke:O, 'stroke-width':0.8}));
-  svg.appendChild(h('circle', {cx:fx-6, cy:fy, r:2.8, fill:EYE}));
-  svg.appendChild(h('circle', {cx:fx+6, cy:fy, r:2.8, fill:EYE}));
-  svg.appendChild(h('circle', {cx:fx-6, cy:fy, r:1.5, fill:'#08060A'}));
-  svg.appendChild(h('circle', {cx:fx+6, cy:fy, r:1.5, fill:'#08060A'}));
-  svg.appendChild(h('circle', {cx:fx-5.1, cy:fy-1, r:0.85, fill:'rgba(255,255,255,0.95)'}));
-  svg.appendChild(h('circle', {cx:fx+6.9, cy:fy-1, r:0.85, fill:'rgba(255,255,255,0.95)'}));
-  svg.appendChild(h('path', {d:`M${fx-10.5},${fy-0.5} Q${fx-6},${fy-4.8} ${fx-1},${fy-0.5}`, fill:'none', stroke:O, 'stroke-width':1.3, 'stroke-linecap':'round'}));
-  svg.appendChild(h('path', {d:`M${fx+1},${fy-0.5} Q${fx+6},${fy-4.8} ${fx+10.5},${fy-0.5}`, fill:'none', stroke:O, 'stroke-width':1.3, 'stroke-linecap':'round'}));
-  svg.appendChild(h('path', {d:`M${fx-1.5},${fy+5} Q${fx-2.5},${fy+8} ${fx},${fy+9} Q${fx+2.5},${fy+8} ${fx+1.5},${fy+5}`, fill:'none', stroke:SKIN_D, 'stroke-width':0.9, 'stroke-linecap':'round', opacity:0.6}));
-  svg.appendChild(h('path', {d:`M${fx-4.5},${fy+13} Q${fx-2},${fy+11.2} ${fx},${fy+12.3} Q${fx+2},${fy+11.2} ${fx+4.5},${fy+13}`, fill:LIP, stroke:O, 'stroke-width':0.8}));
-  svg.appendChild(h('path', {d:`M${fx-4.5},${fy+13} Q${fx},${fy+17} ${fx+4.5},${fy+13}`, fill:LIP, opacity:0.7}));
-  svg.appendChild(h('ellipse', {cx:fx-3.5, cy:fy-6, rx:4, ry:4.5, fill:'rgba(255,255,255,0.16)'}));
+  // Ears (after hair so they peek out correctly)
+  svg.appendChild(h('ellipse', {cx:fx-20, cy:fy+2, rx:3.5, ry:5, fill:SKIN}));
+  svg.appendChild(h('ellipse', {cx:fx+20, cy:fy+2, rx:3.5, ry:5, fill:SKIN_D}));
+
+  // Eyebrows
+  svg.appendChild(h('path', {d:`M${fx-14},${fy-10} Q${fx-9},${fy-14} ${fx-4},${fy-11}`, fill:'none', stroke:HAIR, 'stroke-width':1.8, 'stroke-linecap':'round'}));
+  svg.appendChild(h('path', {d:`M${fx+4},${fy-11} Q${fx+9},${fy-14} ${fx+14},${fy-10}`, fill:'none', stroke:HAIR, 'stroke-width':1.8, 'stroke-linecap':'round'}));
+
+  // Eyes — open, friendly
+  svg.appendChild(h('ellipse', {cx:fx-8, cy:fy-1, rx:4.5, ry:4, fill:'white'}));
+  svg.appendChild(h('ellipse', {cx:fx+8, cy:fy-1, rx:4.5, ry:4, fill:'white'}));
+  svg.appendChild(h('circle', {cx:fx-8, cy:fy-1, r:2.8, fill:EYE}));
+  svg.appendChild(h('circle', {cx:fx+8, cy:fy-1, r:2.8, fill:EYE}));
+  svg.appendChild(h('circle', {cx:fx-8, cy:fy-1, r:1.4, fill:'#08060A'}));
+  svg.appendChild(h('circle', {cx:fx+8, cy:fy-1, r:1.4, fill:'#08060A'}));
+  svg.appendChild(h('circle', {cx:fx-7, cy:fy-2, r:0.9, fill:'rgba(255,255,255,0.9)'}));
+  svg.appendChild(h('circle', {cx:fx+9, cy:fy-2, r:0.9, fill:'rgba(255,255,255,0.9)'}));
+  // Upper lash line
+  svg.appendChild(h('path', {d:`M${fx-12},${fy-4} Q${fx-8},${fy-7} ${fx-4},${fy-4}`, fill:'none', stroke:HAIR, 'stroke-width':1.6, 'stroke-linecap':'round'}));
+  svg.appendChild(h('path', {d:`M${fx+4},${fy-4} Q${fx+8},${fy-7} ${fx+12},${fy-4}`, fill:'none', stroke:HAIR, 'stroke-width':1.6, 'stroke-linecap':'round'}));
+
+  // Nose
+  svg.appendChild(h('circle', {cx:fx-3, cy:fy+9, r:1.8, fill:SKIN_D}));
+  svg.appendChild(h('circle', {cx:fx+3, cy:fy+9, r:1.8, fill:SKIN_D}));
+
+  // Smile
+  svg.appendChild(h('path', {d:`M${fx-8},${fy+16} Q${fx},${fy+22} ${fx+8},${fy+16}`, fill:'none', stroke:LIP, 'stroke-width':2.2, 'stroke-linecap':'round'}));
 }
 
 function drawFigure(svg, T, pose, O, male) {
@@ -107,68 +125,216 @@ function drawFigure(svg, T, pose, O, male) {
     armLOut:12, armROut:12, elbLOut:8, elbLFwd:18, elbROut:8, elbRFwd:18,
     legSpread:9, breathe:0, ...pose,
   };
-  const tw = male?13:12, ww = male?10:9, hw = male?9:8;
-  const HEAD_R = male?13.5:13, UA = 22, FA = 19, THIGH = 29, SHIN = 27, TORSO = 40;
-  const y0 = 14;
-  const headY = y0 + HEAD_R;
-  const neckBase = {x:cx, y:headY+HEAD_R+4};
-  const chestTop = {x:cx, y:neckBase.y+5-P.breathe*1.5};
-  const waistY = chestTop.y + TORSO*0.48;
-  const hipsY = chestTop.y + TORSO;
-  const shlL = {x:cx-tw+2, y:chestTop.y+5};
-  const shlR = {x:cx+tw-2, y:chestTop.y+5};
 
+  // Proportions
+  const HEAD_R = male ? 14 : 13;  // back to original smaller size
+  const UA = 22, FA = 19, THIGH = 30, SHIN = 28, TORSO = 42;
+  const tw = male ? 14 : 12;
+  const hw = male ? 10 : 9;
+
+  const y0 = 12;
+  const headY = y0 + HEAD_R;
+  const neckBase = {x:cx, y:headY + HEAD_R + 3};
+  const chestTop = {x:cx, y:neckBase.y + 5 - P.breathe * 1.5};
+  const waistY = chestTop.y + TORSO * 0.46;
+  const hipsY = chestTop.y + TORSO;
+  const shlL = {x:cx - tw, y:chestTop.y + 6};
+  const shlR = {x:cx + tw, y:chestTop.y + 6};
+
+  // Arm joint positions (same rig as before)
   function armPoint(shl, outDeg, sign) {
-    const rad = outDeg*PI/180;
-    return {x:shl.x+Math.sin(rad)*UA*sign, y:shl.y+Math.cos(rad)*UA};
+    const rad = outDeg * PI / 180;
+    return {x: shl.x + Math.sin(rad) * UA * sign, y: shl.y + Math.cos(rad) * UA};
   }
   const elbL = armPoint(shlL, P.armLOut, -1);
   const elbR = armPoint(shlR, P.armROut, 1);
   function forearmPoint(elb, outDeg, sign, fwd) {
-    const rad = outDeg*PI/180;
-    return {x:elb.x+Math.sin(rad)*FA*sign*0.6+fwd*0.5, y:elb.y+Math.cos(rad)*FA-fwd*0.3};
+    const rad = outDeg * PI / 180;
+    return {x: elb.x + Math.sin(rad) * FA * sign * 0.6 + fwd * 0.5, y: elb.y + Math.cos(rad) * FA - fwd * 0.3};
   }
   const wriL = forearmPoint(elbL, P.elbLOut, -1, P.elbLFwd);
   const wriR = forearmPoint(elbR, P.elbROut, 1, P.elbRFwd);
 
-  const hipL = {x:cx-hw, y:hipsY}, hipR = {x:cx+hw, y:hipsY};
-  const kneeL = {x:cx-P.legSpread, y:hipsY+THIGH};
-  const kneeR = {x:cx+P.legSpread, y:hipsY+THIGH};
-  const ankL = {x:cx-P.legSpread, y:hipsY+THIGH+SHIN};
-  const ankR = {x:cx+P.legSpread, y:hipsY+THIGH+SHIN};
+  const hipL = {x:cx - hw, y:hipsY};
+  const hipR = {x:cx + hw, y:hipsY};
+  const kneeL = {x:cx - P.legSpread, y:hipsY + THIGH};
+  const kneeR = {x:cx + P.legSpread, y:hipsY + THIGH};
+  const ankL = {x:cx - P.legSpread, y:hipsY + THIGH + SHIN};
+  const ankR = {x:cx + P.legSpread, y:hipsY + THIGH + SHIN};
 
-  const SHOE_R = male ? '#7a6a5a' : '#9AC4D8';
-  const SHOE_L = male ? '#9a8a7a' : '#D4E8F0';
+  // Suit clothing — same for male and female
+  const topFill  = SUIT;
+  const topFillD = SUIT_D;
+  const legFill  = TROUSER;
+  const legFillD = TROUSER_D;
+  const skinFill  = male ? SKIN_M : SKIN_F;
+  const skinFillD = male ? SKIN_D_M : SKIN_D_F;
 
-  limb(svg, hipR.x,hipR.y, kneeR.x,kneeR.y, 7,6.5, T.legD, O);
-  limb(svg, kneeR.x,kneeR.y, ankR.x,ankR.y, 6.5,5, T.legD, O);
-  jnt(svg, kneeR.x,kneeR.y, 6, T.legD, O);
-  svg.appendChild(h('ellipse', {cx:ankR.x, cy:ankR.y+4, rx:9, ry:4, fill:SHOE_R, stroke:O, 'stroke-width':1.2}));
+  // Arm stroke widths — thicker, rounded, no joints
+  const armW = male ? 16 : 13;
+  const foreW = male ? 13 : 10;
+  const legW  = male ? 20 : 17;
+  const shinW = male ? 18 : 15;
 
-  limb(svg, shlR.x,shlR.y, elbR.x,elbR.y, 5.5,5, T.topD, O);
-  jnt(svg, elbR.x,elbR.y, 4.5, T.topD, O);
-  limb(svg, elbR.x,elbR.y, wriR.x,wriR.y, 5,3.5, male?SKIN_D_M:SKIN_D_F, O);
-  jnt(svg, wriR.x,wriR.y, 3.8, male?SKIN_D_M:SKIN_D_F, O);
+  // ── LAYER 0: Back hair (behind everything) ──
+  const faceX = cx + P.headTilt*8;
+  const faceY = headY + P.headNod*5;
+  if (!male) {
+    // Female bob sides — drawn here so they appear behind the body
+    svg.appendChild(h('path', {
+      d:`M${faceX-18},${faceY-18} C${faceX-26},${faceY-12} ${faceX-28},${faceY+4} ${faceX-26},${faceY+20} C${faceX-24},${faceY+32} ${faceX-18},${faceY+36} ${faceX-14},${faceY+30} C${faceX-16},${faceY+16} ${faceX-16},${faceY+0} ${faceX-14},${faceY-12} Z`,
+      fill:HAIR_F
+    }));
+    svg.appendChild(h('path', {
+      d:`M${faceX+18},${faceY-18} C${faceX+26},${faceY-12} ${faceX+28},${faceY+4} ${faceX+26},${faceY+20} C${faceX+24},${faceY+32} ${faceX+18},${faceY+36} ${faceX+14},${faceY+30} C${faceX+16},${faceY+16} ${faceX+16},${faceY+0} ${faceX+14},${faceY-12} Z`,
+      fill:HAIR_F
+    }));
+  }
 
-  limb(svg, hipL.x,hipL.y, kneeL.x,kneeL.y, 7.5,7, T.leg, O);
-  limb(svg, kneeL.x,kneeL.y, ankL.x,ankL.y, 7,5.5, T.leg, O);
-  jnt(svg, kneeL.x,kneeL.y, 6.5, T.leg, O);
-  svg.appendChild(h('ellipse', {cx:ankL.x, cy:ankL.y+4, rx:9, ry:4, fill:SHOE_L, stroke:O, 'stroke-width':1.2}));
+  // ── BACK ELEMENTS ──
 
-  svg.appendChild(h('path', {d:`M${cx-tw},${chestTop.y} C${cx-tw-2},${waistY-4} ${cx-ww-1},${waistY+4} ${cx-hw+1},${hipsY} L${cx+hw-1},${hipsY} C${cx+ww+1},${waistY+4} ${cx+tw+2},${waistY-4} ${cx+tw},${chestTop.y} Z`, fill:T.top, stroke:O, 'stroke-width':1.5, 'stroke-linejoin':'round'}));
-  svg.appendChild(h('line', {x1:cx, y1:chestTop.y+5, x2:cx, y2:waistY+2, stroke:'rgba(255,255,255,0.3)', 'stroke-width':2.2, 'stroke-linecap':'round'}));
-  svg.appendChild(h('rect', {x:cx-hw-1, y:hipsY-4, width:(hw+1)*2, height:5, rx:2, fill:T.legD, stroke:O, 'stroke-width':1.2}));
+  // Right leg (back)
+  svg.appendChild(h('path', {
+    d:`M${hipR.x},${hipR.y} Q${kneeR.x+2},${kneeR.y-10} ${kneeR.x},${kneeR.y}`,
+    fill:'none', stroke:legFillD, 'stroke-width':legW-2, 'stroke-linecap':'round'
+  }));
+  svg.appendChild(h('path', {
+    d:`M${kneeR.x},${kneeR.y} Q${ankR.x+1},${ankR.y-10} ${ankR.x},${ankR.y}`,
+    fill:'none', stroke:legFillD, 'stroke-width':shinW-2, 'stroke-linecap':'round'
+  }));
+  // Right foot — black dress shoe
+  svg.appendChild(h('path', {
+    d:`M${ankR.x-8},${ankR.y} Q${ankR.x-8},${ankR.y+10} ${ankR.x+4},${ankR.y+11} Q${ankR.x+14},${ankR.y+10} ${ankR.x+13},${ankR.y+4}`,
+    fill:SHOE_C, stroke:'none'
+  }));
+  // shoe highlight
+  svg.appendChild(h('path', {d:`M${ankR.x-6},${ankR.y+2} Q${ankR.x},${ankR.y+4} ${ankR.x+8},${ankR.y+3}`, fill:'none', stroke:'rgba(255,255,255,0.15)', 'stroke-width':2, 'stroke-linecap':'round'}));
 
-  svg.appendChild(h('rect', {x:cx-4, y:neckBase.y-5, width:8, height:10, rx:3, fill:male?SKIN_M:SKIN_F, stroke:O, 'stroke-width':1.1}));
+  // Right arm (back) — sleeve
+  svg.appendChild(h('path', {
+    d:`M${shlR.x},${shlR.y} Q${(shlR.x+elbR.x)/2+4},${(shlR.y+elbR.y)/2} ${elbR.x},${elbR.y}`,
+    fill:'none', stroke:topFillD, 'stroke-width':armW, 'stroke-linecap':'round'
+  }));
+  // Right forearm (skin)
+  svg.appendChild(h('path', {
+    d:`M${elbR.x},${elbR.y} Q${(elbR.x+wriR.x)/2+2},${(elbR.y+wriR.y)/2} ${wriR.x},${wriR.y}`,
+    fill:'none', stroke:skinFillD, 'stroke-width':foreW, 'stroke-linecap':'round'
+  }));
+  // Right hand
+  svg.appendChild(h('circle', {cx:wriR.x, cy:wriR.y, r:foreW/2+1, fill:skinFillD}));
+  // Right cuff
+  svg.appendChild(h('circle', {cx:wriR.x, cy:wriR.y, r:foreW/2+2.5, fill:'none', stroke:SHIRT, 'stroke-width':2.5}));
 
-  limb(svg, shlL.x,shlL.y, elbL.x,elbL.y, 5.5,5, T.top, O);
-  jnt(svg, elbL.x,elbL.y, 4.5, T.top, O);
-  limb(svg, elbL.x,elbL.y, wriL.x,wriL.y, 5,3.5, male?SKIN_M:SKIN_F, O);
-  jnt(svg, wriL.x,wriL.y, 3.8, male?SKIN_M:SKIN_F, O);
-  svg.appendChild(h('ellipse', {cx:wriL.x, cy:wriL.y+3, rx:4, ry:3, fill:male?SKIN_M:SKIN_F, stroke:O, 'stroke-width':1.1}));
+  // ── TORSO ──
+  // Trouser waistband
+  svg.appendChild(h('rect', {
+    x:cx-hw-3, y:hipsY-6, width:(hw+3)*2, height:9, rx:3,
+    fill:TROUSER_D
+  }));
+  // Trouser belt line
+  svg.appendChild(h('rect', {
+    x:cx-hw-3, y:hipsY-7, width:(hw+3)*2, height:2, rx:1,
+    fill:SUIT_D, opacity:'0.6'
+  }));
+  // Main jacket body
+  svg.appendChild(h('path', {
+    d:`M${cx-tw},${chestTop.y} C${cx-tw-3},${waistY-2} ${cx-hw-3},${waistY+6} ${cx-hw-3},${hipsY} L${cx+hw+3},${hipsY} C${cx+hw+3},${waistY+6} ${cx+tw+3},${waistY-2} ${cx+tw},${chestTop.y} Z`,
+    fill:topFill
+  }));
+  // Jacket left shadow
+  svg.appendChild(h('path', {
+    d:`M${cx-tw},${chestTop.y} C${cx-tw-3},${waistY-2} ${cx-hw-3},${waistY+6} ${cx-hw-3},${hipsY} L${cx-hw+4},${hipsY} C${cx-hw+2},${waistY+4} ${cx-tw+6},${waistY-4} ${cx-tw+6},${chestTop.y} Z`,
+    fill:SUIT_D, opacity:'0.4'
+  }));
+  // Pocket square (right breast pocket)
+  svg.appendChild(h('path', {
+    d:`M${cx+6},${chestTop.y+10} L${cx+12},${chestTop.y+10} L${cx+12},${chestTop.y+16} L${cx+6},${chestTop.y+16} Z`,
+    fill:SHIRT, opacity:'0.9'
+  }));
+  svg.appendChild(h('path', {
+    d:`M${cx+6},${chestTop.y+10} Q${cx+9},${chestTop.y+7} ${cx+12},${chestTop.y+10}`,
+    fill:SHIRT
+  }));
+  // Jacket lapels — white shirt triangle underneath
+  svg.appendChild(h('path', {
+    d:`M${cx-7},${chestTop.y+4} L${cx},${chestTop.y+18} L${cx+7},${chestTop.y+4}`,
+    fill:SHIRT
+  }));
+  // Left lapel
+  svg.appendChild(h('path', {
+    d:`M${cx-tw},${chestTop.y} L${cx-7},${chestTop.y+4} L${cx},${chestTop.y+18} L${cx},${chestTop.y+28} L${cx-tw+2},${chestTop.y+24} Z`,
+    fill:SUIT_L
+  }));
+  // Right lapel
+  svg.appendChild(h('path', {
+    d:`M${cx+tw},${chestTop.y} L${cx+7},${chestTop.y+4} L${cx},${chestTop.y+18} L${cx},${chestTop.y+28} L${cx+tw-2},${chestTop.y+24} Z`,
+    fill:SUIT
+  }));
+  // Jacket button line
+  svg.appendChild(h('line', {x1:cx, y1:chestTop.y+28, x2:cx, y2:hipsY-4, stroke:SUIT_D, 'stroke-width':1.5, 'stroke-linecap':'round'}));
+  // Jacket buttons
+  svg.appendChild(h('circle', {cx, cy:chestTop.y+34, r:1.8, fill:SUIT_D}));
+  svg.appendChild(h('circle', {cx, cy:chestTop.y+44, r:1.8, fill:SUIT_D}));
+  // Tie
+  const tieColor = male ? TIE_M : TIE_F;
+  svg.appendChild(h('path', {
+    d:`M${cx-2.5},${chestTop.y+18} L${cx-4},${chestTop.y+32} L${cx},${chestTop.y+38} L${cx+4},${chestTop.y+32} L${cx+2.5},${chestTop.y+18} Z`,
+    fill:tieColor
+  }));
+  // Tie knot
+  svg.appendChild(h('path', {
+    d:`M${cx-2.5},${chestTop.y+18} Q${cx},${chestTop.y+14} ${cx+2.5},${chestTop.y+18} Q${cx},${chestTop.y+22} ${cx-2.5},${chestTop.y+18} Z`,
+    fill:tieColor
+  }));
 
-  drawFace(svg, cx+P.headTilt*8, headY+P.headNod*5, P.headTilt, P.headNod, O, male);
-  return {wristL:wriL, wristR:wriR, head:{x:cx+P.headTilt*8, y:headY+P.headNod*5}};
+  // Left leg (front)
+  svg.appendChild(h('path', {
+    d:`M${hipL.x},${hipL.y} Q${kneeL.x-2},${kneeL.y-10} ${kneeL.x},${kneeL.y}`,
+    fill:'none', stroke:legFill, 'stroke-width':legW, 'stroke-linecap':'round'
+  }));
+  svg.appendChild(h('path', {
+    d:`M${kneeL.x},${kneeL.y} Q${ankL.x-1},${ankL.y-10} ${ankL.x},${ankL.y}`,
+    fill:'none', stroke:legFill, 'stroke-width':shinW, 'stroke-linecap':'round'
+  }));
+  // Left foot — black dress shoe
+  svg.appendChild(h('path', {
+    d:`M${ankL.x+8},${ankL.y} Q${ankL.x+8},${ankL.y+10} ${ankL.x-4},${ankL.y+11} Q${ankL.x-14},${ankL.y+10} ${ankL.x-13},${ankL.y+4}`,
+    fill:SHOE_C, stroke:'none'
+  }));
+  svg.appendChild(h('path', {d:`M${ankL.x+6},${ankL.y+2} Q${ankL.x},${ankL.y+4} ${ankL.x-8},${ankL.y+3}`, fill:'none', stroke:'rgba(255,255,255,0.15)', 'stroke-width':2, 'stroke-linecap':'round'}));
+
+  // Neck
+  svg.appendChild(h('path', {
+    d:`M${cx-7},${neckBase.y} Q${cx-5},${neckBase.y-10} ${cx-5},${chestTop.y+2}`,
+    fill:'none', stroke:skinFill, 'stroke-width':13, 'stroke-linecap':'round'
+  }));
+  svg.appendChild(h('path', {
+    d:`M${cx+7},${neckBase.y} Q${cx+5},${neckBase.y-10} ${cx+5},${chestTop.y+2}`,
+    fill:'none', stroke:skinFillD, 'stroke-width':6, 'stroke-linecap':'round', opacity:'0.4'
+  }));
+  // Shirt collar wings
+  svg.appendChild(h('path', {d:`M${cx-5},${chestTop.y+4} L${cx-9},${chestTop.y-1} L${cx-4},${chestTop.y+2} Z`, fill:SHIRT}));
+  svg.appendChild(h('path', {d:`M${cx+5},${chestTop.y+4} L${cx+9},${chestTop.y-1} L${cx+4},${chestTop.y+2} Z`, fill:SHIRT}));
+
+  // Left arm (front) — sleeve
+  svg.appendChild(h('path', {
+    d:`M${shlL.x},${shlL.y} Q${(shlL.x+elbL.x)/2-4},${(shlL.y+elbL.y)/2} ${elbL.x},${elbL.y}`,
+    fill:'none', stroke:topFill, 'stroke-width':armW, 'stroke-linecap':'round'
+  }));
+  // Left forearm (skin)
+  svg.appendChild(h('path', {
+    d:`M${elbL.x},${elbL.y} Q${(elbL.x+wriL.x)/2-2},${(elbL.y+wriL.y)/2} ${wriL.x},${wriL.y}`,
+    fill:'none', stroke:skinFill, 'stroke-width':foreW, 'stroke-linecap':'round'
+  }));
+  // Left hand
+  svg.appendChild(h('circle', {cx:wriL.x, cy:wriL.y, r:foreW/2+1, fill:skinFill}));
+  // Left cuff
+  svg.appendChild(h('circle', {cx:wriL.x, cy:wriL.y, r:foreW/2+2.5, fill:'none', stroke:SHIRT, 'stroke-width':2.5}));
+
+  // Face on top of everything
+  drawFace(svg, faceX, faceY, P.headTilt, P.headNod, O, male);
+
+  return {wristL:wriL, wristR:wriR, head:{x:faceX, y:faceY}};
 }
 
 function motionArrow(svg, x, y, angleDeg, color, size) {
@@ -282,6 +448,8 @@ function removeOverlay() {
   if (overlayAnimId) { cancelAnimationFrame(overlayAnimId); overlayAnimId = null; }
   const el = document.getElementById('microbreaks-overlay');
   if (el) el.remove();
+  document.documentElement.style.overflow = _savedHtmlOverflow;
+  document.body.style.overflow = _savedBodyOverflow;
   document.removeEventListener('keydown', onEscape);
 }
 
@@ -290,6 +458,8 @@ function onEscape(e) {
 }
 
 let overlayAnimId = null;
+let _savedHtmlOverflow = '';
+let _savedBodyOverflow = '';
 
 function playCompletionThenClose(svg, T, male, onDone) {
   if (overlayAnimId) cancelAnimationFrame(overlayAnimId);
@@ -375,6 +545,9 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
     alignItems:'center', justifyContent:'center',
     fontFamily:"'Inter',-apple-system,sans-serif",
     cursor:'pointer', overflowY:'auto',
+    // Escape any CSS transform stacking contexts (common on Notion, Figma, Gmail)
+    // by using a dedicated overlay host appended directly to document.documentElement
+    transform:'none', willChange:'auto',
   });
 
   const card = document.createElement('div');
@@ -427,7 +600,12 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
   card.appendChild(hint);
 
   overlay.appendChild(card);
-  document.body.appendChild(overlay);
+  // Save original overflow values before locking scroll
+  _savedHtmlOverflow = document.documentElement.style.overflow;
+  _savedBodyOverflow = document.body.style.overflow;
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+  document.documentElement.appendChild(overlay);
 
   function renderStepsView() {
     // Cancel any running animation before starting a new one
@@ -491,12 +669,16 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
 
   renderStepsView();
 
+  let finishing = false;
   function finish() {
+    if (finishing) return;
+    finishing = true;
     chrome.runtime.sendMessage({type:'START'});
     removeOverlay();
   }
 
   doneBtn.addEventListener('click', () => {
+    if (finishing) return;
     playCompletionThenClose(figSvg, T, male, finish);
   });
   overlay.addEventListener('click', (e) => {

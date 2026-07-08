@@ -74,6 +74,7 @@ const CIRC = 389.6;
 let state = {};
 let localRemSec = null;
 let tickTimer = null;
+let syncTimer = null;
 let viewStretchIndex = 0;
 
 const $ = id => document.getElementById(id);
@@ -180,12 +181,39 @@ function applyState(st) {
   const rem = computeRemSec(st);
   localRemSec = rem;
   clearInterval(tickTimer);
+  clearInterval(syncTimer);
+
+  // Restore stretch area visibility unless the nudge is showing OR grid is open
+  const gridIsOpen = $('stretchGridPanel').classList.contains('open');
+  const nudgeIsOpen = $('nudgePanel').classList.contains('open');
+  if (!nudgeIsOpen && !gridIsOpen) {
+    $('stretchAreaMain').style.display = '';
+  }
 
   if (st.running) {
-    tickTimer = setInterval(() => {
+    tickTimer = setInterval(async () => {
       localRemSec = Math.max(0, localRemSec - 1);
       renderRing(localRemSec, st.intervalMin * 60);
+      // When countdown hits 0, the alarm may not have fired yet (Chrome alarms
+      // can be delayed up to 60s). Re-sync from background every second at 0:00
+      // so the popup updates the moment the break actually fires.
+      if (localRemSec === 0) {
+        const fresh = await send({ type: 'GET_STATE' });
+        if (fresh) applyState(fresh);
+      }
     }, 1000);
+  }
+
+  // Periodically re-sync the countdown from the source of truth (background state)
+  // to prevent setInterval drift over long popup sessions (can accumulate 5-10s per 30min)
+  clearInterval(syncTimer);
+  if (st.running) {
+    syncTimer = setInterval(async () => {
+      const fresh = await send({ type: 'GET_STATE' });
+      if (fresh && fresh.running) {
+        localRemSec = computeRemSec(fresh);
+      }
+    }, 30000);
   }
 
   renderRing(rem, st.intervalMin * 60);
@@ -198,9 +226,9 @@ function applyState(st) {
   renderStretch(st.stretchIndex ?? 0);
   viewStretchIndex = st.stretchIndex ?? 0;
 
-  const prefs = ['tNotif','tAnim','tMale','tSound','tWorkHours','tDailySummary'];
+  const prefs = ['tNotif','tAnim','tSound','tWorkHours','tDailySummary'];
   const prefKeys = {
-    tNotif:'notifEnabled', tAnim:'animEnabled', tMale:'maleModel',
+    tNotif:'notifEnabled', tAnim:'animEnabled',
     tSound:'soundEnabled', tWorkHours:'workHoursEnabled', tDailySummary:'dailySummaryEnabled',
   };
   prefs.forEach(id => {
@@ -209,9 +237,13 @@ function applyState(st) {
     btn.classList.toggle('on', on);
     btn.setAttribute('aria-checked', String(on));
   });
+  // tMale is "Female model" toggle — ON means female (maleModel=false)
+  $('tMale').classList.toggle('on', !st.maleModel);
+  $('tMale').setAttribute('aria-checked', String(!st.maleModel));
 
   $('soundLeadSelect').value = String(st.soundLeadSec ?? 10);
   $('soundLeadRow').classList.toggle('show', !!st.soundEnabled);
+  $('langSelect').value = st.language || 'auto';
 
   $('workStartInput').value = st.workStart || '09:00';
   $('workEndInput').value = st.workEnd || '17:00';
@@ -280,8 +312,8 @@ async function init() {
   STRETCHES = STRETCHES_LIVE();
   $('langSelect').value = langPref;
 
-  if (!st.running && st.pausedRemainSec == null) {
-    st = await send({ type: 'START', intervalMin: st.intervalMin });
+  if (!st.running && st.pausedRemainSec == null && !st.pendingBreak) {
+    st = await send({ type: 'START' });
   }
   applyState(st);
 
@@ -301,8 +333,7 @@ $('langSelect').addEventListener('change', async (e) => {
   const langToLoad = langPref === 'auto' ? detectBrowserLang() : langPref;
   await loadMessages(langToLoad);
   applyI18n();
-  STRETCHES = STRETCHES_LIVE();
-  renderStretch(viewStretchIndex);
+  renderHistory(state); // re-render history so stretch names reflect new language
   renderGoBtn(state.running, state.pausedRemainSec != null && !state.running);
 });
 
@@ -313,7 +344,9 @@ $('goBtn').addEventListener('click', async () => {
   } else if (state.pausedRemainSec != null) {
     st = await send({ type: 'RESUME' });
   } else {
-    st = await send({ type: 'START', intervalMin: state.intervalMin });
+    // Don't pass intervalMin — let background use its own current value
+    // to avoid sending a stale value if settings synced from another device
+    st = await send({ type: 'START' });
   }
   applyState(st);
 });
@@ -436,21 +469,27 @@ $('prevBtn').addEventListener('click', () => {
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === 'BREAK_FIRED') {
     clearInterval(tickTimer);
+    clearInterval(syncTimer); // stop polling during break display
     $('cdDisplay').textContent = t('moveNow');
     $('cdDisplay').classList.add('break-time');
     $('cdLbl').textContent = t('breakTime');
     $('progRing').classList.add('break-mode');
     renderBreathRing(false, true);
     renderGoBtn(false, false);
-    renderStretch(msg.stretchIndex);
-    viewStretchIndex = msg.stretchIndex;
+    // Hide the stretch card during break — it shows "up next" which would be confusing
+    $('stretchAreaMain').style.display = 'none';
+    // If the rating nudge is showing, dismiss it so break takes priority
+    if ($('nudgePanel').classList.contains('open')) {
+      $('nudgePanel').classList.remove('open');
+      $('nudgePanel').setAttribute('aria-hidden', 'true');
+    }
     setTimeout(async () => {
       $('cdDisplay').classList.remove('break-time');
       $('cdLbl').textContent = t('untilBreak');
       $('progRing').classList.remove('break-mode');
       const st = await send({ type: 'GET_STATE' });
-      applyState(st);
-      if ((msg.totalBreaks || 0) >= 10 && !st.ratingNudgeDone) {
+      applyState(st); // applyState restores stretchAreaMain display
+      if (st && (msg.totalBreaks || 0) >= 10 && !st.ratingNudgeDone) {
         showNudge();
       }
     }, 4000);
@@ -458,6 +497,10 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 
 function showNudge() {
+  // Close settings panel if open
+  $('settingsLayer').classList.remove('open');
+  $('settingsLayer').setAttribute('aria-hidden', 'true');
+  $('mainLower').style.display = '';
   // Close both the stretch area and the grid panel before showing the nudge
   $('stretchAreaMain').style.display = 'none';
   $('stretchGridPanel').classList.remove('open');

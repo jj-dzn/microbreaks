@@ -60,7 +60,7 @@ const SYNC_DEFAULTS = {
   focusMode: false,
   notifEnabled: true,
   animEnabled: true,
-  maleModel: false,
+  maleModel: true,
   theme: "sage",
   chimeSound: "marimba",
   darkMode: "system",
@@ -161,7 +161,7 @@ async function startTimer(intervalMin) {
 
   const leadSec = state.soundEnabled ? (state.soundLeadSec || 0) : 0;
   if (leadSec > 0 && intervalMin * 60 > leadSec) {
-    const chimeDelayMin = intervalMin - (leadSec / 60);
+    const chimeDelayMin = Math.max(1, intervalMin - (leadSec / 60));
     chrome.alarms.create(CHIME_ALARM_NAME, { delayInMinutes: chimeDelayMin });
   }
 }
@@ -193,7 +193,7 @@ async function resumeTimer() {
 
   const leadSec = state.soundEnabled ? (state.soundLeadSec || 0) : 0;
   if (leadSec > 0 && remainSec > leadSec) {
-    const chimeDelayMin = (remainSec - leadSec) / 60;
+    const chimeDelayMin = Math.max(1, (remainSec - leadSec) / 60);
     chrome.alarms.create(CHIME_ALARM_NAME, { delayInMinutes: chimeDelayMin });
   }
 
@@ -233,7 +233,7 @@ async function snoozeTimer() {
 
   const leadSec = state.soundEnabled ? (state.soundLeadSec || 0) : 0;
   if (leadSec > 0 && newRemainSec > leadSec) {
-    chrome.alarms.create(CHIME_ALARM_NAME, { delayInMinutes: (newRemainSec - leadSec) / 60 });
+    chrome.alarms.create(CHIME_ALARM_NAME, { delayInMinutes: Math.max(1, (newRemainSec - leadSec) / 60) });
   }
 }
 
@@ -303,7 +303,7 @@ async function playChime() {
 
 // ===== NOTIFICATIONS =====
 
-async function fireNotification(message, stretchIndex) {
+async function fireNotification(message) {
   const title = await bgT('timeToMove');
   const snoozeLbl = await bgT('snoozeBtn');
   const restartLbl = await bgT('restartBtn');
@@ -330,15 +330,15 @@ function yesterday() {
 function getActiveVisibleTab(callback) {
   chrome.windows.getLastFocused({ populate: true, windowTypes: ['normal'] }, (win) => {
     if (chrome.runtime.lastError || !win) {
-      // Fall back to querying any active tab across all windows.
-      chrome.tabs.query({ active: true }, (tabs) => callback(tabs && tabs[0]));
+      // Fall back to querying active tabs in normal windows only
+      chrome.tabs.query({ active: true, windowType: 'normal' }, (tabs) => callback(tabs && tabs[0]));
       return;
     }
     const tab = (win.tabs || []).find(t => t.active) || (win.tabs || [])[0];
     if (tab) {
       callback(tab);
     } else {
-      chrome.tabs.query({ active: true }, (tabs) => callback(tabs && tabs[0]));
+      chrome.tabs.query({ active: true, windowType: 'normal' }, (tabs) => callback(tabs && tabs[0]));
     }
   });
 }
@@ -368,12 +368,14 @@ async function fireBreak() {
   minsMoved += 1;
   totalBreaksAllTime = (totalBreaksAllTime || 0) + 1;
 
+  // Capture the stretch index for THIS break before advancing to the next
+  const currentStretchIndex = stretchIndex;
+
   // Pick next stretch from the custom order, skipping disabled ones
   const order = state.stretchOrder || [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
   const enabled = state.stretchEnabled || order.map(() => true);
   const activeOrder = order.filter((_, i) => enabled[i] !== false);
   if (activeOrder.length === 0) {
-    // All stretches disabled — fall back to full list
     stretchIndex = (stretchIndex + 1) % 15;
   } else {
     const currentPos = activeOrder.indexOf(stretchIndex);
@@ -383,7 +385,7 @@ async function fireBreak() {
 
   // Log this break (today only — clear on date rollover, cap at 100 entries)
   let breakLog = state.breakLogDate === today ? (state.breakLog || []) : [];
-  breakLog = [...breakLog, { time: new Date().toISOString(), stretchIndex }].slice(-100);
+  breakLog = [...breakLog, { time: new Date().toISOString(), stretchIndex: currentStretchIndex }].slice(-100);
 
   await setState({
     breaksToday, minsMoved, streakDays, lastBreakDate: today, totalBreaksAllTime,
@@ -396,8 +398,9 @@ async function fireBreak() {
     "stretchSpinalTwist", "stretchForwardFold", "stretchChestOpener", "stretchSideStretch", "stretchChinTucks",
     "stretchUpperBackSqueeze", "stretchTempleMassage", "stretchAnkleCircles", "stretchFingerSpreads", "stretchHipStretch",
   ];
-  const stretchName = await bgT(stretchKeys[stretchIndex]);
-  const stretchDesc = await bgT(stretchKeys[stretchIndex] + "Desc");
+  // Use currentStretchIndex for notification — it shows what THIS break is, not the next one
+  const stretchName = await bgT(stretchKeys[currentStretchIndex]);
+  const stretchDesc = await bgT(stretchKeys[currentStretchIndex] + "Desc");
   const notifText = `${stretchName} — ${stretchDesc}`;
 
   if (state.focusMode) {
@@ -425,37 +428,34 @@ async function fireBreak() {
               files: ["content.js"],
             });
             const resolvedLang = (state.language === 'auto' || !state.language) ? detectBgLang() : state.language;
-            await chrome.tabs.sendMessage(tab.id, { type: "SHOW_BREAK_OVERLAY", stretchIndex, male: state.maleModel, lang: resolvedLang, theme: state.theme });
+            await chrome.tabs.sendMessage(tab.id, { type: "SHOW_BREAK_OVERLAY", stretchIndex: currentStretchIndex, male: state.maleModel, lang: resolvedLang, theme: state.theme });
             // Overlay shown — clear any previous pending break
             await setState({ pendingBreak: null });
           } catch (e) {
             console.log("[MicroBreaks] Overlay injection failed on:", tab && tab.url, "—", e && e.message);
             // Injection failed on this tab (e.g. CSP) — store pending so user sees it on next navigable tab
-            await setState({ pendingBreak: { stretchIndex } });
-            if (state.notifEnabled) await fireNotification(notifText, stretchIndex);
+            await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
+            if (state.notifEnabled) await fireNotification(notifText);
           }
         } else {
-          // User is not in Chrome — store pending break, show notification too
           console.log("[MicroBreaks] Chrome not focused — storing pending break for when user returns");
-          await setState({ pendingBreak: { stretchIndex } });
-          if (state.notifEnabled) await fireNotification(notifText, stretchIndex);
+          await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
+          if (state.notifEnabled) await fireNotification(notifText);
         }
       } catch (outerErr) {
         console.log("[MicroBreaks] Unexpected error in focus-mode flow —", outerErr && outerErr.message);
-        await setState({ pendingBreak: { stretchIndex } });
-        if (state.notifEnabled) await fireNotification(notifText, stretchIndex);
+        await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
+        if (state.notifEnabled) await fireNotification(notifText);
       }
     });
   } else if (state.notifEnabled) {
-    await fireNotification(notifText, stretchIndex);
+    await fireNotification(notifText);
   }
 
-  chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex, totalBreaks: totalBreaksAllTime }).catch(() => {});
+  // Send BREAK_FIRED to popup for UI update. In focus mode the overlay/pendingBreak
+  // may not be set yet (async callback pending), but popup only uses this for display hints.
+  chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex: currentStretchIndex, totalBreaks: totalBreaksAllTime }).catch(() => {});
 
-  // Auto-restart the timer after the break so the next one is always scheduled.
-  // But if we stored a pendingBreak (user was away), skip the restart — the overlay
-  // dismissal will trigger START which restarts correctly after acknowledgement.
-  // We check pendingBreak AFTER the focus-mode block has had time to set it.
   setTimeout(async () => {
     const freshState = await getState();
     if (!freshState.pendingBreak) {
@@ -493,23 +493,38 @@ async function tryShowPendingOverlay(tab) {
     console.log("[MicroBreaks] Showed pending overlay on focus return");
   } catch (e) {
     console.log("[MicroBreaks] Could not show pending overlay on focus return:", e && e.message);
-    // Re-store the pending break so it can try again on next tab activation
-    await setState({ pendingBreak: { stretchIndex } });
+    // Re-store so it tries again on the next tab activation.
+    // Small delay avoids race with the post-break timer auto-restart.
+    await new Promise(r => setTimeout(r, 200));
+    const freshState = await getState();
+    // Only re-store if timer hasn't restarted yet (pendingBreak still expected)
+    if (!freshState.running) {
+      await setState({ pendingBreak: { stretchIndex } });
+    }
   }
 }
 
 // When Chrome regains focus, check if there's a pending break to show.
 chrome.windows.onFocusChanged.addListener(async (windowId) => {
-  if (windowId === chrome.windows.WINDOW_ID_NONE) return; // Chrome lost focus
+  if (windowId === chrome.windows.WINDOW_ID_NONE) return;
   const state = await getState();
   if (!state.focusMode || !state.pendingBreak) return;
 
-  // Small delay to let the tab finish rendering before injecting
+  // First attempt after 800ms — gives the tab time to render on most machines
   setTimeout(async () => {
     getActiveVisibleTab(async (tab) => {
       if (tab) await tryShowPendingOverlay(tab);
     });
-  }, 600);
+  }, 800);
+
+  // Fallback attempt after 2.5s — catches slow machines and lazy-loaded pages
+  setTimeout(async () => {
+    const freshState = await getState();
+    if (!freshState.pendingBreak) return; // already shown, skip
+    getActiveVisibleTab(async (tab) => {
+      if (tab) await tryShowPendingOverlay(tab);
+    });
+  }, 2500);
 });
 
 // Also check on tab activation — if user switches tabs while a break is pending
@@ -574,8 +589,12 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === 'microbreak-gate-check') {
     const state = await getState();
     const shouldRun = !isWeekendPaused(state) && isWithinWorkHours(state);
-    if (shouldRun && !state.running && state.pausedRemainSec != null) {
-      await startTimer(state.intervalMin);
+    if (shouldRun && !state.running && !state.pendingBreak) {
+      // Only auto-start if fully stopped (post-break), not if user manually paused
+      // A manual pause has pausedRemainSec set — we respect that choice.
+      if (state.pausedRemainSec === null) {
+        await startTimer(state.intervalMin);
+      }
     } else if (!shouldRun && state.running) {
       await pauseTimer();
     }
@@ -596,7 +615,13 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   (async () => {
     switch (msg.type) {
       case "GET_STATE":      sendResponse(await getState()); break;
-      case "START":          await setState({ pendingBreak: null }); await startTimer(msg.intervalMin); sendResponse(await getState()); break;
+      case "START": {
+        await setState({ pendingBreak: null });
+        const startState = await getState();
+        await startTimer(msg.intervalMin ?? startState.intervalMin);
+        sendResponse(await getState());
+        break;
+      }
       case "PAUSE":          await pauseTimer(); sendResponse(await getState()); break;
       case "RESUME":         await resumeTimer(); sendResponse(await getState()); break;
       case "STOP":           await stopTimer(); sendResponse(await getState()); break;
