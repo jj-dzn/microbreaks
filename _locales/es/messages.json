@@ -719,5 +719,11 @@
   },
   "shortcutSnooze": {
     "message": "Posponer el descanso actual"
+  },
+  "femaleModel": {
+    "message": "Modelo femenino"
+  },
+  "femaleModelSub": {
+    "message": "Cambiar a una figura femenina"
   }
 }
