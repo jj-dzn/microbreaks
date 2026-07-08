@@ -719,5 +719,11 @@
   },
   "shortcutSnooze": {
     "message": "वर्तमान ब्रेक स्नूज़ करें"
+  },
+  "femaleModel": {
+    "message": "महिला मॉडल"
+  },
+  "femaleModelSub": {
+    "message": "महिला फिगर पर स्विच करें"
   }
 }
