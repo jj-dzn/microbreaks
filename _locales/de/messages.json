@@ -719,5 +719,11 @@
   },
   "shortcutSnooze": {
     "message": "Aktuelle Pause verschieben"
+  },
+  "femaleModel": {
+    "message": "Weibliches Modell"
+  },
+  "femaleModelSub": {
+    "message": "Zu einer weiblichen Figur wechseln"
   }
 }
