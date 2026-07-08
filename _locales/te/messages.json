@@ -719,5 +719,11 @@
   },
   "shortcutSnooze": {
     "message": "ప్రస్తుత బ్రేక్‌ను వాయిదా వేయి"
+  },
+  "femaleModel": {
+    "message": "మహిళా మోడల్"
+  },
+  "femaleModelSub": {
+    "message": "మహిళా రూపానికి మారండి"
   }
 }
