@@ -725,5 +725,11 @@
   },
   "femaleModelSub": {
     "message": "महिला फिगर पर स्विच करें"
+  },
+  "pausedWeekend": {
+    "message": "रुका — सप्ताहांत"
+  },
+  "pausedWorkHours": {
+    "message": "रुका — कार्य घंटों के बाहर"
   }
 }
