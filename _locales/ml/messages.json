@@ -725,5 +725,11 @@
   },
   "femaleModelSub": {
     "message": "ഒരു വനിതാ ഫിഗറിലേക്ക് മാറുക"
+  },
+  "pausedWeekend": {
+    "message": "നിർത്തിവച്ചു — വാരാന്ത്യം"
+  },
+  "pausedWorkHours": {
+    "message": "നിർത്തിവച്ചു — ജോലി സമയത്തിന് പുറത്ത്"
   }
 }
