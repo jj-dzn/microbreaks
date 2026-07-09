@@ -725,5 +725,11 @@
   },
   "femaleModelSub": {
     "message": "మహిళా రూపానికి మారండి"
+  },
+  "pausedWeekend": {
+    "message": "పాజ్ — వారాంతం"
+  },
+  "pausedWorkHours": {
+    "message": "పాజ్ — పని వేళలకు వెలుపల"
   }
 }
