@@ -77,6 +77,7 @@ const SYNC_DEFAULTS = {
   workEnd: "17:00",
   weekendDays: [0, 6],
   dailySummaryEnabled: true,
+  snoozeMin: 5,
   stretchOrder: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], // indices into STRETCH_KEYS
   stretchEnabled: [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true],
 };
@@ -142,11 +143,11 @@ function isWeekendPaused(state, now = new Date()) {
 
 // ===== TIMER CORE =====
 
-async function startTimer(intervalMin) {
+async function startTimer(intervalMin, force = false) {
   const state = await getState();
   if (intervalMin == null) intervalMin = state.intervalMin || 20;
 
-  if (isWeekendPaused(state) || !isWithinWorkHours(state)) {
+  if (!force && (isWeekendPaused(state) || !isWithinWorkHours(state))) {
     await chrome.alarms.clear(ALARM_NAME);
     await chrome.alarms.clear(CHIME_ALARM_NAME);
     await setState({ running: false, startedAt: null, pausedRemainSec: intervalMin * 60, intervalMin });
@@ -154,9 +155,11 @@ async function startTimer(intervalMin) {
   }
 
   const startedAt = Date.now();
-  await setState({ running: true, startedAt, pausedRemainSec: null, intervalMin });
+  // Clear existing alarms BEFORE writing running:true — prevents a race where
+  // the old alarm fires between setState and clear if the service worker restarts.
   await chrome.alarms.clear(ALARM_NAME);
   await chrome.alarms.clear(CHIME_ALARM_NAME);
+  await setState({ running: true, startedAt, pausedRemainSec: null, intervalMin });
   chrome.alarms.create(ALARM_NAME, { delayInMinutes: intervalMin });
 
   const leadSec = state.soundEnabled ? (state.soundLeadSec || 0) : 0;
@@ -180,12 +183,14 @@ async function pauseTimer() {
 async function resumeTimer() {
   const state = await getState();
 
+  // If outside work hours / weekend, don't resume — leave paused
   if (isWeekendPaused(state) || !isWithinWorkHours(state)) {
     return;
   }
 
   const remainSec = state.pausedRemainSec ?? state.intervalMin * 60;
-  const delayInMinutes = remainSec / 60;
+  // Chrome enforces a minimum 1-minute delay for alarms — clamp to avoid silent rounding
+  const delayInMinutes = Math.max(1, remainSec / 60);
   const startedAt = Date.now();
   await chrome.alarms.clear(ALARM_NAME);
   await chrome.alarms.clear(CHIME_ALARM_NAME);
@@ -208,18 +213,17 @@ async function stopTimer() {
 
 async function snoozeTimer() {
   const state = await getState();
-  const SNOOZE_MIN = 5;
+  const SNOOZE_MIN = state.snoozeMin || 5;
 
   let newRemainSec;
   if (state.running) {
-    // Only clear alarms once we've confirmed we're in a valid state
     await chrome.alarms.clear(ALARM_NAME);
     await chrome.alarms.clear(CHIME_ALARM_NAME);
     const elapsedSec = Math.floor((Date.now() - state.startedAt) / 1000);
     const totalSec = state.intervalMin * 60;
     newRemainSec = Math.max(0, totalSec - elapsedSec) + SNOOZE_MIN * 60;
     chrome.alarms.create(ALARM_NAME, { delayInMinutes: newRemainSec / 60 });
-    await setState({ startedAt: Date.now(), pausedRemainSec: null });
+    await setState({ running: true, startedAt: Date.now(), pausedRemainSec: null });
   } else if (state.pausedRemainSec != null) {
     await chrome.alarms.clear(ALARM_NAME);
     await chrome.alarms.clear(CHIME_ALARM_NAME);
@@ -227,8 +231,13 @@ async function snoozeTimer() {
     await setState({ pausedRemainSec: newRemainSec });
     return;
   } else {
-    // Neither running nor paused — nothing to snooze, don't touch alarms
-    return;
+    // Timer fully stopped (e.g. within 1500ms post-break window before auto-restart).
+    // Still honour the snooze — schedule a 5-minute alarm from now.
+    await chrome.alarms.clear(ALARM_NAME);
+    await chrome.alarms.clear(CHIME_ALARM_NAME);
+    newRemainSec = SNOOZE_MIN * 60;
+    chrome.alarms.create(ALARM_NAME, { delayInMinutes: SNOOZE_MIN });
+    await setState({ running: true, startedAt: Date.now(), pausedRemainSec: null });
   }
 
   const leadSec = state.soundEnabled ? (state.soundLeadSec || 0) : 0;
@@ -343,10 +352,12 @@ function getActiveVisibleTab(callback) {
   });
 }
 
-async function fireBreak() {
+async function fireBreak(force = false) {
   const state = await getState();
 
-  if (isWeekendPaused(state) || !isWithinWorkHours(state)) {
+  if (!state.onboardingDone) return;
+
+  if (!force && (isWeekendPaused(state) || !isWithinWorkHours(state))) {
     await chrome.alarms.clear(CHIME_ALARM_NAME);
     return;
   }
@@ -415,11 +426,8 @@ async function fireBreak() {
           tab.url.startsWith("https://chrome.google.com/webstore") ||
           tab.url.startsWith("https://chromewebstore.google.com");
 
-        // Check if the Chrome window is actually focused by the user right now.
-        // If no window is focused (user is in another app), store a pending break
-        // and show the overlay when they come back instead of firing a notification.
         const win = await new Promise(r => chrome.windows.getLastFocused({ populate: false }, w => r(w)));
-        const chromeIsFocused = win && win.focused && !restricted;
+        const chromeIsFocused = force || (win && win.focused && !restricted);
 
         if (chromeIsFocused) {
           try {
@@ -429,39 +437,47 @@ async function fireBreak() {
             });
             const resolvedLang = (state.language === 'auto' || !state.language) ? detectBgLang() : state.language;
             await chrome.tabs.sendMessage(tab.id, { type: "SHOW_BREAK_OVERLAY", stretchIndex: currentStretchIndex, male: state.maleModel, lang: resolvedLang, theme: state.theme });
-            // Overlay shown — clear any previous pending break
             await setState({ pendingBreak: null });
           } catch (e) {
-            console.log("[MicroBreaks] Overlay injection failed on:", tab && tab.url, "—", e && e.message);
-            // Injection failed on this tab (e.g. CSP) — store pending so user sees it on next navigable tab
+            console.log("[MicroBreaks] Overlay injection failed:", e && e.message);
             await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
-            if (state.notifEnabled) await fireNotification(notifText);
+            if (state.notifEnabled || force) await fireNotification(notifText);
           }
         } else {
-          console.log("[MicroBreaks] Chrome not focused — storing pending break for when user returns");
           await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
-          if (state.notifEnabled) await fireNotification(notifText);
+          if (state.notifEnabled || force) await fireNotification(notifText);
         }
       } catch (outerErr) {
         console.log("[MicroBreaks] Unexpected error in focus-mode flow —", outerErr && outerErr.message);
         await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
-        if (state.notifEnabled) await fireNotification(notifText);
+        if (state.notifEnabled || force) await fireNotification(notifText);
       }
+
+      // Send BREAK_FIRED after overlay attempt so popup reflects correct state
+      chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex: currentStretchIndex, totalBreaks: totalBreaksAllTime }).catch(() => {});
+
+      // Auto-restart AFTER overlay is shown — not before
+      setTimeout(async () => {
+        const freshState = await getState();
+        if (!freshState.pendingBreak) {
+          startTimer(freshState.intervalMin, true);
+        }
+      }, 1500);
     });
-  } else if (state.notifEnabled) {
-    await fireNotification(notifText);
+
+  } else {
+    // Notification mode
+    if (state.notifEnabled || force) await fireNotification(notifText);
+
+    chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex: currentStretchIndex, totalBreaks: totalBreaksAllTime }).catch(() => {});
+
+    setTimeout(async () => {
+      const freshState = await getState();
+      if (!freshState.pendingBreak) {
+        startTimer(freshState.intervalMin, true);
+      }
+    }, 1500);
   }
-
-  // Send BREAK_FIRED to popup for UI update. In focus mode the overlay/pendingBreak
-  // may not be set yet (async callback pending), but popup only uses this for display hints.
-  chrome.runtime.sendMessage({ type: "BREAK_FIRED", stretchIndex: currentStretchIndex, totalBreaks: totalBreaksAllTime }).catch(() => {});
-
-  setTimeout(async () => {
-    const freshState = await getState();
-    if (!freshState.pendingBreak) {
-      startTimer(freshState.intervalMin);
-    }
-  }, 1500);
 }
 
 // ===== PENDING BREAK ON FOCUS RETURN =====
@@ -604,7 +620,10 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 chrome.notifications.onButtonClicked.addListener((notifId, btnIndex) => {
   if (notifId.startsWith("microbreak-")) {
     if (btnIndex === 0) snoozeTimer();
-    if (btnIndex === 1) getState().then(s => startTimer(s.intervalMin));
+    if (btnIndex === 1) {
+      // Clear pendingBreak first so a pending overlay doesn't show after restart
+      setState({ pendingBreak: null }).then(() => getState()).then(s => startTimer(s.intervalMin));
+    }
     chrome.notifications.clear(notifId);
   }
 });
@@ -618,7 +637,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       case "START": {
         await setState({ pendingBreak: null });
         const startState = await getState();
-        await startTimer(msg.intervalMin ?? startState.intervalMin);
+        await startTimer(msg.intervalMin ?? startState.intervalMin, true); // force=true: user explicitly started
         sendResponse(await getState());
         break;
       }
@@ -626,13 +645,14 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       case "RESUME":         await resumeTimer(); sendResponse(await getState()); break;
       case "STOP":           await stopTimer(); sendResponse(await getState()); break;
       case "SNOOZE": {
-        // Only clear pendingBreak if the overlay was already shown (user snoozing from it).
-        // If pendingBreak is set and overlay hasn't shown yet, leave it so it shows on return.
+        // Only clear pendingBreak if overlay was already shown.
+        // If pendingBreak is set and overlay hasn't shown yet, leave it.
         const snoozeState = await getState();
         if (!snoozeState.pendingBreak) {
           await setState({ pendingBreak: null });
         }
         await snoozeTimer();
+        // Always read fresh state after snoozeTimer — it may have returned early
         sendResponse(await getState());
         break;
       }
@@ -647,7 +667,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
           scheduleSummaryAlarm(newState);
         }
         if (['workHoursEnabled', 'workStart', 'workEnd', 'weekendDays'].includes(msg.key)) {
-          if (newState.running || newState.pausedRemainSec != null) {
+          if (newState.running) {
             await startTimer(newState.intervalMin);
           }
         }
@@ -659,9 +679,8 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         await setState({ workHoursEnabled: msg.enabled, workStart: msg.start, workEnd: msg.end });
         const whState = await getState();
         scheduleSummaryAlarm(whState);
-        if (whState.running || whState.pausedRemainSec != null) {
-          await startTimer(whState.intervalMin);
-        }
+        // Only restart if running — don't wipe a manual pause
+        if (whState.running) await startTimer(whState.intervalMin);
         sendResponse(whState);
         break;
       }
@@ -669,9 +688,8 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       case "SET_WEEKEND_DAYS": {
         await setState({ weekendDays: msg.days });
         const wdState = await getState();
-        if (wdState.running || wdState.pausedRemainSec != null) {
-          await startTimer(wdState.intervalMin);
-        }
+        // Only restart if running — don't wipe a manual pause
+        if (wdState.running) await startTimer(wdState.intervalMin);
         sendResponse(wdState);
         break;
       }
@@ -693,7 +711,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 
 chrome.commands.onCommand.addListener(async (command) => {
   if (command === 'trigger-break') {
-    await fireBreak();
+    await fireBreak(true);
   }
   if (command === 'snooze-break') {
     await snoozeTimer();
@@ -704,17 +722,27 @@ chrome.commands.onCommand.addListener(async (command) => {
 
 chrome.runtime.onInstalled.addListener(async (details) => {
   const state = await getState();
-  if (!state.running) await startTimer(state.intervalMin);
+  // Only start timer if fully stopped — not if user has manually paused
+  if (!state.running && state.pausedRemainSec === null) {
+    await startTimer(state.intervalMin);
+  }
   scheduleSummaryAlarm(state);
   if (details.reason === 'install') {
-    // Open the onboarding page on first install
     chrome.tabs.create({ url: chrome.runtime.getURL('onboarding.html') });
   }
 });
 
 chrome.runtime.onStartup.addListener(async () => {
   const state = await getState();
-  if (!state.running && state.pausedRemainSec == null) await startTimer(state.intervalMin);
+  // After browser restart all alarms are gone. Restart timer if:
+  // - Fully stopped (not running, not paused) — fresh start
+  // - Was running when Chrome closed (running=true but alarm is now gone — stale state)
+  if (!state.running && state.pausedRemainSec == null) {
+    await startTimer(state.intervalMin);
+  } else if (state.running) {
+    // Stale running=true from before browser restart — alarm is gone, recreate it
+    await startTimer(state.intervalMin);
+  }
   scheduleSummaryAlarm(state);
   chrome.action.setBadgeText({ text: state.badgeCount > 0 ? String(state.badgeCount) : '' });
 });
