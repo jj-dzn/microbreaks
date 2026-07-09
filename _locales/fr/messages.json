@@ -725,5 +725,11 @@
   },
   "femaleModelSub": {
     "message": "Passer à une figure féminine"
+  },
+  "pausedWeekend": {
+    "message": "En pause — week-end"
+  },
+  "pausedWorkHours": {
+    "message": "En pause — hors heures de travail"
   }
 }
