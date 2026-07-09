@@ -1,117 +1,117 @@
 {
   "extName": {
-    "message": "MicroBreaks — ஸ்ட்ரெச் டைமர்"
+    "message": "MicroBreaks — స్ట్రెచ్ టైమర్"
   },
   "extDescription": {
-    "message": "ஸ்ட்ரெச் பரிந்துரைகளுடன் மென்மையான இடைவேளை நினைவூட்டல்கள். உட்கார்ந்து வேலை செய்து நகர மறக்கும் அனைவருக்கும்."
+    "message": "స్ట్రెచ్ సూచనలతో సున్నితమైన బ్రేక్ రిమైండర్లు. కూర్చుని పని చేస్తూ కదలడం మర్చిపోయే వారి కోసం."
   },
   "brandName": {
     "message": "MicroBreaks"
   },
   "strictModeOn": {
-    "message": "ஸ்ட்ரிக்ட் மோட் ஆன்"
+    "message": "స్ట్రిక్ట్ మోడ్ ఆన్"
   },
   "strictModeOff": {
-    "message": "ஸ்ட்ரிக்ட் மோட் ஆஃப்"
+    "message": "స్ట్రిక్ట్ మోడ్ ఆఫ్"
   },
   "strictModeTooltip": {
-    "message": "அறிவிப்புக்கு பதிலாக, தவிர்க்க முடியாத முழுத் திரை இடைவேளை ஓவர்லேயைக் காட்டுகிறது."
+    "message": "నోటిఫికేషన్‌కు బదులుగా, మిస్ చేయలేని ఫుల్-స్క్రీన్ బ్రేక్ ఓవర్‌లేను చూపుతుంది."
   },
   "untilBreak": {
-    "message": "இடைவேளை வரை"
+    "message": "బ్రేక్ వరకు"
   },
   "breakTime": {
-    "message": "ஸ்ட்ரெச் செய்ய வேண்டிய நேரம்"
+    "message": "స్ట్రెచ్ చేయాల్సిన సమయం"
   },
   "moveNow": {
-    "message": "நகருங்கள்!"
+    "message": "కదలండి!"
   },
   "interval20": {
-    "message": "20 நிமி"
+    "message": "20 నిమి"
   },
   "interval30": {
-    "message": "30 நிமி"
+    "message": "30 నిమి"
   },
   "interval45": {
-    "message": "45 நிமி"
+    "message": "45 నిమి"
   },
   "intervalCustom": {
-    "message": "தனிப்பயன்"
+    "message": "అనుకూలం"
   },
   "customPrompt": {
-    "message": "இடைவேளைகளுக்கு இடையில் எத்தனை நிமிடங்கள்?"
+    "message": "బ్రేక్‌ల మధ్య ఎన్ని నిమిషాలు?"
   },
   "snooze": {
-    "message": "5 நிமி தள்ளிவை"
+    "message": "5 నిమి వాయిదా"
   },
   "start": {
-    "message": "தொடங்கு"
+    "message": "ప్రారంభించు"
   },
   "pause": {
-    "message": "இடைநிறுத்து"
+    "message": "ఆపు"
   },
   "resume": {
-    "message": "தொடர்"
+    "message": "కొనసాగించు"
   },
   "upNext": {
-    "message": "அடுத்தது"
+    "message": "తరువాత"
   },
   "breaksToday": {
-    "message": "இன்றைய இடைவேளைகள்"
+    "message": "ఈరోజు బ్రేక్‌లు"
   },
   "dayStreak": {
-    "message": "தொடர் நாட்கள்"
+    "message": "రోజుల వరుస"
   },
   "minsMoved": {
-    "message": "நகர்ந்த நிமிடங்கள்"
+    "message": "కదిలిన నిమిషాలు"
   },
   "settingsNotifications": {
-    "message": "அறிவிப்புகள்"
+    "message": "నోటిఫికేషన్లు"
   },
   "settingsDisplay": {
-    "message": "திரை"
+    "message": "డిస్‌ప్లే"
   },
   "settingsModel": {
-    "message": "மாடல்"
+    "message": "మోడల్"
   },
   "browserNotification": {
-    "message": "உலாவி அறிவிப்பு"
+    "message": "బ్రౌజర్ నోటిఫికేషన్"
   },
   "browserNotificationSub": {
-    "message": "தாவல் பின்னணியில் இருந்தாலும் வேலை செய்யும்"
+    "message": "ట్యాబ్ బ్యాక్‌గ్రౌండ్‌లో ఉన్నా పనిచేస్తుంది"
   },
   "stretchAnimations": {
-    "message": "ஸ்ட்ரெச் அனிமேஷன்கள்"
+    "message": "స్ట్రెచ్ యానిమేషన్లు"
   },
   "stretchAnimationsSub": {
-    "message": "ஒவ்வொரு இடைவேளையிலும் வழிகாட்டும் அனிமேஷன்"
+    "message": "ప్రతి బ్రేక్‌లో గైడెడ్ యానిమేషన్"
   },
   "maleModel": {
-    "message": "ஆண் மாடல்"
+    "message": "పురుష మోడల్"
   },
   "maleModelSub": {
-    "message": "பயிற்சிகளுக்கு ஆண் உருவத்திற்கு மாறவும்"
+    "message": "వ్యాయామాల కోసం పురుష ఆకృతికి మారండి"
   },
   "language": {
-    "message": "மொழி"
+    "message": "భాష"
   },
   "languageSub": {
-    "message": "உங்கள் விருப்ப மொழியைத் தேர்ந்தெடுக்கவும்"
+    "message": "మీకు నచ్చిన భాషను ఎంచుకోండి"
   },
   "languageAuto": {
-    "message": "தானாக கண்டறி"
+    "message": "స్వయంచాలకంగా గుర్తించు"
   },
   "doneIMoved": {
-    "message": "முடிந்தது — நான் நகர்ந்தேன்"
+    "message": "పూర్తయింది — నేను కదిలాను"
   },
   "dismissHint": {
-    "message": "மூட Esc அழுத்தவும் அல்லது வெளியே கிளிக் செய்யவும்"
+    "message": "మూసివేయడానికి Esc నొక్కండి లేదా బయట క్లిక్ చేయండి"
   },
   "welcomeTitle": {
-    "message": "MicroBreaks இயங்குகிறது"
+    "message": "MicroBreaks నడుస్తోంది"
   },
   "welcomeMessage": {
-    "message": "ஒவ்வொரு $MINUTES$ நிமிடத்திற்கும் ஸ்ட்ரெச் செய்ய மென்மையான நினைவூட்டல் கிடைக்கும். நெகிழ்வாக இருங்கள்!",
+    "message": "ప్రతి $MINUTES$ నిమిషాలకు స్ట్రెచ్ చేయడానికి మీకు సున్నితమైన రిమైండర్ వస్తుంది. వంగేలా ఉండండి!",
     "placeholders": {
       "minutes": {
         "content": "$1"
@@ -119,337 +119,337 @@
     }
   },
   "timeToMove": {
-    "message": "நகர வேண்டிய நேரம்"
+    "message": "కదలాల్సిన సమయం"
   },
   "snoozeBtn": {
-    "message": "5 நிமி தள்ளிவை"
+    "message": "5 నిమి వాయిదా"
   },
   "restartBtn": {
-    "message": "முடிந்தது — மீண்டும் தொடங்கு"
+    "message": "పూర్తయింది — మళ్లీ ప్రారంభించు"
   },
   "stretchNeckRolls": {
-    "message": "கழுத்து சுழற்சி"
+    "message": "మెడ తిప్పడం"
   },
   "stretchNeckRollsDesc": {
-    "message": "உங்கள் தலையை மெதுவாக மூன்று முறை ஒவ்வொரு திசையிலும் சுழற்றவும். தாடையை தளர்த்தவும்."
+    "message": "మీ తలను నెమ్మదిగా మూడు సార్లు ప్రతి దిశలో తిప్పండి. దవడను సడలించండి."
   },
   "stretchNeckRollsStep1": {
-    "message": "நேராக உட்காரவும் அல்லது நிற்கவும், தோள்களை தளர்த்தவும்"
+    "message": "నిటారుగా కూర్చోండి లేదా నిలబడండి, భుజాలు సడలించండి"
   },
   "stretchNeckRollsStep2": {
-    "message": "வலது காதை வலது தோளுக்கு மெதுவாக சாய்க்கவும்"
+    "message": "నెమ్మదిగా కుడి చెవిని కుడి భుజం వైపు వంచండి"
   },
   "stretchNeckRollsStep3": {
-    "message": "தலையை முன்னே சுருட்டவும், மோவாய் மார்புக்கு"
+    "message": "తలను ముందుకు తిప్పండి, గడ్డం రొమ్ముకు"
   },
   "stretchNeckRollsStep4": {
-    "message": "இடது பக்கம் தொடரவும்"
+    "message": "ఎడమ వైపుకు కొనసాగించండి"
   },
   "stretchNeckRollsStep5": {
-    "message": "ஒவ்வொரு திசையிலும் 3 முழு மெதுவான சுற்றுகளை முடிக்கவும்"
+    "message": "ప్రతి దిశలో 3 పూర్తి నెమ్మది వలయాలు పూర్తి చేయండి"
   },
   "stretchOverheadReach": {
-    "message": "மேல்நோக்கி நீட்டுதல்"
+    "message": "పైకి చేరడం"
   },
   "stretchOverheadReachDesc": {
-    "message": "விரல்களை பின்னி, உள்ளங்கைகளை மேற்கூரையை நோக்கி அழுத்தவும். இரண்டு ஆழ்ந்த மூச்சு எடுக்கவும்."
+    "message": "వేళ్లు పెనవేసి, అరచేతులను పైకప్పు వైపు నొక్కండి. రెండు లోతైన శ్వాసలు తీసుకోండి."
   },
   "stretchOverheadReachStep1": {
-    "message": "இடுப்பு அளவில் கால்களை வைத்து நிற்கவும்"
+    "message": "తుంటి వెడల్పులో పాదాలతో నిలబడండి"
   },
   "stretchOverheadReachStep2": {
-    "message": "மூச்சு இழுத்து இரு கைகளையும் தலைக்கு மேல் தூக்கவும்"
+    "message": "శ్వాస తీసుకుని రెండు చేతులను తల పైకి ఎత్తండి"
   },
   "stretchOverheadReachStep3": {
-    "message": "விரல்களை பின்னவும், உள்ளங்கைகள் மேல்நோக்கி"
+    "message": "వేళ్లను పెనవేయండి, అరచేతులు పైకి"
   },
   "stretchOverheadReachStep4": {
-    "message": "மெதுவாக மேலே அழுத்தி 3 மூச்சு பிடிக்கவும்"
+    "message": "నెమ్మదిగా పైకి నొక్కి 3 శ్వాసలు పట్టుకోండి"
   },
   "stretchOverheadReachStep5": {
-    "message": "மூச்சு வெளியேற்றி கைகளை மெதுவாக கீழே கொண்டுவரவும்"
+    "message": "శ్వాస వదిలి చేతులను నెమ్మదిగా దించండి"
   },
   "stretch2020": {
-    "message": "20-20-20 விதி"
+    "message": "20-20-20 నియమం"
   },
   "stretch2020Desc": {
-    "message": "6 மீட்டர் தொலைவில் ஏதேனும் ஒன்றைக் கண்டறியவும். 20 விநாடிகள் கண் இமைக்காமல் பார்க்கவும்."
+    "message": "సుమారు 6 మీటర్ల దూరంలో ఏదైనా కనుగొనండి. 20 సెకన్లు రెప్ప వేయకుండా చూడండి."
   },
   "stretch2020Step1": {
-    "message": "உங்கள் திரையிலிருந்து முற்றிலும் பார்வையை விலக்கவும்"
+    "message": "మీ స్క్రీన్ నుండి పూర్తిగా దృష్టి మరల్చండి"
   },
   "stretch2020Step2": {
-    "message": "குறைந்தது 6 மீட்டர் தொலைவில் ஏதேனும் ஒன்றைக் கண்டறியவும்"
+    "message": "కనీసం 6 మీటర్ల దూరంలో ఏదైనా కనుగొనండి"
   },
   "stretch2020Step3": {
-    "message": "கண்களை வலியுறுத்தாமல் மென்மையாக கவனம் செலுத்தவும்"
+    "message": "కళ్లకు ఒత్తిడి లేకుండా మృదువుగా దృష్టి పెట్టండి"
   },
   "stretch2020Step4": {
-    "message": "20 விநாடிகள் முழுவதும் பார்வையை நிலைநிறுத்தவும்"
+    "message": "పూర్తి 20 సెకన్ల పాటు దృష్టి నిలపండి"
   },
   "stretch2020Step5": {
-    "message": "மெதுவாக கண் இமைத்து வேலைக்குத் திரும்பவும்"
+    "message": "నెమ్మదిగా రెప్ప వేసి పనికి తిరిగి వెళ్లండి"
   },
   "stretchWristCircles": {
-    "message": "மணிக்கட்டு சுழற்சி"
+    "message": "మణికట్టు వలయాలు"
   },
   "stretchWristCirclesDesc": {
-    "message": "கைகளை முன்னே நீட்டவும். மணிக்கட்டுகளை பெரிய வட்டங்களில் சுழற்றவும் — ஒவ்வொரு திசையிலும் ஐந்து முறை."
+    "message": "చేతులను ముందుకు చాపండి. మణికట్లను పెద్ద వలయాలలో తిప్పండి — ప్రతి దిశలో ఐదు సార్లు."
   },
   "stretchWristCirclesStep1": {
-    "message": "இரு கைகளையும் உங்கள் முன்னே நீட்டவும்"
+    "message": "రెండు చేతులను మీ ముందు చాపండి"
   },
   "stretchWristCirclesStep2": {
-    "message": "இரு கைகளாலும் தளர்வான முஷ்டிகளை உருவாக்கவும்"
+    "message": "రెండు చేతులతో వదులైన పిడికిళ్లు చేయండి"
   },
   "stretchWristCirclesStep3": {
-    "message": "இரு மணிக்கட்டுகளையும் மெதுவாக வெளியே சுழற்றவும்"
+    "message": "రెండు మణికట్లను నెమ్మదిగా బయటకు తిప్పండి"
   },
   "stretchWristCirclesStep4": {
-    "message": "5 சுற்றுகளை முடித்து திசையை மாற்றவும்"
+    "message": "5 వలయాలు పూర్తి చేసి దిశ మార్చండి"
   },
   "stretchWristCirclesStep5": {
-    "message": "முடிக்க கைகளை மெதுவாக உலுக்கவும்"
+    "message": "ముగించడానికి చేతులను సున్నితంగా ఊపండి"
   },
   "stretchShoulderRolls": {
-    "message": "தோள் சுழற்சி"
+    "message": "భుజాల తిప్పడం"
   },
   "stretchShoulderRollsDesc": {
-    "message": "தோள்களை மெதுவாக ஐந்து முறை பின்னோக்கி, பின் ஐந்து முறை முன்னோக்கி சுழற்றவும். நாளின் சுமையை விடுங்கள்."
+    "message": "భుజాలను నెమ్మదిగా ఐదు సార్లు వెనుకకు, తరువాత ఐదు సార్లు ముందుకు తిప్పండి. రోజు భారాన్ని వదిలేయండి."
   },
   "stretchShoulderRollsStep1": {
-    "message": "கைகளை பக்கங்களில் தளர்வாக தொங்க விடவும்"
+    "message": "చేతులను పక్కలకు వదులుగా వేళ్లాడనివ్వండి"
   },
   "stretchShoulderRollsStep2": {
-    "message": "இரு தோள்களையும் காதுகளை நோக்கி தூக்கவும்"
+    "message": "రెండు భుజాలను చెవుల వైపు ఎత్తండి"
   },
   "stretchShoulderRollsStep3": {
-    "message": "அவற்றை மெதுவாக பின்னோக்கியும் கீழ்நோக்கியும் சுழற்றவும்"
+    "message": "వాటిని నెమ్మదిగా వెనుకకు, దిగువకు తిప్పండి"
   },
   "stretchShoulderRollsStep4": {
-    "message": "தோள்பட்டைகள் நெருங்குவதை உணரவும்"
+    "message": "భుజం ఎముకలు దగ్గరవ్వడం అనుభవించండి"
   },
   "stretchShoulderRollsStep5": {
-    "message": "5 முறை மீண்டும் செய்து முன்னோக்கி சுழற்றவும்"
+    "message": "5 సార్లు పునరావృతం చేసి ముందుకు తిప్పండి"
   },
   "stretchSpinalTwist": {
-    "message": "முதுகெலும்பு திருப்பம்"
+    "message": "వెన్నెముక మెలి"
   },
   "stretchSpinalTwistDesc": {
-    "message": "நேராக உட்கார்ந்து, ஒரு கையை எதிர் முழங்காலில் வைத்து, மெதுவாக திரும்பவும்."
+    "message": "నిటారుగా కూర్చోండి, ఒక చేతిని వ్యతిరేక మోకాలిపై పెట్టి, నెమ్మదిగా తిప్పండి."
   },
   "stretchSpinalTwistStep1": {
-    "message": "நேராக உட்காரவும், கால்கள் தரையில் தட்டையாக"
+    "message": "నిటారుగా కూర్చోండి, పాదాలు నేలపై చదునుగా"
   },
   "stretchSpinalTwistStep2": {
-    "message": "வலது கையை இடது முழங்காலில் வைக்கவும்"
+    "message": "మీ కుడి చేతిని ఎడమ మోకాలిపై పెట్టండి"
   },
   "stretchSpinalTwistStep3": {
-    "message": "மூச்சு இழுத்து முதுகெலும்பை மேலே நீட்டவும்"
+    "message": "శ్వాస తీసుకుని వెన్నెముకను పైకి సాగదీయండి"
   },
   "stretchSpinalTwistStep4": {
-    "message": "மூச்சு வெளியேற்றி மெதுவாக இடதுபுறம் திரும்பவும்"
+    "message": "శ్వాస వదిలి నెమ్మదిగా ఎడమవైపు తిప్పండి"
   },
   "stretchSpinalTwistStep5": {
-    "message": "3 மூச்சு பிடித்து பக்கம் மாற்றவும்"
+    "message": "3 శ్వాసలు పట్టుకుని వైపు మార్చండి"
   },
   "stretchForwardFold": {
-    "message": "முன்னோக்கி வளைதல்"
+    "message": "ముందుకు వంగడం"
   },
   "stretchForwardFoldDesc": {
-    "message": "இடுப்பிலிருந்து முன்னோக்கி வளைந்து கைகளையும் தலையையும் கனமாக தொங்க விடவும்."
+    "message": "తుంటి నుండి ముందుకు వంగి చేతులు మరియు తలను బరువుగా వేళ్లాడనివ్వండి."
   },
   "stretchForwardFoldStep1": {
-    "message": "இடுப்பு அளவில் கால்களை வைத்து நிற்கவும்"
+    "message": "తుంటి వెడల్పులో పాదాలతో నిలబడండి"
   },
   "stretchForwardFoldStep2": {
-    "message": "மூச்சு இழுத்து முதுகெலும்பை மேலே நீட்டவும்"
+    "message": "శ్వాస తీసుకుని వెన్నెముకను పైకి సాగదీయండి"
   },
   "stretchForwardFoldStep3": {
-    "message": "மூச்சு வெளியேற்றி இடுப்பிலிருந்து முன்னோக்கி வளையவும்"
+    "message": "శ్వాస వదిలి తుంటి నుండి ముందుకు వంగండి"
   },
   "stretchForwardFoldStep4": {
-    "message": "கைகளையும் தலையையும் கனமாக தொங்க விடவும்"
+    "message": "చేతులు మరియు తలను బరువుగా వేళ్లాడనివ్వండి"
   },
   "stretchForwardFoldStep5": {
-    "message": "3 மூச்சு பிடித்து மெதுவாக எழவும்"
+    "message": "3 శ్వాసలు పట్టుకుని నెమ్మదిగా లేచండి"
   },
   "stretchChestOpener": {
-    "message": "மார்பு திறப்பு"
+    "message": "ఛాతీ తెరవడం"
   },
   "stretchChestOpenerDesc": {
-    "message": "கைகளை முதுகுக்குப் பின்னால் பின்னி தோள்பட்டைகளை நெருக்கவும்."
+    "message": "చేతులను వెనుక పెనవేసి భుజం ఎముకలను దగ్గరగా తీసుకురండి."
   },
   "stretchChestOpenerStep1": {
-    "message": "நேராக நின்று அல்லது உட்கார்ந்து"
+    "message": "నిటారుగా నిలబడండి లేదా కూర్చోండి"
   },
   "stretchChestOpenerStep2": {
-    "message": "கைகளை கீழ் முதுகுக்குப் பின்னால் பின்னவும்"
+    "message": "చేతులను దిగువ వెన్నెముక వెనుక పెనవేయండి"
   },
   "stretchChestOpenerStep3": {
-    "message": "தோள்பட்டைகளை நெருக்கவும்"
+    "message": "భుజం ఎముకలను దగ్గరగా తీసుకురండి"
   },
   "stretchChestOpenerStep4": {
-    "message": "மார்பையும் மோவாயையும் சிறிது தூக்கவும்"
+    "message": "ఛాతీ మరియు గడ్డాన్ని కొద్దిగా పైకి ఎత్తండి"
   },
   "stretchChestOpenerStep5": {
-    "message": "3 ஆழ்ந்த மூச்சு பிடித்து விடவும்"
+    "message": "3 లోతైన శ్వాసలు పట్టుకుని వదిలేయండి"
   },
   "stretchSideStretch": {
-    "message": "பக்க ஸ்ட்ரெச்"
+    "message": "పక్క స్ట్రెచ్"
   },
   "stretchSideStretchDesc": {
-    "message": "ஒரு கையை தலைக்கு மேல் தூக்கி எதிர் பக்கம் மெதுவாக சாயவும்."
+    "message": "ఒక చేతిని తల పైకి ఎత్తి వ్యతిరేక పక్కకు నెమ్మదిగా వంగండి."
   },
   "stretchSideStretchStep1": {
-    "message": "இடுப்பு அளவில் கால்களை வைத்து நிற்கவும்"
+    "message": "తుంటి వెడల్పులో పాదాలతో నిలబడండి"
   },
   "stretchSideStretchStep2": {
-    "message": "வலது கையை தலைக்கு மேல் தூக்கவும்"
+    "message": "కుడి చేతిని తల పైకి ఎత్తండి"
   },
   "stretchSideStretchStep3": {
-    "message": "மெதுவாக இடதுபுறம் சாயவும்"
+    "message": "నెమ్మదిగా ఎడమవైపు వంగండి"
   },
   "stretchSideStretchStep4": {
-    "message": "வலது பக்கம் நீட்சியை உணரவும்"
+    "message": "కుడి పక్క సాగడం అనుభవించండి"
   },
   "stretchSideStretchStep5": {
-    "message": "3 மூச்சு பிடித்து பக்கம் மாற்றவும்"
+    "message": "3 శ్వాసలు పట్టుకుని వైపు మార్చండి"
   },
   "stretchChinTucks": {
-    "message": "மோவாய் இழுத்தல்"
+    "message": "గడ్డం లాగడం"
   },
   "stretchChinTucksDesc": {
-    "message": "தலையோட்டின் அடிப்பகுதியை நீட்ட மோவாயை மெதுவாக நேராக பின்னோக்கி இழுக்கவும்."
+    "message": "పుర్రె అడుగుభాగాన్ని సాగదీయడానికి గడ్డాన్ని నెమ్మదిగా నేరుగా వెనుకకు లాగండి."
   },
   "stretchChinTucksStep1": {
-    "message": "முதுகெலும்பு நேராக உட்காரவும் அல்லது நிற்கவும்"
+    "message": "వెన్నెముక నిటారుగా కూర్చోండి లేదా నిలబడండి"
   },
   "stretchChinTucksStep2": {
-    "message": "கண் மட்டத்தில் நேராக முன்னே பார்க்கவும்"
+    "message": "కంటి స్థాయిలో నేరుగా ముందుకు చూడండి"
   },
   "stretchChinTucksStep3": {
-    "message": "மோவாயை மெதுவாக நேராக பின்னோக்கி இழுக்கவும்"
+    "message": "గడ్డాన్ని నెమ్మదిగా నేరుగా వెనుకకు లాగండి"
   },
   "stretchChinTucksStep4": {
-    "message": "தலையோட்டின் அடிப்பகுதியில் நீட்சியை உணரவும்"
+    "message": "పుర్రె అడుగుభాగంలో సాగడం అనుభవించండి"
   },
   "stretchChinTucksStep5": {
-    "message": "3 விநாடிகள் பிடித்து, விடுங்கள், 5 முறை மீண்டும் செய்யவும்"
+    "message": "3 సెకన్లు పట్టుకుని, వదిలేయండి, 5 సార్లు పునరావృతం చేయండి"
   },
   "stretchUpperBackSqueeze": {
-    "message": "மேல் முதுகு இறுக்கம்"
+    "message": "ఎగువ వీపు నొక్కడం"
   },
   "stretchUpperBackSqueezeDesc": {
-    "message": "முழங்கைகளை பின்னோக்கி இழுத்து தோள்பட்டைகளை உறுதியாக நெருக்கவும்."
+    "message": "మోచేతులను వెనుకకు లాగి భుజం ఎముకలను గట్టిగా దగ్గరగా తీసుకురండి."
   },
   "stretchUpperBackSqueezeStep1": {
-    "message": "நேராக உட்காரவும், கைகள் பக்கங்களில்"
+    "message": "నిటారుగా కూర్చోండి, చేతులు పక్కలకు"
   },
   "stretchUpperBackSqueezeStep2": {
-    "message": "முழங்கைகளை 90 டிகிரியில் வளைக்கவும்"
+    "message": "మోచేతులను 90 డిగ్రీలకు వంచండి"
   },
   "stretchUpperBackSqueezeStep3": {
-    "message": "இரு முழங்கைகளையும் உடலுக்குப் பின்னால் இழுக்கவும்"
+    "message": "రెండు మోచేతులను శరీరం వెనుకకు లాగండి"
   },
   "stretchUpperBackSqueezeStep4": {
-    "message": "தோள்பட்டைகளை உறுதியாக நெருக்கவும்"
+    "message": "భుజం ఎముకలను గట్టిగా దగ్గరగా తీసుకురండి"
   },
   "stretchUpperBackSqueezeStep5": {
-    "message": "5 விநாடிகள் பிடித்து, விடுங்கள், 5 முறை மீண்டும் செய்யவும்"
+    "message": "5 సెకన్లు పట్టుకుని, వదిలేయండి, 5 సార్లు పునరావృతం చేయండి"
   },
   "stretchTempleMassage": {
-    "message": "நெற்றி பக்க மசாஜ்"
+    "message": "నుదురు మసాజ్"
   },
   "stretchTempleMassageDesc": {
-    "message": "பதற்றத்தைத் தளர்த்த நெற்றி பக்கங்களில் மெதுவான வட்ட அழுத்தம் கொடுக்கவும்."
+    "message": "ఒత్తిడిని విడుదల చేయడానికి కణతలపై మృదువైన వలయాకార పీడనం ఇవ్వండి."
   },
   "stretchTempleMassageStep1": {
-    "message": "உங்கள் விரல் நுனிகளை நெற்றி பக்கங்களில் வைக்கவும்"
+    "message": "మీ వేళ్ల కొనలను కణతలపై పెట్టండి"
   },
   "stretchTempleMassageStep2": {
-    "message": "உள்நோக்கி மெதுவான வட்ட அழுத்தம் கொடுக்கவும்"
+    "message": "లోపలికి మృదువైన వలయాకార పీడనం ఇవ్వండి"
   },
   "stretchTempleMassageStep3": {
-    "message": "சிறிய வட்டங்களில் மெதுவாக நகரவும்"
+    "message": "చిన్న వలయాలలో నెమ్మదిగా కదలండి"
   },
   "stretchTempleMassageStep4": {
-    "message": "ஆழமாக சுவாசித்து தாடை பதற்றத்தை விடவும்"
+    "message": "లోతుగా శ్వాసించి దవడ ఒత్తిడిని వదిలేయండి"
   },
   "stretchTempleMassageStep5": {
-    "message": "முழு 20 விநாடிகளும் தொடரவும்"
+    "message": "పూర్తి 20 సెకన్లు కొనసాగించండి"
   },
   "stretchAnkleCircles": {
-    "message": "கணுக்கால் சுழற்சி"
+    "message": "చీలమండ వలయాలు"
   },
   "stretchAnkleCirclesDesc": {
-    "message": "இரத்த ஓட்டத்தை மேம்படுத்த கால்களை தூக்கி கணுக்கால்களை மெதுவாக சுழற்றவும்."
+    "message": "రక్త ప్రసరణను మెరుగుపరచడానికి పాదాలను ఎత్తి చీలమండలను నెమ్మదిగా తిప్పండి."
   },
   "stretchAnkleCirclesStep1": {
-    "message": "கால்களை தரையிலிருந்து தூக்கி உட்காரவும்"
+    "message": "పాదాలను నేల నుండి ఎత్తి కూర్చోండి"
   },
   "stretchAnkleCirclesStep2": {
-    "message": "கால் விரல்களை மெதுவாக முன்னோக்கி நேராக்கவும்"
+    "message": "కాలి వేళ్లను నెమ్మదిగా ముందుకు చూపించండి"
   },
   "stretchAnkleCirclesStep3": {
-    "message": "இரு கணுக்கால்களையும் மெதுவாக வெளியே சுழற்றவும்"
+    "message": "రెండు చీలమండలను నెమ్మదిగా బయటకు తిప్పండి"
   },
   "stretchAnkleCirclesStep4": {
-    "message": "5 சுற்றுகளை முடித்து திசையை மாற்றவும்"
+    "message": "5 వలయాలు పూర్తి చేసి దిశ మార్చండి"
   },
   "stretchAnkleCirclesStep5": {
-    "message": "முடிக்க கால்களை வளைத்து நேராக்கவும்"
+    "message": "ముగించడానికి పాదాలను వంచి, చాపండి"
   },
   "stretchFingerSpreads": {
-    "message": "விரல் விரிப்பு"
+    "message": "వేళ్లు చాపడం"
   },
   "stretchFingerSpreadsDesc": {
-    "message": "தட்டச்சு பதற்றத்தை குறைக்க விரல்களை அகலமாக விரித்து, பின் முஷ்டியாக மடிக்கவும்."
+    "message": "టైపింగ్ ఒత్తిడిని తగ్గించడానికి వేళ్లను వెడల్పుగా చాపి, తరువాత పిడికిలి చుట్టండి."
   },
   "stretchFingerSpreadsStep1": {
-    "message": "இரு கைகளையும் உங்கள் முன்னே நீட்டவும்"
+    "message": "రెండు చేతులను మీ ముందు పెట్టండి"
   },
   "stretchFingerSpreadsStep2": {
-    "message": "விரல்களை முடிந்தவரை அகலமாக விரிக்கவும்"
+    "message": "వేళ్లను వీలైనంత వెడల్పుగా చాపండి"
   },
   "stretchFingerSpreadsStep3": {
-    "message": "3 விநாடிகள் விரிப்பை தக்கவைக்கவும்"
+    "message": "3 సెకన్లు చాపును కొనసాగించండి"
   },
   "stretchFingerSpreadsStep4": {
-    "message": "பின் விரல்களை தளர்வான முஷ்டியாக மடிக்கவும்"
+    "message": "తరువాత వేళ్లను వదులైన పిడికిలిగా చుట్టండి"
   },
   "stretchFingerSpreadsStep5": {
-    "message": "திறத்தல்-மூடுதல் இயக்கத்தை 5 முறை மீண்டும் செய்யவும்"
+    "message": "తెరవడం-మూసివేయడం కదలికను 5 సార్లు పునరావృతం చేయండి"
   },
   "stretchHipStretch": {
-    "message": "இடுப்பு ஸ்ட்ரெச்"
+    "message": "తుంటి స్ట్రెచ్"
   },
   "stretchHipStretchDesc": {
-    "message": "இடுப்பு மற்றும் குறுக்குத் தசையை நீட்ட ஒரு முழங்காலை மார்புக்கு தூக்கவும்."
+    "message": "తుంటి మరియు గ్లూట్‌ను సాగదీయడానికి ఒక మోకాలిని రొమ్ము వైపు ఎత్తండి."
   },
   "stretchHipStretchStep1": {
-    "message": "சமநிலைக்காக உங்கள் மேசையை அருகே நிற்கவும்"
+    "message": "సమతుల్యత కోసం మీ డెస్క్ దగ్గర నిలబడండి"
   },
   "stretchHipStretchStep2": {
-    "message": "வலது முழங்காலை மார்புக்கு தூக்கவும்"
+    "message": "కుడి మోకాలిని రొమ్ము వైపు ఎత్తండి"
   },
   "stretchHipStretchStep3": {
-    "message": "இரு கைகளாலும் மெதுவாக பிடிக்கவும்"
+    "message": "రెండు చేతులతో నెమ్మదిగా పట్టుకోండి"
   },
   "stretchHipStretchStep4": {
-    "message": "இடுப்பு மற்றும் குறுக்குத் தசையில் நீட்சியை உணரவும்"
+    "message": "తుంటి మరియు గ్లూట్‌లో సాగడం అనుభవించండి"
   },
   "stretchHipStretchStep5": {
-    "message": "3 மூச்சு பிடித்து கால் மாற்றவும்"
+    "message": "3 శ్వాసలు పట్టుకుని కాలు మార్చండి"
   },
   "settingsLanguage": {
-    "message": "மொழி"
+    "message": "భాష"
   },
   "summaryTitle": {
-    "message": "வேலை நாள் முடிந்தது"
+    "message": "పని దినం పూర్తయింది"
   },
   "summaryBody": {
-    "message": "இன்று நீங்கள் $BREAKS$ இடைவேளைகள் எடுத்தீர்கள், $MINUTES$ நிமிடங்கள் நகர்ந்தீர்கள். $STREAK$ நாள் தொடர்ச்சி.",
+    "message": "ఈరోజు మీరు $BREAKS$ బ్రేక్‌లు తీసుకున్నారు, $MINUTES$ నిమిషాలు కదిలారు. $STREAK$ రోజుల వరుస.",
     "placeholders": {
       "breaks": {
         "content": "$1"
@@ -463,261 +463,273 @@
     }
   },
   "settingsWorkHours": {
-    "message": "வேலை நேரம்"
+    "message": "పని వేళలు"
   },
   "workHoursEnabled": {
-    "message": "வேலை நேரம்"
+    "message": "పని వేళలు"
   },
   "workHoursEnabledSub": {
-    "message": "இந்த நேரத்தில் மட்டும் டைமரை இயக்கவும்"
+    "message": "ఈ వేళల్లో మాత్రమే టైమర్‌ను నడపండి"
   },
   "workStart": {
-    "message": "தொடக்கம்"
+    "message": "ప్రారంభం"
   },
   "workEnd": {
-    "message": "முடிவு"
+    "message": "ముగింపు"
   },
   "settingsWeekends": {
-    "message": "வார இறுதிகள்"
+    "message": "వారాంతాలు"
   },
   "pauseOnDay": {
-    "message": "இந்த நாளில் நிறுத்து"
+    "message": "ఈ రోజున ఆపు"
   },
   "dailySummary": {
-    "message": "தினசரி சுருக்கம்"
+    "message": "రోజువారీ సారాంశం"
   },
   "dailySummarySub": {
-    "message": "வேலை நாள் முடியும்போது எனக்கு அறிவிக்கவும்"
+    "message": "పని దినం ముగిసినప్పుడు నాకు తెలియజేయండి"
   },
   "settingsSound": {
-    "message": "ஒலி"
+    "message": "శబ్దం"
   },
   "soundChime": {
-    "message": "இடைவேளைக்கு முன் ஒலி"
+    "message": "బ్రేక్‌కు ముందు శబ్దం"
   },
   "soundChimeSub": {
-    "message": "ஒவ்வொரு இடைவேளைக்கும் முன் மென்மையான ஒலியை இயக்குகிறது"
+    "message": "ప్రతి బ్రేక్‌కు ముందు సున్నితమైన శబ్దం వినిపిస్తుంది"
   },
   "soundLeadTime": {
-    "message": "முன் நேரம்"
+    "message": "ముందు సమయం"
   },
   "soundLeadTimeSub": {
-    "message": "இடைவேளைக்கு எத்தனை வினாடிகள் முன்பு"
+    "message": "బ్రేక్‌కు ఎన్ని సెకన్ల ముందు"
   },
   "dayMon": {
-    "message": "திங்கள்"
+    "message": "సోమ"
   },
   "dayTue": {
-    "message": "செவ்வாய்"
+    "message": "మంగళ"
   },
   "dayWed": {
-    "message": "புதன்"
+    "message": "బుధ"
   },
   "dayThu": {
-    "message": "வியாழன்"
+    "message": "గురు"
   },
   "dayFri": {
-    "message": "வெள்ளி"
+    "message": "శుక్ర"
   },
   "daySat": {
-    "message": "சனி"
+    "message": "శని"
   },
   "daySun": {
-    "message": "ஞாயிறு"
+    "message": "ఆది"
   },
   "settingsTheme": {
-    "message": "வண்ண தீம்"
+    "message": "రంగు థీమ్"
   },
   "themeLabel": {
-    "message": "தீம்"
+    "message": "థీమ్"
   },
   "themeLabelSub": {
-    "message": "ஓவர்லேயின் வண்ணத் தட்டை தேர்ந்தெடுக்கவும்"
+    "message": "ఓవర్‌లే రంగు పాలెట్‌ను ఎంచుకోండి"
   },
   "settingsChimeSound": {
-    "message": "ஒலி தொனி"
+    "message": "శబ్ద టోన్"
   },
   "chimeSoundLabel": {
-    "message": "ஒலி"
+    "message": "శబ్దం"
   },
   "chimeSoundLabelSub": {
-    "message": "ஒவ்வொரு இடைவேளைக்கும் முன் இயங்கும் தொனியைத் தேர்ந்தெடுக்கவும்"
+    "message": "ప్రతి బ్రేక్‌కు ముందు వినిపించే టోన్‌ను ఎంచుకోండి"
   },
   "soundMarimba": {
-    "message": "மரிம்பா"
+    "message": "మరింబా"
   },
   "soundBell": {
-    "message": "மென்மையான மணி"
+    "message": "సున్నితమైన గంట"
   },
   "soundKalimba": {
-    "message": "கலிம்பா"
+    "message": "కలింబా"
   },
   "soundWindchime": {
-    "message": "காற்று மணி"
+    "message": "విండ్ చైమ్"
   },
   "openFullSettings": {
-    "message": "முழு அமைப்புகள் பக்கத்தைத் திறக்கவும்"
+    "message": "పూర్తి సెట్టింగ్‌ల పేజీని తెరవండి"
   },
   "optionsTitle": {
-    "message": "MicroBreaks அமைப்புகள்"
+    "message": "MicroBreaks సెట్టింగ్‌లు"
   },
   "navTimer": {
-    "message": "டைமர்"
+    "message": "టైమర్"
   },
   "navNotifications": {
-    "message": "அறிவிப்புகள்"
+    "message": "నోటిఫికేషన్‌లు"
   },
   "navAppearance": {
-    "message": "தோற்றம்"
+    "message": "కనిపించే తీరు"
   },
   "navWorkHours": {
-    "message": "வேலை நேரம்"
+    "message": "పని వేళలు"
   },
   "navWeekends": {
-    "message": "வார இறுதிகள்"
+    "message": "వారాంతాలు"
   },
   "navLanguage": {
-    "message": "மொழி"
+    "message": "భాష"
   },
   "navAbout": {
-    "message": "பற்றி"
+    "message": "గురించి"
   },
   "timerSectionSub": {
-    "message": "நீங்கள் எவ்வளவு அடிக்கடி நகர நினைவூட்டப்பட வேண்டும் என்பதைக் கட்டுப்படுத்தவும்."
+    "message": "మీకు ఎంత తరచుగా కదలమని గుర్తు చేయాలో నియంత్రించండి."
   },
   "intervalLabel": {
-    "message": "இடைவேளை இடைவெளி"
+    "message": "బ్రేక్ విరామం"
   },
   "strictModeOptLabel": {
-    "message": "ஸ்ட்ரிக்ட் மோட்"
+    "message": "స్ట్రిక్ట్ మోడ్"
   },
   "strictModeOptSub": {
-    "message": "அறிவிப்புக்கு பதிலாக முழுத்திரை மேலடுக்கு"
+    "message": "నోటిఫికేషన్‌కు బదులుగా ఫుల్-స్క్రీన్ ఓవర్‌లే"
   },
   "snoozeDurationLabel": {
-    "message": "தள்ளிவைப்பு கால அளவு"
+    "message": "స్నూజ్ వ్యవధి"
   },
   "snoozeDurationSub": {
-    "message": "தள்ளிவைப்பு பொத்தான் இடைவேளையை எவ்வளவு தாமதிக்கிறது"
+    "message": "స్నూజ్ బటన్ బ్రేక్‌ను ఎంత ఆలస్యం చేస్తుంది"
   },
   "notifSectionSub": {
-    "message": "MicroBreaks உங்கள் கவனத்தை எவ்வாறு பெற வேண்டும் என்பதைத் தேர்ந்தெடுக்கவும்."
+    "message": "MicroBreaks మీ దృష్టిని ఎలా పొందాలో ఎంచుకోండి."
   },
   "appearanceSectionSub": {
-    "message": "MicroBreaks இன் தோற்றத்தைத் தேர்ந்தெடுக்கவும்."
+    "message": "MicroBreaks యొక్క కనిపించే తీరును ఎంచుకోండి."
   },
   "workHoursSectionSub": {
-    "message": "நீங்கள் உண்மையில் வேலை செய்யும் போது மட்டும் டைமரை இயக்கவும்."
+    "message": "మీరు నిజంగా పని చేసేటప్పుడు మాత్రమే టైమర్‌ను నడపండి."
   },
   "weekendsSectionSub": {
-    "message": "எந்த நாட்களை தானாக நிறுத்த வேண்டும் என்பதைத் தேர்ந்தெடுக்கவும்."
+    "message": "ఏ రోజులను స్వయంచాలకంగా ఆపాలో ఎంచుకోండి."
   },
   "languageSectionSub": {
-    "message": "MicroBreaks க்கான உங்கள் விருப்ப மொழியைத் தேர்ந்தெடுக்கவும்."
+    "message": "MicroBreaks కోసం మీకు నచ్చిన భాషను ఎంచుకోండి."
   },
   "aboutSectionSub": {
-    "message": "மேசை வேலை செய்பவர்களுக்கான மென்மையான இடைவேளை டைமர்."
+    "message": "డెస్క్ వద్ద పనిచేసేవారి కోసం సున్నితమైన బ్రేక్ టైమర్."
   },
   "aboutVersion": {
-    "message": "பதிப்பு"
+    "message": "వెర్షన్"
   },
   "aboutPrivacy": {
-    "message": "தனியுரிமைக் கொள்கை"
+    "message": "ప్రైవసీ పాలసీ"
   },
   "aboutWebsite": {
-    "message": "வலைத்தளம்"
+    "message": "వెబ్‌సైట్"
   },
   "themeSage": {
-    "message": "சேஜ்"
+    "message": "సేజ్"
   },
   "themeDusk": {
-    "message": "டஸ்க் பர்பிள்"
+    "message": "డస్క్ పర్పుల్"
   },
   "themeOcean": {
-    "message": "ஓஷன் ப்ளூ"
+    "message": "ఓషన్ బ్లూ"
   },
   "dayMonFull": {
-    "message": "திங்கட்கிழமை"
+    "message": "సోమవారం"
   },
   "dayTueFull": {
-    "message": "செவ்வாய்க்கிழமை"
+    "message": "మంగళవారం"
   },
   "dayWedFull": {
-    "message": "புதன்கிழமை"
+    "message": "బుధవారం"
   },
   "dayThuFull": {
-    "message": "வியாழக்கிழமை"
+    "message": "గురువారం"
   },
   "dayFriFull": {
-    "message": "வெள்ளிக்கிழமை"
+    "message": "శుక్రవారం"
   },
   "daySatFull": {
-    "message": "சனிக்கிழமை"
+    "message": "శనివారం"
   },
   "daySunFull": {
-    "message": "ஞாயிற்றுக்கிழமை"
+    "message": "ఆదివారం"
   },
   "allStretches": {
-    "message": "அனைத்து ஸ்ட்ரெச்களும்"
+    "message": "అన్ని స్ట్రెచ్‌లు"
   },
   "darkMode": {
-    "message": "டார்க் மோட்"
+    "message": "డార్క్ మోడ్"
   },
   "darkModeSub": {
-    "message": "சிஸ்டம் தோற்ற விருப்பத்தை மேலெழுது"
+    "message": "సిస్టమ్ రూపాన్ని ప్రాధాన్యతను అభిభవించు"
   },
   "darkModeSystem": {
-    "message": "சிஸ்டம்"
+    "message": "సిస్టమ్"
   },
   "darkModeLight": {
-    "message": "வெளிர்"
+    "message": "లైట్"
   },
   "darkModeDark": {
-    "message": "இருள்"
+    "message": "డార్క్"
   },
   "nudgeTitle": {
-    "message": "10 இடைவேளைகள் முடிந்தன!"
+    "message": "10 బ్రేక్‌లు పూర్తయ్యాయి!"
   },
   "nudgeBody": {
-    "message": "MicroBreaks பிடிக்கிறதா? ஒரு விரைவான மதிப்பீடு மற்றவர்களுக்கு இதை கண்டுபிடிக்க உதவுகிறது."
+    "message": "MicroBreaks నచ్చిందా? ఒక శీఘ్ర సమీక్ష ఇతరులు దాన్ని కనుగొనడంలో సహాయపడుతుంది."
   },
   "nudgeReview": {
-    "message": "மதிப்பீடு அளிக்கவும் ↗"
+    "message": "సమీక్ష ఇవ్వండి ↗"
   },
   "nudgeDismiss": {
-    "message": "ஒருவேளை பின்னர்"
+    "message": "బహుశా తర్వాత"
   },
   "historyTitle": {
-    "message": "இன்றைய இடைவேளைகள்"
+    "message": "నేటి బ్రేక్‌లు"
   },
   "historyEmpty": {
-    "message": "இன்று இதுவரை இடைவேளைகள் இல்லை"
+    "message": "ఈరోజు ఇంకా బ్రేక్‌లు లేవు"
   },
   "navStretches": {
-    "message": "ஸ்ட்ரெச்கள்"
+    "message": "స్ట్రెచ్‌లు"
   },
   "stretchesSectionSub": {
-    "message": "எந்த ஸ்ட்ரெச்கள் தோன்ற வேண்டும் என்பதை தேர்ந்தெடுத்து வரிசைமாற்ற இழுக்கவும்."
+    "message": "ఏ స్ట్రెచ్‌లు కనిపించాలో ఎంచుకోండి మరియు క్రమాన్ని మార్చడానికి లాగండి."
   },
   "stretchesDragHint": {
-    "message": "வரிசைமாற்ற இழுக்கவும் · இயக்கு அல்லது முடக்கு"
+    "message": "క్రమాన్ని మార్చడానికి లాగండి · ప్రారంభించు లేదా నిలిపివేయు"
   },
   "replayOnboarding": {
-    "message": "அமைப்பு வழிகாட்டி"
+    "message": "సెటప్ గైడ్"
   },
   "replayOnboardingBtn": {
-    "message": "மீண்டும் →"
+    "message": "మళ్లీ →"
   },
   "onboardingTitle": {
-    "message": "MicroBreaks-க்கு வரவேற்கிறோம்"
+    "message": "MicroBreaks కి స్వాగతం"
   },
   "keyboardShortcuts": {
-    "message": "கீபோர்டு குறுக்குவழிகள்"
+    "message": "కీబోర్డ్ షార్ట్‌కట్‌లు"
   },
   "shortcutTrigger": {
-    "message": "இப்போது ஒரு இடைவேளை தொடங்கு"
+    "message": "ఇప్పుడు బ్రేక్ ప్రారంభించు"
   },
   "shortcutSnooze": {
-    "message": "தற்போதைய இடைவேளையை ஒத்திடு"
+    "message": "ప్రస్తుత బ్రేక్‌ను వాయిదా వేయి"
+  },
+  "femaleModel": {
+    "message": "మహిళా మోడల్"
+  },
+  "femaleModelSub": {
+    "message": "మహిళా రూపానికి మారండి"
+  },
+  "pausedWeekend": {
+    "message": "పాజ్ — వారాంతం"
+  },
+  "pausedWorkHours": {
+    "message": "పాజ్ — పని వేళలకు వెలుపల"
   }
 }
