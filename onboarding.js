@@ -133,6 +133,10 @@ el('skipBtn').onclick = function() {
   });
 };
 
+el('openShortcutsBtn').onclick = function() {
+  chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+};
+
 function finish() {
   // Bug 2 fix: always read latest values from inputs at save time
   workStart = (el('whStart') && el('whStart').value) || workStart;

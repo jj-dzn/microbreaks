@@ -87,7 +87,7 @@ function renderAll() {
   $('optStrictMode').setAttribute('aria-checked', String(!!state.focusMode));
 
 
-  $('optSnoozeMin').value = '5';
+  $('optSnoozeMin').value = String(state.snoozeMin || 5);
 
   $('optNotif').classList.toggle('on', !!state.notifEnabled);
   $('optNotif').setAttribute('aria-checked', String(!!state.notifEnabled));
@@ -158,6 +158,11 @@ $('optStrictMode').addEventListener('click', async () => {
   renderAll();
 });
 
+
+$('optSnoozeMin').addEventListener('change', async (e) => {
+  state = await send({ type: 'SET_PREF', key: 'snoozeMin', value: parseInt(e.target.value) });
+  renderAll();
+});
 
 $('optNotif').addEventListener('click', async () => {
   state = await send({ type: 'SET_PREF', key: 'notifEnabled', value: !state.notifEnabled });
@@ -318,13 +323,15 @@ function renderStretchList() {
     item.addEventListener('drop', async (e) => {
       e.preventDefault();
       if (dragSrcIdx === null || dragSrcIdx === pos) return;
-      const newOrder = [...(state.stretchOrder || [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])];
-      const newEnabled = [...(state.stretchEnabled || newOrder.map(() => true))];
+      // Fetch fresh state to avoid stale enabled array if toggles happened during drag
+      const fresh = await send({ type: 'GET_STATE' });
+      if (!fresh) return;
+      const newOrder = [...(fresh.stretchOrder || [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])];
+      const newEnabled = [...(fresh.stretchEnabled || newOrder.map(() => true))];
       const [movedO] = newOrder.splice(dragSrcIdx, 1);
       const [movedE] = newEnabled.splice(dragSrcIdx, 1);
       newOrder.splice(pos, 0, movedO);
       newEnabled.splice(pos, 0, movedE);
-      // Send both in one message to avoid split-state if second write fails
       await send({ type: 'SET_PREF', key: 'stretchOrder', value: newOrder });
       state = await send({ type: 'SET_PREF', key: 'stretchEnabled', value: newEnabled });
       dragSrcIdx = null;
@@ -341,17 +348,22 @@ $('replayOnboardingBtn').addEventListener('click', () => {
   chrome.tabs.create({ url: chrome.runtime.getURL('onboarding.html') });
 });
 
+$('shortcutsBtn').addEventListener('click', () => {
+  chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+});
+
 // ===== INIT =====
 
 async function init() {
-  state = await send({ type: 'GET_STATE' });
-
-  // Guard against null response when service worker is still waking up
-  if (!state) {
-    await new Promise(r => setTimeout(r, 400));
-    state = await send({ type: 'GET_STATE' });
+  // Retry up to 5 times — service worker may be cold on fresh install
+  let state_tmp = null;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    state_tmp = await send({ type: 'GET_STATE' });
+    if (state_tmp) break;
+    await new Promise(r => setTimeout(r, 300 * (attempt + 1)));
   }
-  if (!state) return; // give up gracefully
+  state = state_tmp;
+  if (!state) return;
 
   const langPref = state.language || 'auto';
   const langToLoad = langPref === 'auto' ? detectBrowserLang() : langPref;

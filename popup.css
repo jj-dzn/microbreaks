@@ -633,3 +633,33 @@ body {
   font-size: 11px; color: var(--text-soft);
   text-align: center; padding: 12px 0;
 }
+
+/* Work hours banner */
+.work-hours-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 16px 8px;
+  padding: 8px 12px;
+  background: rgba(232,168,76,0.1);
+  border: 0.5px solid rgba(232,168,76,0.35);
+  border-radius: 10px;
+  font-size: 11px;
+  color: var(--amber);
+}
+.wh-banner-icon { font-size: 13px; flex-shrink: 0; }
+.wh-banner-msg { flex: 1; font-weight: 500; }
+.wh-banner-btn {
+  background: rgba(232,168,76,0.18);
+  border: 0.5px solid rgba(232,168,76,0.45);
+  border-radius: 7px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--amber);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.wh-banner-btn:hover { background: rgba(232,168,76,0.28); }

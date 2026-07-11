@@ -274,19 +274,20 @@
     </div>
 
     <div class="step" id="step4">
-      <div class="step-title">Keyboard shortcuts</div>
-      <div class="step-sub">Trigger or snooze a break without opening the extension.</div>
+      <div class="step-title">Set up keyboard shortcuts</div>
+      <div class="step-sub">Trigger a break or snooze without opening the extension. Chrome requires these to be set manually — it only takes 30 seconds.</div>
       <div class="shortcut-box">
         <div class="shortcut-row">
           <span class="shortcut-label">Trigger a break now</span>
-          <span class="shortcut-key">Alt+Shift+B</span>
+          <span class="shortcut-key" id="triggerKey">Alt+Shift+B</span>
         </div>
         <div class="shortcut-row">
           <span class="shortcut-label">Snooze current break</span>
-          <span class="shortcut-key">Alt+Shift+S</span>
+          <span class="shortcut-key" id="snoozeKey">Alt+Shift+S</span>
         </div>
       </div>
-      <div class="hint-text">Customise these at <strong>chrome://extensions/shortcuts</strong></div>
+      <button id="openShortcutsBtn" style="margin-top:14px;background:var(--sage);color:var(--forest);border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Open shortcuts settings ↗</button>
+      <div class="hint-text" style="margin-top:12px;">Don't need shortcuts? Just click <strong>Get started</strong> below.</div>
     </div>
 
   </div>

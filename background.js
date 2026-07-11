@@ -94,6 +94,7 @@ const LOCAL_DEFAULTS = {
   pendingBreak: null,
   breakLog: [], // [{time: ISO string, stretchIndex: number}] — today only, cleared at midnight
   breakLogDate: null, // date string to detect midnight rollover
+  gatePaused: false, // true when timer was paused by work hours/weekend gate, not by user
 };
 
 async function getState() {
@@ -150,7 +151,7 @@ async function startTimer(intervalMin, force = false) {
   if (!force && (isWeekendPaused(state) || !isWithinWorkHours(state))) {
     await chrome.alarms.clear(ALARM_NAME);
     await chrome.alarms.clear(CHIME_ALARM_NAME);
-    await setState({ running: false, startedAt: null, pausedRemainSec: intervalMin * 60, intervalMin });
+    await setState({ running: false, startedAt: null, pausedRemainSec: intervalMin * 60, intervalMin, gatePaused: true });
     return;
   }
 
@@ -177,7 +178,7 @@ async function pauseTimer() {
   const remainSec = Math.max(0, totalSec - elapsedSec);
   await chrome.alarms.clear(ALARM_NAME);
   await chrome.alarms.clear(CHIME_ALARM_NAME);
-  await setState({ running: false, pausedRemainSec: remainSec, startedAt: null });
+  await setState({ running: false, pausedRemainSec: remainSec, startedAt: null, gatePaused: false });
 }
 
 async function resumeTimer() {
@@ -606,13 +607,18 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     const state = await getState();
     const shouldRun = !isWeekendPaused(state) && isWithinWorkHours(state);
     if (shouldRun && !state.running && !state.pendingBreak) {
-      // Only auto-start if fully stopped (post-break), not if user manually paused
-      // A manual pause has pausedRemainSec set — we respect that choice.
-      if (state.pausedRemainSec === null) {
+      if (state.gatePaused) {
+        // Was paused by the work hours gate — auto-resume now that hours started
+        await setState({ gatePaused: false });
+        await startTimer(state.intervalMin, true);
+      } else if (state.pausedRemainSec === null) {
+        // Fully stopped (post-break) — start fresh
         await startTimer(state.intervalMin);
       }
+      // If manually paused (gatePaused:false, pausedRemainSec set) — respect user's choice
     } else if (!shouldRun && state.running) {
       await pauseTimer();
+      await setState({ gatePaused: true }); // mark as gate-paused so resume is automatic
     }
   }
 });
@@ -722,27 +728,62 @@ chrome.commands.onCommand.addListener(async (command) => {
 
 chrome.runtime.onInstalled.addListener(async (details) => {
   const state = await getState();
-  // Only start timer if fully stopped — not if user has manually paused
-  if (!state.running && state.pausedRemainSec === null) {
-    await startTimer(state.intervalMin);
-  }
   scheduleSummaryAlarm(state);
-  if (details.reason === 'install') {
+
+  if (!state.onboardingDone) {
+    // Fresh install (or reinstall) — open onboarding regardless of reason
+    // details.reason is 'update' in dev mode even on first load, so we check
+    // the onboardingDone flag instead which is reliably false on first install
     chrome.tabs.create({ url: chrome.runtime.getURL('onboarding.html') });
+    await startTimer(state.intervalMin);
+  } else {
+    // Existing install being updated — respect manual pause state
+    if (!state.running && state.pausedRemainSec === null) {
+      await startTimer(state.intervalMin);
+    }
   }
 });
 
 chrome.runtime.onStartup.addListener(async () => {
   const state = await getState();
-  // After browser restart all alarms are gone. Restart timer if:
-  // - Fully stopped (not running, not paused) — fresh start
-  // - Was running when Chrome closed (running=true but alarm is now gone — stale state)
-  if (!state.running && state.pausedRemainSec == null) {
-    await startTimer(state.intervalMin);
-  } else if (state.running) {
-    // Stale running=true from before browser restart — alarm is gone, recreate it
-    await startTimer(state.intervalMin);
+  const now = Date.now();
+
+  // If there's a pending break from a previous session, discard it —
+  // the user closed the browser so the break is no longer relevant
+  if (state.pendingBreak) {
+    await setState({ pendingBreak: null });
   }
+
+  // If the timer was running when the browser closed, check how long ago it started.
+  // If more than 2x the interval has passed, the session is stale — start fresh.
+  // If less, restart the timer for the remaining time.
+  if (state.running && state.startedAt) {
+    const elapsedSec = Math.floor((now - state.startedAt) / 1000);
+    const totalSec = state.intervalMin * 60;
+    const remainSec = totalSec - elapsedSec;
+
+    if (remainSec <= 0) {
+      // Timer would have already fired — start a fresh interval
+      await startTimer(state.intervalMin);
+    } else {
+      // Resume with the remaining time
+      await setState({ pausedRemainSec: remainSec, running: false, startedAt: null });
+      await resumeTimer();
+    }
+  } else if (!state.running && state.pausedRemainSec == null && !state.gatePaused) {
+    // Fully stopped and not gate-paused — start fresh
+    await startTimer(state.intervalMin);
+  } else if (state.gatePaused) {
+    // Was gate-paused when browser closed — re-evaluate work hours now
+    const shouldRun = !isWeekendPaused(state) && isWithinWorkHours(state);
+    if (shouldRun) {
+      await setState({ gatePaused: false });
+      await startTimer(state.intervalMin, true);
+    }
+    // Otherwise leave gate-paused — gate-check will resume when hours start
+  }
+  // If manually paused (running:false, pausedRemainSec set, gatePaused:false) — leave as-is
+
   scheduleSummaryAlarm(state);
   chrome.action.setBadgeText({ text: state.badgeCount > 0 ? String(state.badgeCount) : '' });
 });

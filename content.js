@@ -176,7 +176,10 @@ function drawFigure(svg, T, pose, O, male) {
   const legW  = male ? 20 : 17;
   const shinW = male ? 18 : 15;
 
-  // ── LAYER 0: Back hair (behind everything) ──
+  // ── LAYER 0: Background blob + Back hair ──
+  // Soft teal blob gives the figure depth against the dark overlay background
+  svg.appendChild(h('ellipse', {cx:50, cy:120, rx:44, ry:58, fill:'rgba(93,184,160,0.12)'}));
+
   const faceX = cx + P.headTilt*8;
   const faceY = headY + P.headNod*5;
   if (!male) {
@@ -432,10 +435,12 @@ function mbT(key) {
 }
 
 function getStretches() {
-  return STRETCH_DATA.map(s => ({
+  return STRETCH_DATA.map((s, i) => ({
+    emoji: emojiForIndex(i),
     name: mbT(s.key),
     dur: s.dur,
-    steps: [1,2,3,4,5].map(n => mbT(s.key + 'Step' + n)),
+    steps: [1,2,3,4,5].map(n => mbT(s.key + 'Step' + n))
+      .filter(text => text && !text.includes('Step')), // filter out missing keys
     pose: s.pose,
     arrows: s.arrows,
     period: s.period,
@@ -454,7 +459,10 @@ function removeOverlay() {
 }
 
 function onEscape(e) {
-  if (e.key === 'Escape') { chrome.runtime.sendMessage({type:'START'}); removeOverlay(); }
+  if (e.key === 'Escape') {
+    try { chrome.runtime.sendMessage({type:'START'}); } catch(_) {}
+    removeOverlay();
+  }
 }
 
 let overlayAnimId = null;

@@ -181,7 +181,7 @@ function applyState(st) {
   const rem = computeRemSec(st);
   localRemSec = rem;
   clearInterval(tickTimer);
-  clearInterval(syncTimer);
+  clearInterval(syncTimer); // single clear — was duplicated below
 
   // Restore stretch area visibility unless the nudge is showing OR grid is open
   const gridIsOpen = $('stretchGridPanel').classList.contains('open');
@@ -194,19 +194,22 @@ function applyState(st) {
     tickTimer = setInterval(async () => {
       localRemSec = Math.max(0, localRemSec - 1);
       renderRing(localRemSec, st.intervalMin * 60);
-      // When countdown hits 0, the alarm may not have fired yet (Chrome alarms
-      // can be delayed up to 60s). Re-sync from background every second at 0:00
-      // so the popup updates the moment the break actually fires.
-      if (localRemSec === 0) {
+      // When countdown hits 0, Chrome alarms can be delayed up to 60s.
+      // Re-sync from background every second so the popup updates the moment
+      // the break fires — but only when we're actually running, not paused.
+      if (localRemSec === 0 && st.running) {
         const fresh = await send({ type: 'GET_STATE' });
-        if (fresh) applyState(fresh);
+        // Only apply if the break has actually fired (running changed to false)
+        // or timer restarted (running still true). Avoid applying the transitional
+        // stopped+unpaused state which would jump display to intervalMin * 60.
+        if (fresh && (fresh.running || fresh.pausedRemainSec != null)) {
+          applyState(fresh);
+        }
       }
     }, 1000);
   }
 
-  // Periodically re-sync the countdown from the source of truth (background state)
-  // to prevent setInterval drift over long popup sessions (can accumulate 5-10s per 30min)
-  clearInterval(syncTimer);
+  // Periodically re-sync the countdown to prevent setInterval drift
   if (st.running) {
     syncTimer = setInterval(async () => {
       const fresh = await send({ type: 'GET_STATE' });
@@ -214,6 +217,22 @@ function applyState(st) {
         localRemSec = computeRemSec(fresh);
       }
     }, 30000);
+  }
+
+  // Show work-hours banner only when timer was paused by the gate (not manual pause)
+  const isWorkHoursPaused = st.workHoursEnabled && st.gatePaused && !st.running;
+  const banner = $('workHoursBanner');
+  if (isWorkHoursPaused) {
+    banner.style.display = 'flex';
+    // Show which restriction applies
+    const now = new Date();
+    const day = now.getDay();
+    const paused = (st.weekendDays || []).includes(day);
+    $('whBannerMsg').textContent = paused
+      ? t('pausedWeekend') || 'Paused — weekend'
+      : t('pausedWorkHours') || `Paused — outside ${st.workStart}–${st.workEnd}`;
+  } else {
+    banner.style.display = 'none';
   }
 
   renderRing(rem, st.intervalMin * 60);
@@ -296,14 +315,18 @@ function send(msg) {
 }
 
 async function init() {
-  let st = await send({ type: 'GET_STATE' });
-
-  // Guard against null response when service worker is still waking up
-  if (!st) {
-    await new Promise(r => setTimeout(r, 400));
+  // Retry up to 5 times with increasing delays — service worker may be cold on fresh install
+  let st = null;
+  for (let attempt = 0; attempt < 5; attempt++) {
     st = await send({ type: 'GET_STATE' });
+    if (st) break;
+    await new Promise(r => setTimeout(r, 300 * (attempt + 1)));
   }
-  if (!st) return; // give up gracefully — popup will show defaults
+  if (!st) {
+    // Last resort: show a basic error state rather than blank popup
+    document.body.innerHTML = '<div style="padding:24px;text-align:center;color:#5DB8A0;font-family:sans-serif;font-size:13px;">Starting up...<br><br><button onclick="location.reload()" style="margin-top:12px;padding:8px 16px;background:#5DB8A0;color:#1D3D38;border:none;border-radius:8px;cursor:pointer;font-size:12px;">Retry</button></div>';
+    return;
+  }
 
   const langPref = st.language || 'auto';
   const langToLoad = langPref === 'auto' ? detectBrowserLang() : langPref;
@@ -312,7 +335,8 @@ async function init() {
   STRETCHES = STRETCHES_LIVE();
   $('langSelect').value = langPref;
 
-  if (!st.running && st.pausedRemainSec == null && !st.pendingBreak) {
+  // Don't auto-start timer if onboarding isn't done yet
+  if (!st.running && st.pausedRemainSec == null && !st.pendingBreak && st.onboardingDone) {
     st = await send({ type: 'START' });
   }
   applyState(st);
@@ -329,12 +353,19 @@ async function init() {
 $('langSelect').addEventListener('change', async (e) => {
   const langPref = e.target.value;
   const st = await send({ type: 'SET_PREF', key: 'language', value: langPref });
-  if (st) state = st; // keep local state in sync
+  if (st) state = st;
   const langToLoad = langPref === 'auto' ? detectBrowserLang() : langPref;
   await loadMessages(langToLoad);
   applyI18n();
-  renderHistory(state); // re-render history so stretch names reflect new language
+  STRETCHES = STRETCHES_LIVE(); // rebuild so stretch names update in new language
+  renderStretch(viewStretchIndex);
+  renderHistory(state);
   renderGoBtn(state.running, state.pausedRemainSec != null && !state.running);
+});
+
+$('whRunAnywayBtn').addEventListener('click', async () => {
+  const st = await send({ type: 'START' }); // force=true in background bypasses work hours
+  applyState(st);
 });
 
 $('goBtn').addEventListener('click', async () => {
@@ -343,10 +374,13 @@ $('goBtn').addEventListener('click', async () => {
     st = await send({ type: 'PAUSE' });
   } else if (state.pausedRemainSec != null) {
     st = await send({ type: 'RESUME' });
-  } else {
-    // Don't pass intervalMin — let background use its own current value
-    // to avoid sending a stale value if settings synced from another device
+  } else if (!state.pendingBreak) {
+    // Don't start if there's a pending overlay waiting to be shown —
+    // START would clear pendingBreak and the overlay would never appear
     st = await send({ type: 'START' });
+  } else {
+    // Pending break exists — just refresh state so popup reflects reality
+    st = await send({ type: 'GET_STATE' });
   }
   applyState(st);
 });
