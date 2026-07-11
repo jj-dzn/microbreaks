@@ -451,8 +451,7 @@ function getStretches() {
 
 function removeOverlay() {
   if (overlayAnimId) { cancelAnimationFrame(overlayAnimId); overlayAnimId = null; }
-  const el = document.getElementById('microbreaks-overlay');
-  if (el) el.remove();
+  if (overlayHost) { overlayHost.remove(); overlayHost = null; }
   document.documentElement.style.overflow = _savedHtmlOverflow;
   document.body.style.overflow = _savedBodyOverflow;
   document.removeEventListener('keydown', onEscape);
@@ -466,6 +465,7 @@ function onEscape(e) {
 }
 
 let overlayAnimId = null;
+let overlayHost = null;
 let _savedHtmlOverflow = '';
 let _savedBodyOverflow = '';
 
@@ -544,8 +544,17 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
   let idx = stretchIndex % S.length;
   let browsing = false;
 
+  // Host element lives in the page's light DOM (so `position:fixed` escapes any
+  // CSS transform stacking contexts on Notion, Figma, Gmail, etc.), but everything
+  // inside is rendered in a closed shadow root — the host page's stylesheets cannot
+  // select into it (no `!important` rule on the page can hide or restyle the overlay),
+  // and page scripts cannot read or tamper with its contents via document.querySelector.
+  overlayHost = document.createElement('div');
+  overlayHost.id = 'microbreaks-overlay-host';
+  Object.assign(overlayHost.style, { all: 'initial' });
+  const shadow = overlayHost.attachShadow({ mode: 'closed' });
+
   const overlay = document.createElement('div');
-  overlay.id = 'microbreaks-overlay';
   Object.assign(overlay.style, {
     position:'fixed', inset:'0', zIndex:'2147483647',
     background: T.bg.startsWith('#') ? hexToRgba(T.bg, 0.96) : T.bg,
@@ -553,8 +562,6 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
     alignItems:'center', justifyContent:'center',
     fontFamily:"'Inter',-apple-system,sans-serif",
     cursor:'pointer', overflowY:'auto',
-    // Escape any CSS transform stacking contexts (common on Notion, Figma, Gmail)
-    // by using a dedicated overlay host appended directly to document.documentElement
     transform:'none', willChange:'auto',
   });
 
@@ -608,12 +615,13 @@ async function showOverlay(stretchIndex, male, lang, themeName) {
   card.appendChild(hint);
 
   overlay.appendChild(card);
+  shadow.appendChild(overlay);
   // Save original overflow values before locking scroll
   _savedHtmlOverflow = document.documentElement.style.overflow;
   _savedBodyOverflow = document.body.style.overflow;
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
-  document.documentElement.appendChild(overlay);
+  document.documentElement.appendChild(overlayHost);
 
   function renderStepsView() {
     // Cancel any running animation before starting a new one

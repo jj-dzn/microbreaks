@@ -73,6 +73,7 @@ microbreaks/
 ├── offscreen.html / .js        Audio playback document (MV3 service workers can't play sound directly)
 ├── icons/                      Toolbar and store icons
 ├── sounds/                     chime-marimba.mp3, chime-bell.mp3, chime-kalimba.mp3, chime-windchime.mp3
+├── fonts/                      Self-hosted Inter and DM Serif Display (no Google Fonts requests)
 ├── _locales/                   Translations — en, es, fr, de, hi, ml, ta, te
 ├── index.html                  Landing page (GitHub Pages)
 └── privacy-policy.html         Privacy policy (GitHub Pages)

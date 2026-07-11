@@ -216,6 +216,12 @@ async function snoozeTimer() {
   const state = await getState();
   const SNOOZE_MIN = state.snoozeMin || 5;
 
+  // Snoozing is an explicit user action that supersedes any break overlay still
+  // waiting to be shown — without this, a break snoozed via the notification button
+  // or the Alt+Shift+S shortcut would still pop up the full-screen overlay the next
+  // time the user focuses Chrome.
+  if (state.pendingBreak) await setState({ pendingBreak: null });
+
   let newRemainSec;
   if (state.running) {
     await chrome.alarms.clear(ALARM_NAME);
@@ -651,12 +657,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       case "RESUME":         await resumeTimer(); sendResponse(await getState()); break;
       case "STOP":           await stopTimer(); sendResponse(await getState()); break;
       case "SNOOZE": {
-        // Only clear pendingBreak if overlay was already shown.
-        // If pendingBreak is set and overlay hasn't shown yet, leave it.
-        const snoozeState = await getState();
-        if (!snoozeState.pendingBreak) {
-          await setState({ pendingBreak: null });
-        }
+        // snoozeTimer() clears pendingBreak itself
         await snoozeTimer();
         // Always read fresh state after snoozeTimer — it may have returned early
         sendResponse(await getState());

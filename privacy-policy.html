@@ -80,12 +80,11 @@
     <li><strong>alarms</strong> — to fire break reminders reliably, even when the popup is closed</li>
     <li><strong>notifications</strong> — to show you a break reminder notification</li>
     <li><strong>storage</strong> — to save your settings and streak locally on your device</li>
-    <li><strong>tabs</strong> — to detect your active tab when showing the strict mode overlay</li>
     <li><strong>scripting</strong> — to inject the break overlay onto your active tab in strict mode</li>
     <li><strong>offscreen</strong> — to play the gentle chime sound before a break, since Chrome does not allow background scripts to play audio directly</li>
     <li><strong>windows</strong> — to detect when you return focus to Chrome after being in another application, so a pending strict-mode break overlay can be shown on your return instead of being silently missed</li>
     <li><strong>commands</strong> — to register keyboard shortcuts (Alt+Shift+B and Alt+Shift+S) that let you trigger or snooze a break without opening the extension popup</li>
-    <li><strong>host permissions (all URLs)</strong> — required by Chrome to allow the strict mode overlay to appear on any webpage you are visiting</li>
+    <li><strong>host permissions (all URLs)</strong> — required by Chrome to allow the strict mode overlay to appear on any webpage you are visiting, and to detect your active tab so the overlay knows where to appear</li>
   </ul>
   <p>None of these permissions are used to collect, transmit, or share any data.</p>
 
@@ -99,7 +98,7 @@
   <p>If we make changes to this policy, we will update the date at the top of this page. Continued use of the extension after changes constitutes acceptance of the updated policy.</p>
 
   <h2>Contact</h2>
-  <p>If you have any questions about this privacy policy, please open an issue on our <a href="#">GitHub repository</a> or contact us at the email listed on the Chrome Web Store listing.</p>
+  <p>If you have any questions about this privacy policy, please open an issue on our <a href="https://github.com/jj-dzn/microbreaks/issues" target="_blank" rel="noopener">GitHub repository</a> or contact us at the email listed on the Chrome Web Store listing.</p>
 
   <div class="footer">
     MicroBreaks — A gentle stretch timer for desk workers. &nbsp;·&nbsp; All data stays on your device.
