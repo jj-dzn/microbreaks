@@ -767,9 +767,16 @@ chrome.runtime.onStartup.addListener(async () => {
       // Timer would have already fired — start a fresh interval
       await startTimer(state.intervalMin);
     } else {
-      // Resume with the remaining time
+      // Resume with the remaining time — but only if we're within work hours /
+      // not on a paused weekend day. Otherwise mark gate-paused so the popup
+      // shows the "paused" banner and Resume isn't left silently doing nothing
+      // (resumeTimer() itself no-ops when gated).
       await setState({ pausedRemainSec: remainSec, running: false, startedAt: null });
-      await resumeTimer();
+      if (!isWeekendPaused(state) && isWithinWorkHours(state)) {
+        await resumeTimer();
+      } else {
+        await setState({ gatePaused: true });
+      }
     }
   } else if (!state.running && state.pausedRemainSec == null && !state.gatePaused) {
     // Fully stopped and not gate-paused — start fresh
