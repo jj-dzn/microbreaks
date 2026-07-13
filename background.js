@@ -5,6 +5,11 @@ const SUMMARY_ALARM_NAME = "microbreak-summary";
 let bgMessages = null;
 let bgLang = null;
 
+// Guards against a break firing twice in quick succession (e.g. a rapid double-press
+// of the Alt+Shift+B shortcut while the previous break's overlay/notification is
+// still up). Cleared once the break's post-fire settling window has passed.
+let breakInFlight = false;
+
 async function loadBgMessages(lang) {
   if (bgLang === lang && bgMessages) return bgMessages;
   try {
@@ -232,10 +237,9 @@ async function snoozeTimer() {
     chrome.alarms.create(ALARM_NAME, { delayInMinutes: newRemainSec / 60 });
     await setState({ running: true, startedAt: Date.now(), pausedRemainSec: null });
   } else if (state.pausedRemainSec != null) {
-    await chrome.alarms.clear(ALARM_NAME);
-    await chrome.alarms.clear(CHIME_ALARM_NAME);
-    newRemainSec = state.pausedRemainSec + SNOOZE_MIN * 60;
-    await setState({ pausedRemainSec: newRemainSec });
+    // Timer is paused — manually, or by the weekend/work-hours gate. Snoozing only
+    // makes sense for an active or about-to-fire break, so do nothing here rather
+    // than silently resuming the countdown the user (or the gate) paused.
     return;
   } else {
     // Timer fully stopped (e.g. within 1500ms post-break window before auto-restart).
@@ -363,11 +367,14 @@ async function fireBreak(force = false) {
   const state = await getState();
 
   if (!state.onboardingDone) return;
+  if (breakInFlight) return;
 
   if (!force && (isWeekendPaused(state) || !isWithinWorkHours(state))) {
     await chrome.alarms.clear(CHIME_ALARM_NAME);
     return;
   }
+
+  breakInFlight = true;
 
   const today = new Date().toDateString();
   let { breaksToday, minsMoved, streakDays, lastBreakDate, stretchIndex, totalBreaksAllTime } = state;
@@ -448,16 +455,19 @@ async function fireBreak(force = false) {
           } catch (e) {
             console.log("[MicroBreaks] Overlay injection failed:", e && e.message);
             await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
-            if (state.notifEnabled || force) await fireNotification(notifText);
+            // Strict mode promised a full-screen overlay — if it genuinely couldn't be
+            // shown, fall back to a notification regardless of notifEnabled so the break
+            // is never completely invisible to the user.
+            await fireNotification(notifText);
           }
         } else {
           await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
-          if (state.notifEnabled || force) await fireNotification(notifText);
+          await fireNotification(notifText);
         }
       } catch (outerErr) {
         console.log("[MicroBreaks] Unexpected error in focus-mode flow —", outerErr && outerErr.message);
         await setState({ pendingBreak: { stretchIndex: currentStretchIndex } });
-        if (state.notifEnabled || force) await fireNotification(notifText);
+        await fireNotification(notifText);
       }
 
       // Send BREAK_FIRED after overlay attempt so popup reflects correct state
@@ -469,6 +479,7 @@ async function fireBreak(force = false) {
         if (!freshState.pendingBreak) {
           startTimer(freshState.intervalMin, true);
         }
+        breakInFlight = false;
       }, 1500);
     });
 
@@ -483,6 +494,7 @@ async function fireBreak(force = false) {
       if (!freshState.pendingBreak) {
         startTimer(freshState.intervalMin, true);
       }
+      breakInFlight = false;
     }, 1500);
   }
 }

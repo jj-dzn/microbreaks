@@ -83,6 +83,55 @@ dayBtns.forEach(function(btn) {
   };
 });
 
+// ===== PRE-FILL FROM CURRENT SETTINGS =====
+// This flow doubles as both first-run onboarding (where GET_STATE returns
+// defaults) and a replay from Settings (where the user has real customized
+// settings). Without this, replaying and clicking through without touching
+// anything would silently reset the user's actual settings back to the
+// hardcoded defaults above.
+function applyStateToUI() {
+  ivBtns.forEach(function(b) { b.classList.remove('sel'); });
+  var ivMatch = null;
+  ivBtns.forEach(function(b) {
+    if (parseInt(b.getAttribute('data-min')) === selectedMin) ivMatch = b;
+  });
+  if (ivMatch) ivMatch.classList.add('sel');
+
+  modeBtns.forEach(function(b) {
+    b.classList.toggle('sel', b.getAttribute('data-mode') === selectedMode);
+  });
+
+  themeBtns.forEach(function(b) {
+    b.classList.toggle('sel', b.getAttribute('data-theme') === selectedTheme);
+  });
+
+  whToggle.setAttribute('aria-checked', String(workHoursEnabled));
+  whToggle.classList.toggle('on', workHoursEnabled);
+  whTimes.classList.toggle('show', workHoursEnabled);
+  whStartInput.value = workStart;
+  whEndInput.value = workEnd;
+
+  dayBtns.forEach(function(btn) {
+    var day = parseInt(btn.getAttribute('data-day'));
+    btn.classList.toggle('paused', weekendDays.indexOf(day) > -1);
+  });
+}
+
+function initFromState() {
+  send({ type: 'GET_STATE' }).then(function(state) {
+    if (!state) return; // fall back to the hardcoded defaults already reflected in the HTML
+    selectedMin = state.intervalMin || selectedMin;
+    selectedMode = state.focusMode ? 'strict' : 'notification';
+    selectedTheme = state.theme || selectedTheme;
+    workHoursEnabled = !!state.workHoursEnabled;
+    workStart = state.workStart || workStart;
+    workEnd = state.workEnd || workEnd;
+    weekendDays = Array.isArray(state.weekendDays) ? state.weekendDays.slice() : weekendDays;
+    applyStateToUI();
+  });
+}
+initFromState();
+
 // ===== NAVIGATION =====
 function updatePips() {
   for (var i = 0; i < TOTAL; i++) {
@@ -147,10 +196,9 @@ function finish() {
   }).then(function() {
     return send({ type: 'SET_PREF', key: 'theme', value: selectedTheme });
   }).then(function() {
-    if (workHoursEnabled) {
-      return send({ type: 'SET_WORK_HOURS', enabled: true, start: workStart, end: workEnd });
-    }
-    return Promise.resolve();
+    // Always send this — not just when enabling — so turning work hours OFF
+    // during a replay actually persists instead of silently being a no-op.
+    return send({ type: 'SET_WORK_HOURS', enabled: workHoursEnabled, start: workStart, end: workEnd });
   }).then(function() {
     return send({ type: 'SET_WEEKEND_DAYS', days: weekendDays });
   }).then(function() {
