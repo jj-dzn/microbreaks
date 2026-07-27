@@ -713,6 +713,16 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       }
       case "SET_FOCUS":      await setState({ focusMode: msg.value }); sendResponse(await getState()); break;
 
+      case "SET_STRETCH_ORDER": {
+        // stretchEnabled[i] describes stretchOrder[i] — the two arrays must always
+        // move together. Setting them in one call (instead of two sequential
+        // SET_PREF messages) avoids a narrow window where a break could fire and
+        // read a mismatched pair mid-drag-reorder.
+        await setState({ stretchOrder: msg.order, stretchEnabled: msg.enabled });
+        sendResponse(await getState());
+        break;
+      }
+
       case "SET_PREF": {
         await setState({ [msg.key]: msg.value });
         if (msg.key === 'language') { bgMessages = null; bgLang = null; }

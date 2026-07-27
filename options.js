@@ -332,8 +332,7 @@ function renderStretchList() {
       const [movedE] = newEnabled.splice(dragSrcIdx, 1);
       newOrder.splice(pos, 0, movedO);
       newEnabled.splice(pos, 0, movedE);
-      await send({ type: 'SET_PREF', key: 'stretchOrder', value: newOrder });
-      state = await send({ type: 'SET_PREF', key: 'stretchEnabled', value: newEnabled });
+      state = await send({ type: 'SET_STRETCH_ORDER', order: newOrder, enabled: newEnabled });
       dragSrcIdx = null;
       renderStretchList();
     });
