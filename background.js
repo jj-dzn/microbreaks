@@ -322,6 +322,12 @@ async function ensureOffscreen() {
 async function playChime() {
   try {
     const state = await getState();
+    // The chime fires a few seconds before the break itself. If the gate would
+    // block the break (and there's no active override), don't play the chime for
+    // a break that's about to be silently skipped.
+    if ((isWeekendPaused(state) || !isWithinWorkHours(state)) && !state.gateOverride) {
+      return;
+    }
     await ensureOffscreen();
     await chrome.runtime.sendMessage({ type: 'PLAY_CHIME', sound: state.chimeSound || 'marimba' });
   } catch (e) {
@@ -662,8 +668,11 @@ chrome.notifications.onButtonClicked.addListener((notifId, btnIndex) => {
   if (notifId.startsWith("microbreak-")) {
     if (btnIndex === 0) snoozeTimer();
     if (btnIndex === 1) {
-      // Clear pendingBreak first so a pending overlay doesn't show after restart
-      setState({ pendingBreak: null }).then(() => getState()).then(s => startTimer(s.intervalMin));
+      // Clear pendingBreak first so a pending overlay doesn't show after restart.
+      // force=true to match every other explicit start action (Start button, Run
+      // anyway) — clicking "Restart" is just as deliberate and shouldn't silently
+      // no-op if it happens to be outside work hours.
+      setState({ pendingBreak: null }).then(() => getState()).then(s => startTimer(s.intervalMin, true));
     }
     chrome.notifications.clear(notifId);
   }
@@ -725,7 +734,16 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       }
 
       case "SET_WORK_HOURS": {
-        await setState({ workHoursEnabled: msg.enabled, workStart: msg.start, workEnd: msg.end });
+        // Reject an identical start/end time — it would make isWithinWorkHours()
+        // always false, silently and permanently gating the timer with no obvious
+        // way to un-stick it. Keep whatever the previous (valid) times were instead.
+        const prevWhState = await getState();
+        const validRange = msg.start !== msg.end;
+        await setState({
+          workHoursEnabled: msg.enabled,
+          workStart: validRange ? msg.start : prevWhState.workStart,
+          workEnd: validRange ? msg.end : prevWhState.workEnd,
+        });
         const whState = await getState();
         scheduleSummaryAlarm(whState);
         // Only restart if running — don't wipe a manual pause
