@@ -100,6 +100,9 @@ const LOCAL_DEFAULTS = {
   breakLog: [], // [{time: ISO string, stretchIndex: number}] — today only, cleared at midnight
   breakLogDate: null, // date string to detect midnight rollover
   gatePaused: false, // true when timer was paused by work hours/weekend gate, not by user
+  gateOverride: false, // true when the user force-started the timer while gate-blocked
+                        // (e.g. "Run anyway") — tells the periodic gate-check to leave
+                        // it running instead of silently re-pausing it a few minutes later
 };
 
 async function getState() {
@@ -153,7 +156,9 @@ async function startTimer(intervalMin, force = false) {
   const state = await getState();
   if (intervalMin == null) intervalMin = state.intervalMin || 20;
 
-  if (!force && (isWeekendPaused(state) || !isWithinWorkHours(state))) {
+  const gateBlocked = isWeekendPaused(state) || !isWithinWorkHours(state);
+
+  if (!force && gateBlocked) {
     await chrome.alarms.clear(ALARM_NAME);
     await chrome.alarms.clear(CHIME_ALARM_NAME);
     await setState({ running: false, startedAt: null, pausedRemainSec: intervalMin * 60, intervalMin, gatePaused: true });
@@ -165,7 +170,10 @@ async function startTimer(intervalMin, force = false) {
   // the old alarm fires between setState and clear if the service worker restarts.
   await chrome.alarms.clear(ALARM_NAME);
   await chrome.alarms.clear(CHIME_ALARM_NAME);
-  await setState({ running: true, startedAt, pausedRemainSec: null, intervalMin });
+  // If this start bypassed a blocked gate (force=true while gateBlocked), remember it —
+  // otherwise the periodic gate-check alarm would silently re-pause this a few minutes
+  // later, since from its point of view an active timer outside the gate looks wrong.
+  await setState({ running: true, startedAt, pausedRemainSec: null, intervalMin, gateOverride: force && gateBlocked });
   chrome.alarms.create(ALARM_NAME, { delayInMinutes: intervalMin });
 
   const leadSec = state.soundEnabled ? (state.soundLeadSec || 0) : 0;
@@ -183,7 +191,7 @@ async function pauseTimer() {
   const remainSec = Math.max(0, totalSec - elapsedSec);
   await chrome.alarms.clear(ALARM_NAME);
   await chrome.alarms.clear(CHIME_ALARM_NAME);
-  await setState({ running: false, pausedRemainSec: remainSec, startedAt: null, gatePaused: false });
+  await setState({ running: false, pausedRemainSec: remainSec, startedAt: null, gatePaused: false, gateOverride: false });
 }
 
 async function resumeTimer() {
@@ -214,7 +222,7 @@ async function resumeTimer() {
 async function stopTimer() {
   await chrome.alarms.clear(ALARM_NAME);
   await chrome.alarms.clear(CHIME_ALARM_NAME);
-  await setState({ running: false, startedAt: null, pausedRemainSec: null });
+  await setState({ running: false, startedAt: null, pausedRemainSec: null, gateOverride: false });
 }
 
 async function snoozeTimer() {
@@ -615,30 +623,39 @@ async function fireDailySummary() {
   chrome.action.setBadgeBackgroundColor({ color: '#E8A84C' });
 }
 
+// ===== GATE RE-EVALUATION =====
+// Shared by the periodic gate-check alarm and by anything that changes the
+// work-hours/weekend settings, so a change to those settings takes effect
+// immediately instead of waiting for the next 5-minute alarm tick.
+async function reevaluateGate() {
+  const state = await getState();
+  const shouldRun = !isWeekendPaused(state) && isWithinWorkHours(state);
+  if (shouldRun && !state.running && !state.pendingBreak) {
+    if (state.gatePaused) {
+      // Was paused by the work hours gate — auto-resume now that hours started
+      await setState({ gatePaused: false });
+      await startTimer(state.intervalMin, true);
+    } else if (state.pausedRemainSec === null) {
+      // Fully stopped (post-break) — start fresh
+      await startTimer(state.intervalMin);
+    }
+    // If manually paused (gatePaused:false, pausedRemainSec set) — respect user's choice
+  } else if (!shouldRun && state.running && !state.gateOverride) {
+    await pauseTimer();
+    await setState({ gatePaused: true }); // mark as gate-paused so resume is automatic
+  } else if (shouldRun && state.running && state.gateOverride) {
+    // Back within the gate naturally — the override is no longer needed.
+    await setState({ gateOverride: false });
+  }
+}
+
 // ===== ALARM ROUTER =====
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === ALARM_NAME) fireBreak();
   if (alarm.name === CHIME_ALARM_NAME) playChime();
   if (alarm.name === SUMMARY_ALARM_NAME) fireDailySummary();
-  if (alarm.name === 'microbreak-gate-check') {
-    const state = await getState();
-    const shouldRun = !isWeekendPaused(state) && isWithinWorkHours(state);
-    if (shouldRun && !state.running && !state.pendingBreak) {
-      if (state.gatePaused) {
-        // Was paused by the work hours gate — auto-resume now that hours started
-        await setState({ gatePaused: false });
-        await startTimer(state.intervalMin, true);
-      } else if (state.pausedRemainSec === null) {
-        // Fully stopped (post-break) — start fresh
-        await startTimer(state.intervalMin);
-      }
-      // If manually paused (gatePaused:false, pausedRemainSec set) — respect user's choice
-    } else if (!shouldRun && state.running) {
-      await pauseTimer();
-      await setState({ gatePaused: true }); // mark as gate-paused so resume is automatic
-    }
-  }
+  if (alarm.name === 'microbreak-gate-check') await reevaluateGate();
 });
 
 chrome.notifications.onButtonClicked.addListener((notifId, btnIndex) => {
@@ -675,7 +692,16 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         sendResponse(await getState());
         break;
       }
-      case "SET_INTERVAL":   await setState({ intervalMin: msg.intervalMin }); await startTimer(msg.intervalMin); sendResponse(await getState()); break;
+      case "SET_INTERVAL": {
+        // Preserve an active gate override across the interval change — otherwise
+        // picking a new interval while running via "Run anyway" would immediately
+        // re-trigger the gate and pause it.
+        const prevState = await getState();
+        await setState({ intervalMin: msg.intervalMin });
+        await startTimer(msg.intervalMin, prevState.gateOverride === true);
+        sendResponse(await getState());
+        break;
+      }
       case "SET_FOCUS":      await setState({ focusMode: msg.value }); sendResponse(await getState()); break;
 
       case "SET_PREF": {
@@ -689,8 +715,12 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
           if (newState.running) {
             await startTimer(newState.intervalMin);
           }
+          // Re-check immediately in case this change should resume or pause
+          // right now — otherwise a paused user is stuck for up to 5 minutes
+          // waiting on the periodic gate-check alarm.
+          await reevaluateGate();
         }
-        sendResponse(newState);
+        sendResponse(await getState());
         break;
       }
 
@@ -700,7 +730,10 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         scheduleSummaryAlarm(whState);
         // Only restart if running — don't wipe a manual pause
         if (whState.running) await startTimer(whState.intervalMin);
-        sendResponse(whState);
+        // Re-check immediately — if this change means the gate should no longer
+        // block (or should now block), don't wait up to 5 min for the alarm.
+        await reevaluateGate();
+        sendResponse(await getState());
         break;
       }
 
@@ -709,7 +742,8 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         const wdState = await getState();
         // Only restart if running — don't wipe a manual pause
         if (wdState.running) await startTimer(wdState.intervalMin);
-        sendResponse(wdState);
+        await reevaluateGate();
+        sendResponse(await getState());
         break;
       }
 
