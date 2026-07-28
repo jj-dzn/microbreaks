@@ -816,6 +816,9 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     if (!state.running && state.pausedRemainSec === null) {
       await startTimer(state.intervalMin);
     }
+    // Safety net, same reasoning as onStartup — self-corrects a stuck gatePaused
+    // state without ever overriding a deliberate manual pause.
+    await reevaluateGate();
   }
 });
 
@@ -868,6 +871,14 @@ chrome.runtime.onStartup.addListener(async () => {
 
   scheduleSummaryAlarm(state);
   chrome.action.setBadgeText({ text: state.badgeCount > 0 ? String(state.badgeCount) : '' });
+
+  // Final safety net: independently re-derive from a fresh read whether the timer
+  // should be running right now, rather than trusting only the single state snapshot
+  // read at the top of this function. reevaluateGate() is idempotent and always
+  // respects an actual manual pause, so this can only self-correct a stuck state
+  // (e.g. gatePaused should have triggered a resume above but didn't for some
+  // reason) — it never overrides a deliberate pause.
+  await reevaluateGate();
 });
 
 // Periodically re-check work-hours / weekend gating even without user interaction,
