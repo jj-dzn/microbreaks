@@ -647,8 +647,17 @@ async function reevaluateGate() {
     }
     // If manually paused (gatePaused:false, pausedRemainSec set) — respect user's choice
   } else if (!shouldRun && state.running && !state.gateOverride) {
-    await pauseTimer();
-    await setState({ gatePaused: true }); // mark as gate-paused so resume is automatic
+    // Gate-pausing (as opposed to a manual pause) always resumes with a fresh full
+    // interval — never the actual leftover remainder — so show that as what's
+    // "paused" too. pauseTimer() stores the real elapsed-adjusted remainder, which
+    // would be misleading here: e.g. it could show "58:30 left" for hours while
+    // gated, when what actually happens on resume is a fresh 60:00.
+    await chrome.alarms.clear(ALARM_NAME);
+    await chrome.alarms.clear(CHIME_ALARM_NAME);
+    await setState({
+      running: false, startedAt: null, gatePaused: true, gateOverride: false,
+      pausedRemainSec: state.intervalMin * 60,
+    });
   } else if (shouldRun && state.running && state.gateOverride) {
     // Back within the gate naturally — the override is no longer needed.
     await setState({ gateOverride: false });

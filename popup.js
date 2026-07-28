@@ -234,6 +234,11 @@ function applyState(st) {
   } else {
     banner.style.display = 'none';
   }
+  // Snooze and Resume are both no-ops while gate-paused (by design — neither should
+  // silently bypass the weekend/work-hours gate). Hide them so "Run anyway" in the
+  // banner above is the one unambiguous action, instead of leaving a Resume button
+  // that looks clickable but silently does nothing.
+  $('ctrlRow').style.display = isWorkHoursPaused ? 'none' : '';
 
   renderRing(rem, st.intervalMin * 60);
   renderInterval(st.intervalMin);
