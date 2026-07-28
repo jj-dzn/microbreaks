@@ -62,7 +62,7 @@ async function bgT(key, sub) {
 
 const SYNC_DEFAULTS = {
   intervalMin: 20,
-  focusMode: false,
+  focusMode: true,
   notifEnabled: true,
   animEnabled: true,
   maleModel: true,
