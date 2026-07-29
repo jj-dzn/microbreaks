@@ -70,6 +70,7 @@ const SYNC_DEFAULTS = {
   chimeSound: "marimba",
   darkMode: "system",
   ratingNudgeDone: false,
+  supportNudgeDone: false,
   onboardingDone: false,
   language: "auto",
   streakDays: 0,

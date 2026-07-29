@@ -687,6 +687,21 @@
   "nudgeDismiss": {
     "message": "शायद बाद में"
   },
+  "supportTitle": {
+    "message": "अभी भी जारी है!"
+  },
+  "supportBody": {
+    "message": "MicroBreaks मुफ़्त है और हमेशा रहेगा। अगर इसने आपको अधिक चलने-फिरने में मदद की है, तो डेवलपर को एक कॉफ़ी दिलाने पर विचार करें।"
+  },
+  "supportCta": {
+    "message": "मुझे कॉफ़ी दिलाएं ↗"
+  },
+  "aboutSupport": {
+    "message": "विकास का समर्थन करें"
+  },
+  "aboutSupportLink": {
+    "message": "मुझे कॉफ़ी दिलाएं ☕"
+  },
   "historyTitle": {
     "message": "आज के ब्रेक"
   },

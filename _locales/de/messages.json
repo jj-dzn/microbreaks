@@ -687,6 +687,21 @@
   "nudgeDismiss": {
     "message": "Vielleicht später"
   },
+  "supportTitle": {
+    "message": "Immer noch dabei!"
+  },
+  "supportBody": {
+    "message": "MicroBreaks ist kostenlos und wird es immer bleiben. Wenn es dir geholfen hat, dich mehr zu bewegen, spendiere dem Entwickler doch einen Kaffee."
+  },
+  "supportCta": {
+    "message": "Kaffee spendieren ↗"
+  },
+  "aboutSupport": {
+    "message": "Entwicklung unterstützen"
+  },
+  "aboutSupportLink": {
+    "message": "Kaffee spendieren ☕"
+  },
   "historyTitle": {
     "message": "Pausen heute"
   },

@@ -687,6 +687,21 @@
   "nudgeDismiss": {
     "message": "Maybe later"
   },
+  "supportTitle": {
+    "message": "Still going strong!"
+  },
+  "supportBody": {
+    "message": "MicroBreaks is free and always will be. If it's helped you move more, consider buying the developer a coffee."
+  },
+  "supportCta": {
+    "message": "Buy me a coffee ↗"
+  },
+  "aboutSupport": {
+    "message": "Support development"
+  },
+  "aboutSupportLink": {
+    "message": "Buy me a coffee ☕"
+  },
   "historyTitle": {
     "message": "today's breaks"
   },

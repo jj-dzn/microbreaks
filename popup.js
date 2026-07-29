@@ -183,9 +183,9 @@ function applyState(st) {
   clearInterval(tickTimer);
   clearInterval(syncTimer); // single clear — was duplicated below
 
-  // Restore stretch area visibility unless the nudge is showing OR grid is open
+  // Restore stretch area visibility unless a nudge is showing OR grid is open
   const gridIsOpen = $('stretchGridPanel').classList.contains('open');
-  const nudgeIsOpen = $('nudgePanel').classList.contains('open');
+  const nudgeIsOpen = $('nudgePanel').classList.contains('open') || $('supportPanel').classList.contains('open');
   if (!nudgeIsOpen && !gridIsOpen) {
     $('stretchAreaMain').style.display = '';
   }
@@ -362,6 +362,9 @@ async function init() {
 
   if ((st.totalBreaksAllTime || 0) >= 10 && !st.ratingNudgeDone) {
     showNudge();
+  } else if ((st.totalBreaksAllTime || 0) >= 40 && st.ratingNudgeDone && !st.supportNudgeDone) {
+    // Only after the rating nudge has been resolved — never show both at once
+    showSupportNudge();
   }
 }
 
@@ -527,10 +530,14 @@ chrome.runtime.onMessage.addListener((msg) => {
     renderGoBtn(false, false);
     // Hide the stretch card during break — it shows "up next" which would be confusing
     $('stretchAreaMain').style.display = 'none';
-    // If the rating nudge is showing, dismiss it so break takes priority
+    // If a nudge is showing, dismiss it so break takes priority
     if ($('nudgePanel').classList.contains('open')) {
       $('nudgePanel').classList.remove('open');
       $('nudgePanel').setAttribute('aria-hidden', 'true');
+    }
+    if ($('supportPanel').classList.contains('open')) {
+      $('supportPanel').classList.remove('open');
+      $('supportPanel').setAttribute('aria-hidden', 'true');
     }
     setTimeout(async () => {
       $('cdDisplay').classList.remove('break-time');
@@ -540,6 +547,8 @@ chrome.runtime.onMessage.addListener((msg) => {
       applyState(st); // applyState restores stretchAreaMain display
       if (st && (msg.totalBreaks || 0) >= 10 && !st.ratingNudgeDone) {
         showNudge();
+      } else if (st && (msg.totalBreaks || 0) >= 40 && st.ratingNudgeDone && !st.supportNudgeDone) {
+        showSupportNudge();
       }
     }, 4000);
   }
@@ -575,6 +584,35 @@ $('nudgeDismissBtn').addEventListener('click', async () => {
 $('nudgeReviewBtn').addEventListener('click', async () => {
   await send({ type: 'SET_PREF', key: 'ratingNudgeDone', value: true });
   setTimeout(hideNudge, 800);
+});
+
+function showSupportNudge() {
+  $('settingsLayer').classList.remove('open');
+  $('settingsLayer').setAttribute('aria-hidden', 'true');
+  $('mainLower').style.display = '';
+  $('stretchAreaMain').style.display = 'none';
+  $('stretchGridPanel').classList.remove('open');
+  $('stretchGridPanel').setAttribute('aria-hidden', 'true');
+  $('supportPanel').classList.add('open');
+  $('supportPanel').setAttribute('aria-hidden', 'false');
+}
+
+function hideSupportNudge() {
+  $('supportPanel').classList.remove('open');
+  $('supportPanel').setAttribute('aria-hidden', 'true');
+  $('stretchAreaMain').style.display = '';
+  $('stretchGridPanel').classList.remove('open');
+  $('stretchGridPanel').setAttribute('aria-hidden', 'true');
+}
+
+$('supportDismissBtn').addEventListener('click', async () => {
+  hideSupportNudge();
+  await send({ type: 'SET_PREF', key: 'supportNudgeDone', value: true });
+});
+
+$('supportBtn').addEventListener('click', async () => {
+  await send({ type: 'SET_PREF', key: 'supportNudgeDone', value: true });
+  setTimeout(hideSupportNudge, 800);
 });
 
 $('historyToggle').addEventListener('click', () => {

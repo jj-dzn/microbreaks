@@ -687,6 +687,21 @@
   "nudgeDismiss": {
     "message": "ஒருவேளை பின்னர்"
   },
+  "supportTitle": {
+    "message": "இன்னும் தொடர்கிறது!"
+  },
+  "supportBody": {
+    "message": "MicroBreaks இலவசம், எப்போதும் இலவசமாகவே இருக்கும். இது நீங்கள் அதிகம் நகர உதவியிருந்தால், டெவலப்பருக்கு ஒரு காபி வாங்கிக் கொடுக்க பரிசீலிக்கவும்."
+  },
+  "supportCta": {
+    "message": "எனக்கு காபி வாங்கு ↗"
+  },
+  "aboutSupport": {
+    "message": "மேம்பாட்டை ஆதரிக்கவும்"
+  },
+  "aboutSupportLink": {
+    "message": "எனக்கு காபி வாங்கு ☕"
+  },
   "historyTitle": {
     "message": "இன்றைய இடைவேளைகள்"
   },

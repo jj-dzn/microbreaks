@@ -687,6 +687,21 @@
   "nudgeDismiss": {
     "message": "బహుశా తర్వాత"
   },
+  "supportTitle": {
+    "message": "ఇంకా కొనసాగుతోంది!"
+  },
+  "supportBody": {
+    "message": "MicroBreaks ఉచితం మరియు ఎల్లప్పుడూ ఉచితంగానే ఉంటుంది. ఇది మిమ్మల్ని ఎక్కువగా కదిలేలా చేసి ఉంటే, డెవలపర్‌కు ఒక కాఫీ కొనివ్వడం పరిగణించండి."
+  },
+  "supportCta": {
+    "message": "నాకు కాఫీ కొనివ్వండి ↗"
+  },
+  "aboutSupport": {
+    "message": "అభివృద్ధికి మద్దతు ఇవ్వండి"
+  },
+  "aboutSupportLink": {
+    "message": "నాకు కాఫీ కొనివ్వండి ☕"
+  },
   "historyTitle": {
     "message": "నేటి బ్రేక్‌లు"
   },
