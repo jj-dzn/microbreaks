@@ -183,6 +183,8 @@ async function startTimer(intervalMin, force = false) {
     const chimeDelayMin = Math.max(1, intervalMin - (leadSec / 60));
     chrome.alarms.create(CHIME_ALARM_NAME, { delayInMinutes: chimeDelayMin });
   }
+
+  await reconfirmNotIdle(state.idleDetectionEnabled);
 }
 
 async function pauseTimer() {
@@ -196,11 +198,20 @@ async function pauseTimer() {
   await setState({ running: false, pausedRemainSec: remainSec, startedAt: null, gatePaused: false, gateOverride: false });
 }
 
-async function resumeTimer() {
+async function resumeTimer(force = false) {
   const state = await getState();
 
-  // If outside work hours / weekend, don't resume — leave paused
-  if (isWeekendPaused(state) || !isWithinWorkHours(state)) {
+  // Idempotency guard: if something else already resumed it (e.g. a manual Resume
+  // click and the idle→active event it triggered racing each other), bail out
+  // instead of recomputing remainSec from a pausedRemainSec that's already been
+  // cleared to null — that would silently reset the just-resumed countdown to a
+  // full fresh interval.
+  if (state.running) return;
+
+  // If outside work hours / weekend, don't resume — leave paused — unless an
+  // active gate override says otherwise (e.g. resuming from an idle-pause that
+  // happened while running via "Run anyway").
+  if (!force && (isWeekendPaused(state) || !isWithinWorkHours(state))) {
     return;
   }
 
@@ -219,6 +230,7 @@ async function resumeTimer() {
   }
 
   await setState({ running: true, startedAt, pausedRemainSec: null, idlePaused: false });
+  await reconfirmNotIdle(state.idleDetectionEnabled);
 }
 
 async function stopTimer() {
@@ -674,7 +686,33 @@ async function reevaluateGate() {
 // other application too, not just when a Chrome window has focus.
 const IDLE_DETECTION_INTERVAL_SEC = 60; // Chrome's own default; minimum allowed is 15
 
+// Right after a break fires, holding a stretch position for its 20-30 second
+// duration without touching the keyboard/mouse looks identical to "stepped away"
+// to the idle tracker. Skip idle-pausing for a short grace window after the most
+// recent break so finishing a stretch doesn't immediately trigger it.
+const POST_BREAK_IDLE_GRACE_MS = 90 * 1000;
+
 chrome.idle.setDetectionInterval(IDLE_DETECTION_INTERVAL_SEC);
+
+// Central "should we idle-pause right now" check — shared by the onStateChanged
+// listener, startTimer()/resumeTimer() (so a timer that starts running while the
+// user is ALREADY away gets caught immediately, since chrome.idle only reports
+// future transitions), and the periodic gate-check alarm below (a safety net for
+// the case where the one-shot 'idle' transition landed inside the post-break
+// grace window and there's no second event to catch the user staying away much
+// longer — chrome.idle doesn't repeat events while remaining idle).
+async function reconfirmNotIdle(idleDetectionEnabled) {
+  if (!idleDetectionEnabled) return;
+  const currentIdleState = await new Promise(r => chrome.idle.queryState(IDLE_DETECTION_INTERVAL_SEC, r));
+  if (currentIdleState === 'active') return;
+  const s = await getState();
+  if (!s.running) return;
+  const lastBreak = s.breakLog && s.breakLog.length ? s.breakLog[s.breakLog.length - 1] : null;
+  if (lastBreak && (Date.now() - new Date(lastBreak.time).getTime()) < POST_BREAK_IDLE_GRACE_MS) return;
+  const hadOverride = s.gateOverride;
+  await pauseTimer();
+  await setState({ idlePaused: true, gateOverride: hadOverride });
+}
 
 chrome.idle.onStateChanged.addListener(async (newState) => {
   const state = await getState();
@@ -687,18 +725,20 @@ chrome.idle.onStateChanged.addListener(async (newState) => {
     // Resume with the actual remaining time — unlike the work-hours gate, idle-pause
     // isn't a policy boundary the user configured; the clock just shouldn't have
     // advanced while they were away, so pick back up where they left off.
-    if (!isWeekendPaused(freshState) && isWithinWorkHours(freshState)) {
-      await resumeTimer();
-    } else {
-      // Stepped away right as work hours also ended — hand off to the gate instead
-      // of resuming into a state it would immediately re-pause anyway.
+    const gateBlocked = isWeekendPaused(freshState) || !isWithinWorkHours(freshState);
+    if (gateBlocked && !freshState.gateOverride) {
+      // Stepped away right as work hours also ended, with no override in play —
+      // hand off to the gate instead of resuming into a state it would
+      // immediately re-pause anyway.
       await setState({ gatePaused: true });
+    } else {
+      // force through if an override was active before stepping away — losing it
+      // just because the user went idle for a bit would be surprising.
+      await resumeTimer(gateBlocked && freshState.gateOverride);
     }
   } else {
     // 'idle' or 'locked'
-    if (!state.running) return; // nothing to pause (already paused/gated/stopped)
-    await pauseTimer();
-    await setState({ idlePaused: true });
+    await reconfirmNotIdle(state.idleDetectionEnabled);
   }
 });
 
@@ -708,7 +748,15 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === ALARM_NAME) fireBreak();
   if (alarm.name === CHIME_ALARM_NAME) playChime();
   if (alarm.name === SUMMARY_ALARM_NAME) fireDailySummary();
-  if (alarm.name === 'microbreak-gate-check') await reevaluateGate();
+  if (alarm.name === 'microbreak-gate-check') {
+    await reevaluateGate();
+    // Safety net: chrome.idle only fires once per transition, so if the one-shot
+    // 'idle' event landed inside the post-break grace window, there's no second
+    // event to catch the user staying away much longer. Piggyback on this
+    // existing 5-minute tick to re-check directly instead of adding another alarm.
+    const idleState = await getState();
+    await reconfirmNotIdle(idleState.idleDetectionEnabled);
+  }
 });
 
 chrome.notifications.onButtonClicked.addListener((notifId, btnIndex) => {
@@ -742,8 +790,17 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       case "RESUME": {
         // Manual resume also clears idle-pause state, so a stray idle→active event
         // arriving shortly after doesn't try to resume an already-running timer.
+        const rState = await getState();
         await setState({ idlePaused: false });
-        await resumeTimer();
+        const gateBlocked = isWeekendPaused(rState) || !isWithinWorkHours(rState);
+        if (gateBlocked && !rState.gateOverride) {
+          // Was idle-paused, but the work-hours gate would block a real resume —
+          // hand off to the gate so the banner and "Run anyway" show up instead
+          // of leaving an unlabeled dead Resume button.
+          await setState({ gatePaused: true });
+        } else {
+          await resumeTimer(gateBlocked && rState.gateOverride);
+        }
         sendResponse(await getState());
         break;
       }
@@ -797,10 +854,11 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
           // Turning the feature off should lift a pause it's currently the cause
           // of — the reason for the pause no longer applies.
           await setState({ idlePaused: false });
-          if (!isWeekendPaused(newState) && isWithinWorkHours(newState)) {
-            await resumeTimer();
-          } else {
+          const gateBlocked = isWeekendPaused(newState) || !isWithinWorkHours(newState);
+          if (gateBlocked && !newState.gateOverride) {
             await setState({ gatePaused: true });
+          } else {
+            await resumeTimer(gateBlocked && newState.gateOverride);
           }
         }
         sendResponse(await getState());
@@ -904,10 +962,11 @@ chrome.runtime.onStartup.addListener(async () => {
     const currentIdleState = await new Promise(r => chrome.idle.queryState(IDLE_DETECTION_INTERVAL_SEC, r));
     if (currentIdleState === 'active') {
       await setState({ idlePaused: false });
-      if (!isWeekendPaused(state) && isWithinWorkHours(state)) {
-        await resumeTimer();
-      } else {
+      const gateBlocked = isWeekendPaused(state) || !isWithinWorkHours(state);
+      if (gateBlocked && !state.gateOverride) {
         await setState({ gatePaused: true });
+      } else {
+        await resumeTimer(gateBlocked && state.gateOverride);
       }
       scheduleSummaryAlarm(state);
       chrome.action.setBadgeText({ text: state.badgeCount > 0 ? String(state.badgeCount) : '' });
