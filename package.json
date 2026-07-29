@@ -1,0 +1,11 @@
+{
+  "name": "microbreaks",
+  "private": true,
+  "description": "Test tooling for the MicroBreaks Chrome extension. Not published, not part of the extension itself.",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.js\""
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

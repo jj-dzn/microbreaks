@@ -1,0 +1,6 @@
+# Dev-only tooling — kept out of `git archive` output (used to build the
+# Chrome Web Store upload zip) so none of it ships inside the extension.
+/tests/ export-ignore
+/package.json export-ignore
+/.github/ export-ignore
+/.gitattributes export-ignore
