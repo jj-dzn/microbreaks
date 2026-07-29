@@ -219,8 +219,13 @@ function applyState(st) {
     }, 30000);
   }
 
-  // Show work-hours banner only when timer was paused by the gate (not manual pause)
-  const isWorkHoursPaused = st.workHoursEnabled && st.gatePaused && !st.running;
+  // Show work-hours banner only when timer was paused by the gate (not manual pause).
+  // Deliberately NOT gated on st.workHoursEnabled — weekend pause applies (and
+  // defaults to on) independently of the work-hours toggle, so gatePaused can be
+  // true purely from weekend gating even with work hours off. Requiring
+  // workHoursEnabled here used to hide the banner (and leave a dead Resume
+  // button visible) for exactly that case.
+  const isWorkHoursPaused = st.gatePaused && !st.running;
   const banner = $('workHoursBanner');
   if (isWorkHoursPaused) {
     banner.style.display = 'flex';
