@@ -731,5 +731,17 @@
   },
   "pausedWorkHours": {
     "message": "रुका — कार्य घंटों के बाहर"
+  },
+  "pausedIdle": {
+    "message": "रुका — आप दूर चले गए"
+  },
+  "settingsIdle": {
+    "message": "निष्क्रियता पहचान"
+  },
+  "idleDetection": {
+    "message": "निष्क्रिय होने पर स्वतः रोकें"
+  },
+  "idleDetectionSub": {
+    "message": "जब आप कंप्यूटर से दूर जाएं तो टाइमर रोक दें"
   }
 }

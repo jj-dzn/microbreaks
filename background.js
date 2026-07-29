@@ -85,6 +85,7 @@ const SYNC_DEFAULTS = {
   snoozeMin: 5,
   stretchOrder: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], // indices into STRETCH_KEYS
   stretchEnabled: [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true],
+  idleDetectionEnabled: true,
 };
 
 const LOCAL_DEFAULTS = {
@@ -103,6 +104,7 @@ const LOCAL_DEFAULTS = {
   gateOverride: false, // true when the user force-started the timer while gate-blocked
                         // (e.g. "Run anyway") — tells the periodic gate-check to leave
                         // it running instead of silently re-pausing it a few minutes later
+  idlePaused: false, // true when timer was auto-paused because the user stepped away
 };
 
 async function getState() {
@@ -173,7 +175,7 @@ async function startTimer(intervalMin, force = false) {
   // If this start bypassed a blocked gate (force=true while gateBlocked), remember it —
   // otherwise the periodic gate-check alarm would silently re-pause this a few minutes
   // later, since from its point of view an active timer outside the gate looks wrong.
-  await setState({ running: true, startedAt, pausedRemainSec: null, intervalMin, gateOverride: force && gateBlocked });
+  await setState({ running: true, startedAt, pausedRemainSec: null, intervalMin, gateOverride: force && gateBlocked, idlePaused: false });
   chrome.alarms.create(ALARM_NAME, { delayInMinutes: intervalMin });
 
   const leadSec = state.soundEnabled ? (state.soundLeadSec || 0) : 0;
@@ -216,7 +218,7 @@ async function resumeTimer() {
     chrome.alarms.create(CHIME_ALARM_NAME, { delayInMinutes: chimeDelayMin });
   }
 
-  await setState({ running: true, startedAt, pausedRemainSec: null });
+  await setState({ running: true, startedAt, pausedRemainSec: null, idlePaused: false });
 }
 
 async function stopTimer() {
@@ -664,6 +666,42 @@ async function reevaluateGate() {
   }
 }
 
+// ===== IDLE DETECTION =====
+// Auto-pauses the timer when the user steps away, so breaks don't keep firing
+// against wall-clock time while nobody's actually working. chrome.idle tracks
+// keyboard/mouse/touch input at the OS level — not just activity inside Chrome —
+// so this correctly recognizes the user as "active" while they're working in any
+// other application too, not just when a Chrome window has focus.
+const IDLE_DETECTION_INTERVAL_SEC = 60; // Chrome's own default; minimum allowed is 15
+
+chrome.idle.setDetectionInterval(IDLE_DETECTION_INTERVAL_SEC);
+
+chrome.idle.onStateChanged.addListener(async (newState) => {
+  const state = await getState();
+  if (!state.idleDetectionEnabled) return;
+
+  if (newState === 'active') {
+    if (!state.idlePaused || state.running) return; // wasn't idle-paused, or already resumed some other way
+    await setState({ idlePaused: false });
+    const freshState = await getState();
+    // Resume with the actual remaining time — unlike the work-hours gate, idle-pause
+    // isn't a policy boundary the user configured; the clock just shouldn't have
+    // advanced while they were away, so pick back up where they left off.
+    if (!isWeekendPaused(freshState) && isWithinWorkHours(freshState)) {
+      await resumeTimer();
+    } else {
+      // Stepped away right as work hours also ended — hand off to the gate instead
+      // of resuming into a state it would immediately re-pause anyway.
+      await setState({ gatePaused: true });
+    }
+  } else {
+    // 'idle' or 'locked'
+    if (!state.running) return; // nothing to pause (already paused/gated/stopped)
+    await pauseTimer();
+    await setState({ idlePaused: true });
+  }
+});
+
 // ===== ALARM ROUTER =====
 
 chrome.alarms.onAlarm.addListener(async (alarm) => {
@@ -701,7 +739,14 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         break;
       }
       case "PAUSE":          await pauseTimer(); sendResponse(await getState()); break;
-      case "RESUME":         await resumeTimer(); sendResponse(await getState()); break;
+      case "RESUME": {
+        // Manual resume also clears idle-pause state, so a stray idle→active event
+        // arriving shortly after doesn't try to resume an already-running timer.
+        await setState({ idlePaused: false });
+        await resumeTimer();
+        sendResponse(await getState());
+        break;
+      }
       case "STOP":           await stopTimer(); sendResponse(await getState()); break;
       case "SNOOZE": {
         // snoozeTimer() clears pendingBreak itself
@@ -747,6 +792,16 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
           // right now — otherwise a paused user is stuck for up to 5 minutes
           // waiting on the periodic gate-check alarm.
           await reevaluateGate();
+        }
+        if (msg.key === 'idleDetectionEnabled' && msg.value === false && newState.idlePaused) {
+          // Turning the feature off should lift a pause it's currently the cause
+          // of — the reason for the pause no longer applies.
+          await setState({ idlePaused: false });
+          if (!isWeekendPaused(newState) && isWithinWorkHours(newState)) {
+            await resumeTimer();
+          } else {
+            await setState({ gatePaused: true });
+          }
         }
         sendResponse(await getState());
         break;
@@ -839,6 +894,26 @@ chrome.runtime.onStartup.addListener(async () => {
   // the user closed the browser so the break is no longer relevant
   if (state.pendingBreak) {
     await setState({ pendingBreak: null });
+  }
+
+  // Reconcile a stale idle-pause from before a full restart. chrome.idle only
+  // reports transitions, and a freshly-launched service worker has no prior state
+  // to transition from — so a genuinely-active user right now (they just opened
+  // Chrome) would otherwise be stuck idle-paused until the next idle→active cycle.
+  if (state.idlePaused) {
+    const currentIdleState = await new Promise(r => chrome.idle.queryState(IDLE_DETECTION_INTERVAL_SEC, r));
+    if (currentIdleState === 'active') {
+      await setState({ idlePaused: false });
+      if (!isWeekendPaused(state) && isWithinWorkHours(state)) {
+        await resumeTimer();
+      } else {
+        await setState({ gatePaused: true });
+      }
+      scheduleSummaryAlarm(state);
+      chrome.action.setBadgeText({ text: state.badgeCount > 0 ? String(state.badgeCount) : '' });
+      await reevaluateGate();
+      return; // handled — the running/gatePaused logic below doesn't apply here
+    }
   }
 
   // If the timer was running when the browser closed, check how long ago it started.

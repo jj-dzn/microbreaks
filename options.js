@@ -86,6 +86,8 @@ function renderAll() {
   $('optStrictMode').classList.toggle('on', !!state.focusMode);
   $('optStrictMode').setAttribute('aria-checked', String(!!state.focusMode));
 
+  $('optIdle').classList.toggle('on', state.idleDetectionEnabled !== false);
+  $('optIdle').setAttribute('aria-checked', String(state.idleDetectionEnabled !== false));
 
   $('optSnoozeMin').value = String(state.snoozeMin || 5);
 
@@ -155,6 +157,11 @@ document.querySelectorAll('#intervalRow .chip').forEach(chip => {
 
 $('optStrictMode').addEventListener('click', async () => {
   state = await send({ type: 'SET_FOCUS', value: !state.focusMode });
+  renderAll();
+});
+
+$('optIdle').addEventListener('click', async () => {
+  state = await send({ type: 'SET_PREF', key: 'idleDetectionEnabled', value: !(state.idleDetectionEnabled !== false) });
   renderAll();
 });
 

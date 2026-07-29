@@ -59,6 +59,11 @@
       <button class="wh-banner-btn" id="whRunAnywayBtn">Run anyway</button>
     </div>
 
+    <div class="work-hours-banner" id="idleBanner" style="display:none;">
+      <span class="wh-banner-icon">💤</span>
+      <span class="wh-banner-msg" id="idleBannerMsg" data-i18n="pausedIdle">Paused — you stepped away</span>
+    </div>
+
     <div class="ctrl-row" id="ctrlRow">
       <button class="btn-snooze" id="snoozeBtn">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><line x1="17" y1="20" x2="22" y2="20"/><line x1="19" y1="18" x2="19" y2="22"/></svg>
@@ -302,6 +307,17 @@
         <button class="day-btn" data-day="0" data-i18n="daySun">Sun</button>
       </div>
       <div class="stg-sub" style="margin-top:6px;" data-i18n="pauseOnDay">Pause on this day</div>
+    </div>
+
+    <div class="stg-group">
+      <div class="stg-head" data-i18n="settingsIdle">idle detection</div>
+      <div class="stg-row">
+        <div class="stg-txt">
+          <div class="stg-lbl" data-i18n="idleDetection">Auto-pause when idle</div>
+          <div class="stg-sub" data-i18n="idleDetectionSub">Pause the timer when you step away from the computer</div>
+        </div>
+        <button class="tog" id="tIdle" role="switch" aria-checked="true" data-pref="idleDetectionEnabled"></button>
+      </div>
     </div>
 
     <button class="options-link" id="openOptionsBtn" data-i18n="openFullSettings">Open full settings page</button>

@@ -25,6 +25,7 @@ No accounts, no servers, no tracking. Everything stays on your device.
 - 🔥 **Streak tracking** — daily breaks taken, minutes moved, and current streak
 - 🔔 **Gentle chime** — 4 sounds to choose from (marimba, soft bell, kalimba, wind chime), with a live preview when selecting
 - 🕐 **Work hours** — timer only runs during your set working hours
+- 💺 **Idle detection** — auto-pauses when you step away from the computer (works system-wide, not just Chrome activity), and picks back up right where it left off when you return
 - 📅 **Weekend pause** — auto-pauses on Saturday and Sunday by default, fully configurable per day
 - 📊 **Daily summary** — notification and badge at end of workday with your stats
 - ☁️ **Synced across devices** — settings and streak follow you via Chrome's built-in sync
@@ -58,6 +59,7 @@ Plain JavaScript, HTML, and CSS — no build step, no frameworks, no dependencie
 - `chrome.scripting` + `host_permissions` — on-demand strict mode overlay injection on any active tab
 - `chrome.commands` — keyboard shortcuts for triggering and snoozing breaks without opening the popup
 - `chrome.windows` — detects when the user returns to Chrome to show a pending break overlay
+- `chrome.idle` — system-wide (not just Chrome) keyboard/mouse/touch activity tracking, to auto-pause while the user is away
 - `_locales/` — Chrome's native i18n system for 8-language support
 
 ## Project structure

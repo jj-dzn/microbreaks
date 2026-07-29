@@ -731,5 +731,17 @@
   },
   "pausedWorkHours": {
     "message": "Paused — outside work hours"
+  },
+  "pausedIdle": {
+    "message": "Paused — you stepped away"
+  },
+  "settingsIdle": {
+    "message": "idle detection"
+  },
+  "idleDetection": {
+    "message": "Auto-pause when idle"
+  },
+  "idleDetectionSub": {
+    "message": "Pause the timer when you step away from the computer"
   }
 }

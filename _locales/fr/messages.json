@@ -731,5 +731,17 @@
   },
   "pausedWorkHours": {
     "message": "En pause — hors heures de travail"
+  },
+  "pausedIdle": {
+    "message": "En pause — vous êtes absent"
+  },
+  "settingsIdle": {
+    "message": "détection d'inactivité"
+  },
+  "idleDetection": {
+    "message": "Pause automatique en cas d'inactivité"
+  },
+  "idleDetectionSub": {
+    "message": "Met le minuteur en pause lorsque vous quittez l'ordinateur"
   }
 }

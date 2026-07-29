@@ -240,6 +240,10 @@ function applyState(st) {
   // that looks clickable but silently does nothing.
   $('ctrlRow').style.display = isWorkHoursPaused ? 'none' : '';
 
+  // Idle-pause banner — purely informational. Unlike the work-hours gate, Resume
+  // works normally here (it's not a policy boundary), so the ctrl-row stays visible.
+  $('idleBanner').style.display = (st.idlePaused && !st.running) ? 'flex' : 'none';
+
   renderRing(rem, st.intervalMin * 60);
   renderInterval(st.intervalMin);
   renderGoBtn(st.running, st.pausedRemainSec != null && !st.running);
@@ -250,10 +254,11 @@ function applyState(st) {
   renderStretch(st.stretchIndex ?? 0);
   viewStretchIndex = st.stretchIndex ?? 0;
 
-  const prefs = ['tNotif','tAnim','tSound','tWorkHours','tDailySummary'];
+  const prefs = ['tNotif','tAnim','tSound','tWorkHours','tDailySummary','tIdle'];
   const prefKeys = {
     tNotif:'notifEnabled', tAnim:'animEnabled',
     tSound:'soundEnabled', tWorkHours:'workHoursEnabled', tDailySummary:'dailySummaryEnabled',
+    tIdle:'idleDetectionEnabled',
   };
   prefs.forEach(id => {
     const on = !!st[prefKeys[id]];

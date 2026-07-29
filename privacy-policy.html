@@ -48,7 +48,7 @@
   </div>
 
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: June 2026</p>
+  <p class="updated">Last updated: July 2026</p>
 
   <div class="highlight">
     <strong>Short version:</strong> MicroBreaks has no servers of its own and collects no personal data. Settings sync between your own devices using Chrome's built-in sync feature — the same mechanism Chrome uses for bookmarks and passwords — and nothing is ever sent to us or any third party.
@@ -84,12 +84,16 @@
     <li><strong>offscreen</strong> — to play the gentle chime sound before a break, since Chrome does not allow background scripts to play audio directly</li>
     <li><strong>windows</strong> — to detect when you return focus to Chrome after being in another application, so a pending strict-mode break overlay can be shown on your return instead of being silently missed</li>
     <li><strong>commands</strong> — to register keyboard shortcuts (Alt+Shift+B and Alt+Shift+S) that let you trigger or snooze a break without opening the extension popup</li>
+    <li><strong>idle</strong> — to detect when you've stepped away from the computer, so the timer can auto-pause instead of scheduling breaks against wall-clock time nobody's around for</li>
     <li><strong>host permissions (all URLs)</strong> — required by Chrome to allow the strict mode overlay to appear on any webpage you are visiting, and to detect your active tab so the overlay knows where to appear</li>
   </ul>
   <p>None of these permissions are used to collect, transmit, or share any data.</p>
 
   <h2>Strict mode</h2>
   <p>When strict mode is enabled, MicroBreaks injects a visual overlay onto your active tab at break time. This overlay is rendered entirely within your browser. No content from your tab is read, captured, or transmitted.</p>
+
+  <h2>Idle detection</h2>
+  <p>MicroBreaks uses Chrome's built-in idle API to tell whether you're actively using the computer — it only sees a system-level state (active, idle, or locked), based on keyboard/mouse/touch input timing. It does not record what you type, what you click, or what applications you use, and this state is never stored beyond deciding whether to pause or resume the timer, and never leaves your device.</p>
 
   <h2>Children's privacy</h2>
   <p>MicroBreaks does not knowingly collect any information from anyone, including children under 13.</p>

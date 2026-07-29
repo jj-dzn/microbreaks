@@ -731,5 +731,17 @@
   },
   "pausedWorkHours": {
     "message": "Pausado — fuera del horario laboral"
+  },
+  "pausedIdle": {
+    "message": "Pausado — te alejaste"
+  },
+  "settingsIdle": {
+    "message": "detección de inactividad"
+  },
+  "idleDetection": {
+    "message": "Pausar automáticamente si estás inactivo"
+  },
+  "idleDetectionSub": {
+    "message": "Pausa el temporizador cuando te alejas del ordenador"
   }
 }

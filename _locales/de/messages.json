@@ -731,5 +731,17 @@
   },
   "pausedWorkHours": {
     "message": "Pausiert — außerhalb der Arbeitszeiten"
+  },
+  "pausedIdle": {
+    "message": "Pausiert — du warst weg"
+  },
+  "settingsIdle": {
+    "message": "Inaktivitätserkennung"
+  },
+  "idleDetection": {
+    "message": "Automatisch pausieren bei Inaktivität"
+  },
+  "idleDetectionSub": {
+    "message": "Pausiert den Timer, wenn du den Computer verlässt"
   }
 }
