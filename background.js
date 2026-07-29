@@ -164,7 +164,11 @@ async function startTimer(intervalMin, force = false) {
   if (!force && gateBlocked) {
     await chrome.alarms.clear(ALARM_NAME);
     await chrome.alarms.clear(CHIME_ALARM_NAME);
-    await setState({ running: false, startedAt: null, pausedRemainSec: intervalMin * 60, intervalMin, gatePaused: true });
+    // Also clear idlePaused: this is reachable while idle-paused (e.g. SET_INTERVAL
+    // always calls startTimer regardless of running state) — without this, a stale
+    // idlePaused:true left over from before would combine with the new gatePaused:true
+    // to show both the idle banner and the work-hours banner at once.
+    await setState({ running: false, startedAt: null, pausedRemainSec: intervalMin * 60, intervalMin, gatePaused: true, idlePaused: false });
     return;
   }
 
