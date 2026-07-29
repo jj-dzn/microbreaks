@@ -14,4 +14,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test "tests/**/*.test.js"
+      - name: Run tests
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test "tests/**/*.test.js" | tee test-output.txt
+          test_count=$(grep -oP '(?<=ℹ tests )\d+' test-output.txt || echo 0)
+          echo "Ran $test_count tests"
+          if [ "$test_count" -eq 0 ]; then
+            echo "::error::No tests were found/run — the glob may not be matching any files, which would otherwise pass silently"
+            exit 1
+          fi
