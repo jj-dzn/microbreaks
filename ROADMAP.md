@@ -2,6 +2,23 @@
 
 Ideas for future MicroBreaks improvements, roughly ordered by effort within each tier. Nothing here is committed — this is a working list to pull from, not a promise.
 
+## 1.7 — target: next ~30 days
+
+Curated from the tiers below for a realistic one-month scope: all self-contained, none touch the work-hours/weekend gate logic (that code just went through three straight patch releases stabilizing it — deliberately giving it a cycle to settle before building more on top of it).
+
+- **Idle detection** — auto-pause when away from the computer (`chrome.idle`), so breaks don't silently pile up during lunch or a long meeting. Highest-value item on this list; solves a real, frequently-hit gap.
+- **Overlay customization (opacity / corner-widget option)** — now that strict mode is the default (1.6.21), this is more relevant than it used to be: a lighter middle ground for users who find the full-screen takeover too disruptive but don't want to drop back to plain notifications. Directly follow-on work from the default-mode change.
+- **Eye-rest breaks (20-20-20)** — a second break type alongside stretches. Reuses existing overlay/notification plumbing, mostly new content + a type selector.
+- **Accessibility pass** — screen-reader labels, focus management in the overlay/popup, `prefers-reduced-motion` support. Worth doing before the user base grows further; also a Chrome Web Store quality signal.
+- **"Why this stretch" tooltip** — one-line rationale per stretch card. Cheap, improves the guided-stretch experience.
+- **More chime options** — low-effort content addition to the existing sound picker.
+- **Export/import settings** — JSON export/import for backup or moving to a fresh profile. Straightforward, no new mechanism.
+
+**Deliberately deferred past 1.7:**
+- *Custom intervals per time-of-day* — builds directly on the work-hours gate; holding until the current gate logic has had a real cycle in the wild with no regressions.
+- *Additional stretch categories* — content-heavy (new animated figures/poses), not a scoped engineering task; better as its own release.
+- *Popup/options live sync* (`chrome.storage.onChanged`) — a robustness item noted during the 1.6.x bug hunts, not a feature; candidate for a maintenance-focused release instead of a feature release.
+
 ## Near-term (small, self-contained)
 
 - **Eye-rest breaks (20-20-20)** — an alternate break type alongside stretches: "look at something 20ft away for 20 seconds." Simple timer variant, reuses existing overlay/notification plumbing.
