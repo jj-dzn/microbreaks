@@ -758,5 +758,8 @@
   },
   "idleDetectionSub": {
     "message": "Pausiert den Timer, wenn du den Computer verlässt"
+  },
+  "idleDetectionConfirm": {
+    "message": "Automatisch pausieren bei Inaktivität nutzt deine Tastatur- und Mausaktivität, um zu erkennen, wann du dich entfernt hast, und pausiert den Timer, bis du zurück bist.\n\nEs kann nicht zwischen Abwesenheit und einfachem Lesen oder Ansehen von etwas ohne Mausbewegung unterscheiden — wenn du das an deinem Schreibtisch oft tust, pausiert dies möglicherweise häufiger als erwartet.\n\nAktivieren?"
   }
 }

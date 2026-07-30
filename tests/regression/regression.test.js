@@ -45,6 +45,7 @@ test('regression 840bca6: gate-pausing shows the full interval, never a stale el
 // interval. Fixed with an idempotency guard.
 test('regression 9995682 (#3): a concurrent Resume + idle-active event never resets the countdown', async (t) => {
   const { chrome, internals, api } = await setup(t);
+  await api.setState({ idleDetectionEnabled: true });
   await api.startTimer(20);
   await tickAndFlush(t, 5 * 60 * 1000); // 5 minutes in, 15 remain
 
@@ -73,7 +74,7 @@ test('regression 9995682 (#3): a concurrent Resume + idle-active event never res
 // instead of resuming. Fixed to preserve and honor it.
 test('regression 9995682 (#1): an active gate override survives idle-pause and is honored on resume', async (t) => {
   const { chrome, api } = await setup(t, { now: WEDNESDAY_8PM });
-  await api.setState({ workHoursEnabled: true, workStart: '09:00', workEnd: '17:00' });
+  await api.setState({ workHoursEnabled: true, workStart: '09:00', workEnd: '17:00', idleDetectionEnabled: true });
   await api.startTimer(20, true); // force through the gate
   assert.equal((await api.getState()).gateOverride, true);
 
@@ -171,4 +172,30 @@ test('onInstalled (existing install) resolves a stale idle-pause when the user i
   const state = await api.getState();
   assert.equal(state.idlePaused, false, 'must not stay stuck idle-paused when the user is demonstrably active');
   assert.equal(state.running, true);
+});
+
+// Regression: reported by the user directly — at 6:02pm with work hours 8-5,
+// the popup showed "58:09" (a stale partial remainder). Root cause: the timer
+// had idle-paused sometime before 5pm (while still within hours, freezing a
+// partial elapsed remainder — correct for idle-pause, which is meant to resume
+// with the ACTUAL remaining time). But reevaluateGate() — which the periodic
+// 5-minute gate-check alarm calls — had no branch for "still idle-paused, but
+// the gate has ALSO started blocking since then": it only acted on gatePaused
+// or running states, silently leaving a stale idle-pause snapshot frozen
+// indefinitely, well past when work hours actually ended.
+test('reevaluateGate hands an idle-pause off to a gate-pause once the gate also blocks', async (t) => {
+  const outsideHours = localTime(2024, 0, 10, 18, 2); // 6:02pm, work hours 8-17
+  const { api } = await setup(t, { now: outsideHours });
+  await api.setState({
+    workHoursEnabled: true, workStart: '08:00', workEnd: '17:00',
+    running: false, idlePaused: true, gatePaused: false, gateOverride: false,
+    pausedRemainSec: 58 * 60 + 9, intervalMin: 60, // stale partial remainder from before idle-pausing
+  });
+
+  await api.reevaluateGate();
+  const state = await api.getState();
+
+  assert.equal(state.idlePaused, false);
+  assert.equal(state.gatePaused, true);
+  assert.equal(state.pausedRemainSec, 60 * 60, 'must show the full interval, not the stale partial remainder');
 });

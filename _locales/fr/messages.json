@@ -758,5 +758,8 @@
   },
   "idleDetectionSub": {
     "message": "Met le minuteur en pause lorsque vous quittez l'ordinateur"
+  },
+  "idleDetectionConfirm": {
+    "message": "La pause automatique en cas d'inactivité utilise votre activité clavier/souris pour détecter que vous vous êtes absenté, et met le minuteur en pause jusqu'à votre retour.\n\nElle ne peut pas faire la différence entre être absent et simplement lire ou regarder quelque chose sans toucher la souris — si cela vous arrive souvent à votre bureau, cela pourrait mettre en pause plus souvent que prévu.\n\nL'activer ?"
   }
 }

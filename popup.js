@@ -444,6 +444,10 @@ document.querySelectorAll('.tog').forEach(btn => {
   btn.addEventListener('click', async () => {
     const key = btn.dataset.pref;
     const newVal = !state[key];
+    // Idle detection can't distinguish "away" from "reading/watching something
+    // without touching the mouse" — explain that trade-off before turning it on,
+    // rather than only after someone notices breaks pausing more than expected.
+    if (key === 'idleDetectionEnabled' && newVal && !confirm(t('idleDetectionConfirm'))) return;
     const st = await send({ type: 'SET_PREF', key, value: newVal });
     applyState(st);
   });

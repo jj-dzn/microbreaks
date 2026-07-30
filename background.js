@@ -86,7 +86,7 @@ const SYNC_DEFAULTS = {
   snoozeMin: 5,
   stretchOrder: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], // indices into STRETCH_KEYS
   stretchEnabled: [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true],
-  idleDetectionEnabled: true,
+  idleDetectionEnabled: false,
 };
 
 const LOCAL_DEFAULTS = {
@@ -677,6 +677,16 @@ async function reevaluateGate() {
       running: false, startedAt: null, gatePaused: true, gateOverride: false,
       pausedRemainSec: state.intervalMin * 60,
     });
+  } else if (!shouldRun && !state.running && state.idlePaused) {
+    // The gate has ALSO started blocking while still idle-paused (e.g. work hours
+    // ended while the user was away from the keyboard). Hand off to the gate so
+    // the display matches the "always shows a fresh interval" convention
+    // gate-pausing uses, instead of leaving a stale idle-pause snapshot — a
+    // partial elapsed remainder like "58:09" — frozen indefinitely, possibly
+    // well past when the gate actually closed. Deliberately does NOT apply to a
+    // genuine manual pause (idlePaused:false here) — that still respects the
+    // user's choice untouched, same as the branch above this one always has.
+    await setState({ idlePaused: false, gatePaused: true, pausedRemainSec: state.intervalMin * 60 });
   } else if (shouldRun && state.running && state.gateOverride) {
     // Back within the gate naturally — the override is no longer needed.
     await setState({ gateOverride: false });

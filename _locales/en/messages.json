@@ -758,5 +758,8 @@
   },
   "idleDetectionSub": {
     "message": "Pause the timer when you step away from the computer"
+  },
+  "idleDetectionConfirm": {
+    "message": "Auto-pause when idle uses your keyboard and mouse activity to detect when you've stepped away, and pauses the timer until you're back.\n\nIt can't tell the difference between being away and just reading or watching something without touching the mouse — if you do that often at your desk, this may pause more often than you'd expect.\n\nTurn it on?"
   }
 }

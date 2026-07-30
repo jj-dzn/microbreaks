@@ -758,5 +758,8 @@
   },
   "idleDetectionSub": {
     "message": "Pausa el temporizador cuando te alejas del ordenador"
+  },
+  "idleDetectionConfirm": {
+    "message": "La pausa automática por inactividad usa tu actividad de teclado y ratón para detectar cuándo te has alejado, y pausa el temporizador hasta que vuelvas.\n\nNo puede distinguir entre estar ausente y simplemente leer o ver algo sin tocar el ratón — si haces eso a menudo en tu escritorio, esto podría pausar más de lo que esperarías.\n\n¿Activarlo?"
   }
 }

@@ -161,7 +161,12 @@ $('optStrictMode').addEventListener('click', async () => {
 });
 
 $('optIdle').addEventListener('click', async () => {
-  state = await send({ type: 'SET_PREF', key: 'idleDetectionEnabled', value: !(state.idleDetectionEnabled !== false) });
+  const newVal = !(state.idleDetectionEnabled !== false);
+  // Idle detection can't distinguish "away" from "reading/watching something
+  // without touching the mouse" — explain that trade-off before turning it on,
+  // rather than only after someone notices breaks pausing more than expected.
+  if (newVal && !confirm(t('idleDetectionConfirm'))) return;
+  state = await send({ type: 'SET_PREF', key: 'idleDetectionEnabled', value: newVal });
   renderAll();
 });
 
