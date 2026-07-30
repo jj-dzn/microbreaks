@@ -689,7 +689,15 @@ async function reevaluateGate() {
 // keyboard/mouse/touch input at the OS level — not just activity inside Chrome —
 // so this correctly recognizes the user as "active" while they're working in any
 // other application too, not just when a Chrome window has focus.
-const IDLE_DETECTION_INTERVAL_SEC = 60; // Chrome's own default; minimum allowed is 15
+// Deliberately much longer than Chrome's own 60-second default. This is meant to
+// catch "genuinely stepped away" (lunch, a meeting elsewhere, end of day) — not
+// the normal gaps in keyboard/mouse activity that happen constantly during real
+// work (reading, thinking, a call). At 60 seconds, a huge share of ordinary
+// working sessions would hit a qualifying gap at some point during any given
+// interval, clearing the break alarm before it ever fires — directly working
+// against the point of a break-reminder timer, which needs to interrupt people
+// who are legitimately at their desk but not actively typing.
+const IDLE_DETECTION_INTERVAL_SEC = 5 * 60;
 
 // Right after a break fires, holding a stretch position for its 20-30 second
 // duration without touching the keyboard/mouse looks identical to "stepped away"
