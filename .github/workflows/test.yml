@@ -19,7 +19,11 @@ jobs:
         run: |
           set -o pipefail
           node --test "tests/**/*.test.js" | tee test-output.txt
-          test_count=$(grep -oP '(?<=ℹ tests )\d+' test-output.txt || echo 0)
+          test_count=$(grep -oE 'tests [0-9]+' test-output.txt | head -n1 | grep -oE '[0-9]+')
+          if [ -z "$test_count" ]; then
+            echo "::error::Could not parse a test count from the output — failing safe"
+            exit 1
+          fi
           echo "Ran $test_count tests"
           if [ "$test_count" -eq 0 ]; then
             echo "::error::No tests were found/run — the glob may not be matching any files, which would otherwise pass silently"
