@@ -940,7 +940,23 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     await startTimer(state.intervalMin);
   } else {
     // Existing install being updated — respect manual pause state
-    if (!state.running && state.pausedRemainSec === null) {
+    if (state.idlePaused) {
+      // Chrome extensions can auto-update while the browser stays open. chrome.idle
+      // only reports transitions, so an update landing while the user is genuinely
+      // active right now has no guaranteed idle→active event to clear a stale
+      // idlePaused left over from before the update — same reasoning as
+      // onStartup's reconciliation below, just missing here until now.
+      const currentIdleState = await new Promise(r => chrome.idle.queryState(IDLE_DETECTION_INTERVAL_SEC, r));
+      if (currentIdleState === 'active') {
+        await setState({ idlePaused: false });
+        const gateBlocked = isWeekendPaused(state) || !isWithinWorkHours(state);
+        if (gateBlocked && !state.gateOverride) {
+          await setState({ gatePaused: true });
+        } else {
+          await resumeTimer(gateBlocked && state.gateOverride);
+        }
+      }
+    } else if (!state.running && state.pausedRemainSec === null) {
       await startTimer(state.intervalMin);
     }
     // Safety net, same reasoning as onStartup — self-corrects a stuck gatePaused

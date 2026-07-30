@@ -150,3 +150,25 @@ test('regression 1a99ebb + invariant: gatePaused and idlePaused are never both t
     assert.ok(!(state.gatePaused && state.idlePaused), 'invariant violated');
   });
 });
+
+// Regression: found via exploratory scenario testing after building this harness
+// (no prior commit — this was never shipped) — onInstalled had no equivalent of
+// onStartup's idle-reconciliation block. Chrome extensions can auto-update while
+// the browser stays open; since chrome.idle only reports transitions, a user who
+// was idle-paused before an update, and is genuinely active during/after it, had
+// no automatic path back to running — stuck until a manual Resume click or an
+// actual idle→active cycle, unlike every other lifecycle entry point.
+test('onInstalled (existing install) resolves a stale idle-pause when the user is actually active', async (t) => {
+  const { chrome, api } = await setup(t);
+  await api.setState({
+    onboardingDone: true, running: false, pausedRemainSec: 400, intervalMin: 20,
+    idlePaused: true, gatePaused: false,
+  });
+
+  chrome.idle._setState('active');
+  await chrome.runtime.onInstalled.trigger({ reason: 'update' });
+
+  const state = await api.getState();
+  assert.equal(state.idlePaused, false, 'must not stay stuck idle-paused when the user is demonstrably active');
+  assert.equal(state.running, true);
+});
